@@ -103,64 +103,57 @@
   to { transform: scale(1.1); }
 }
 
-/* Play Area */
-.play-area {
+/* Play Area - Single Unified Tabletop */
+.play-area-unified {
   flex: 1;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  gap: 1rem;
-  padding: 1rem;
-  min-height: 0;
-}
-
-.opponent-area,
-.player-area {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 50, 0, 0.3);
   border-radius: 15px;
   padding: 1rem;
+  margin: 1rem;
   position: relative;
   overflow: hidden;
+  min-height: 0;
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.opponent-area h3,
-.player-area h3 {
+.area-label {
   margin: 0 0 1rem 0;
   font-size: 1.1rem;
   position: absolute;
   top: 1rem;
   left: 1rem;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   padding: 0.5rem 1rem;
   border-radius: 8px;
-}
-
-.cards-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  padding-top: 3rem;
+  backdrop-filter: blur(5px);
 }
 
 .played-card {
   position: absolute;
-  transition: transform 0.2s;
-  cursor: move;
+  transition: box-shadow 0.2s;
+  user-select: none;
 }
 
 .played-card:hover {
   z-index: 100;
 }
 
-.empty-area {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 1.1rem;
+.empty-tabletop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.2rem;
   padding: 2rem;
+  width: 80%;
+  max-width: 600px;
+}
+
+.empty-tabletop p {
+  margin: 0.5rem 0;
 }
 
 /* Hand */
@@ -169,11 +162,26 @@
   padding: 1rem 2rem;
   border-top: 2px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-height: 280px;
 }
 
-.hand h3 {
-  margin: 0 0 1rem 0;
-  font-size: 1.1rem;
+.hand-section {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.hand-section h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 0.5rem;
 }
 
 .hand-cards {
@@ -217,6 +225,79 @@
   min-height: 100px;
   color: rgba(255, 255, 255, 0.4);
   font-size: 1rem;
+}
+
+.empty-section {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.85rem;
+  font-style: italic;
+  text-align: center;
+  padding: 1rem;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 0.5rem;
+}
+
+/* Card Zoom Overlay */
+.card-zoom-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.card-zoom-content {
+  position: relative;
+  animation: zoomIn 0.3s ease-out;
+}
+
+.zoom-close {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.zoom-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Responsive */

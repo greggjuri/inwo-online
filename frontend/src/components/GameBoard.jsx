@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSocket } from '../contexts/SocketContext';
 import Card from './Card';
 import './GameBoard.css';
@@ -8,28 +8,25 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
   const [players, setPlayers] = useState([]);
   const [hand, setHand] = useState([]);
   const [deck, setDeck] = useState([...playerDeck]);
-  const [playArea, setPlayArea] = useState([]);
-  const [opponentPlayArea, setOpponentPlayArea] = useState([]);
+  const [playArea, setPlayArea] = useState([]); // All cards on table (yours + opponent's)
   const [diceResult, setDiceResult] = useState(null);
+  const [zoomedCard, setZoomedCard] = useState(null);
+  const [draggedCard, setDraggedCard] = useState(null);
+  const [dragStartPos, setDragStartPos] = useState({ x: 0, y: 0 });
+  const [hasMoved, setHasMoved] = useState(false);
+  const playAreaRef = useRef(null);
 
   useEffect(() => {
     if (!socket) return;
 
-    // Join the room
     socket.emit('join-room', { roomId, playerName });
-
-    // Send deck to server
     socket.emit('set-deck', { roomId, deck: playerDeck });
-
-    // Draw starting hand (5 cards)
     drawCards(5);
 
-    // Listen for room joined confirmation
     socket.on('room-joined', ({ players: roomPlayers }) => {
       setPlayers(roomPlayers);
     });
 
-    // Listen for other players joining
     socket.on('player-joined', ({ playerId, playerName: newPlayerName }) => {
       setPlayers(prev => {
         const exists = prev.find(p => p.id === playerId);
@@ -38,28 +35,51 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       });
     });
 
-    // Listen for card movements from other players
-    socket.on('card-moved', ({ playerId, card, to, position }) => {
-      if (to === 'play-area') {
-        setOpponentPlayArea(prev => [...prev, { ...card, position, playerId }]);
-      }
+    socket.on('card-moved', ({ playerId, card, position, rotation, tokens }) => {
+      setPlayArea(prev => {
+        const existing = prev.findIndex(c => c.uniqueId === card.uniqueId);
+        if (existing >= 0) {
+          const updated = [...prev];
+          updated[existing] = { 
+            ...card, 
+            position, 
+            rotation: rotation || 0, 
+            tokens: tokens || 0, 
+            playerId,
+            isOpponent: true 
+          };
+          return updated;
+        }
+        return [...prev, { 
+          ...card, 
+          position, 
+          rotation: rotation || 0, 
+          tokens: tokens || 0, 
+          playerId,
+          isOpponent: true 
+        }];
+      });
     });
 
-    // Listen for dice rolls
+    socket.on('card-removed', ({ cardId }) => {
+      setPlayArea(prev => prev.filter(c => c.uniqueId !== cardId));
+    });
+
     socket.on('dice-rolled', ({ playerId, result, sides }) => {
       setDiceResult({ playerId, result, sides });
       setTimeout(() => setDiceResult(null), 3000);
     });
 
-    // Listen for players leaving
     socket.on('player-left', ({ playerId }) => {
       setPlayers(prev => prev.filter(p => p.id !== playerId));
+      setPlayArea(prev => prev.filter(c => c.playerId !== playerId));
     });
 
     return () => {
       socket.off('room-joined');
       socket.off('player-joined');
       socket.off('card-moved');
+      socket.off('card-removed');
       socket.off('dice-rolled');
       socket.off('player-left');
     };
@@ -67,33 +87,155 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
 
   const drawCards = (count) => {
     if (deck.length === 0) return;
-    
     const cardsToDraw = deck.slice(0, Math.min(count, deck.length));
     setHand(prev => [...prev, ...cardsToDraw]);
     setDeck(prev => prev.slice(count));
   };
 
   const playCard = (card, index) => {
-    // Remove from hand
+    const uniqueCard = { 
+      ...card, 
+      uniqueId: `${card.id}-${Date.now()}-${Math.random()}`,
+      rotation: 0, 
+      tokens: 0,
+      isOpponent: false,
+      playerId: socket?.id
+    };
+    
     setHand(prev => prev.filter((_, i) => i !== index));
     
-    // Add to play area
-    const position = { x: Math.random() * 500, y: Math.random() * 300 };
-    setPlayArea(prev => [...prev, { ...card, position }]);
+    const rect = playAreaRef.current?.getBoundingClientRect();
+    const position = { 
+      x: Math.random() * ((rect?.width || 800) - 200), 
+      y: Math.random() * ((rect?.height || 600) - 280)
+    };
     
-    // Notify other players
+    setPlayArea(prev => [...prev, { ...uniqueCard, position }]);
+    
     socket.emit('move-card', {
       roomId,
-      card,
-      from: 'hand',
-      to: 'play-area',
-      position
+      card: uniqueCard,
+      position,
+      rotation: 0,
+      tokens: 0
     });
   };
 
-  const returnToHand = (card, index) => {
-    setPlayArea(prev => prev.filter((_, i) => i !== index));
-    setHand(prev => [...prev, card]);
+  const returnToHand = (card) => {
+    if (card.isOpponent) return; // Can't take opponent's cards
+    
+    setPlayArea(prev => prev.filter(c => c.uniqueId !== card.uniqueId));
+    const { uniqueId, position, rotation, tokens, isOpponent, playerId, ...originalCard } = card;
+    setHand(prev => [...prev, originalCard]);
+    socket.emit('card-removed', { roomId, cardId: card.uniqueId });
+  };
+
+  const updateCardOnServer = (card) => {
+    socket.emit('move-card', {
+      roomId,
+      card: card,
+      position: card.position,
+      rotation: card.rotation,
+      tokens: card.tokens
+    });
+  };
+
+  const handleCardMouseDown = (e, card) => {
+    if (card.isOpponent) return; // Can't drag opponent's cards
+    if (e.button !== 0) return; // Only left mouse button
+    
+    e.preventDefault();
+    const rect = playAreaRef.current.getBoundingClientRect();
+    
+    setDragStartPos({ x: e.clientX, y: e.clientY });
+    setHasMoved(false);
+    setDraggedCard({
+      card,
+      offsetX: e.clientX - rect.left - card.position.x,
+      offsetY: e.clientY - rect.top - card.position.y
+    });
+  };
+
+  const handleMouseMove = (e) => {
+    if (!draggedCard) return;
+    
+    const moveDistance = Math.sqrt(
+      Math.pow(e.clientX - dragStartPos.x, 2) + 
+      Math.pow(e.clientY - dragStartPos.y, 2)
+    );
+    
+    if (moveDistance > 5) {
+      setHasMoved(true);
+    }
+    
+    const rect = playAreaRef.current.getBoundingClientRect();
+    const newX = Math.max(0, Math.min(e.clientX - rect.left - draggedCard.offsetX, rect.width - 180));
+    const newY = Math.max(0, Math.min(e.clientY - rect.top - draggedCard.offsetY, rect.height - 250));
+    
+    setPlayArea(prev => prev.map(c => 
+      c.uniqueId === draggedCard.card.uniqueId 
+        ? { ...c, position: { x: newX, y: newY } }
+        : c
+    ));
+  };
+
+  const handleMouseUp = () => {
+    if (draggedCard) {
+      if (hasMoved) {
+        // Update server with final position
+        const updatedCard = playArea.find(c => c.uniqueId === draggedCard.card.uniqueId);
+        if (updatedCard) {
+          updateCardOnServer(updatedCard);
+        }
+      } else {
+        // It was a click, not a drag - show zoom
+        const card = playArea.find(c => c.uniqueId === draggedCard.card.uniqueId);
+        if (card && !card.isOpponent) {
+          setZoomedCard(card);
+        }
+      }
+      setDraggedCard(null);
+      setHasMoved(false);
+    }
+  };
+
+  useEffect(() => {
+    if (draggedCard) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+      };
+    }
+  }, [draggedCard, playArea, dragStartPos, hasMoved]);
+
+  const rotateCard = (card) => {
+    if (card.isOpponent) return;
+    
+    setPlayArea(prev => prev.map(c => {
+      if (c.uniqueId === card.uniqueId) {
+        const newRotation = (c.rotation + 90) % 360;
+        const updated = { ...c, rotation: newRotation };
+        updateCardOnServer(updated);
+        return updated;
+      }
+      return c;
+    }));
+  };
+
+  const updateTokens = (card, newTokenCount) => {
+    if (card.isOpponent) return;
+    
+    const tokens = Math.max(0, newTokenCount);
+    setPlayArea(prev => prev.map(c => {
+      if (c.uniqueId === card.uniqueId) {
+        const updated = { ...c, tokens };
+        updateCardOnServer(updated);
+        return updated;
+      }
+      return c;
+    }));
   };
 
   const rollDice = (sides = 6) => {
@@ -101,16 +243,37 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
   };
 
   const shuffleDeck = () => {
-    const shuffled = [...hand, ...deck, ...playArea].sort(() => Math.random() - 0.5);
+    const myCards = playArea.filter(c => !c.isOpponent);
+    const shuffled = [
+      ...hand, 
+      ...deck, 
+      ...myCards.map(c => {
+        const { rotation, tokens, position, uniqueId, isOpponent, playerId, ...original } = c;
+        return original;
+      })
+    ].sort(() => Math.random() - 0.5);
+    
     setDeck(shuffled);
     setHand([]);
-    setPlayArea([]);
+    
+    // Remove only my cards from play area
+    setPlayArea(prev => prev.filter(c => c.isOpponent));
+    
+    // Notify server
+    myCards.forEach(card => {
+      socket.emit('card-removed', { roomId, cardId: card.uniqueId });
+    });
+    
     drawCards(5);
   };
 
+  // Separate hand by card type
+  const illuminatiCards = hand.filter(c => c.type === 'illuminati');
+  const groupResourceCards = hand.filter(c => c.type === 'groups' || c.type === 'resources');
+  const plotCards = hand.filter(c => c.type === 'plots');
+
   return (
     <div className="game-board-container">
-      {/* Header */}
       <div className="game-header">
         <div className="room-info">
           <h2>Room: {roomId}</h2>
@@ -133,83 +296,122 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
         </div>
       </div>
 
-      {/* Dice Result Popup */}
       {diceResult && (
         <div className="dice-popup">
-          <div className="dice-result">
-            🎲 {diceResult.result} 🎲
-          </div>
+          <div className="dice-result">🎲 {diceResult.result} 🎲</div>
         </div>
       )}
 
-      {/* Play Area */}
-      <div className="play-area">
-        <div className="opponent-area">
-          <h3>Opponent's Cards ({opponentPlayArea.length})</h3>
-          <div className="cards-container">
-            {opponentPlayArea.map((card, index) => (
-              <div
-                key={`opp-${index}`}
-                className="played-card"
-                style={{
-                  left: card.position.x,
-                  top: card.position.y
-                }}
-              >
-                <Card card={card} size="small" draggable={false} />
-              </div>
-            ))}
+      {/* Single unified play area (tabletop) */}
+      <div 
+        className="play-area-unified" 
+        ref={playAreaRef}
+      >
+        <h3 className="area-label">Tabletop ({playArea.length} cards)</h3>
+        
+        {playArea.map((card) => (
+          <div
+            key={card.uniqueId}
+            className="played-card"
+            style={{
+              left: card.position.x,
+              top: card.position.y,
+              position: 'absolute',
+              cursor: card.isOpponent ? 'default' : 'grab'
+            }}
+            onMouseDown={(e) => handleCardMouseDown(e, card)}
+          >
+            <Card 
+              card={card} 
+              size="small"
+              rotation={card.rotation || 0}
+              tokens={card.tokens || 0}
+              showBack={card.isOpponent}
+              isOpponent={card.isOpponent}
+              onDoubleClick={() => returnToHand(card)}
+              onRotate={() => rotateCard(card)}
+              onTokenChange={(newTokens) => updateTokens(card, newTokens)}
+            />
           </div>
-        </div>
+        ))}
+        
+        {playArea.length === 0 && (
+          <div className="empty-tabletop">
+            <p>🎴 Click cards from your hand to play them on the tabletop</p>
+            <p className="hint">Drag to move • Right-click to rotate • Hover for tokens • Double-click to return to hand</p>
+          </div>
+        )}
+      </div>
 
-        <div className="player-area">
-          <h3>Your Cards ({playArea.length})</h3>
-          <div className="cards-container">
-            {playArea.map((card, index) => (
-              <div
-                key={`play-${index}`}
-                className="played-card"
-                style={{
-                  left: card.position.x,
-                  top: card.position.y
-                }}
-              >
+      {/* Hand with three sections */}
+      <div className="hand">
+        <div className="hand-section">
+          <h3>Illuminati ({illuminatiCards.length})</h3>
+          <div className="hand-cards">
+            {illuminatiCards.map((card, index) => (
+              <div key={`illum-${index}`} className="hand-card">
                 <Card 
                   card={card} 
-                  size="small"
-                  onDoubleClick={() => returnToHand(card, index)}
+                  size="small" 
+                  onClick={() => {
+                    const originalIndex = hand.findIndex(c => c === card);
+                    playCard(card, originalIndex);
+                  }} 
                 />
               </div>
             ))}
+            {illuminatiCards.length === 0 && <p className="empty-section">No Illuminati cards</p>}
           </div>
-          {playArea.length === 0 && (
-            <div className="empty-area">
-              <p>Click cards from your hand to play them here</p>
-            </div>
-          )}
+        </div>
+
+        <div className="hand-section">
+          <h3>Groups & Resources ({groupResourceCards.length})</h3>
+          <div className="hand-cards">
+            {groupResourceCards.map((card, index) => (
+              <div key={`group-${index}`} className="hand-card">
+                <Card 
+                  card={card} 
+                  size="small" 
+                  onClick={() => {
+                    const originalIndex = hand.findIndex(c => c === card);
+                    playCard(card, originalIndex);
+                  }} 
+                />
+              </div>
+            ))}
+            {groupResourceCards.length === 0 && <p className="empty-section">No Group/Resource cards</p>}
+          </div>
+        </div>
+
+        <div className="hand-section">
+          <h3>Plots ({plotCards.length})</h3>
+          <div className="hand-cards">
+            {plotCards.map((card, index) => (
+              <div key={`plot-${index}`} className="hand-card">
+                <Card 
+                  card={card} 
+                  size="small" 
+                  onClick={() => {
+                    const originalIndex = hand.findIndex(c => c === card);
+                    playCard(card, originalIndex);
+                  }} 
+                />
+              </div>
+            ))}
+            {plotCards.length === 0 && <p className="empty-section">No Plot cards</p>}
+          </div>
         </div>
       </div>
 
-      {/* Hand */}
-      <div className="hand">
-        <h3>Your Hand ({hand.length} cards)</h3>
-        <div className="hand-cards">
-          {hand.map((card, index) => (
-            <div key={`hand-${index}`} className="hand-card">
-              <Card
-                card={card}
-                size="small"
-                onClick={() => playCard(card, index)}
-              />
-            </div>
-          ))}
-          {hand.length === 0 && (
-            <div className="empty-hand">
-              <p>No cards in hand. Draw some cards!</p>
-            </div>
-          )}
+      {/* Card zoom overlay */}
+      {zoomedCard && !zoomedCard.isOpponent && (
+        <div className="card-zoom-overlay" onClick={() => setZoomedCard(null)}>
+          <div className="card-zoom-content" onClick={(e) => e.stopPropagation()}>
+            <button className="zoom-close" onClick={() => setZoomedCard(null)}>✕</button>
+            <Card card={zoomedCard} size="large" draggable={false} />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

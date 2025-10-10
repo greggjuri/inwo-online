@@ -64,18 +64,25 @@ io.on('connection', (socket) => {
     console.log(`${playerName} joined room ${roomId}`);
   });
 
-  // Handle card movements
-  socket.on('move-card', ({ roomId, card, from, to, position }) => {
+  // Handle card movements and updates
+  socket.on('move-card', ({ roomId, card, position, rotation, tokens }) => {
     const room = gameRooms.get(roomId);
     if (!room) return;
 
-    // Broadcast card movement to other players in room
+    // Broadcast card state to other players in room
     socket.to(roomId).emit('card-moved', {
       playerId: socket.id,
       card,
-      from,
-      to,
-      position
+      position,
+      rotation: rotation || 0,
+      tokens: tokens || 0
+    });
+  });
+
+  // Handle card removal from play area
+  socket.on('card-removed', ({ roomId, cardId }) => {
+    socket.to(roomId).emit('card-removed', {
+      cardId
     });
   });
 
