@@ -1,0 +1,105 @@
+.card {
+  position: relative;
+  width: 180px;
+  height: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 3px solid;
+  background: #1a1a1a;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  z-index: 10;
+}
+
+.card-small {
+  width: 120px;
+  height: 167px;
+}
+
+.card-large {
+  width: 360px;
+  height: 500px;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.card-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+  background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+  border: 2px solid;
+  color: white;
+}
+
+.card-placeholder h3 {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.card-placeholder .card-id {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.card-type-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  backdrop-filter: blur(4px);
+  opacity: 0.9;
+}
+
+.card-small .card-type-badge {
+  font-size: 0.6rem;
+  padding: 2px 8px;
+}
+
+.card-large .card-type-badge {
+  font-size: 1rem;
+  padding: 8px 16px;
+}
