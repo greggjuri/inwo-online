@@ -64,25 +64,59 @@ io.on('connection', (socket) => {
     console.log(`${playerName} joined room ${roomId}`);
   });
 
-  // Handle card movements and updates
-  socket.on('move-card', ({ roomId, card, position, rotation, tokens }) => {
+  // Handle card movements
+  socket.on('move-card', ({ roomId, card, from, to, position, rotation, tokens }) => {
     const room = gameRooms.get(roomId);
     if (!room) return;
 
-    // Broadcast card state to other players in room
+    // Broadcast card movement to other players in room
     socket.to(roomId).emit('card-moved', {
       playerId: socket.id,
       card,
+      from,
+      to,
       position,
       rotation: rotation || 0,
       tokens: tokens || 0
     });
   });
 
-  // Handle card removal from play area
-  socket.on('card-removed', ({ roomId, cardId }) => {
+  // Handle card updates (rotation, tokens)
+  socket.on('update-card', ({ roomId, cardIndex, rotation, tokens }) => {
+    const room = gameRooms.get(roomId);
+    if (!room) return;
+
+    // Broadcast card update to other players in room
+    socket.to(roomId).emit('card-updated', {
+      playerId: socket.id,
+      cardIndex,
+      rotation,
+      tokens
+    });
+  });
+
+  // Handle card position updates (for dragging)
+  socket.on('update-card-position', ({ roomId, cardIndex, position }) => {
+    const room = gameRooms.get(roomId);
+    if (!room) return;
+
+    // Broadcast position update to other players in room
+    socket.to(roomId).emit('card-position-updated', {
+      playerId: socket.id,
+      cardIndex,
+      position
+    });
+  });
+
+  // Handle card removal (return to hand)
+  socket.on('remove-card', ({ roomId, cardIndex }) => {
+    const room = gameRooms.get(roomId);
+    if (!room) return;
+
+    // Broadcast card removal to other players in room
     socket.to(roomId).emit('card-removed', {
-      cardId
+      playerId: socket.id,
+      cardIndex
     });
   });
 

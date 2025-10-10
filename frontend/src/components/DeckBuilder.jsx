@@ -9,14 +9,9 @@ const DeckBuilder = ({ onStartGame }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCard, setSelectedCard] = useState(null);
 
-  // Filter and search cards
-  const filteredCards = useMemo(() => {
+  // Organize cards by type in the order: illuminati, groups, resources, plots
+  const organizedCards = useMemo(() => {
     let cards = cardsData.cards;
-    
-    // Filter by type
-    if (filter !== 'all') {
-      cards = cards.filter(card => card.type === filter);
-    }
     
     // Search by name
     if (searchTerm) {
@@ -25,7 +20,21 @@ const DeckBuilder = ({ onStartGame }) => {
       );
     }
     
-    return cards;
+    // If filter is active, only show that type
+    if (filter !== 'all') {
+      cards = cards.filter(card => card.type === filter);
+      return { [filter]: cards };
+    }
+    
+    // Organize by type
+    const organized = {
+      illuminati: cards.filter(c => c.type === 'illuminati'),
+      groups: cards.filter(c => c.type === 'groups'),
+      resources: cards.filter(c => c.type === 'resources'),
+      plots: cards.filter(c => c.type === 'plots')
+    };
+    
+    return organized;
   }, [filter, searchTerm]);
 
   // Get card counts by type
@@ -46,12 +55,14 @@ const DeckBuilder = ({ onStartGame }) => {
   }, []);
 
   const handleCardClick = (card) => {
-    setSelectedCard(card);
+    // Add card to deck (allow duplicates)
+    setSelectedCards(prev => [...prev, card]);
   };
 
-  const handleCardDoubleClick = (card) => {
-    // Add card to deck
-    setSelectedCards(prev => [...prev, card]);
+  const handleCardRightClick = (e, card) => {
+    e.preventDefault();
+    // Show preview on right-click
+    setSelectedCard(card);
   };
 
   const removeFromDeck = (index) => {
@@ -66,10 +77,29 @@ const DeckBuilder = ({ onStartGame }) => {
     }
   };
 
+  const typeLabels = {
+    illuminati: 'Illuminati',
+    groups: 'Groups',
+    resources: 'Resources',
+    plots: 'Plots'
+  };
+
+  const typeColors = {
+    illuminati: '#ffd700',
+    groups: '#e24a4a',
+    resources: '#8B4513',
+    plots: '#4a90e2'
+  };
+
   return (
     <div className="deck-builder">
       <div className="deck-builder-header">
-        <h1>Build Your Deck</h1>
+        <div>
+          <h1>Build Your Deck</h1>
+          <p className="deck-instructions">
+            <strong>Left-click</strong> to add • <strong>Right-click</strong> to preview • Multiple copies allowed
+          </p>
+        </div>
         <div className="header-actions">
           <button className="start-game-btn" onClick={handleStartGame}>
             Start Game ({selectedCards.length} cards)
@@ -109,33 +139,53 @@ const DeckBuilder = ({ onStartGame }) => {
                 Groups ({cardCounts.groups})
               </button>
               <button 
-                className={filter === 'plots' ? 'active' : ''}
-                onClick={() => setFilter('plots')}
-              >
-                Plots ({cardCounts.plots})
-              </button>
-              <button 
                 className={filter === 'resources' ? 'active' : ''}
                 onClick={() => setFilter('resources')}
               >
                 Resources ({cardCounts.resources})
               </button>
+              <button 
+                className={filter === 'plots' ? 'active' : ''}
+                onClick={() => setFilter('plots')}
+              >
+                Plots ({cardCounts.plots})
+              </button>
             </div>
           </div>
 
-          <div className="cards-grid">
-            {filteredCards.map(card => (
-              <Card
-                key={card.id}
-                card={card}
-                size="small"
-                onClick={() => handleCardClick(card)}
-                onDoubleClick={() => handleCardDoubleClick(card)}
-              />
+          <div className="cards-organized">
+            {Object.entries(organizedCards).map(([type, cards]) => (
+              cards.length > 0 && (
+                <div key={type} className="card-section">
+                  <div 
+                    className="section-header"
+                    style={{ borderLeftColor: typeColors[type] }}
+                  >
+                    <h3>{typeLabels[type]}</h3>
+                    <span className="card-count">{cards.length} cards</span>
+                  </div>
+                  <div className="cards-grid">
+                    {cards.map(card => (
+                      <div 
+                        key={card.id}
+                        onContextMenu={(e) => handleCardRightClick(e, card)}
+                      >
+                        <Card
+                          card={card}
+                          size="small"
+                          onClick={() => handleCardClick(card)}
+                          onDoubleClick={() => handleCardClick(card)}
+                          draggable={false}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )
             ))}
           </div>
 
-          {filteredCards.length === 0 && (
+          {Object.values(organizedCards).every(arr => arr.length === 0) && (
             <div className="no-cards">
               <p>No cards found matching "{searchTerm}"</p>
             </div>
@@ -148,26 +198,52 @@ const DeckBuilder = ({ onStartGame }) => {
           
           {selectedCards.length === 0 ? (
             <div className="empty-deck">
-              <p>Double-click cards to add them to your deck</p>
+              <p>Click cards to add them to your deck</p>
+              <p className="deck-hint">💡 You can add multiple copies of the same card</p>
             </div>
           ) : (
-            <div className="deck-cards">
-              {selectedCards.map((card, index) => (
-                <div key={`${card.id}-${index}`} className="deck-card-item">
-                  <Card
-                    card={card}
-                    size="small"
-                    onClick={() => setSelectedCard(card)}
-                  />
-                  <button
-                    className="remove-btn"
-                    onClick={() => removeFromDeck(index)}
+            <>
+              <div className="deck-cards">
+                {selectedCards.map((card, index) => (
+                  <div 
+                    key={`deck-${index}`} 
+                    className="deck-list-item"
+                    onContextMenu={(e) => handleCardRightClick(e, card)}
                   >
-                    ✕
-                  </button>
+                    <div className="deck-item-info">
+                      <span className="card-name">{card.name}</span>
+                      <span 
+                        className="card-type-badge-small" 
+                        style={{ background: typeColors[card.type] }}
+                      >
+                        {typeLabels[card.type]}
+                      </span>
+                    </div>
+                    <button
+                      className="remove-btn-list"
+                      onClick={() => removeFromDeck(index)}
+                      title="Remove from deck"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <div className="deck-summary">
+                <div className="type-counts">
+                  {Object.keys(typeLabels).map(type => {
+                    const count = selectedCards.filter(c => c.type === type).length;
+                    if (count === 0) return null;
+                    return (
+                      <div key={type} className="type-count" style={{ borderColor: typeColors[type] }}>
+                        <span className="count">{count}</span>
+                        <span className="label">{typeLabels[type]}</span>
+                      </div>
+                    );
+                  })}
                 </div>
-              ))}
-            </div>
+              </div>
+            </>
           )}
 
           <button className="clear-deck-btn" onClick={() => setSelectedCards([])}>
@@ -177,16 +253,18 @@ const DeckBuilder = ({ onStartGame }) => {
 
         {/* Card Preview */}
         {selectedCard && (
-          <div className="card-preview">
-            <div className="preview-header">
-              <h3>{selectedCard.name}</h3>
-              <button onClick={() => setSelectedCard(null)}>✕</button>
+          <div className="card-preview" onClick={() => setSelectedCard(null)}>
+            <div className="preview-content" onClick={(e) => e.stopPropagation()}>
+              <div className="preview-header">
+                <h3>{selectedCard.name}</h3>
+                <button onClick={() => setSelectedCard(null)}>✕</button>
+              </div>
+              <Card
+                card={selectedCard}
+                size="large"
+                draggable={false}
+              />
             </div>
-            <Card
-              card={selectedCard}
-              size="large"
-              draggable={false}
-            />
           </div>
         )}
       </div>

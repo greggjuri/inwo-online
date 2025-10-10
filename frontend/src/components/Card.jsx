@@ -5,36 +5,31 @@ const Card = ({
   card, 
   onClick, 
   onDoubleClick, 
+  draggable = true, 
   size = 'normal',
   rotation = 0,
   tokens = 0,
-  showBack = false,
-  isOpponent = false,
   onRotate,
   onTokenChange,
-  draggable = true
+  onDragStart,
+  onDrag,
+  onDragEnd
 }) => {
   const [imageError, setImageError] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
-  const [isDragging, setIsDragging] = useState(false);
 
   // Get card image path
   const getCardImagePath = () => {
     return `/cards/${card.filename}`;
   };
 
-  // Card back path (you'll add this image later)
-  const getCardBackPath = () => {
-    return `/cards/card-back.webp`;
-  };
-
   // Get card type color
   const getTypeColor = () => {
     const colors = {
-      illuminati: '#ffd700',
-      groups: '#4a90e2',
-      plots: '#e24a4a',
-      resources: '#50c878'
+      illuminati: '#ffd700',  // yellow
+      groups: '#e24a4a',      // red
+      plots: '#4a90e2',       // blue
+      resources: '#8B4513'    // brown
     };
     return colors[card.type] || '#999';
   };
@@ -48,125 +43,100 @@ const Card = ({
     setImageLoading(false);
   };
 
-  const handleContextMenu = (e) => {
-    e.preventDefault();
-    if (onRotate && !isOpponent) {
+  const handleRotate = (e) => {
+    e.stopPropagation();
+    if (onRotate) {
       onRotate();
     }
   };
 
-  const handleClick = (e) => {
-    // Don't trigger click if this is handled by parent (drag/drop scenario)
-    if (onClick && !isDragging) {
-      onClick(e);
+  const handleAddToken = (e) => {
+    e.stopPropagation();
+    if (onTokenChange) {
+      onTokenChange(tokens + 1);
     }
   };
 
-  const handleDoubleClick = (e) => {
-    if (onDoubleClick && !isOpponent) {
-      onDoubleClick(e);
+  const handleRemoveToken = (e) => {
+    e.stopPropagation();
+    if (onTokenChange && tokens > 0) {
+      onTokenChange(tokens - 1);
     }
   };
 
+  // Check if this is an illuminati card (landscape)
+  const isIlluminati = card.type === 'illuminati';
   const sizeClass = size === 'small' ? 'card-small' : size === 'large' ? 'card-large' : '';
+  const landscapeClass = isIlluminati ? 'card-landscape' : '';
 
   return (
     <div
-      className={`card ${sizeClass} ${isDragging ? 'dragging' : ''}`}
-      onClick={handleClick}
-      onDoubleClick={handleDoubleClick}
-      onContextMenu={handleContextMenu}
+      className={`card ${sizeClass} ${landscapeClass}`}
+      onClick={onClick}
+      onDoubleClick={onDoubleClick}
+      draggable={draggable}
+      onDragStart={onDragStart}
+      onDrag={onDrag}
+      onDragEnd={onDragEnd}
       style={{ 
         borderColor: getTypeColor(),
-        transform: `rotate(${rotation}deg)`,
-        cursor: draggable ? 'grab' : 'pointer'
+        transform: `rotate(${rotation}deg)`
       }}
     >
-      {imageLoading && !showBack && (
+      {imageLoading && (
         <div className="card-loading">
           <div className="spinner"></div>
         </div>
       )}
       
-      {showBack ? (
-        // Show card back for opponent
-        <div className="card-back" style={{ borderColor: getTypeColor() }}>
-          <div className="card-back-pattern">🎴</div>
-        </div>
-      ) : imageError ? (
+      {imageError ? (
         <div className="card-placeholder" style={{ borderColor: getTypeColor() }}>
-          <div className="card-type-badge" style={{ background: getTypeColor() }}>
-            {card.type}
-          </div>
           <h3>{card.name}</h3>
           <p className="card-id">{card.id}</p>
         </div>
       ) : (
-        <>
-          <img
-            src={getCardImagePath()}
-            alt={card.name}
-            className="card-image"
-            onLoad={handleImageLoad}
-            onError={handleImageError}
-            style={{ display: imageLoading ? 'none' : 'block' }}
-          />
-          <div className="card-type-badge" style={{ background: getTypeColor() }}>
-            {card.type}
-          </div>
-        </>
+        <img
+          src={getCardImagePath()}
+          alt={card.name}
+          className="card-image"
+          onLoad={handleImageLoad}
+          onError={handleImageError}
+          style={{ display: imageLoading ? 'none' : 'block' }}
+        />
       )}
 
-      {/* Rotation indicator */}
-      {rotation !== 0 && !showBack && size !== 'large' && (
-        <div className="rotation-indicator">
-          {rotation}°
-        </div>
+      {/* Token Counter */}
+      {tokens > 0 && (
+        <div className="token-counter">{tokens}</div>
       )}
 
-      {/* Token counter */}
-      {tokens > 0 && !showBack && (
-        <div className="token-counter">
-          {tokens}
-        </div>
-      )}
-
-      {/* Token controls (only show on hover for played cards) */}
-      {onTokenChange && !isOpponent && !showBack && size !== 'large' && (
+      {/* Token Controls (on hover) */}
+      {(onTokenChange || onRotate) && (
         <div className="token-controls">
-          <button 
-            className="token-btn token-minus"
-            onClick={(e) => {
-              e.stopPropagation();
-              onTokenChange(tokens - 1);
-            }}
-            disabled={tokens <= 0}
-          >
-            −
-          </button>
-          <button 
-            className="token-btn token-plus"
-            onClick={(e) => {
-              e.stopPropagation();
-              onTokenChange(tokens + 1);
-            }}
-          >
-            +
-          </button>
+          {onTokenChange && (
+            <>
+              <button 
+                className="token-btn token-minus" 
+                onClick={handleRemoveToken}
+                disabled={tokens === 0}
+              >
+                −
+              </button>
+              <button 
+                className="token-btn token-plus" 
+                onClick={handleAddToken}
+              >
+                +
+              </button>
+            </>
+          )}
         </div>
       )}
 
-      {/* Rotate button (only show on hover) */}
-      {onRotate && !isOpponent && !showBack && size !== 'large' && (
+      {/* Rotation Control (on hover) */}
+      {onRotate && (
         <div className="rotate-control">
-          <button 
-            className="rotate-btn"
-            onClick={(e) => {
-              e.stopPropagation();
-              onRotate();
-            }}
-            title="Right-click or click to rotate"
-          >
+          <button className="rotate-btn" onClick={handleRotate}>
             ↻
           </button>
         </div>
