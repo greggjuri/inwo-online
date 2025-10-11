@@ -178,7 +178,7 @@
     {
       "id": "bigfoot",
       "name": "Bigfoot",
-      "type": "groups",
+      "type": "resources",
       "filename": "groups/bigfoot.webp"
     },
     {
@@ -910,7 +910,7 @@
     {
       "id": "gun-lobby",
       "name": "Gun Lobby",
-      "type": "plots",
+      "type": "groups",
       "filename": "plots/gun-lobby.webp"
     },
     {
