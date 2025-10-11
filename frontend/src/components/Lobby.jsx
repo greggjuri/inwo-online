@@ -36,8 +36,8 @@ const Lobby = ({ onJoinRoom }) => {
       </div>
 
       <div className="lobby-container">
-        <h1>INWO Online</h1>
-        <p className="lobby-subtitle">Illuminati: New World Order - Virtual Tabletop</p>
+        <h1>ILLUMINATI</h1>
+        <p className="lobby-subtitle">New World Order™</p>
         
         <form className="lobby-form" onSubmit={handleJoin}>
           <div className="form-group">
@@ -77,7 +77,7 @@ const Lobby = ({ onJoinRoom }) => {
           </div>
 
           <div className="divider">
-            <span>Ready to play?</span>
+            <span>Ready to conspire?</span>
           </div>
 
           <button type="submit" className="btn btn-primary" disabled={!connected}>
@@ -86,9 +86,9 @@ const Lobby = ({ onJoinRoom }) => {
         </form>
 
         <div className="lobby-info">
-          <p>🎮 Create a room or join an existing one</p>
-          <p>🎯 Build your deck and start playing</p>
-          <p>👥 Share the room code with friends to play together</p>
+          <p>🔺 Create or join a conspiracy</p>
+          <p>🎯 Build your secret deck of power</p>
+          <p>👁️ Share the code to recruit co-conspirators</p>
         </div>
       </div>
     </div>
