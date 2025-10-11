@@ -44,8 +44,7 @@ io.on('connection', (socket) => {
         id: socket.id,
         name: playerName,
         hand: [],
-        deck: [],
-        handCounts: { illuminati: 0, groups: 0, resources: 0, plots: 0 }
+        deck: []
       });
     }
 
@@ -67,10 +66,6 @@ io.on('connection', (socket) => {
 
   // Handle card movements
   socket.on('move-card', ({ roomId, card, from, to, position, rotation, tokens }) => {
-    const room = gameRooms.get(roomId);
-    if (!room) return;
-
-    // Broadcast card movement to other players in room
     socket.to(roomId).emit('card-moved', {
       playerId: socket.id,
       card,
@@ -123,38 +118,19 @@ io.on('connection', (socket) => {
     }
   });
 
-  // Handle drawing cards
-  socket.on('draw-card', ({ roomId, cardId }) => {
-    socket.to(roomId).emit('card-drawn', {
+  // Handle hand updates (send card counts to opponents)
+  socket.on('hand-update', ({ roomId, handCounts }) => {
+    socket.to(roomId).emit('opponent-hand-update', {
       playerId: socket.id,
-      cardId
+      handCounts
     });
   });
 
-  // Handle hand updates
-  socket.on('hand-update', ({ roomId, handCounts }) => {
-    const room = gameRooms.get(roomId);
-    if (!room) return;
-
-    const player = room.players.find(p => p.id === socket.id);
-    if (player) {
-      player.handCounts = handCounts;
-      
-      // Broadcast to other players in room
-      socket.to(roomId).emit('opponent-hand-update', {
-        playerId: socket.id,
-        handCounts
-      });
-    }
-  });
-
-  // Handle dice roll - server generates the results
+  // Handle dice roll - FIXED to roll TWO dice
   socket.on('roll-dice', ({ roomId, sides }) => {
-    // Roll 2 dice on the server
     const dice1 = Math.floor(Math.random() * sides) + 1;
     const dice2 = Math.floor(Math.random() * sides) + 1;
     
-    // Send the same result to ALL players in the room
     io.to(roomId).emit('dice-rolled', {
       playerId: socket.id,
       dice1,
@@ -162,10 +138,9 @@ io.on('connection', (socket) => {
     });
   });
 
-  // Handle dice close - close for everyone
+  // Handle closing dice popup
   socket.on('close-dice', ({ roomId }) => {
-    // Broadcast to all players in room including sender
-    io.to(roomId).emit('dice-closed');
+    socket.to(roomId).emit('dice-closed');
   });
 
   // Handle disconnect

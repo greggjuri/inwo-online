@@ -2,7 +2,9 @@ import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { useSocket } from '../contexts/SocketContext';
 import Card from './Card';
 import Dice3D from './Dice';
+import './Dice.css'; // IMPORTANT: Import Dice CSS first
 import './GameBoard.css';
+import './Dice.css'; // Import the dice CSS
 
 const GameBoard = ({ roomId, playerName, playerDeck }) => {
   const { socket } = useSocket();
@@ -109,6 +111,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
     });
 
     socket.on('dice-rolled', ({ dice1, dice2 }) => {
+      console.log('Dice rolled:', dice1, dice2); // Debug log
       setDiceResults([dice1, dice2]);
     });
 
