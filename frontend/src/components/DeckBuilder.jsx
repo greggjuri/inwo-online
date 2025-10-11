@@ -26,7 +26,7 @@ const DeckBuilder = ({ onStartGame }) => {
       return { [filter]: cards };
     }
     
-    // Organize by type
+    // Organize by type - NO LIMITS
     const organized = {
       illuminati: cards.filter(c => c.type === 'illuminati'),
       groups: cards.filter(c => c.type === 'groups'),
@@ -70,11 +70,25 @@ const DeckBuilder = ({ onStartGame }) => {
   };
 
   const handleStartGame = () => {
-    if (selectedCards.length > 0) {
-      onStartGame(selectedCards);
-    } else {
+    if (selectedCards.length === 0) {
       alert('Please select at least one card for your deck!');
+      return;
     }
+    
+    // Check if deck has at least one Illuminati card
+    const hasIlluminati = selectedCards.some(card => card.type === 'illuminati');
+    if (!hasIlluminati) {
+      const confirmed = window.confirm('Your deck has no Illuminati card. Are you sure you want to continue?');
+      if (!confirmed) return;
+    }
+    
+    // Recommend 45 cards but don't enforce it
+    if (selectedCards.length < 30) {
+      const confirmed = window.confirm(`Your deck has ${selectedCards.length} cards. A typical deck has 45 cards. Continue anyway?`);
+      if (!confirmed) return;
+    }
+    
+    onStartGame(selectedCards);
   };
 
   const typeLabels = {
