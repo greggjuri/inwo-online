@@ -163,57 +163,91 @@
 /* Draw Piles */
 .draw-piles {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.pile-section {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
 }
 
 .draw-pile {
-  cursor: pointer;
   transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
 .draw-pile:hover {
   transform: translateY(-5px);
 }
 
+.pile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pile-action-btn {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+  color: white;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.pile-action-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(118, 75, 162, 0.9), rgba(102, 126, 234, 0.9));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.pile-action-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.pile-action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .card-back {
   width: 120px;
   height: 167px;
   border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 3px solid;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  overflow: hidden;
 }
 
-.card-back.groups-resources {
-  background: linear-gradient(135deg, #8B4513 0%, #654321 100%);
-  border-color: #654321;
-}
-
-.card-back.plots {
-  background: linear-gradient(135deg, #4a90e2 0%, #2563eb 100%);
-  border-color: #2563eb;
+.card-back-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .pile-count {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-size: 2.5rem;
   font-weight: bold;
   color: white;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-}
-
-.pile-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 0.5rem;
-  text-align: center;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  text-shadow: 
+    2px 2px 4px rgba(0,0,0,0.9),
+    -2px -2px 4px rgba(0,0,0,0.9),
+    2px -2px 4px rgba(0,0,0,0.9),
+    -2px 2px 4px rgba(0,0,0,0.9);
+  z-index: 10;
 }
 
 /* Opponent Hand Info */
@@ -489,6 +523,24 @@
   cursor: default;
 }
 
+.card-preview-content.show-multiple {
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.multiple-cards-display {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.preview-card-item {
+  flex-shrink: 0;
+}
+
 @keyframes zoomIn {
   from {
     opacity: 0;
@@ -555,5 +607,21 @@
   
   .hand {
     padding: 1rem;
+  }
+
+  .draw-piles {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .pile-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pile-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }

@@ -143,6 +143,14 @@ io.on('connection', (socket) => {
     socket.to(roomId).emit('dice-closed');
   });
 
+  // Handle showing card to all players
+  socket.on('show-card-to-all', ({ roomId, card }) => {
+    socket.to(roomId).emit('show-card-to-all', {
+      playerId: socket.id,
+      card
+    });
+  });
+
   // Handle disconnect
   socket.on('disconnect', () => {
     console.log('User disconnected:', socket.id);

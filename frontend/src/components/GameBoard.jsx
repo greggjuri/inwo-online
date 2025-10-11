@@ -20,6 +20,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
   const [isDragOver, setIsDragOver] = useState(false);
   const [previewCard, setPreviewCard] = useState(null);
   const [setupReady, setSetupReady] = useState(false);
+  const [showTopCards, setShowTopCards] = useState(null); // For showing top cards to owner
   const [opponentHandCounts, setOpponentHandCounts] = useState({
     illuminati: 0,
     groups: 0,
@@ -129,6 +130,10 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       }
     });
 
+    socket.on('show-card-to-all', ({ card }) => {
+      setPreviewCard(card);
+    });
+
     return () => {
       socket.off('room-joined');
       socket.off('player-joined');
@@ -140,6 +145,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       socket.off('dice-closed');
       socket.off('player-left');
       socket.off('opponent-hand-update');
+      socket.off('show-card-to-all');
     };
   }, [socket, roomId, playerName, playerDeck]);
 
@@ -219,12 +225,46 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
     setGroupResourcePile(prev => prev.slice(1));
   };
 
+  const showTopGroupResource = () => {
+    if (groupResourcePile.length === 0) return;
+    
+    const topCard = groupResourcePile[0];
+    setPreviewCard(topCard);
+    
+    socket.emit('show-card-to-all', {
+      roomId,
+      card: topCard
+    });
+  };
+
   const drawFromPlots = () => {
     if (plotPile.length === 0) return;
     
     const drawn = plotPile[0];
     setHand(prev => [...prev, drawn]);
     setPlotPile(prev => prev.slice(1));
+  };
+
+  const drawFromPlotsBottom = () => {
+    if (plotPile.length === 0) return;
+    
+    const drawn = plotPile[plotPile.length - 1];
+    setHand(prev => [...prev, drawn]);
+    setPlotPile(prev => prev.slice(0, -1));
+  };
+
+  const showTopPlot = () => {
+    if (plotPile.length === 0) return;
+    
+    const topCard = plotPile[0];
+    setShowTopCards([topCard]);
+  };
+
+  const showTopThreePlots = () => {
+    if (plotPile.length === 0) return;
+    
+    const topThree = plotPile.slice(0, Math.min(3, plotPile.length));
+    setShowTopCards(topThree);
   };
 
   const playCard = (card, originalIndex, position = null) => {
@@ -425,16 +465,45 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
         {/* Draw Piles */}
         {gamePhase === 'playing' && (
           <div className="draw-piles">
-            <div className="draw-pile" onClick={drawFromGroupResource}>
-              <div className="card-back groups-resources">
-                <div className="pile-count">{groupResourcePile.length}</div>
-                <div className="pile-label">Groups/Resources</div>
+            {/* Groups/Resources Pile */}
+            <div className="pile-section">
+              <div className="draw-pile">
+                <div className="card-back">
+                  <img src="/cards/group-back.webp" alt="Groups/Resources deck" className="card-back-image" />
+                  <div className="pile-count">{groupResourcePile.length}</div>
+                </div>
+              </div>
+              <div className="pile-actions">
+                <button className="pile-action-btn" onClick={drawFromGroupResource} disabled={groupResourcePile.length === 0}>
+                  Draw Top
+                </button>
+                <button className="pile-action-btn" onClick={showTopGroupResource} disabled={groupResourcePile.length === 0}>
+                  Show Top
+                </button>
               </div>
             </div>
-            <div className="draw-pile" onClick={drawFromPlots}>
-              <div className="card-back plots">
-                <div className="pile-count">{plotPile.length}</div>
-                <div className="pile-label">Plots</div>
+
+            {/* Plots Pile */}
+            <div className="pile-section">
+              <div className="draw-pile">
+                <div className="card-back">
+                  <img src="/cards/plot-back.webp" alt="Plots deck" className="card-back-image" />
+                  <div className="pile-count">{plotPile.length}</div>
+                </div>
+              </div>
+              <div className="pile-actions">
+                <button className="pile-action-btn" onClick={drawFromPlots} disabled={plotPile.length === 0}>
+                  Draw Top
+                </button>
+                <button className="pile-action-btn" onClick={drawFromPlotsBottom} disabled={plotPile.length === 0}>
+                  Draw Bottom
+                </button>
+                <button className="pile-action-btn" onClick={showTopPlot} disabled={plotPile.length === 0}>
+                  Show Top
+                </button>
+                <button className="pile-action-btn" onClick={showTopThreePlots} disabled={plotPile.length === 0}>
+                  Show Top 3
+                </button>
               </div>
             </div>
           </div>
@@ -504,6 +573,29 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
               size="large"
               draggable={false}
             />
+          </div>
+        </div>
+      )}
+
+      {/* Show Top Cards (Private to Owner) */}
+      {showTopCards && (
+        <div className="card-preview-overlay" onClick={() => setShowTopCards(null)}>
+          <div className="card-preview-content show-multiple" onClick={(e) => e.stopPropagation()}>
+            <div className="preview-header">
+              <h3>Top {showTopCards.length} Card{showTopCards.length > 1 ? 's' : ''} (Private View)</h3>
+              <button className="preview-close" onClick={() => setShowTopCards(null)}>✕</button>
+            </div>
+            <div className="multiple-cards-display">
+              {showTopCards.map((card, index) => (
+                <div key={`top-${index}`} className="preview-card-item">
+                  <Card
+                    card={card}
+                    size="large"
+                    draggable={false}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}
