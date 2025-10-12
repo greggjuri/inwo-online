@@ -26,6 +26,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
     resources: 0,
     plots: 0
   });
+  const [isFullscreenView, setIsFullscreenView] = useState(false);
   
   const cardsContainerRef = useRef(null);
 
@@ -319,8 +320,10 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
   };
 
   return (
-    <div className="game-board-container">
-      <div className="game-header">
+    <div className={`game-board-container ${isFullscreenView ? 'fullscreen-mode' : ''}`}>
+      {/* Header - Hidden in fullscreen */}
+      {!isFullscreenView && (
+        <div className="game-header">
         <div className="room-info">
           <h2>{roomId}</h2>
           <div className="players">
@@ -331,7 +334,12 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
             ))}
           </div>
           {gamePhase === 'playing' && (
-            <button className="dice-button" onClick={roll2D6}>🎲 2D6</button>
+            <>
+              <button className="dice-button" onClick={roll2D6}>🎲 2D6</button>
+              <button className="view-board-button" onClick={() => setIsFullscreenView(true)}>
+                👁️ View Board
+              </button>
+            </>
           )}
           {gamePhase === 'setup' && (
             <button className="setup-done-button" onClick={handleSetupDone}>✓ Done</button>
@@ -370,13 +378,16 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
           )}
         </div>
       </div>
+      )}
 
-      {gamePhase === 'setup' && (
+      {/* Setup Instructions - Hidden in fullscreen */}
+      {!isFullscreenView && gamePhase === 'setup' && (
         <div className="setup-instructions">
           <p>📋 Place 1 Illuminati card and 1 Group card on the play area, then click "Done"</p>
         </div>
       )}
 
+      {/* Dice Results */}
       {diceResults && (
         <div className="dice-popup-overlay" onClick={closeDice}>
           <div className="dice-container">
@@ -438,7 +449,16 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
         </div>
       </div>
 
-      <div className="hand">
+      {/* Exit Fullscreen Button */}
+      {isFullscreenView && (
+        <button className="exit-fullscreen-button" onClick={() => setIsFullscreenView(false)}>
+          ✕ Exit View
+        </button>
+      )}
+
+      {/* Hand with Draw Piles - Hidden in fullscreen */}
+      {!isFullscreenView && (
+        <div className="hand">
         {gamePhase === 'playing' && (
           <div className="draw-piles">
             <div className="pile-section">
@@ -522,6 +542,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
           </div>
         </div>
       </div>
+      )}
     </div>
   );
 };
