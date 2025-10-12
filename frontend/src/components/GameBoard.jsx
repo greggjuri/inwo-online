@@ -574,7 +574,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
             <div className="pile-section">
               <div className="draw-pile">
                 <div className="card-back">
-                  <img src="/cards/group-back.webp" alt="Groups/Resources" className="card-back-image" />
+                  <img src={`${import.meta.env.BASE_URL}cards/group-back.webp`} alt="Groups/Resources" className="card-back-image" />
                   <div className="pile-count">{groupResourcePile.length}</div>
                 </div>
               </div>
@@ -587,7 +587,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
             <div className="pile-section">
               <div className="draw-pile">
                 <div className="card-back">
-                  <img src="/cards/plot-back.webp" alt="Plots" className="card-back-image" />
+                  <img src={`${import.meta.env.BASE_URL}cards/plot-back.webp`} alt="Plots" className="card-back-image" />
                   <div className="pile-count">{plotPile.length}</div>
                 </div>
               </div>
