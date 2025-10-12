@@ -242,10 +242,17 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
     });
   };
 
-  const handleDragStart = (e, card, originalIndex, source = 'play-area') => {
+   const handleDragStart = (e, card, originalIndex, source = 'play-area') => {
     if (source === 'play-area') {
-      const rect = e.currentTarget.getBoundingClientRect();
-      setDragOffset({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+      // For cards in play area, calculate offset relative to stored position
+      // This works correctly even for rotated cards
+      const containerRect = cardsContainerRef.current.getBoundingClientRect();
+      const mouseX = e.clientX - containerRect.left;
+      const mouseY = e.clientY - containerRect.top;
+      setDragOffset({ 
+        x: mouseX - card.position.x, 
+        y: mouseY - card.position.y 
+      });
     }
     setDraggedCard({ card, index: originalIndex, source });
     e.dataTransfer.effectAllowed = 'move';
