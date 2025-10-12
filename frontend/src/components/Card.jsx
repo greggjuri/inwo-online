@@ -20,7 +20,7 @@ const Card = ({
 
   // Get card image path
   const getCardImagePath = () => {
-    return `/cards/${card.filename}`;
+    return `${import.meta.env.BASE_URL}cards/${card.filename}`;
   };
 
   // Get card type color
