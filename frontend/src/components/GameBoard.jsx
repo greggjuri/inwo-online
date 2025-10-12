@@ -27,6 +27,8 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
     plots: 0
   });
   const [isFullscreenView, setIsFullscreenView] = useState(false);
+  const [groupResourceDiscard, setGroupResourceDiscard] = useState([]);
+  const [plotDiscard, setPlotDiscard] = useState([]);
   
   const cardsContainerRef = useRef(null);
 
@@ -115,6 +117,14 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       setPreviewCard(card);
     });
 
+    socket.on('card-discarded', ({ discardType, card }) => {
+      if (discardType === 'group-resource') {
+        setGroupResourceDiscard(prev => [...prev, card]);
+      } else if (discardType === 'plot') {
+        setPlotDiscard(prev => [...prev, card]);
+      }
+    });
+
     return () => {
       socket.off('room-joined');
       socket.off('player-joined');
@@ -127,6 +137,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       socket.off('player-left');
       socket.off('opponent-hand-update');
       socket.off('show-card-to-all');
+      socket.off('card-discarded');
     };
   }, [socket, roomId, playerName, playerDeck]);
 
@@ -223,6 +234,38 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
     socket.emit('remove-card', { roomId, cardIndex: index });
   };
 
+  const discardFromHand = (card, originalIndex) => {
+    setHand(prev => prev.filter((_, i) => i !== originalIndex));
+    const discardType = (card.type === 'groups' || card.type === 'resources') ? 'group-resource' : 'plot';
+    if (discardType === 'group-resource') {
+      setGroupResourceDiscard(prev => [...prev, card]);
+    } else {
+      setPlotDiscard(prev => [...prev, card]);
+    }
+    socket.emit('discard-card', { roomId, discardType, card });
+  };
+
+  const discardFromPlay = (card, index) => {
+    setSharedPlayArea(prev => prev.filter((_, i) => i !== index));
+    const { position, rotation, tokens, playerId, ...cleanCard } = card;
+    const discardType = (cleanCard.type === 'groups' || cleanCard.type === 'resources') ? 'group-resource' : 'plot';
+    if (discardType === 'group-resource') {
+      setGroupResourceDiscard(prev => [...prev, cleanCard]);
+    } else {
+      setPlotDiscard(prev => [...prev, cleanCard]);
+    }
+    socket.emit('remove-card', { roomId, cardIndex: index });
+    socket.emit('discard-card', { roomId, discardType, card: cleanCard });
+  };
+
+  const showTopDiscard = (discardType) => {
+    const pile = discardType === 'group-resource' ? groupResourceDiscard : plotDiscard;
+    if (pile.length === 0) return;
+    const topCard = pile[pile.length - 1];
+    setPreviewCard(topCard);
+    socket.emit('show-card-to-all', { roomId, card: topCard });
+  };
+
   const handleCardRotate = (index) => {
     setSharedPlayArea(prev => {
       const updated = [...prev];
@@ -317,9 +360,69 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
     setDiceResults(null);
   };
 
-  const handleRightClick = (e, card) => {
+  const handleRightClick = (e, card, index = null, source = 'hand') => {
     e.preventDefault();
-    setPreviewCard(card);
+    
+    // Show context menu with options
+    const showContextMenu = () => {
+      const menu = document.createElement('div');
+      menu.className = 'context-menu';
+      menu.style.position = 'fixed';
+      menu.style.left = e.clientX + 'px';
+      menu.style.top = e.clientY + 'px';
+      menu.style.zIndex = '10000';
+      
+      const previewBtn = document.createElement('button');
+      previewBtn.textContent = '👁️ Preview';
+      previewBtn.onclick = () => {
+        setPreviewCard(card);
+        document.body.removeChild(menu);
+      };
+      
+      menu.appendChild(previewBtn);
+      
+      // Add discard option for hand cards or play area cards
+      if (source === 'hand') {
+        const discardBtn = document.createElement('button');
+        discardBtn.textContent = '🗑️ Discard';
+        discardBtn.onclick = () => {
+          discardFromHand(card, index);
+          document.body.removeChild(menu);
+        };
+        menu.appendChild(discardBtn);
+      } else if (source === 'play-area') {
+        const discardBtn = document.createElement('button');
+        discardBtn.textContent = '🗑️ Discard';
+        discardBtn.onclick = () => {
+          discardFromPlay(card, index);
+          document.body.removeChild(menu);
+        };
+        menu.appendChild(discardBtn);
+        
+        const returnBtn = document.createElement('button');
+        returnBtn.textContent = '↩️ Return to Hand';
+        returnBtn.onclick = () => {
+          returnToHand(card, index);
+          document.body.removeChild(menu);
+        };
+        menu.appendChild(returnBtn);
+      }
+      
+      document.body.appendChild(menu);
+      
+      const closeMenu = (e) => {
+        if (!menu.contains(e.target)) {
+          if (document.body.contains(menu)) {
+            document.body.removeChild(menu);
+          }
+          document.removeEventListener('click', closeMenu);
+        }
+      };
+      
+      setTimeout(() => document.addEventListener('click', closeMenu), 10);
+    };
+    
+    showContextMenu();
   };
 
   const closePreview = () => {
@@ -441,7 +544,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
             {sharedPlayArea.map((card, index) => {
               const isDragging = draggedCard && draggedCard.index === index && draggedCard.source === 'play-area';
               return (
-                <div key={`play-${index}`} className={`played-card ${isDragging ? 'dragging-card' : ''}`} style={{ left: card.position.x + 'px', top: card.position.y + 'px' }} onContextMenu={(e) => handleRightClick(e, card)}>
+                <div key={`play-${index}`} className={`played-card ${isDragging ? 'dragging-card' : ''}`} style={{ left: card.position.x + 'px', top: card.position.y + 'px' }} onContextMenu={(e) => handleRightClick(e, card, index, 'play-area')}>
                   <Card card={card} size="small" rotation={card.rotation || 0} tokens={card.tokens || 0} onRotate={() => handleCardRotate(index)} onTokenChange={(tokens) => handleTokenChange(index, tokens)} onDoubleClick={() => returnToHand(card, index)} draggable={true} onDragStart={(e) => handleDragStart(e, card, index, 'play-area')} onDragEnd={handleDragEnd} />
                 </div>
               );
@@ -503,7 +606,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
             {groupedHand.illuminati.length > 0 && (
               <div className="hand-card-group">
                 {groupedHand.illuminati.map(({ card, originalIndex }) => (
-                  <div key={`hand-illuminati-${originalIndex}`} className="hand-card" onContextMenu={(e) => handleRightClick(e, card)}>
+                  <div key={`hand-illuminati-${originalIndex}`} className="hand-card" onContextMenu={(e) => handleRightClick(e, card, originalIndex, 'hand')}>
                     <Card card={card} size="small" onClick={() => playCard(card, originalIndex)} draggable={true} onDragStart={(e) => handleDragStart(e, card, originalIndex, 'hand')} onDragEnd={handleDragEnd} />
                   </div>
                 ))}
@@ -513,7 +616,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
             {groupedHand.groups.length > 0 && (
               <div className="hand-card-group">
                 {groupedHand.groups.map(({ card, originalIndex }) => (
-                  <div key={`hand-groups-${originalIndex}`} className="hand-card" onContextMenu={(e) => handleRightClick(e, card)}>
+                  <div key={`hand-groups-${originalIndex}`} className="hand-card" onContextMenu={(e) => handleRightClick(e, card, originalIndex, 'hand')}>
                     <Card card={card} size="small" onClick={() => playCard(card, originalIndex)} draggable={true} onDragStart={(e) => handleDragStart(e, card, originalIndex, 'hand')} onDragEnd={handleDragEnd} />
                   </div>
                 ))}
@@ -523,7 +626,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
             {groupedHand.resources.length > 0 && (
               <div className="hand-card-group">
                 {groupedHand.resources.map(({ card, originalIndex }) => (
-                  <div key={`hand-resources-${originalIndex}`} className="hand-card" onContextMenu={(e) => handleRightClick(e, card)}>
+                  <div key={`hand-resources-${originalIndex}`} className="hand-card" onContextMenu={(e) => handleRightClick(e, card, originalIndex, 'hand')}>
                     <Card card={card} size="small" onClick={() => playCard(card, originalIndex)} draggable={true} onDragStart={(e) => handleDragStart(e, card, originalIndex, 'hand')} onDragEnd={handleDragEnd} />
                   </div>
                 ))}
@@ -533,7 +636,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
             {groupedHand.plots.length > 0 && (
               <div className="hand-card-group">
                 {groupedHand.plots.map(({ card, originalIndex }) => (
-                  <div key={`hand-plots-${originalIndex}`} className="hand-card" onContextMenu={(e) => handleRightClick(e, card)}>
+                  <div key={`hand-plots-${originalIndex}`} className="hand-card" onContextMenu={(e) => handleRightClick(e, card, originalIndex, 'hand')}>
                     <Card card={card} size="small" onClick={() => playCard(card, originalIndex)} draggable={true} onDragStart={(e) => handleDragStart(e, card, originalIndex, 'hand')} onDragEnd={handleDragEnd} />
                   </div>
                 ))}
@@ -548,6 +651,30 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
             )}
           </div>
         </div>
+
+        {gamePhase === 'playing' && (
+          <div className="discard-piles">
+            <div className="pile-section">
+              <div className="discard-pile" onClick={() => showTopDiscard('group-resource')}>
+                <div className="card-back">
+                  <img src="/cards/group-back.webp" alt="Groups/Resources Discard" className="card-back-image" />
+                  <div className="pile-count">{groupResourceDiscard.length}</div>
+                </div>
+              </div>
+              <div className="pile-label">G/R Discard</div>
+            </div>
+
+            <div className="pile-section">
+              <div className="discard-pile" onClick={() => showTopDiscard('plot')}>
+                <div className="card-back">
+                  <img src="/cards/plot-back.webp" alt="Plots Discard" className="card-back-image" />
+                  <div className="pile-count">{plotDiscard.length}</div>
+                </div>
+              </div>
+              <div className="pile-label">Plot Discard</div>
+            </div>
+          </div>
+        )}
       </div>
       )}
     </div>

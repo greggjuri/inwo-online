@@ -96,6 +96,57 @@
   to { opacity: 1; }
 }
 
+/* Context Menu */
+.context-menu {
+  background: linear-gradient(135deg, rgba(20, 20, 20, 0.98), rgba(30, 30, 30, 0.98));
+  border-radius: 10px;
+  padding: 0.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 150px;
+  animation: contextMenuAppear 0.2s ease-out;
+}
+
+@keyframes contextMenuAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.context-menu button {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(102, 126, 234, 0.2);
+  color: white;
+  text-align: left;
+  border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+.context-menu button:hover {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.4));
+  transform: translateX(3px);
+  border-color: rgba(102, 126, 234, 0.6);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.context-menu button:active {
+  transform: translateX(1px);
+}
+
 /* Ultra-Compact Header */
 .game-header {
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%);
@@ -592,11 +643,28 @@
   flex-shrink: 0;
 }
 
+/* Discard Piles - Ultra Compact */
+.discard-piles {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
 .pile-section {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
   align-items: center;
+}
+
+.pile-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .draw-pile {
@@ -605,6 +673,16 @@
 }
 
 .draw-pile:hover {
+  transform: translateY(-2px);
+}
+
+.discard-pile {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.discard-pile:hover {
   transform: translateY(-2px);
 }
 
@@ -808,6 +886,13 @@
   }
 
   .draw-piles {
+    flex-direction: row;
+    gap: 0.5rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .discard-piles {
     flex-direction: row;
     gap: 0.5rem;
     width: 100%;
