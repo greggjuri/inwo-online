@@ -657,7 +657,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
             <div className="pile-section">
               <div className="discard-pile" onClick={() => showTopDiscard('group-resource')}>
                 <div className="card-back">
-                  <img src="/cards/group-back.webp" alt="Groups/Resources Discard" className="card-back-image" />
+                 <img src={`${import.meta.env.BASE_URL}cards/group-back.webp`} alt="Groups/Resources" className="card-back-image" />
                   <div className="pile-count">{groupResourceDiscard.length}</div>
                 </div>
               </div>
@@ -667,7 +667,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
             <div className="pile-section">
               <div className="discard-pile" onClick={() => showTopDiscard('plot')}>
                 <div className="card-back">
-                  <img src="/cards/plot-back.webp" alt="Plots Discard" className="card-back-image" />
+                  <img src={`${import.meta.env.BASE_URL}cards/plot-back.webp`} alt="Plots" className="card-back-image" />
                   <div className="pile-count">{plotDiscard.length}</div>
                 </div>
               </div>
