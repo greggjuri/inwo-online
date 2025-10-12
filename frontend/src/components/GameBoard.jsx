@@ -1,3 +1,4 @@
+// frontend/src/components/GameBoard.jsx (Part 1 of 2)
 import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { useSocket } from '../contexts/SocketContext';
 import Card from './Card';
@@ -160,278 +161,278 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
     socket.emit('hand-update', { roomId, handCounts: counts });
   }, [hand, socket, roomId, groupedHand]);
 
-  const handleSetupDone = () => {
-    const myPlayedCards = sharedPlayArea.filter(c => c.playerId === socket.id);
-    const hasIlluminati = myPlayedCards.some(c => c.type === 'illuminati');
-    const hasGroup = myPlayedCards.some(c => c.type === 'groups');
-    
-    if (!hasIlluminati || !hasGroup) {
-      alert('Please place 1 Illuminati card and 1 Group card on the play area before clicking Done.');
-      return;
-    }
 
-    const playedCardIds = myPlayedCards.map(c => c.id);
-    const remainingHand = hand.filter(c => !playedCardIds.includes(c.id));
-    const remainingGroups = remainingHand.filter(c => c.type === 'groups');
-    const resources = playerDeck.filter(c => c.type === 'resources');
-    const groupResourceDeck = [...remainingGroups, ...resources].sort(() => Math.random() - 0.5);
-    const drawn = groupResourceDeck.slice(0, 6);
-    const remainingGroupResource = groupResourceDeck.slice(6);
-    const plots = remainingHand.filter(c => c.type === 'plots');
-    setHand([...plots, ...drawn]);
-    setGroupResourcePile(remainingGroupResource);
-    setGamePhase('playing');
-    setSetupReady(true);
-  };
 
-  const drawFromGroupResource = () => {
-    if (groupResourcePile.length === 0) return;
-    setHand(prev => [...prev, groupResourcePile[0]]);
-    setGroupResourcePile(prev => prev.slice(1));
-  };
+const handleSetupDone = () => {
+  const myPlayedCards = sharedPlayArea.filter(c => c.playerId === socket.id);
+  const hasIlluminati = myPlayedCards.some(c => c.type === 'illuminati');
+  const hasGroup = myPlayedCards.some(c => c.type === 'groups');
+  
+  if (!hasIlluminati || !hasGroup) {
+    alert('Please place 1 Illuminati card and 1 Group card on the play area before clicking Done.');
+    return;
+  }
 
-  const showTopGroupResource = () => {
-    if (groupResourcePile.length === 0) return;
-    const topCard = groupResourcePile[0];
-    setPreviewCard(topCard);
-    socket.emit('show-card-to-all', { roomId, card: topCard });
-  };
+  const playedCardIds = myPlayedCards.map(c => c.id);
+  const remainingHand = hand.filter(c => !playedCardIds.includes(c.id));
+  const remainingGroups = remainingHand.filter(c => c.type === 'groups');
+  const resources = playerDeck.filter(c => c.type === 'resources');
+  const groupResourceDeck = [...remainingGroups, ...resources].sort(() => Math.random() - 0.5);
+  const drawn = groupResourceDeck.slice(0, 6);
+  const remainingGroupResource = groupResourceDeck.slice(6);
+  const plots = remainingHand.filter(c => c.type === 'plots');
+  setHand([...plots, ...drawn]);
+  setGroupResourcePile(remainingGroupResource);
+  setGamePhase('playing');
+  setSetupReady(true);
+};
 
-  const drawFromPlots = () => {
-    if (plotPile.length === 0) return;
-    setHand(prev => [...prev, plotPile[0]]);
-    setPlotPile(prev => prev.slice(1));
-  };
+const drawFromGroupResource = () => {
+  if (groupResourcePile.length === 0) return;
+  setHand(prev => [...prev, groupResourcePile[0]]);
+  setGroupResourcePile(prev => prev.slice(1));
+};
 
-  const drawFromPlotsBottom = () => {
-    if (plotPile.length === 0) return;
-    setHand(prev => [...prev, plotPile[plotPile.length - 1]]);
-    setPlotPile(prev => prev.slice(0, -1));
-  };
+const showTopGroupResource = () => {
+  if (groupResourcePile.length === 0) return;
+  const topCard = groupResourcePile[0];
+  setPreviewCard(topCard);
+  socket.emit('show-card-to-all', { roomId, card: topCard });
+};
 
-  const showTopPlot = () => {
-    if (plotPile.length === 0) return;
-    setShowTopCards([plotPile[0]]);
-  };
+const drawFromPlots = () => {
+  if (plotPile.length === 0) return;
+  setHand(prev => [...prev, plotPile[0]]);
+  setPlotPile(prev => prev.slice(1));
+};
 
-  const showTopThreePlots = () => {
-    if (plotPile.length === 0) return;
-    setShowTopCards(plotPile.slice(0, Math.min(3, plotPile.length)));
-  };
+const drawFromPlotsBottom = () => {
+  if (plotPile.length === 0) return;
+  setHand(prev => [...prev, plotPile[plotPile.length - 1]]);
+  setPlotPile(prev => prev.slice(0, -1));
+};
 
-  const playCard = (card, originalIndex, position = null) => {
-    setHand(prev => prev.filter((_, i) => i !== originalIndex));
-    const finalPosition = position || { x: Math.random() * 500, y: Math.random() * 300 };
-    const newCard = { ...card, position: finalPosition, rotation: 0, tokens: 0, playerId: socket.id };
-    setSharedPlayArea(prev => [...prev, newCard]);
-    socket.emit('move-card', { roomId, card, from: 'hand', to: 'play-area', position: finalPosition, rotation: 0, tokens: 0 });
-  };
+const showTopPlot = () => {
+  if (plotPile.length === 0) return;
+  setShowTopCards([plotPile[0]]);
+};
 
-  const returnToHand = (card, index) => {
-    setSharedPlayArea(prev => prev.filter((_, i) => i !== index));
-    const { position, rotation, tokens, playerId, ...cleanCard } = card;
-    setHand(prev => [...prev, cleanCard]);
-    socket.emit('remove-card', { roomId, cardIndex: index });
-  };
+const showTopThreePlots = () => {
+  if (plotPile.length === 0) return;
+  setShowTopCards(plotPile.slice(0, Math.min(3, plotPile.length)));
+};
 
-  const discardFromHand = (card, originalIndex) => {
-    setHand(prev => prev.filter((_, i) => i !== originalIndex));
-    const discardType = (card.type === 'groups' || card.type === 'resources') ? 'group-resource' : 'plot';
-    if (discardType === 'group-resource') {
-      setGroupResourceDiscard(prev => [...prev, card]);
-    } else {
-      setPlotDiscard(prev => [...prev, card]);
-    }
-    socket.emit('discard-card', { roomId, discardType, card });
-  };
+const playCard = (card, originalIndex, position = null) => {
+  setHand(prev => prev.filter((_, i) => i !== originalIndex));
+  const finalPosition = position || { x: Math.random() * 500, y: Math.random() * 300 };
+  const newCard = { ...card, position: finalPosition, rotation: 0, tokens: 0, playerId: socket.id };
+  setSharedPlayArea(prev => [...prev, newCard]);
+  socket.emit('move-card', { roomId, card, from: 'hand', to: 'play-area', position: finalPosition, rotation: 0, tokens: 0 });
+};
 
-  const discardFromPlay = (card, index) => {
-    setSharedPlayArea(prev => prev.filter((_, i) => i !== index));
-    const { position, rotation, tokens, playerId, ...cleanCard } = card;
-    const discardType = (cleanCard.type === 'groups' || cleanCard.type === 'resources') ? 'group-resource' : 'plot';
-    if (discardType === 'group-resource') {
-      setGroupResourceDiscard(prev => [...prev, cleanCard]);
-    } else {
-      setPlotDiscard(prev => [...prev, cleanCard]);
-    }
-    socket.emit('remove-card', { roomId, cardIndex: index });
-    socket.emit('discard-card', { roomId, discardType, card: cleanCard });
-  };
+const returnToHand = (card, index) => {
+  setSharedPlayArea(prev => prev.filter((_, i) => i !== index));
+  const { position, rotation, tokens, playerId, ...cleanCard } = card;
+  setHand(prev => [...prev, cleanCard]);
+  socket.emit('remove-card', { roomId, cardIndex: index });
+};
 
-  const showTopDiscard = (discardType) => {
-    const pile = discardType === 'group-resource' ? groupResourceDiscard : plotDiscard;
-    if (pile.length === 0) return;
-    const topCard = pile[pile.length - 1];
-    setPreviewCard(topCard);
-    socket.emit('show-card-to-all', { roomId, card: topCard });
-  };
+const discardFromHand = (card, originalIndex) => {
+  setHand(prev => prev.filter((_, i) => i !== originalIndex));
+  const discardType = (card.type === 'groups' || card.type === 'resources') ? 'group-resource' : 'plot';
+  if (discardType === 'group-resource') {
+    setGroupResourceDiscard(prev => [...prev, card]);
+  } else {
+    setPlotDiscard(prev => [...prev, card]);
+  }
+  socket.emit('discard-card', { roomId, discardType, card });
+};
 
-  const handleCardRotate = (index) => {
-    setSharedPlayArea(prev => {
-      const updated = [...prev];
-      const newRotation = ((updated[index].rotation || 0) + 90) % 360;
-      updated[index] = { ...updated[index], rotation: newRotation };
-      socket.emit('update-card', { roomId, cardIndex: index, rotation: newRotation });
-      return updated;
-    });
-  };
+const discardFromPlay = (card, index) => {
+  setSharedPlayArea(prev => prev.filter((_, i) => i !== index));
+  const { position, rotation, tokens, playerId, ...cleanCard } = card;
+  const discardType = (cleanCard.type === 'groups' || cleanCard.type === 'resources') ? 'group-resource' : 'plot';
+  if (discardType === 'group-resource') {
+    setGroupResourceDiscard(prev => [...prev, cleanCard]);
+  } else {
+    setPlotDiscard(prev => [...prev, cleanCard]);
+  }
+  socket.emit('remove-card', { roomId, cardIndex: index });
+  socket.emit('discard-card', { roomId, discardType, card: cleanCard });
+};
 
-  const handleTokenChange = (index, newTokenCount) => {
-    setSharedPlayArea(prev => {
-      const updated = [...prev];
-      updated[index] = { ...updated[index], tokens: newTokenCount };
-      socket.emit('update-card', { roomId, cardIndex: index, tokens: newTokenCount });
-      return updated;
-    });
-  };
+const showTopDiscard = (discardType) => {
+  const pile = discardType === 'group-resource' ? groupResourceDiscard : plotDiscard;
+  if (pile.length === 0) return;
+  const topCard = pile[pile.length - 1];
+  setPreviewCard(topCard);
+  socket.emit('show-card-to-all', { roomId, card: topCard });
+};
 
-   const handleDragStart = (e, card, originalIndex, source = 'play-area') => {
-    if (source === 'play-area') {
-      // For cards in play area, calculate offset relative to stored position
-      // This works correctly even for rotated cards
-      const containerRect = cardsContainerRef.current.getBoundingClientRect();
-      const mouseX = e.clientX - containerRect.left;
-      const mouseY = e.clientY - containerRect.top;
-      setDragOffset({ 
-        x: mouseX - card.position.x, 
-        y: mouseY - card.position.y 
-      });
-    }
-    setDraggedCard({ card, index: originalIndex, source });
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/plain', '');
-  };
+const handleCardRotate = (index) => {
+  setSharedPlayArea(prev => {
+    const updated = [...prev];
+    const newRotation = ((updated[index].rotation || 0) + 90) % 360;
+    updated[index] = { ...updated[index], rotation: newRotation };
+    socket.emit('update-card', { roomId, cardIndex: index, rotation: newRotation });
+    return updated;
+  });
+};
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
-    setIsDragOver(true);
-  };
+const handleTokenChange = (index, newTokenCount) => {
+  setSharedPlayArea(prev => {
+    const updated = [...prev];
+    updated[index] = { ...updated[index], tokens: newTokenCount };
+    socket.emit('update-card', { roomId, cardIndex: index, tokens: newTokenCount });
+    return updated;
+  });
+};
 
-  const handleDragLeave = (e) => {
-    if (e.currentTarget === e.target) {
-      setIsDragOver(false);
-    }
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    setIsDragOver(false);
-    if (!draggedCard || !cardsContainerRef.current) return;
-
+const handleDragStart = (e, card, originalIndex, source = 'play-area') => {
+  if (source === 'play-area') {
     const containerRect = cardsContainerRef.current.getBoundingClientRect();
-    let x, y;
-    
-    if (draggedCard.source === 'hand') {
-      x = e.clientX - containerRect.left - 60;
-      y = e.clientY - containerRect.top - 83.5;
-    } else {
-      x = e.clientX - containerRect.left - dragOffset.x;
-      y = e.clientY - containerRect.top - dragOffset.y;
-    }
-    
-    x = Math.max(-50, Math.min(x, containerRect.width - 70));
-    y = Math.max(-50, Math.min(y, containerRect.height - 117));
+    const mouseX = e.clientX - containerRect.left;
+    const mouseY = e.clientY - containerRect.top;
+    setDragOffset({ 
+      x: mouseX - card.position.x, 
+      y: mouseY - card.position.y 
+    });
+  }
+  setDraggedCard({ card, index: originalIndex, source });
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', '');
+};
 
-    if (draggedCard.source === 'hand') {
-      playCard(draggedCard.card, draggedCard.index, { x, y });
-    } else {
-      setSharedPlayArea(prev => {
-        const updated = [...prev];
-        updated[draggedCard.index] = { ...updated[draggedCard.index], position: { x, y } };
-        socket.emit('update-card-position', { roomId, cardIndex: draggedCard.index, position: { x, y } });
-        return updated;
-      });
-    }
-    setDraggedCard(null);
-  };
+const handleDragOver = (e) => {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  setIsDragOver(true);
+};
 
-  const handleDragEnd = () => {
-    setDraggedCard(null);
+const handleDragLeave = (e) => {
+  if (e.currentTarget === e.target) {
     setIsDragOver(false);
-  };
+  }
+};
 
-  const roll2D6 = () => {
-    socket.emit('roll-dice', { roomId, sides: 6 });
-  };
+const handleDrop = (e) => {
+  e.preventDefault();
+  setIsDragOver(false);
+  if (!draggedCard || !cardsContainerRef.current) return;
 
-  const closeDice = () => {
-    socket.emit('close-dice', { roomId });
-    setDiceResults(null);
-  };
+  const containerRect = cardsContainerRef.current.getBoundingClientRect();
+  let x, y;
+  
+  if (draggedCard.source === 'hand') {
+    x = e.clientX - containerRect.left - 60;
+    y = e.clientY - containerRect.top - 83.5;
+  } else {
+    x = e.clientX - containerRect.left - dragOffset.x;
+    y = e.clientY - containerRect.top - dragOffset.y;
+  }
+  
+  x = Math.max(-50, Math.min(x, containerRect.width - 70));
+  y = Math.max(-50, Math.min(y, containerRect.height - 117));
 
-  const handleRightClick = (e, card, index = null, source = 'hand') => {
-    e.preventDefault();
+  if (draggedCard.source === 'hand') {
+    playCard(draggedCard.card, draggedCard.index, { x, y });
+  } else {
+    setSharedPlayArea(prev => {
+      const updated = [...prev];
+      updated[draggedCard.index] = { ...updated[draggedCard.index], position: { x, y } };
+      socket.emit('update-card-position', { roomId, cardIndex: draggedCard.index, position: { x, y } });
+      return updated;
+    });
+  }
+  setDraggedCard(null);
+};
+
+const handleDragEnd = () => {
+  setDraggedCard(null);
+  setIsDragOver(false);
+};
+
+const roll2D6 = () => {
+  socket.emit('roll-dice', { roomId, sides: 6 });
+};
+
+const closeDice = () => {
+  socket.emit('close-dice', { roomId });
+  setDiceResults(null);
+};
+
+const handleRightClick = (e, card, index = null, source = 'hand') => {
+  e.preventDefault();
+  
+  const showContextMenu = () => {
+    const menu = document.createElement('div');
+    menu.className = 'context-menu';
+    menu.style.position = 'fixed';
+    menu.style.left = e.clientX + 'px';
+    menu.style.top = e.clientY + 'px';
+    menu.style.zIndex = '10000';
     
-    // Show context menu with options
-    const showContextMenu = () => {
-      const menu = document.createElement('div');
-      menu.className = 'context-menu';
-      menu.style.position = 'fixed';
-      menu.style.left = e.clientX + 'px';
-      menu.style.top = e.clientY + 'px';
-      menu.style.zIndex = '10000';
-      
-      const previewBtn = document.createElement('button');
-      previewBtn.textContent = '👁️ Preview';
-      previewBtn.onclick = () => {
-        setPreviewCard(card);
-        document.body.removeChild(menu);
-      };
-      
-      menu.appendChild(previewBtn);
-      
-      // Add discard option for hand cards or play area cards
-      if (source === 'hand') {
-        const discardBtn = document.createElement('button');
-        discardBtn.textContent = '🗑️ Discard';
-        discardBtn.onclick = () => {
-          discardFromHand(card, index);
-          document.body.removeChild(menu);
-        };
-        menu.appendChild(discardBtn);
-      } else if (source === 'play-area') {
-        const discardBtn = document.createElement('button');
-        discardBtn.textContent = '🗑️ Discard';
-        discardBtn.onclick = () => {
-          discardFromPlay(card, index);
-          document.body.removeChild(menu);
-        };
-        menu.appendChild(discardBtn);
-        
-        const returnBtn = document.createElement('button');
-        returnBtn.textContent = '↩️ Return to Hand';
-        returnBtn.onclick = () => {
-          returnToHand(card, index);
-          document.body.removeChild(menu);
-        };
-        menu.appendChild(returnBtn);
-      }
-      
-      document.body.appendChild(menu);
-      
-      const closeMenu = (e) => {
-        if (!menu.contains(e.target)) {
-          if (document.body.contains(menu)) {
-            document.body.removeChild(menu);
-          }
-          document.removeEventListener('click', closeMenu);
-        }
-      };
-      
-      setTimeout(() => document.addEventListener('click', closeMenu), 10);
+    const previewBtn = document.createElement('button');
+    previewBtn.textContent = '👁️ Preview';
+    previewBtn.onclick = () => {
+      setPreviewCard(card);
+      document.body.removeChild(menu);
     };
     
-    showContextMenu();
+    menu.appendChild(previewBtn);
+    
+    if (source === 'hand') {
+      const discardBtn = document.createElement('button');
+      discardBtn.textContent = '🗑️ Discard';
+      discardBtn.onclick = () => {
+        discardFromHand(card, index);
+        document.body.removeChild(menu);
+      };
+      menu.appendChild(discardBtn);
+    } else if (source === 'play-area') {
+      const discardBtn = document.createElement('button');
+      discardBtn.textContent = '🗑️ Discard';
+      discardBtn.onclick = () => {
+        discardFromPlay(card, index);
+        document.body.removeChild(menu);
+      };
+      menu.appendChild(discardBtn);
+      
+      const returnBtn = document.createElement('button');
+      returnBtn.textContent = '↩️ Return to Hand';
+      returnBtn.onclick = () => {
+        returnToHand(card, index);
+        document.body.removeChild(menu);
+      };
+      menu.appendChild(returnBtn);
+    }
+    
+    document.body.appendChild(menu);
+    
+    const closeMenu = (e) => {
+      if (!menu.contains(e.target)) {
+        if (document.body.contains(menu)) {
+          document.body.removeChild(menu);
+        }
+        document.removeEventListener('click', closeMenu);
+      }
+    };
+    
+    setTimeout(() => document.addEventListener('click', closeMenu), 10);
   };
+  
+  showContextMenu();
+};
 
-  const closePreview = () => {
-    setPreviewCard(null);
-  };
+const closePreview = () => {
+  setPreviewCard(null);
+};
+
+// frontend/src/components/GameBoard.jsx (Part 3 of 3 - JSX Return)
+// ... continued from Part 2
 
   return (
     <div className={`game-board-container ${isFullscreenView ? 'fullscreen-mode' : ''}`}>
-      {/* Header - Hidden in fullscreen */}
       {!isFullscreenView && (
         <div className="game-header">
         <div className="room-info">
@@ -490,14 +491,12 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       </div>
       )}
 
-      {/* Setup Instructions - Hidden in fullscreen */}
       {!isFullscreenView && gamePhase === 'setup' && (
         <div className="setup-instructions">
           <p>📋 Place 1 Illuminati card and 1 Group card on the play area, then click "Done"</p>
         </div>
       )}
 
-      {/* Dice Results */}
       {diceResults && (
         <div className="dice-popup-overlay" onClick={closeDice}>
           <div className="dice-container">
@@ -559,14 +558,12 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
         </div>
       </div>
 
-      {/* Exit Fullscreen Button */}
       {isFullscreenView && (
         <button className="exit-fullscreen-button" onClick={() => setIsFullscreenView(false)}>
           ✕ Exit View
         </button>
       )}
 
-      {/* Hand with Draw Piles - Hidden in fullscreen */}
       {!isFullscreenView && (
         <div className="hand">
         {gamePhase === 'playing' && (

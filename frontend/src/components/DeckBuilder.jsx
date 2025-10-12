@@ -1,3 +1,4 @@
+// frontend/src/components/DeckBuilder.jsx
 import React, { useState, useMemo } from 'react';
 import Card from './Card';
 import cardsData from '../cards.json';
@@ -8,6 +9,10 @@ const DeckBuilder = ({ onStartGame }) => {
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCard, setSelectedCard] = useState(null);
+  const [showSaveModal, setShowSaveModal] = useState(false);
+  const [showLoadModal, setShowLoadModal] = useState(false);
+  const [deckName, setDeckName] = useState('');
+  const [deckDescription, setDeckDescription] = useState('');
 
   // Organize cards by type in the order: illuminati, groups, resources, plots
   const organizedCards = useMemo(() => {
@@ -53,6 +58,77 @@ const DeckBuilder = ({ onStartGame }) => {
     
     return counts;
   }, []);
+
+  // Load saved decks from localStorage
+  const getSavedDecks = () => {
+    try {
+      const saved = localStorage.getItem('inwo-saved-decks');
+      return saved ? JSON.parse(saved) : [];
+    } catch (error) {
+      console.error('Error loading saved decks:', error);
+      return [];
+    }
+  };
+
+  // Save deck to localStorage
+  const saveDeck = () => {
+    if (!deckName.trim()) {
+      alert('Please enter a deck name');
+      return;
+    }
+
+    if (selectedCards.length === 0) {
+      alert('Cannot save an empty deck');
+      return;
+    }
+
+    const deck = {
+      id: Date.now().toString(),
+      name: deckName.trim(),
+      description: deckDescription.trim(),
+      cards: selectedCards,
+      savedAt: new Date().toISOString(),
+      cardCount: selectedCards.length
+    };
+
+    const savedDecks = getSavedDecks();
+    savedDecks.push(deck);
+    
+    try {
+      localStorage.setItem('inwo-saved-decks', JSON.stringify(savedDecks));
+      alert(`Deck "${deck.name}" saved successfully!`);
+      setShowSaveModal(false);
+      setDeckName('');
+      setDeckDescription('');
+    } catch (error) {
+      console.error('Error saving deck:', error);
+      alert('Error saving deck. Storage might be full.');
+    }
+  };
+
+  // Load a saved deck
+  const loadDeck = (deck) => {
+    setSelectedCards(deck.cards);
+    setShowLoadModal(false);
+    alert(`Loaded deck: ${deck.name}`);
+  };
+
+  // Delete a saved deck
+  const deleteDeck = (deckId) => {
+    if (!confirm('Are you sure you want to delete this deck?')) return;
+
+    const savedDecks = getSavedDecks();
+    const filtered = savedDecks.filter(d => d.id !== deckId);
+    
+    try {
+      localStorage.setItem('inwo-saved-decks', JSON.stringify(filtered));
+      // Force re-render by closing and reopening modal
+      setShowLoadModal(false);
+      setTimeout(() => setShowLoadModal(true), 10);
+    } catch (error) {
+      console.error('Error deleting deck:', error);
+    }
+  };
 
   const handleCardClick = (card) => {
     // Add card to deck (allow duplicates)
@@ -105,6 +181,11 @@ const DeckBuilder = ({ onStartGame }) => {
     plots: '#4a90e2'
   };
 
+  const formatDate = (isoString) => {
+    const date = new Date(isoString);
+    return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
+
   return (
     <div className="deck-builder">
       <div className="deck-builder-header">
@@ -115,6 +196,12 @@ const DeckBuilder = ({ onStartGame }) => {
           </p>
         </div>
         <div className="header-actions">
+          <button className="save-load-btn save-btn" onClick={() => setShowSaveModal(true)}>
+            💾 Save Deck
+          </button>
+          <button className="save-load-btn load-btn" onClick={() => setShowLoadModal(true)}>
+            📂 Load Deck
+          </button>
           <button className="start-game-btn" onClick={handleStartGame}>
             Start Game ({selectedCards.length} cards)
           </button>
@@ -278,6 +365,109 @@ const DeckBuilder = ({ onStartGame }) => {
                 size="large"
                 draggable={false}
               />
+            </div>
+          </div>
+        )}
+
+        {/* Save Deck Modal */}
+        {showSaveModal && (
+          <div className="modal-overlay" onClick={() => setShowSaveModal(false)}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              <div className="modal-header">
+                <h3>💾 Save Deck</h3>
+                <button onClick={() => setShowSaveModal(false)}>✕</button>
+              </div>
+              <div className="modal-body">
+                <div className="form-group">
+                  <label htmlFor="deck-name">Deck Name *</label>
+                  <input
+                    id="deck-name"
+                    type="text"
+                    placeholder="Enter deck name..."
+                    value={deckName}
+                    onChange={(e) => setDeckName(e.target.value)}
+                    maxLength={50}
+                    autoFocus
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="deck-description">Description (Optional)</label>
+                  <textarea
+                    id="deck-description"
+                    placeholder="Add a description for your deck..."
+                    value={deckDescription}
+                    onChange={(e) => setDeckDescription(e.target.value)}
+                    maxLength={200}
+                    rows={3}
+                  />
+                </div>
+                <div className="deck-info-summary">
+                  <p><strong>{selectedCards.length}</strong> cards in deck</p>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button className="btn-cancel" onClick={() => setShowSaveModal(false)}>
+                  Cancel
+                </button>
+                <button className="btn-save" onClick={saveDeck}>
+                  Save Deck
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Load Deck Modal */}
+        {showLoadModal && (
+          <div className="modal-overlay" onClick={() => setShowLoadModal(false)}>
+            <div className="modal-content load-modal" onClick={(e) => e.stopPropagation()}>
+              <div className="modal-header">
+                <h3>📂 Load Deck</h3>
+                <button onClick={() => setShowLoadModal(false)}>✕</button>
+              </div>
+              <div className="modal-body">
+                {getSavedDecks().length === 0 ? (
+                  <div className="no-saved-decks">
+                    <p>No saved decks found</p>
+                    <p className="hint">Save your current deck to see it here</p>
+                  </div>
+                ) : (
+                  <div className="saved-decks-list">
+                    {getSavedDecks().reverse().map(deck => (
+                      <div key={deck.id} className="saved-deck-item">
+                        <div className="saved-deck-info">
+                          <h4>{deck.name}</h4>
+                          {deck.description && (
+                            <p className="deck-description">{deck.description}</p>
+                          )}
+                          <div className="deck-meta">
+                            <span className="deck-card-count">
+                              🎴 {deck.cardCount} cards
+                            </span>
+                            <span className="deck-date">
+                              📅 {formatDate(deck.savedAt)}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="saved-deck-actions">
+                          <button 
+                            className="btn-load-deck"
+                            onClick={() => loadDeck(deck)}
+                          >
+                            Load
+                          </button>
+                          <button 
+                            className="btn-delete-deck"
+                            onClick={() => deleteDeck(deck.id)}
+                          >
+                            🗑️
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}

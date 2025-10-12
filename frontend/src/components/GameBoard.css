@@ -1,3 +1,5 @@
+/* frontend/src/components/GameBoard.css */
+
 .game-board-container {
   width: 100vw;
   height: 100vh;
@@ -8,20 +10,6 @@
   animation: fadeIn 0.5s ease-out;
   overflow: hidden;
 }
-
-/* 
-  Vertical space optimization for 1920x1080:
-  NORMAL VIEW:
-  - Header: ~40px
-  - Setup instructions (when shown): ~30px
-  - Play area: ~850-900px (fits 4 portrait cards + 1 landscape card)
-  - Hand section: ~180px (max 12 cards, overlapped 20%)
-  - Total: ~1080px ✓
-  
-  FULLSCREEN VIEW (click "View Board" button):
-  - Play area: 100vh (~1080px) - entire screen for viewing the board
-  - Click "Exit View" button to return to normal view
-*/
 
 /* Fullscreen Mode - Entire screen for play area */
 .game-board-container.fullscreen-mode .play-area {
@@ -44,7 +32,6 @@
 }
 
 .game-board-container.fullscreen-mode .cards-container {
-  /* Full screen space for maximum visibility */
   min-width: 1800px;
   min-height: 1000px;
   max-width: 2000px;
@@ -425,16 +412,12 @@
     0 0 20px rgba(102, 126, 234, 0.3);
 }
 
-/* Cards Container - Optimized for 1920x1080 with more vertical space */
+/* Cards Container */
 .cards-container {
   position: relative;
   width: 100%;
   height: 100%;
   display: block;
-  /* Sized to fit 12 cards wide × (4 portrait + 1 landscape) tall
-     Horizontal: 12 × 120px = 1440px + spacing = 1500px
-     Vertical: (4 × 167px) + 120px = 788px + spacing = 850px
-  */
   min-width: 1500px;
   min-height: 850px;
   max-width: 1900px;
@@ -518,7 +501,7 @@
   50% { transform: translateY(-10px); }
 }
 
-/* Hand Section - Optimized for max 12 cards */
+/* Hand Section */
 .hand {
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
   padding: 0.3rem 0.75rem;
@@ -538,7 +521,7 @@
 }
 
 .hand h3 {
-  display: none; /* Remove hand counter */
+  display: none;
 }
 
 .hand-cards {
@@ -586,7 +569,6 @@
   z-index: 1;
 }
 
-/* More overlap - 20% instead of 10% (24px for 120px width) */
 .hand-card-group .hand-card:not(:first-child) {
   margin-left: -24px;
 }
@@ -635,7 +617,7 @@
   animation: floatIcon 3s ease-in-out infinite;
 }
 
-/* Draw Piles - Ultra Compact */
+/* Draw Piles */
 .draw-piles {
   display: flex;
   gap: 0.75rem;
@@ -643,7 +625,7 @@
   flex-shrink: 0;
 }
 
-/* Discard Piles - Ultra Compact */
+/* Discard Piles */
 .discard-piles {
   display: flex;
   gap: 0.75rem;
@@ -847,59 +829,4 @@
 .preview-close:hover {
   background: rgba(255, 255, 255, 0.2);
   transform: rotate(90deg) scale(1.1);
-}
-
-/* Responsive */
-@media (max-width: 1920px) {
-  .cards-container {
-    min-width: 1400px;
-    min-height: 800px;
-  }
-}
-
-@media (max-width: 1600px) {
-  .cards-container {
-    min-width: 1200px;
-    min-height: 700px;
-  }
-}
-
-@media (max-width: 768px) {
-  .game-header {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 0.5rem;
-  }
-  
-  .room-info {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .players {
-    justify-content: center;
-  }
-  
-  .hand {
-    flex-direction: column;
-    padding: 0.5rem;
-  }
-
-  .draw-piles {
-    flex-direction: row;
-    gap: 0.5rem;
-    width: 100%;
-    justify-content: center;
-  }
-
-  .discard-piles {
-    flex-direction: row;
-    gap: 0.5rem;
-    width: 100%;
-    justify-content: center;
-  }
-
-  .pile-section {
-    flex-direction: column;
-  }
 }
