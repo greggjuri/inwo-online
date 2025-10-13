@@ -201,6 +201,33 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
     setPlotPile(prev => prev.slice(0, -1));
   };
 
+  const discardTopPlot = () => {
+  if (plotPile.length === 0) return;
+  const discarded = plotPile[0];
+  setPlotDiscard(prev => [...prev, discarded]);
+  setPlotPile(prev => prev.slice(1));
+};
+
+const discardTop2Plots = () => {
+  if (plotPile.length === 0) return;
+  const count = Math.min(2, plotPile.length);
+  const discarded = plotPile.slice(0, count);
+  setPlotDiscard(prev => [...prev, ...discarded]);
+  setPlotPile(prev => prev.slice(count));
+};
+
+const discardTopPlotBlind = () => {
+  if (plotPile.length === 0) return;
+  setPlotDiscard(prev => [...prev, plotPile[0]]);
+  setPlotPile(prev => prev.slice(1));
+};
+
+const discardTop2PlotsBlind = () => {
+  if (plotPile.length === 0) return;
+  const count = Math.min(2, plotPile.length);
+  setPlotDiscard(prev => [...prev, ...plotPile.slice(0, count)]);
+  setPlotPile(prev => prev.slice(count));
+};
   const showTopPlot = () => {
     if (plotPile.length === 0) return;
     setShowTopCards([plotPile[0]]);
@@ -347,24 +374,124 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
     setDiceResults(null);
   };
 
-  const handleRightClick = (e, card, index = null, source = 'hand') => {
-    e.preventDefault();
+ const handleRightClick = (e, card, index = null, source = 'hand') => {
+  e.preventDefault();
+  
+  const showContextMenu = () => {
+    const menu = document.createElement('div');
+    menu.className = 'context-menu';
+    menu.style.position = 'fixed';
+    menu.style.left = e.clientX + 'px';
+    menu.style.top = e.clientY + 'px';
+    menu.style.zIndex = '10000';
     
-    const showContextMenu = () => {
-      const menu = document.createElement('div');
-      menu.className = 'context-menu';
-      menu.style.position = 'fixed';
-      menu.style.left = e.clientX + 'px';
-      menu.style.top = e.clientY + 'px';
-      menu.style.zIndex = '10000';
+    if (source === 'group-resource-pile') {
+      // Group/Resource pile menu
+      const drawBtn = document.createElement('button');
+      drawBtn.textContent = '📥 Draw 1';
+      drawBtn.onclick = () => {
+        drawFromGroupResource();
+        document.body.removeChild(menu);
+      };
+      menu.appendChild(drawBtn);
       
+      const showBtn = document.createElement('button');
+      showBtn.textContent = '👁️ Show 1 (self)';
+      showBtn.onclick = () => {
+        if (groupResourcePile.length > 0) {
+          setPreviewCard(groupResourcePile[0]);
+        }
+        document.body.removeChild(menu);
+      };
+      menu.appendChild(showBtn);
+      
+    } else if (source === 'plot-pile') {
+      // Plot pile menu
+      const drawTopBtn = document.createElement('button');
+      drawTopBtn.textContent = '📥 Draw 1';
+      drawTopBtn.onclick = () => {
+        drawFromPlots();
+        document.body.removeChild(menu);
+      };
+      menu.appendChild(drawTopBtn);
+      
+      const drawBottomBtn = document.createElement('button');
+      drawBottomBtn.textContent = '📥 Draw bottom';
+      drawBottomBtn.onclick = () => {
+        drawFromPlotsBottom();
+        document.body.removeChild(menu);
+      };
+      menu.appendChild(drawBottomBtn);
+      
+      const showTopBtn = document.createElement('button');
+      showTopBtn.textContent = '👁️ Show top (self)';
+      showTopBtn.onclick = () => {
+        showTopPlot();
+        document.body.removeChild(menu);
+      };
+      menu.appendChild(showTopBtn);
+      
+      const showTop3Btn = document.createElement('button');
+      showTop3Btn.textContent = '👁️ Show top 3 (self)';
+      showTop3Btn.onclick = () => {
+        showTopThreePlots();
+        document.body.removeChild(menu);
+      };
+      menu.appendChild(showTop3Btn);
+      
+      const discardTopBtn = document.createElement('button');
+      discardTopBtn.textContent = '🗑️ Discard top';
+      discardTopBtn.onclick = () => {
+        if (plotPile.length > 0) {
+          setPreviewCard(plotPile[0]);
+          setTimeout(() => {
+            discardTopPlot();
+            setPreviewCard(null);
+          }, 1500);
+        }
+        document.body.removeChild(menu);
+      };
+      menu.appendChild(discardTopBtn);
+      
+      const discardTop2Btn = document.createElement('button');
+      discardTop2Btn.textContent = '🗑️ Discard top 2';
+      discardTop2Btn.onclick = () => {
+        if (plotPile.length > 0) {
+          const cardsToShow = plotPile.slice(0, Math.min(2, plotPile.length));
+          setShowTopCards(cardsToShow);
+          setTimeout(() => {
+            discardTop2Plots();
+            setShowTopCards(null);
+          }, 2000);
+        }
+        document.body.removeChild(menu);
+      };
+      menu.appendChild(discardTop2Btn);
+      
+      const discardTopBlindBtn = document.createElement('button');
+      discardTopBlindBtn.textContent = '🗑️ Discard top blind';
+      discardTopBlindBtn.onclick = () => {
+        discardTopPlotBlind();
+        document.body.removeChild(menu);
+      };
+      menu.appendChild(discardTopBlindBtn);
+      
+      const discardTop2BlindBtn = document.createElement('button');
+      discardTop2BlindBtn.textContent = '🗑️ Discard top 2 blind';
+      discardTop2BlindBtn.onclick = () => {
+        discardTop2PlotsBlind();
+        document.body.removeChild(menu);
+      };
+      menu.appendChild(discardTop2BlindBtn);
+      
+    } else {
+      // Original card menu
       const previewBtn = document.createElement('button');
       previewBtn.textContent = '👁️ Preview';
       previewBtn.onclick = () => {
         setPreviewCard(card);
         document.body.removeChild(menu);
       };
-      
       menu.appendChild(previewBtn);
       
       if (source === 'hand') {
@@ -392,23 +519,24 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
         };
         menu.appendChild(returnBtn);
       }
-      
-      document.body.appendChild(menu);
-      
-      const closeMenu = (e) => {
-        if (!menu.contains(e.target)) {
-          if (document.body.contains(menu)) {
-            document.body.removeChild(menu);
-          }
-          document.removeEventListener('click', closeMenu);
+    }
+    
+    document.body.appendChild(menu);
+    
+    const closeMenu = (e) => {
+      if (!menu.contains(e.target)) {
+        if (document.body.contains(menu)) {
+          document.body.removeChild(menu);
         }
-      };
-      
-      setTimeout(() => document.addEventListener('click', closeMenu), 10);
+        document.removeEventListener('click', closeMenu);
+      }
     };
     
-    showContextMenu();
+    setTimeout(() => document.addEventListener('click', closeMenu), 10);
   };
+  
+  showContextMenu();
+};
 
   const closePreview = () => {
     setPreviewCard(null);
@@ -552,30 +680,28 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
         {gamePhase === 'playing' && (
           <div className="draw-piles">
             <div className="pile-section">
-              <div className="draw-pile">
+              <div 
+                className="draw-pile" 
+                onContextMenu={(e) => groupResourcePile.length > 0 && handleRightClick(e, null, null, 'group-resource-pile')}
+                title="Right-click for options"
+              >
                 <div className="card-back">
                   <img src={`${import.meta.env.BASE_URL}cards/group-back.webp`} alt="Groups/Resources" className="card-back-image" />
                   <div className="pile-count">{groupResourcePile.length}</div>
                 </div>
               </div>
-              <div className="pile-actions">
-                <button className="pile-action-btn" onClick={drawFromGroupResource} disabled={groupResourcePile.length === 0}>Draw</button>
-                <button className="pile-action-btn" onClick={showTopGroupResource} disabled={groupResourcePile.length === 0}>Show</button>
-              </div>
             </div>
 
             <div className="pile-section">
-              <div className="draw-pile">
+              <div 
+                className="draw-pile"
+                onContextMenu={(e) => plotPile.length > 0 && handleRightClick(e, null, null, 'plot-pile')}
+                title="Right-click for options"
+              >
                 <div className="card-back">
                   <img src={`${import.meta.env.BASE_URL}cards/plot-back.webp`} alt="Plots" className="card-back-image" />
                   <div className="pile-count">{plotPile.length}</div>
                 </div>
-              </div>
-              <div className="pile-actions">
-                <button className="pile-action-btn" onClick={drawFromPlots} disabled={plotPile.length === 0}>Top</button>
-                <button className="pile-action-btn" onClick={drawFromPlotsBottom} disabled={plotPile.length === 0}>Bottom</button>
-                <button className="pile-action-btn" onClick={showTopPlot} disabled={plotPile.length === 0}>Show 1</button>
-                <button className="pile-action-btn" onClick={showTopThreePlots} disabled={plotPile.length === 0}>Show 3</button>
               </div>
             </div>
           </div>

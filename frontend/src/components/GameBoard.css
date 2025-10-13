@@ -643,10 +643,12 @@
 .draw-pile {
   transition: transform 0.2s ease;
   flex-shrink: 0;
+  cursor: context-menu;
 }
 
 .draw-pile:hover {
   transform: translateY(-2px);
+  filter: brightness(1.1);
 }
 
 .discard-pile {
@@ -657,45 +659,6 @@
 
 .discard-pile:hover {
   transform: translateY(-2px);
-}
-
-.pile-actions {
-  display: flex;
-  gap: 0.2rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 120px;
-}
-
-.pile-action-btn {
-  padding: 0.2rem 0.4rem;
-  border: none;
-  border-radius: 3px;
-  font-size: 0.65rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
-  color: white;
-  white-space: nowrap;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.pile-action-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, rgba(118, 75, 162, 0.9), rgba(102, 126, 234, 0.9));
-  transform: translateY(-1px);
-  box-shadow: 0 2px 6px rgba(102, 126, 234, 0.4);
-}
-
-.pile-action-btn:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.pile-action-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
 }
 
 .card-back {
