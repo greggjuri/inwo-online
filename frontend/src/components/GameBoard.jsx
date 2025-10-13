@@ -374,115 +374,132 @@ const discardTop2PlotsBlind = () => {
     setDiceResults(null);
   };
 
- const handleRightClick = (e, card, index = null, source = 'hand') => {
+const handleRightClick = (e, card, index = null, source = 'hand') => {
   e.preventDefault();
   
   const showContextMenu = () => {
     const menu = document.createElement('div');
     menu.className = 'context-menu';
     menu.style.position = 'fixed';
-    menu.style.left = e.clientX + 'px';
-    menu.style.top = e.clientY + 'px';
     menu.style.zIndex = '10000';
+    
+    const createSubmenu = (items, parentBtn) => {
+      const submenu = document.createElement('div');
+      submenu.className = 'context-submenu';
+      submenu.style.display = 'none'; // Hidden by default
+      
+      items.forEach(item => {
+        const btn = document.createElement('button');
+        btn.textContent = item.text;
+        btn.onclick = (e) => {
+          e.stopPropagation();
+          item.action();
+          document.body.removeChild(menu);
+        };
+        submenu.appendChild(btn);
+      });
+      
+      // Click handler for parent to toggle submenu
+      parentBtn.onclick = (e) => {
+        e.stopPropagation();
+        
+        // Close all other submenus
+        menu.querySelectorAll('.context-submenu').forEach(sub => {
+          if (sub !== submenu) {
+            sub.style.display = 'none';
+          }
+        });
+        
+        // Toggle this submenu
+        submenu.style.display = submenu.style.display === 'none' ? 'flex' : 'none';
+      };
+      
+      return submenu;
+    };
     
     if (source === 'group-resource-pile') {
       // Group/Resource pile menu
       const drawBtn = document.createElement('button');
-      drawBtn.textContent = '📥 Draw 1';
-      drawBtn.onclick = () => {
-        drawFromGroupResource();
-        document.body.removeChild(menu);
-      };
+      drawBtn.textContent = '📥 Draw';
+      drawBtn.className = 'menu-parent';
+      const drawSubmenu = createSubmenu([
+        { text: '📥 Draw 1', action: drawFromGroupResource }
+      ], drawBtn);
+      drawBtn.appendChild(drawSubmenu);
       menu.appendChild(drawBtn);
       
       const showBtn = document.createElement('button');
-      showBtn.textContent = '👁️ Show 1 (self)';
-      showBtn.onclick = () => {
-        if (groupResourcePile.length > 0) {
-          setPreviewCard(groupResourcePile[0]);
+      showBtn.textContent = '👁️ Show';
+      showBtn.className = 'menu-parent';
+      const showSubmenu = createSubmenu([
+        { 
+          text: '👁️ Show 1 (self)', 
+          action: () => {
+            if (groupResourcePile.length > 0) {
+              setPreviewCard(groupResourcePile[0]);
+            }
+          }
         }
-        document.body.removeChild(menu);
-      };
+      ], showBtn);
+      showBtn.appendChild(showSubmenu);
       menu.appendChild(showBtn);
       
     } else if (source === 'plot-pile') {
       // Plot pile menu
-      const drawTopBtn = document.createElement('button');
-      drawTopBtn.textContent = '📥 Draw 1';
-      drawTopBtn.onclick = () => {
-        drawFromPlots();
-        document.body.removeChild(menu);
-      };
-      menu.appendChild(drawTopBtn);
+      const drawBtn = document.createElement('button');
+      drawBtn.textContent = '📥 Draw';
+      drawBtn.className = 'menu-parent';
+      const drawSubmenu = createSubmenu([
+        { text: '📥 Top', action: drawFromPlots },
+        { text: '📥 Bottom', action: drawFromPlotsBottom }
+      ], drawBtn);
+      drawBtn.appendChild(drawSubmenu);
+      menu.appendChild(drawBtn);
       
-      const drawBottomBtn = document.createElement('button');
-      drawBottomBtn.textContent = '📥 Draw bottom';
-      drawBottomBtn.onclick = () => {
-        drawFromPlotsBottom();
-        document.body.removeChild(menu);
-      };
-      menu.appendChild(drawBottomBtn);
+      const showBtn = document.createElement('button');
+      showBtn.textContent = '👁️ Show';
+      showBtn.className = 'menu-parent';
+      const showSubmenu = createSubmenu([
+        { text: '👁️ Show top (self)', action: showTopPlot },
+        { text: '👁️ Show top 3 (self)', action: showTopThreePlots }
+      ], showBtn);
+      showBtn.appendChild(showSubmenu);
+      menu.appendChild(showBtn);
       
-      const showTopBtn = document.createElement('button');
-      showTopBtn.textContent = '👁️ Show top (self)';
-      showTopBtn.onclick = () => {
-        showTopPlot();
-        document.body.removeChild(menu);
-      };
-      menu.appendChild(showTopBtn);
-      
-      const showTop3Btn = document.createElement('button');
-      showTop3Btn.textContent = '👁️ Show top 3 (self)';
-      showTop3Btn.onclick = () => {
-        showTopThreePlots();
-        document.body.removeChild(menu);
-      };
-      menu.appendChild(showTop3Btn);
-      
-      const discardTopBtn = document.createElement('button');
-      discardTopBtn.textContent = '🗑️ Discard top';
-      discardTopBtn.onclick = () => {
-        if (plotPile.length > 0) {
-          setPreviewCard(plotPile[0]);
-          setTimeout(() => {
-            discardTopPlot();
-            setPreviewCard(null);
-          }, 1500);
-        }
-        document.body.removeChild(menu);
-      };
-      menu.appendChild(discardTopBtn);
-      
-      const discardTop2Btn = document.createElement('button');
-      discardTop2Btn.textContent = '🗑️ Discard top 2';
-      discardTop2Btn.onclick = () => {
-        if (plotPile.length > 0) {
-          const cardsToShow = plotPile.slice(0, Math.min(2, plotPile.length));
-          setShowTopCards(cardsToShow);
-          setTimeout(() => {
-            discardTop2Plots();
-            setShowTopCards(null);
-          }, 2000);
-        }
-        document.body.removeChild(menu);
-      };
-      menu.appendChild(discardTop2Btn);
-      
-      const discardTopBlindBtn = document.createElement('button');
-      discardTopBlindBtn.textContent = '🗑️ Discard top blind';
-      discardTopBlindBtn.onclick = () => {
-        discardTopPlotBlind();
-        document.body.removeChild(menu);
-      };
-      menu.appendChild(discardTopBlindBtn);
-      
-      const discardTop2BlindBtn = document.createElement('button');
-      discardTop2BlindBtn.textContent = '🗑️ Discard top 2 blind';
-      discardTop2BlindBtn.onclick = () => {
-        discardTop2PlotsBlind();
-        document.body.removeChild(menu);
-      };
-      menu.appendChild(discardTop2BlindBtn);
+      const discardBtn = document.createElement('button');
+      discardBtn.textContent = '🗑️ Discard';
+      discardBtn.className = 'menu-parent';
+      const discardSubmenu = createSubmenu([
+        { 
+          text: '🗑️ Discard top', 
+          action: () => {
+            if (plotPile.length > 0) {
+              setPreviewCard(plotPile[0]);
+              setTimeout(() => {
+                discardTopPlot();
+                setPreviewCard(null);
+              }, 1500);
+            }
+          }
+        },
+        { 
+          text: '🗑️ Discard top 2', 
+          action: () => {
+            if (plotPile.length > 0) {
+              const cardsToShow = plotPile.slice(0, Math.min(2, plotPile.length));
+              setShowTopCards(cardsToShow);
+              setTimeout(() => {
+                discardTop2Plots();
+                setShowTopCards(null);
+              }, 2000);
+            }
+          }
+        },
+        { text: '🗑️ Discard top blind', action: discardTopPlotBlind },
+        { text: '🗑️ Discard top 2 blind', action: discardTop2PlotsBlind }
+      ], discardBtn);
+      discardBtn.appendChild(discardSubmenu);
+      menu.appendChild(discardBtn);
       
     } else {
       // Original card menu
@@ -522,6 +539,37 @@ const discardTop2PlotsBlind = () => {
     }
     
     document.body.appendChild(menu);
+    
+    // Position the menu
+    const menuRect = menu.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const viewportWidth = window.innerWidth;
+    
+    let left = e.clientX;
+    let top = e.clientY - menuRect.height; // Position so click is at the bottom of menu
+    
+    // Adjust horizontal position if menu would overflow right edge
+    if (left + menuRect.width > viewportWidth) {
+      left = viewportWidth - menuRect.width - 10;
+    }
+    
+    // Ensure menu doesn't go left of viewport
+    if (left < 10) {
+      left = 10;
+    }
+    
+    // Ensure menu doesn't go above viewport (if menu is taller than available space)
+    if (top < 10) {
+      top = 10;
+    }
+    
+    // If menu would still overflow bottom (shouldn't happen with bottom positioning, but just in case)
+    if (top + menuRect.height > viewportHeight) {
+      top = viewportHeight - menuRect.height - 10;
+    }
+    
+    menu.style.left = left + 'px';
+    menu.style.top = top + 'px';
     
     const closeMenu = (e) => {
       if (!menu.contains(e.target)) {
