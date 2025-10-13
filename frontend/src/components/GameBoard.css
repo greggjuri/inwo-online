@@ -640,15 +640,6 @@
   align-items: center;
 }
 
-.pile-label {
-  font-size: 0.65rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.7);
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
 .draw-pile {
   transition: transform 0.2s ease;
   flex-shrink: 0;

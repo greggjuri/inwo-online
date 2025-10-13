@@ -151,15 +151,6 @@ io.on('connection', (socket) => {
     });
   });
 
-  // Handle card discard
-  socket.on('discard-card', ({ roomId, discardType, card }) => {
-    socket.to(roomId).emit('card-discarded', {
-      playerId: socket.id,
-      discardType,
-      card
-    });
-  });
-
   // Handle disconnect
   socket.on('disconnect', () => {
     console.log('User disconnected:', socket.id);

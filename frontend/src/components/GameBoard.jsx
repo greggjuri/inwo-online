@@ -1,4 +1,4 @@
-// frontend/src/components/GameBoard.jsx (Part 1 of 2)
+// frontend/src/components/GameBoard.jsx
 import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { useSocket } from '../contexts/SocketContext';
 import Card from './Card';
@@ -118,14 +118,6 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       setPreviewCard(card);
     });
 
-    socket.on('card-discarded', ({ discardType, card }) => {
-      if (discardType === 'group-resource') {
-        setGroupResourceDiscard(prev => [...prev, card]);
-      } else if (discardType === 'plot') {
-        setPlotDiscard(prev => [...prev, card]);
-      }
-    });
-
     return () => {
       socket.off('room-joined');
       socket.off('player-joined');
@@ -138,7 +130,6 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       socket.off('player-left');
       socket.off('opponent-hand-update');
       socket.off('show-card-to-all');
-      socket.off('card-discarded');
     };
   }, [socket, roomId, playerName, playerDeck]);
 
@@ -161,275 +152,267 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
     socket.emit('hand-update', { roomId, handCounts: counts });
   }, [hand, socket, roomId, groupedHand]);
 
+  const handleSetupDone = () => {
+    const myPlayedCards = sharedPlayArea.filter(c => c.playerId === socket.id);
+    const hasIlluminati = myPlayedCards.some(c => c.type === 'illuminati');
+    const hasGroup = myPlayedCards.some(c => c.type === 'groups');
+    
+    if (!hasIlluminati || !hasGroup) {
+      alert('Please place 1 Illuminati card and 1 Group card on the play area before clicking Done.');
+      return;
+    }
 
+    const playedCardIds = myPlayedCards.map(c => c.id);
+    const remainingHand = hand.filter(c => !playedCardIds.includes(c.id));
+    const remainingGroups = remainingHand.filter(c => c.type === 'groups');
+    const resources = playerDeck.filter(c => c.type === 'resources');
+    const groupResourceDeck = [...remainingGroups, ...resources].sort(() => Math.random() - 0.5);
+    const drawn = groupResourceDeck.slice(0, 6);
+    const remainingGroupResource = groupResourceDeck.slice(6);
+    const plots = remainingHand.filter(c => c.type === 'plots');
+    setHand([...plots, ...drawn]);
+    setGroupResourcePile(remainingGroupResource);
+    setGamePhase('playing');
+    setSetupReady(true);
+  };
 
-const handleSetupDone = () => {
-  const myPlayedCards = sharedPlayArea.filter(c => c.playerId === socket.id);
-  const hasIlluminati = myPlayedCards.some(c => c.type === 'illuminati');
-  const hasGroup = myPlayedCards.some(c => c.type === 'groups');
-  
-  if (!hasIlluminati || !hasGroup) {
-    alert('Please place 1 Illuminati card and 1 Group card on the play area before clicking Done.');
-    return;
-  }
+  const drawFromGroupResource = () => {
+    if (groupResourcePile.length === 0) return;
+    setHand(prev => [...prev, groupResourcePile[0]]);
+    setGroupResourcePile(prev => prev.slice(1));
+  };
 
-  const playedCardIds = myPlayedCards.map(c => c.id);
-  const remainingHand = hand.filter(c => !playedCardIds.includes(c.id));
-  const remainingGroups = remainingHand.filter(c => c.type === 'groups');
-  const resources = playerDeck.filter(c => c.type === 'resources');
-  const groupResourceDeck = [...remainingGroups, ...resources].sort(() => Math.random() - 0.5);
-  const drawn = groupResourceDeck.slice(0, 6);
-  const remainingGroupResource = groupResourceDeck.slice(6);
-  const plots = remainingHand.filter(c => c.type === 'plots');
-  setHand([...plots, ...drawn]);
-  setGroupResourcePile(remainingGroupResource);
-  setGamePhase('playing');
-  setSetupReady(true);
-};
+  const showTopGroupResource = () => {
+    if (groupResourcePile.length === 0) return;
+    const topCard = groupResourcePile[0];
+    setPreviewCard(topCard);
+    socket.emit('show-card-to-all', { roomId, card: topCard });
+  };
 
-const drawFromGroupResource = () => {
-  if (groupResourcePile.length === 0) return;
-  setHand(prev => [...prev, groupResourcePile[0]]);
-  setGroupResourcePile(prev => prev.slice(1));
-};
+  const drawFromPlots = () => {
+    if (plotPile.length === 0) return;
+    setHand(prev => [...prev, plotPile[0]]);
+    setPlotPile(prev => prev.slice(1));
+  };
 
-const showTopGroupResource = () => {
-  if (groupResourcePile.length === 0) return;
-  const topCard = groupResourcePile[0];
-  setPreviewCard(topCard);
-  socket.emit('show-card-to-all', { roomId, card: topCard });
-};
+  const drawFromPlotsBottom = () => {
+    if (plotPile.length === 0) return;
+    setHand(prev => [...prev, plotPile[plotPile.length - 1]]);
+    setPlotPile(prev => prev.slice(0, -1));
+  };
 
-const drawFromPlots = () => {
-  if (plotPile.length === 0) return;
-  setHand(prev => [...prev, plotPile[0]]);
-  setPlotPile(prev => prev.slice(1));
-};
+  const showTopPlot = () => {
+    if (plotPile.length === 0) return;
+    setShowTopCards([plotPile[0]]);
+  };
 
-const drawFromPlotsBottom = () => {
-  if (plotPile.length === 0) return;
-  setHand(prev => [...prev, plotPile[plotPile.length - 1]]);
-  setPlotPile(prev => prev.slice(0, -1));
-};
+  const showTopThreePlots = () => {
+    if (plotPile.length === 0) return;
+    setShowTopCards(plotPile.slice(0, Math.min(3, plotPile.length)));
+  };
 
-const showTopPlot = () => {
-  if (plotPile.length === 0) return;
-  setShowTopCards([plotPile[0]]);
-};
+  const playCard = (card, originalIndex, position = null) => {
+    setHand(prev => prev.filter((_, i) => i !== originalIndex));
+    const finalPosition = position || { x: Math.random() * 500, y: Math.random() * 300 };
+    const newCard = { ...card, position: finalPosition, rotation: 0, tokens: 0, playerId: socket.id };
+    setSharedPlayArea(prev => [...prev, newCard]);
+    socket.emit('move-card', { roomId, card, from: 'hand', to: 'play-area', position: finalPosition, rotation: 0, tokens: 0 });
+  };
 
-const showTopThreePlots = () => {
-  if (plotPile.length === 0) return;
-  setShowTopCards(plotPile.slice(0, Math.min(3, plotPile.length)));
-};
+  const returnToHand = (card, index) => {
+    setSharedPlayArea(prev => prev.filter((_, i) => i !== index));
+    const { position, rotation, tokens, playerId, ...cleanCard } = card;
+    setHand(prev => [...prev, cleanCard]);
+    socket.emit('remove-card', { roomId, cardIndex: index });
+  };
 
-const playCard = (card, originalIndex, position = null) => {
-  setHand(prev => prev.filter((_, i) => i !== originalIndex));
-  const finalPosition = position || { x: Math.random() * 500, y: Math.random() * 300 };
-  const newCard = { ...card, position: finalPosition, rotation: 0, tokens: 0, playerId: socket.id };
-  setSharedPlayArea(prev => [...prev, newCard]);
-  socket.emit('move-card', { roomId, card, from: 'hand', to: 'play-area', position: finalPosition, rotation: 0, tokens: 0 });
-};
+  const discardFromHand = (card, originalIndex) => {
+    setHand(prev => prev.filter((_, i) => i !== originalIndex));
+    const discardType = (card.type === 'groups' || card.type === 'resources') ? 'group-resource' : 'plot';
+    if (discardType === 'group-resource') {
+      setGroupResourceDiscard(prev => [...prev, card]);
+    } else {
+      setPlotDiscard(prev => [...prev, card]);
+    }
+  };
 
-const returnToHand = (card, index) => {
-  setSharedPlayArea(prev => prev.filter((_, i) => i !== index));
-  const { position, rotation, tokens, playerId, ...cleanCard } = card;
-  setHand(prev => [...prev, cleanCard]);
-  socket.emit('remove-card', { roomId, cardIndex: index });
-};
+  const discardFromPlay = (card, index) => {
+    setSharedPlayArea(prev => prev.filter((_, i) => i !== index));
+    const { position, rotation, tokens, playerId, ...cleanCard } = card;
+    const discardType = (cleanCard.type === 'groups' || cleanCard.type === 'resources') ? 'group-resource' : 'plot';
+    if (discardType === 'group-resource') {
+      setGroupResourceDiscard(prev => [...prev, cleanCard]);
+    } else {
+      setPlotDiscard(prev => [...prev, cleanCard]);
+    }
+    socket.emit('remove-card', { roomId, cardIndex: index });
+  };
 
-const discardFromHand = (card, originalIndex) => {
-  setHand(prev => prev.filter((_, i) => i !== originalIndex));
-  const discardType = (card.type === 'groups' || card.type === 'resources') ? 'group-resource' : 'plot';
-  if (discardType === 'group-resource') {
-    setGroupResourceDiscard(prev => [...prev, card]);
-  } else {
-    setPlotDiscard(prev => [...prev, card]);
-  }
-  socket.emit('discard-card', { roomId, discardType, card });
-};
+  const showTopDiscard = (discardType) => {
+    const pile = discardType === 'group-resource' ? groupResourceDiscard : plotDiscard;
+    if (pile.length === 0) return;
+    const topCard = pile[pile.length - 1];
+    setPreviewCard(topCard);
+  };
 
-const discardFromPlay = (card, index) => {
-  setSharedPlayArea(prev => prev.filter((_, i) => i !== index));
-  const { position, rotation, tokens, playerId, ...cleanCard } = card;
-  const discardType = (cleanCard.type === 'groups' || cleanCard.type === 'resources') ? 'group-resource' : 'plot';
-  if (discardType === 'group-resource') {
-    setGroupResourceDiscard(prev => [...prev, cleanCard]);
-  } else {
-    setPlotDiscard(prev => [...prev, cleanCard]);
-  }
-  socket.emit('remove-card', { roomId, cardIndex: index });
-  socket.emit('discard-card', { roomId, discardType, card: cleanCard });
-};
-
-const showTopDiscard = (discardType) => {
-  const pile = discardType === 'group-resource' ? groupResourceDiscard : plotDiscard;
-  if (pile.length === 0) return;
-  const topCard = pile[pile.length - 1];
-  setPreviewCard(topCard);
-  socket.emit('show-card-to-all', { roomId, card: topCard });
-};
-
-const handleCardRotate = (index) => {
-  setSharedPlayArea(prev => {
-    const updated = [...prev];
-    const newRotation = ((updated[index].rotation || 0) + 90) % 360;
-    updated[index] = { ...updated[index], rotation: newRotation };
-    socket.emit('update-card', { roomId, cardIndex: index, rotation: newRotation });
-    return updated;
-  });
-};
-
-const handleTokenChange = (index, newTokenCount) => {
-  setSharedPlayArea(prev => {
-    const updated = [...prev];
-    updated[index] = { ...updated[index], tokens: newTokenCount };
-    socket.emit('update-card', { roomId, cardIndex: index, tokens: newTokenCount });
-    return updated;
-  });
-};
-
-const handleDragStart = (e, card, originalIndex, source = 'play-area') => {
-  if (source === 'play-area') {
-    const containerRect = cardsContainerRef.current.getBoundingClientRect();
-    const mouseX = e.clientX - containerRect.left;
-    const mouseY = e.clientY - containerRect.top;
-    setDragOffset({ 
-      x: mouseX - card.position.x, 
-      y: mouseY - card.position.y 
-    });
-  }
-  setDraggedCard({ card, index: originalIndex, source });
-  e.dataTransfer.effectAllowed = 'move';
-  e.dataTransfer.setData('text/plain', '');
-};
-
-const handleDragOver = (e) => {
-  e.preventDefault();
-  e.dataTransfer.dropEffect = 'move';
-  setIsDragOver(true);
-};
-
-const handleDragLeave = (e) => {
-  if (e.currentTarget === e.target) {
-    setIsDragOver(false);
-  }
-};
-
-const handleDrop = (e) => {
-  e.preventDefault();
-  setIsDragOver(false);
-  if (!draggedCard || !cardsContainerRef.current) return;
-
-  const containerRect = cardsContainerRef.current.getBoundingClientRect();
-  let x, y;
-  
-  if (draggedCard.source === 'hand') {
-    x = e.clientX - containerRect.left - 60;
-    y = e.clientY - containerRect.top - 83.5;
-  } else {
-    x = e.clientX - containerRect.left - dragOffset.x;
-    y = e.clientY - containerRect.top - dragOffset.y;
-  }
-  
-  x = Math.max(-50, Math.min(x, containerRect.width - 70));
-  y = Math.max(-50, Math.min(y, containerRect.height - 117));
-
-  if (draggedCard.source === 'hand') {
-    playCard(draggedCard.card, draggedCard.index, { x, y });
-  } else {
+  const handleCardRotate = (index) => {
     setSharedPlayArea(prev => {
       const updated = [...prev];
-      updated[draggedCard.index] = { ...updated[draggedCard.index], position: { x, y } };
-      socket.emit('update-card-position', { roomId, cardIndex: draggedCard.index, position: { x, y } });
+      const newRotation = ((updated[index].rotation || 0) + 90) % 360;
+      updated[index] = { ...updated[index], rotation: newRotation };
+      socket.emit('update-card', { roomId, cardIndex: index, rotation: newRotation });
       return updated;
     });
-  }
-  setDraggedCard(null);
-};
+  };
 
-const handleDragEnd = () => {
-  setDraggedCard(null);
-  setIsDragOver(false);
-};
+  const handleTokenChange = (index, newTokenCount) => {
+    setSharedPlayArea(prev => {
+      const updated = [...prev];
+      updated[index] = { ...updated[index], tokens: newTokenCount };
+      socket.emit('update-card', { roomId, cardIndex: index, tokens: newTokenCount });
+      return updated;
+    });
+  };
 
-const roll2D6 = () => {
-  socket.emit('roll-dice', { roomId, sides: 6 });
-};
+  const handleDragStart = (e, card, originalIndex, source = 'play-area') => {
+    if (source === 'play-area') {
+      const containerRect = cardsContainerRef.current.getBoundingClientRect();
+      const mouseX = e.clientX - containerRect.left;
+      const mouseY = e.clientY - containerRect.top;
+      setDragOffset({ 
+        x: mouseX - card.position.x, 
+        y: mouseY - card.position.y 
+      });
+    }
+    setDraggedCard({ card, index: originalIndex, source });
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', '');
+  };
 
-const closeDice = () => {
-  socket.emit('close-dice', { roomId });
-  setDiceResults(null);
-};
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    setIsDragOver(true);
+  };
 
-const handleRightClick = (e, card, index = null, source = 'hand') => {
-  e.preventDefault();
-  
-  const showContextMenu = () => {
-    const menu = document.createElement('div');
-    menu.className = 'context-menu';
-    menu.style.position = 'fixed';
-    menu.style.left = e.clientX + 'px';
-    menu.style.top = e.clientY + 'px';
-    menu.style.zIndex = '10000';
+  const handleDragLeave = (e) => {
+    if (e.currentTarget === e.target) {
+      setIsDragOver(false);
+    }
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    if (!draggedCard || !cardsContainerRef.current) return;
+
+    const containerRect = cardsContainerRef.current.getBoundingClientRect();
+    let x, y;
     
-    const previewBtn = document.createElement('button');
-    previewBtn.textContent = '👁️ Preview';
-    previewBtn.onclick = () => {
-      setPreviewCard(card);
-      document.body.removeChild(menu);
-    };
-    
-    menu.appendChild(previewBtn);
-    
-    if (source === 'hand') {
-      const discardBtn = document.createElement('button');
-      discardBtn.textContent = '🗑️ Discard';
-      discardBtn.onclick = () => {
-        discardFromHand(card, index);
-        document.body.removeChild(menu);
-      };
-      menu.appendChild(discardBtn);
-    } else if (source === 'play-area') {
-      const discardBtn = document.createElement('button');
-      discardBtn.textContent = '🗑️ Discard';
-      discardBtn.onclick = () => {
-        discardFromPlay(card, index);
-        document.body.removeChild(menu);
-      };
-      menu.appendChild(discardBtn);
-      
-      const returnBtn = document.createElement('button');
-      returnBtn.textContent = '↩️ Return to Hand';
-      returnBtn.onclick = () => {
-        returnToHand(card, index);
-        document.body.removeChild(menu);
-      };
-      menu.appendChild(returnBtn);
+    if (draggedCard.source === 'hand') {
+      x = e.clientX - containerRect.left - 60;
+      y = e.clientY - containerRect.top - 83.5;
+    } else {
+      x = e.clientX - containerRect.left - dragOffset.x;
+      y = e.clientY - containerRect.top - dragOffset.y;
     }
     
-    document.body.appendChild(menu);
+    x = Math.max(-50, Math.min(x, containerRect.width - 70));
+    y = Math.max(-50, Math.min(y, containerRect.height - 117));
+
+    if (draggedCard.source === 'hand') {
+      playCard(draggedCard.card, draggedCard.index, { x, y });
+    } else {
+      setSharedPlayArea(prev => {
+        const updated = [...prev];
+        updated[draggedCard.index] = { ...updated[draggedCard.index], position: { x, y } };
+        socket.emit('update-card-position', { roomId, cardIndex: draggedCard.index, position: { x, y } });
+        return updated;
+      });
+    }
+    setDraggedCard(null);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedCard(null);
+    setIsDragOver(false);
+  };
+
+  const roll2D6 = () => {
+    socket.emit('roll-dice', { roomId, sides: 6 });
+  };
+
+  const closeDice = () => {
+    socket.emit('close-dice', { roomId });
+    setDiceResults(null);
+  };
+
+  const handleRightClick = (e, card, index = null, source = 'hand') => {
+    e.preventDefault();
     
-    const closeMenu = (e) => {
-      if (!menu.contains(e.target)) {
-        if (document.body.contains(menu)) {
+    const showContextMenu = () => {
+      const menu = document.createElement('div');
+      menu.className = 'context-menu';
+      menu.style.position = 'fixed';
+      menu.style.left = e.clientX + 'px';
+      menu.style.top = e.clientY + 'px';
+      menu.style.zIndex = '10000';
+      
+      const previewBtn = document.createElement('button');
+      previewBtn.textContent = '👁️ Preview';
+      previewBtn.onclick = () => {
+        setPreviewCard(card);
+        document.body.removeChild(menu);
+      };
+      
+      menu.appendChild(previewBtn);
+      
+      if (source === 'hand') {
+        const discardBtn = document.createElement('button');
+        discardBtn.textContent = '🗑️ Discard';
+        discardBtn.onclick = () => {
+          discardFromHand(card, index);
           document.body.removeChild(menu);
-        }
-        document.removeEventListener('click', closeMenu);
+        };
+        menu.appendChild(discardBtn);
+      } else if (source === 'play-area') {
+        const discardBtn = document.createElement('button');
+        discardBtn.textContent = '🗑️ Discard';
+        discardBtn.onclick = () => {
+          discardFromPlay(card, index);
+          document.body.removeChild(menu);
+        };
+        menu.appendChild(discardBtn);
+        
+        const returnBtn = document.createElement('button');
+        returnBtn.textContent = '↩️ Return to Hand';
+        returnBtn.onclick = () => {
+          returnToHand(card, index);
+          document.body.removeChild(menu);
+        };
+        menu.appendChild(returnBtn);
       }
+      
+      document.body.appendChild(menu);
+      
+      const closeMenu = (e) => {
+        if (!menu.contains(e.target)) {
+          if (document.body.contains(menu)) {
+            document.body.removeChild(menu);
+          }
+          document.removeEventListener('click', closeMenu);
+        }
+      };
+      
+      setTimeout(() => document.addEventListener('click', closeMenu), 10);
     };
     
-    setTimeout(() => document.addEventListener('click', closeMenu), 10);
+    showContextMenu();
   };
-  
-  showContextMenu();
-};
 
-const closePreview = () => {
-  setPreviewCard(null);
-};
-
-// frontend/src/components/GameBoard.jsx (Part 3 of 3 - JSX Return)
-// ... continued from Part 2
+  const closePreview = () => {
+    setPreviewCard(null);
+  };
 
   return (
     <div className={`game-board-container ${isFullscreenView ? 'fullscreen-mode' : ''}`}>
@@ -654,21 +637,19 @@ const closePreview = () => {
             <div className="pile-section">
               <div className="discard-pile" onClick={() => showTopDiscard('group-resource')}>
                 <div className="card-back">
-                 <img src={`${import.meta.env.BASE_URL}cards/group-back.webp`} alt="Groups/Resources" className="card-back-image" />
+                 <img src={`${import.meta.env.BASE_URL}cards/group-back.webp`} alt="Groups/Resources Discard" className="card-back-image" />
                   <div className="pile-count">{groupResourceDiscard.length}</div>
                 </div>
               </div>
-              <div className="pile-label">G/R Discard</div>
             </div>
 
             <div className="pile-section">
               <div className="discard-pile" onClick={() => showTopDiscard('plot')}>
                 <div className="card-back">
-                  <img src={`${import.meta.env.BASE_URL}cards/plot-back.webp`} alt="Plots" className="card-back-image" />
+                  <img src={`${import.meta.env.BASE_URL}cards/plot-back.webp`} alt="Plots Discard" className="card-back-image" />
                   <div className="pile-count">{plotDiscard.length}</div>
                 </div>
               </div>
-              <div className="pile-label">Plot Discard</div>
             </div>
           </div>
         )}
