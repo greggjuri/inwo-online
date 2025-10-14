@@ -31,6 +31,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
   const [groupResourceDiscard, setGroupResourceDiscard] = useState([]);
   const [plotDiscard, setPlotDiscard] = useState([]);
   const [currentTurn, setCurrentTurn] = useState(null);  
+  const [turnNumber, setTurnNumber] = useState(1);
   const cardsContainerRef = useRef(null);
 
   useEffect(() => {
@@ -118,14 +119,19 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       setPreviewCard(card);
     });
 
-    socket.on('game-started', ({ currentTurn: newCurrentTurn, startingPlayerName }) => {
+    socket.on('game-started', ({ currentTurn: newCurrentTurn, startingPlayerName, turnNumber: newTurnNumber }) => {
       setCurrentTurn(newCurrentTurn);
+      setTurnNumber(newTurnNumber);
       setGamePhase('playing');
       alert(`Game started! ${startingPlayerName} goes first!`);
     });
 
     socket.on('turn-changed', ({ currentTurn: newCurrentTurn }) => {
       setCurrentTurn(newCurrentTurn);
+    });
+
+    socket.on('turn-number-updated', ({ turnNumber: newTurnNumber }) => {
+      setTurnNumber(newTurnNumber);
     });
 
     return () => {
@@ -142,6 +148,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       socket.off('show-card-to-all');
       socket.off('game-started');
       socket.off('turn-changed');
+      socket.off('turn-number-updated');
     };
   }, [socket, roomId, playerName, playerDeck]);
 
@@ -646,9 +653,15 @@ const handleRightClick = (e, card, index = null, source = 'hand') => {
           )}
         </div>
 
-        <div className="room-info">
-          {(opponentHandCounts.illuminati + opponentHandCounts.groups + opponentHandCounts.resources + opponentHandCounts.plots) > 0 && (
-            <div className="opponent-hand-info">
+                <div className="room-info">
+                  {gamePhase === 'playing' && (
+                    <div className="turn-counter">
+                      <span className="turn-icon">🔄</span>
+                      <span className="turn-text">Turn {turnNumber}</span>
+                    </div>
+                  )}
+                 {(opponentHandCounts.illuminati + opponentHandCounts.groups + opponentHandCounts.resources + opponentHandCounts.plots) > 0 && (
+                    <div className="opponent-hand-info">
               <span style={{ fontWeight: 'bold' }}>Opp:</span>
               {opponentHandCounts.illuminati > 0 && (
                 <div className="hand-type-count">

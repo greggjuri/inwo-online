@@ -45,21 +45,22 @@ const gameRooms = new Map();
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
 
-  // Create or join a room
 // Create or join a room
 socket.on('join-room', ({ roomId, playerName }) => {
   socket.join(roomId);
   
-  if (!gameRooms.has(roomId)) {
-    gameRooms.set(roomId, {
-      players: [],
-      gameState: {
-        board: [],
-        currentTurn: null
-      },
-      setupReady: []
-    });
-  }
+    if (!gameRooms.has(roomId)) {
+      gameRooms.set(roomId, {
+        players: [],
+        gameState: {
+          board: [],
+          currentTurn: null,
+          turnNumber: 1
+        },
+        setupReady: [],
+        knockedThisRound: []
+      });
+    }
     const room = gameRooms.get(roomId);
     
     // Add player if not already in room (max 2 players)
@@ -175,7 +176,7 @@ socket.on('join-room', ({ roomId, playerName }) => {
     });
   });
 
-  // Handle setup completion
+// Handle setup completion
 socket.on('setup-done', ({ roomId }) => {
   const room = gameRooms.get(roomId);
   if (!room) return;
@@ -191,11 +192,14 @@ socket.on('setup-done', ({ roomId }) => {
     const randomIndex = Math.floor(Math.random() * 2);
     const startingPlayerId = room.players[randomIndex].id;
     room.gameState.currentTurn = startingPlayerId;
+    room.gameState.turnNumber = 1;
+    room.knockedThisRound = [];
     
     // Notify all players
     io.to(roomId).emit('game-started', {
       currentTurn: startingPlayerId,
-      startingPlayerName: room.players[randomIndex].name
+      startingPlayerName: room.players[randomIndex].name,
+      turnNumber: 1
     });
   }
 });
@@ -205,11 +209,27 @@ socket.on('end-turn', ({ roomId }) => {
   const room = gameRooms.get(roomId);
   if (!room) return;
   
+  // Track who knocked this round
+  if (!room.knockedThisRound.includes(socket.id)) {
+    room.knockedThisRound.push(socket.id);
+  }
+  
   // Find current player index
   const currentIndex = room.players.findIndex(p => p.id === room.gameState.currentTurn);
   // Switch to next player
   const nextIndex = (currentIndex + 1) % room.players.length;
   room.gameState.currentTurn = room.players[nextIndex].id;
+  
+  // Check if both players have knocked (round complete)
+  if (room.knockedThisRound.length === 2) {
+    room.gameState.turnNumber++;
+    room.knockedThisRound = [];
+    
+    // Notify all players of new turn number
+    io.to(roomId).emit('turn-number-updated', {
+      turnNumber: room.gameState.turnNumber
+    });
+  }
   
   io.to(roomId).emit('turn-changed', {
     currentTurn: room.gameState.currentTurn
