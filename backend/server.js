@@ -15,6 +15,29 @@ const io = new Server(httpServer, {
 app.use(cors());
 app.use(express.json());
 
+// Storage for shared decks (in-memory for now)
+const sharedDecks = new Map();
+
+// REST API endpoints for deck management
+app.get('/api/decks', (req, res) => {
+  res.json(Array.from(sharedDecks.values()));
+});
+
+app.post('/api/decks', (req, res) => {
+  const deck = {
+    ...req.body,
+    id: Date.now().toString(),
+    savedAt: new Date().toISOString()
+  };
+  sharedDecks.set(deck.id, deck);
+  res.json(deck);
+});
+
+app.delete('/api/decks/:id', (req, res) => {
+  sharedDecks.delete(req.params.id);
+  res.json({ success: true });
+});
+
 // Store active game rooms
 const gameRooms = new Map();
 

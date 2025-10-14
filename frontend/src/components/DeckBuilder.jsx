@@ -1,8 +1,9 @@
 // frontend/src/components/DeckBuilder.jsx
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Card from './Card';
 import cardsData from '../cards.json';
 import './DeckBuilder.css';
+import { deckStorage } from '../services/deckStorage';
 
 const DeckBuilder = ({ onStartGame }) => {
   const [selectedCards, setSelectedCards] = useState([]);
@@ -13,6 +14,17 @@ const DeckBuilder = ({ onStartGame }) => {
   const [showLoadModal, setShowLoadModal] = useState(false);
   const [deckName, setDeckName] = useState('');
   const [deckDescription, setDeckDescription] = useState('');
+  const [savedDecks, setSavedDecks] = useState([]);
+
+  // Load decks when component mounts
+  useEffect(() => {
+      loadDecks();
+    }, []);
+
+  const loadDecks = async () => {
+    const decks = await deckStorage.getDecks();
+    setSavedDecks(decks);
+  };
 
   // Organize cards by type in the order: illuminati, groups, resources, plots
   const organizedCards = useMemo(() => {
@@ -59,19 +71,8 @@ const DeckBuilder = ({ onStartGame }) => {
     return counts;
   }, []);
 
-  // Load saved decks from localStorage
-  const getSavedDecks = () => {
-    try {
-      const saved = localStorage.getItem('inwo-saved-decks');
-      return saved ? JSON.parse(saved) : [];
-    } catch (error) {
-      console.error('Error loading saved decks:', error);
-      return [];
-    }
-  };
-
-  // Save deck to localStorage
-  const saveDeck = () => {
+  // Save deck using storage service
+  const saveDeck = async () => {
     if (!deckName.trim()) {
       alert('Please enter a deck name');
       return;
@@ -83,26 +84,22 @@ const DeckBuilder = ({ onStartGame }) => {
     }
 
     const deck = {
-      id: Date.now().toString(),
       name: deckName.trim(),
       description: deckDescription.trim(),
       cards: selectedCards,
-      savedAt: new Date().toISOString(),
       cardCount: selectedCards.length
     };
 
-    const savedDecks = getSavedDecks();
-    savedDecks.push(deck);
-    
     try {
-      localStorage.setItem('inwo-saved-decks', JSON.stringify(savedDecks));
+      await deckStorage.saveDeck(deck);
+      await loadDecks(); // Refresh the deck list
       alert(`Deck "${deck.name}" saved successfully!`);
       setShowSaveModal(false);
       setDeckName('');
       setDeckDescription('');
     } catch (error) {
       console.error('Error saving deck:', error);
-      alert('Error saving deck. Storage might be full.');
+      alert('Error saving deck. Please try again.');
     }
   };
 
@@ -114,19 +111,15 @@ const DeckBuilder = ({ onStartGame }) => {
   };
 
   // Delete a saved deck
-  const deleteDeck = (deckId) => {
+  const deleteDeck = async (deckId) => {
     if (!confirm('Are you sure you want to delete this deck?')) return;
 
-    const savedDecks = getSavedDecks();
-    const filtered = savedDecks.filter(d => d.id !== deckId);
-    
     try {
-      localStorage.setItem('inwo-saved-decks', JSON.stringify(filtered));
-      // Force re-render by closing and reopening modal
-      setShowLoadModal(false);
-      setTimeout(() => setShowLoadModal(true), 10);
+      await deckStorage.deleteDeck(deckId);
+      await loadDecks(); // Refresh the deck list
     } catch (error) {
       console.error('Error deleting deck:', error);
+      alert('Error deleting deck. Please try again.');
     }
   };
 
@@ -426,14 +419,14 @@ const DeckBuilder = ({ onStartGame }) => {
                 <button onClick={() => setShowLoadModal(false)}>✕</button>
               </div>
               <div className="modal-body">
-                {getSavedDecks().length === 0 ? (
+                {savedDecks.length === 0 ? (
                   <div className="no-saved-decks">
                     <p>No saved decks found</p>
                     <p className="hint">Save your current deck to see it here</p>
                   </div>
                 ) : (
                   <div className="saved-decks-list">
-                    {getSavedDecks().reverse().map(deck => (
+                    {[...savedDecks].reverse().map(deck => (
                       <div key={deck.id} className="saved-deck-item">
                         <div className="saved-deck-info">
                           <h4>{deck.name}</h4>
