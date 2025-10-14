@@ -237,8 +237,9 @@
 .room-info {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
+  min-width: 200px;
 }
 
 .room-info h2 {
@@ -250,11 +251,14 @@
   background-clip: text;
   font-weight: bold;
   letter-spacing: 1px;
+  min-width: 80px;
+  flex-shrink: 0;
 }
 
 .players {
   display: flex;
   gap: 0.4rem;
+  margin-left: 1rem;
 }
 
 .player-badge {
@@ -267,6 +271,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
   animation: badgeAppear 0.4s ease-out;
+  white-space: nowrap;
 }
 
 @keyframes badgeAppear {
@@ -856,4 +861,73 @@
 .preview-close:hover {
   background: rgba(255, 255, 255, 0.2);
   transform: rotate(90deg) scale(1.1);
+}
+
+/* Current Turn Indicator */
+.player-badge.current-turn {
+  font-size: 1.3rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+  color: #000;
+  padding: 0.5rem 1rem;
+  border: 3px solid #ff6b35;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8),
+              0 0 40px rgba(255, 107, 53, 0.6),
+              inset 0 2px 4px rgba(255, 255, 255, 0.5);
+  animation: pulse-glow 2s ease-in-out infinite;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  transform: scale(1.15);
+  position: relative;
+}
+
+.player-badge.current-turn::before {
+  content: '▶';
+  margin-right: 0.5rem;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8),
+                0 0 40px rgba(255, 107, 53, 0.6),
+                inset 0 2px 4px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 215, 0, 1),
+                0 0 60px rgba(255, 107, 53, 0.8),
+                inset 0 2px 4px rgba(255, 255, 255, 0.7);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+/* End Turn Button */
+.end-turn-button {
+  padding: 0.3rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.8rem;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+  margin-left: 0.5rem;
+}
+
+.end-turn-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.6);
+}
+
+.end-turn-button:active {
+  transform: translateY(0);
 }

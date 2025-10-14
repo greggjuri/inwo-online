@@ -46,19 +46,20 @@ io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
 
   // Create or join a room
-  socket.on('join-room', ({ roomId, playerName }) => {
-    socket.join(roomId);
-    
-    if (!gameRooms.has(roomId)) {
-      gameRooms.set(roomId, {
-        players: [],
-        gameState: {
-          board: [],
-          currentTurn: null
-        }
-      });
-    }
-
+// Create or join a room
+socket.on('join-room', ({ roomId, playerName }) => {
+  socket.join(roomId);
+  
+  if (!gameRooms.has(roomId)) {
+    gameRooms.set(roomId, {
+      players: [],
+      gameState: {
+        board: [],
+        currentTurn: null
+      },
+      setupReady: []
+    });
+  }
     const room = gameRooms.get(roomId);
     
     // Add player if not already in room (max 2 players)
@@ -173,6 +174,47 @@ io.on('connection', (socket) => {
       card
     });
   });
+
+  // Handle setup completion
+socket.on('setup-done', ({ roomId }) => {
+  const room = gameRooms.get(roomId);
+  if (!room) return;
+  
+  // Add player to ready list
+  if (!room.setupReady.includes(socket.id)) {
+    room.setupReady.push(socket.id);
+  }
+  
+  // Check if both players are ready
+  if (room.setupReady.length === 2) {
+    // Randomize starting player
+    const randomIndex = Math.floor(Math.random() * 2);
+    const startingPlayerId = room.players[randomIndex].id;
+    room.gameState.currentTurn = startingPlayerId;
+    
+    // Notify all players
+    io.to(roomId).emit('game-started', {
+      currentTurn: startingPlayerId,
+      startingPlayerName: room.players[randomIndex].name
+    });
+  }
+});
+
+// Handle turn change
+socket.on('end-turn', ({ roomId }) => {
+  const room = gameRooms.get(roomId);
+  if (!room) return;
+  
+  // Find current player index
+  const currentIndex = room.players.findIndex(p => p.id === room.gameState.currentTurn);
+  // Switch to next player
+  const nextIndex = (currentIndex + 1) % room.players.length;
+  room.gameState.currentTurn = room.players[nextIndex].id;
+  
+  io.to(roomId).emit('turn-changed', {
+    currentTurn: room.gameState.currentTurn
+  });
+});
 
   // Handle disconnect
   socket.on('disconnect', () => {

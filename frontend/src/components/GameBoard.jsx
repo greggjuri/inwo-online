@@ -30,7 +30,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
   const [isFullscreenView, setIsFullscreenView] = useState(false);
   const [groupResourceDiscard, setGroupResourceDiscard] = useState([]);
   const [plotDiscard, setPlotDiscard] = useState([]);
-  
+  const [currentTurn, setCurrentTurn] = useState(null);  
   const cardsContainerRef = useRef(null);
 
   useEffect(() => {
@@ -118,6 +118,16 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       setPreviewCard(card);
     });
 
+    socket.on('game-started', ({ currentTurn: newCurrentTurn, startingPlayerName }) => {
+      setCurrentTurn(newCurrentTurn);
+      setGamePhase('playing');
+      alert(`Game started! ${startingPlayerName} goes first!`);
+    });
+
+    socket.on('turn-changed', ({ currentTurn: newCurrentTurn }) => {
+      setCurrentTurn(newCurrentTurn);
+    });
+
     return () => {
       socket.off('room-joined');
       socket.off('player-joined');
@@ -130,6 +140,8 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       socket.off('player-left');
       socket.off('opponent-hand-update');
       socket.off('show-card-to-all');
+      socket.off('game-started');
+      socket.off('turn-changed');
     };
   }, [socket, roomId, playerName, playerDeck]);
 
@@ -152,29 +164,35 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
     socket.emit('hand-update', { roomId, handCounts: counts });
   }, [hand, socket, roomId, groupedHand]);
 
-  const handleSetupDone = () => {
-    const myPlayedCards = sharedPlayArea.filter(c => c.playerId === socket.id);
-    const hasIlluminati = myPlayedCards.some(c => c.type === 'illuminati');
-    const hasGroup = myPlayedCards.some(c => c.type === 'groups');
-    
-    if (!hasIlluminati || !hasGroup) {
-      alert('Please place 1 Illuminati card and 1 Group card on the play area before clicking Done.');
-      return;
-    }
+const handleSetupDone = () => {
+  const myPlayedCards = sharedPlayArea.filter(c => c.playerId === socket.id);
+  const hasIlluminati = myPlayedCards.some(c => c.type === 'illuminati');
+  const hasGroup = myPlayedCards.some(c => c.type === 'groups');
+  
+  if (!hasIlluminati || !hasGroup) {
+    alert('Please place 1 Illuminati card and 1 Group card on the play area before clicking Done.');
+    return;
+  }
 
-    const playedCardIds = myPlayedCards.map(c => c.id);
-    const remainingHand = hand.filter(c => !playedCardIds.includes(c.id));
-    const remainingGroups = remainingHand.filter(c => c.type === 'groups');
-    const resources = playerDeck.filter(c => c.type === 'resources');
-    const groupResourceDeck = [...remainingGroups, ...resources].sort(() => Math.random() - 0.5);
-    const drawn = groupResourceDeck.slice(0, 6);
-    const remainingGroupResource = groupResourceDeck.slice(6);
-    const plots = remainingHand.filter(c => c.type === 'plots');
+  const playedCardIds = myPlayedCards.map(c => c.id);
+  const remainingHand = hand.filter(c => !playedCardIds.includes(c.id));
+  const remainingGroups = remainingHand.filter(c => c.type === 'groups');
+  const resources = playerDeck.filter(c => c.type === 'resources');
+  const groupResourceDeck = [...remainingGroups, ...resources].sort(() => Math.random() - 0.5);
+  const drawn = groupResourceDeck.slice(0, 6);
+  const remainingGroupResource = groupResourceDeck.slice(6);
+  const plots = remainingHand.filter(c => c.type === 'plots');
     setHand([...plots, ...drawn]);
     setGroupResourcePile(remainingGroupResource);
-    setGamePhase('playing');
     setSetupReady(true);
-  };
+  
+  // Notify server that this player is ready
+  socket.emit('setup-done', { roomId });
+};
+
+const endTurn = () => {
+  socket.emit('end-turn', { roomId });
+};
 
   const drawFromGroupResource = () => {
     if (groupResourcePile.length === 0) return;
@@ -597,11 +615,18 @@ const handleRightClick = (e, card, index = null, source = 'hand') => {
         <div className="room-info">
           <h2>{roomId}</h2>
           <div className="players">
-            {players.map(player => (
-              <span key={player.id} className="player-badge">
-                {player.name}{player.id === socket?.id ? ' (You)' : ''}
-              </span>
-            ))}
+            {players.map(player => {
+              const isCurrentTurn = currentTurn === player.id;
+              const isMe = player.id === socket?.id;
+              return (
+                <span 
+                  key={player.id} 
+                  className={`player-badge ${isCurrentTurn ? 'current-turn' : ''}`}
+                >
+                  {player.name}{isMe ? ' (You)' : ''}
+                </span>
+              );
+            })}
           </div>
           {gamePhase === 'playing' && (
             <>
@@ -609,6 +634,11 @@ const handleRightClick = (e, card, index = null, source = 'hand') => {
               <button className="view-board-button" onClick={() => setIsFullscreenView(true)}>
                 👁️ View Board
               </button>
+              {currentTurn === socket?.id && (
+                <button className="end-turn-button" onClick={endTurn}>
+                  ✓ End Turn
+                </button>
+              )}
             </>
           )}
           {gamePhase === 'setup' && (
