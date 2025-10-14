@@ -635,8 +635,8 @@ const handleRightClick = (e, card, index = null, source = 'hand') => {
                 👁️ View Board
               </button>
               {currentTurn === socket?.id && (
-                <button className="end-turn-button" onClick={endTurn}>
-                  ✓ End Turn
+                <button className="knock-button" onClick={endTurn}>
+                  👊 KNOCK
                 </button>
               )}
             </>
