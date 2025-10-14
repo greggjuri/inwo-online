@@ -1240,7 +1240,7 @@
     {
       "id": "loch-ness-monster",
       "name": "Loch Ness Monster",
-      "type": "plots",
+      "type": "resources",
       "filename": "plots/loch-ness-monster.webp"
     },
     {
