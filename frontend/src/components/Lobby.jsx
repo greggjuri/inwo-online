@@ -6,6 +6,17 @@ const Lobby = ({ onJoinRoom }) => {
   const [roomId, setRoomId] = useState('');
   const [playerName, setPlayerName] = useState('');
   const { connected } = useSocket();
+  
+  const tickerMessages = [
+    "AGENT PHOENIX HAS ENTERED THE NETWORK...",
+    "NEW CELL ESTABLISHED IN SECTOR 7-ALPHA...",
+    "OPERATION BLACKOUT: PHASE 2 INITIATED...",
+    "GLOBAL INFLUENCE EXPANDING: +3.7%...",
+    "ENCRYPTED TRANSMISSION RECEIVED FROM THE COUNCIL...",
+    "ASSET DEPLOYMENT SUCCESSFUL IN REGION 4...",
+    "SURVEILLANCE NETWORK UPGRADED: LEVEL 9...",
+    "SHADOW GOVERNMENT PROTOCOLS ACTIVATED..."
+  ];
 
   const handleJoin = (e) => {
     e.preventDefault();
@@ -17,79 +28,266 @@ const Lobby = ({ onJoinRoom }) => {
   const generateRoomId = () => {
     const newRoomId = Math.random().toString(36).substring(2, 8).toUpperCase();
     setRoomId(newRoomId);
-    
-    // Add a little visual feedback
-    const button = document.activeElement;
-    if (button) {
-      button.style.transform = 'scale(0.95)';
-      setTimeout(() => {
-        button.style.transform = '';
-      }, 100);
-    }
   };
 
   return (
     <div className="lobby">
-      <div className="connection-status">
-        <div className={`connection-dot ${connected ? 'connected' : 'disconnected'}`}></div>
-        <span>{connected ? 'Connected' : 'Connecting...'}</span>
+      {/* Security Clearance Banner */}
+      <div className="top-banner">
+        <div className="clearance-level">
+          <span className="clearance-icon">🔐</span>
+          SECURITY CLEARANCE: LEVEL 0 - INITIATE
+        </div>
+        <div className="connection-status">
+          <div className={`status-dot ${connected ? 'connected' : 'disconnected'}`}></div>
+          <span>{connected ? 'SECURE CHANNEL ESTABLISHED' : 'ESTABLISHING LINK...'}</span>
+        </div>
       </div>
 
-      <div className="lobby-container">
-        <h1>ILLUMINATI</h1>
-        <p className="lobby-subtitle">New World Order™</p>
-        
-        <form className="lobby-form" onSubmit={handleJoin}>
-          <div className="form-group">
-            <label htmlFor="playerName">Your Name</label>
-            <input
-              id="playerName"
-              type="text"
-              placeholder="Enter your name"
-              value={playerName}
-              onChange={(e) => setPlayerName(e.target.value)}
-              required
-              maxLength={20}
-            />
-          </div>
+      {/* Main Split Container */}
+      <div className="main-container">
+        {/* Left Panel - Eye of Providence */}
+        <div className="left-panel">
+          <div className="eye-container">
+            {/* Pyramid SVG */}
+            <svg className="pyramid-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="pyramidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style={{stopColor: '#8B0000', stopOpacity: 0.9}} />
+                  <stop offset="100%" style={{stopColor: '#450000', stopOpacity: 1}} />
+                </linearGradient>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+              
+              {/* Pyramid body */}
+              <path d="M 150 30 L 270 250 L 30 250 Z" 
+                    fill="url(#pyramidGrad)" 
+                    stroke="#ff8800" 
+                    strokeWidth="2"
+                    filter="url(#glow)"/>
+              
+              {/* Top capstone */}
+              <path d="M 150 30 L 190 90 L 110 90 Z" 
+                    fill="#ffcc00" 
+                    stroke="#ff8800" 
+                    strokeWidth="2"
+                    opacity="0.9"
+                    filter="url(#glow)"/>
+              
+              {/* Eye */}
+              <ellipse cx="150" cy="150" rx="45" ry="30" fill="#1a1a1a" stroke="#ffcc00" strokeWidth="3"/>
+              <circle cx="150" cy="150" r="20" fill="#ffcc00" opacity="0.9">
+                <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="150" cy="150" r="10" fill="#1a1a1a"/>
+              
+              {/* Rays */}
+              {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle, i) => {
+                const rad = (angle * Math.PI) / 180;
+                const x1 = 150 + Math.cos(rad) * 55;
+                const y1 = 150 + Math.sin(rad) * 35;
+                const x2 = 150 + Math.cos(rad) * 90;
+                const y2 = 150 + Math.sin(rad) * 60;
+                return (
+                  <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} 
+                        stroke="#ffcc00" strokeWidth="2" opacity="0.6">
+                    <animate attributeName="opacity" 
+                             values="0.3;0.8;0.3" 
+                             dur="4s" 
+                             begin={`${i * 0.3}s`}
+                             repeatCount="indefinite"/>
+                  </line>
+                );
+              })}
+            </svg>
 
-          <div className="form-group">
-            <label htmlFor="roomId">Room Code</label>
-            <div className="input-group">
-              <input
-                id="roomId"
-                type="text"
-                placeholder="Enter room code"
-                value={roomId}
-                onChange={(e) => setRoomId(e.target.value.toUpperCase())}
-                required
-                maxLength={6}
-                style={{ textTransform: 'uppercase' }}
-              />
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={generateRoomId}
-              >
-                <span>Generate</span>
-              </button>
+            {/* Orbiting Symbols */}
+            <div className="orbit-container">
+              {['△', '☥', '⚡', '☠', '✦', '◉'].map((symbol, i) => (
+                <div 
+                  key={i} 
+                  className={`orbiting-symbol orbit-${i % 3}`}
+                  style={{animationDelay: `${i * -1.3}s`}}
+                >
+                  {symbol}
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className="divider">
-            <span>Ready to conspire?</span>
+          {/* Mystical Text */}
+          <div className="mystic-text">
+            <p className="latin-text">NOVUS ORDO SECLORUM</p>
+            <p className="latin-subtext">The New Order of the Ages</p>
+          </div>
+        </div>
+
+        {/* Right Panel - Induction Form */}
+        <div className="right-panel">
+          {/* Background conspiracy documents */}
+          <div className="document-overlay">
+            {[0, 1, 2].map((i) => (
+              <div 
+                key={i} 
+                className="fake-document"
+                style={{
+                  top: `${20 + i * 30}%`,
+                  left: `${10 + i * 15}%`,
+                  transform: `rotate(${-5 + i * 3}deg)`
+                }}
+              >
+                <div className="doc-lines"></div>
+                <div className="doc-lines"></div>
+                <div className="doc-lines"></div>
+                <div className="redacted-bar"></div>
+              </div>
+            ))}
           </div>
 
-          <button type="submit" className="btn btn-primary" disabled={!connected}>
-            <span>{connected ? 'Join Game' : 'Connecting...'}</span>
-          </button>
-        </form>
+          <div className="form-container">
+            <div className="induction-header">
+              <h1 className="induction-title">ILLUMINATI</h1>
+              <div className="subtitle-container">
+                <span className="induction-subtitle">INDUCTION PROTOCOL</span>
+                <div className="stamp">
+                  <div className="stamp-inner">
+                    TOP<br/>SECRET
+                  </div>
+                </div>
+              </div>
+            </div>
 
-        <div className="lobby-info">
-          <p>🔺 Create or join a conspiracy</p>
-          <p>🎯 Build your secret deck of power</p>
-          <p>👁️ Share the code to recruit co-conspirators</p>
+            <form className="lobby-form" onSubmit={handleJoin}>
+              {/* Codename Input */}
+              <div className="form-group">
+                <label htmlFor="playerName" className="form-label">
+                  <span className="label-icon">👤</span>
+                  OPERATIVE CODENAME
+                  <span className="required">*MANDATORY</span>
+                </label>
+                <div className="input-wrapper">
+                  <input
+                    id="playerName"
+                    type="text"
+                    placeholder="Enter your alias..."
+                    value={playerName}
+                    onChange={(e) => setPlayerName(e.target.value)}
+                    required
+                    maxLength={20}
+                    className="form-input"
+                  />
+                  <div className="input-stamp">✓</div>
+                </div>
+              </div>
+
+              {/* Cell Designation Input */}
+              <div className="form-group">
+                <label htmlFor="roomId" className="form-label">
+                  <span className="label-icon">🔑</span>
+                  CELL DESIGNATION CODE
+                  <span className="required">*CLASSIFIED</span>
+                </label>
+                <div className="input-group">
+                  <div className="input-wrapper input-wrapper-flex">
+                    <input
+                      id="roomId"
+                      type="text"
+                      placeholder="Enter cipher..."
+                      value={roomId}
+                      onChange={(e) => setRoomId(e.target.value.toUpperCase())}
+                      required
+                      maxLength={6}
+                      className="form-input"
+                      style={{textTransform: 'uppercase'}}
+                    />
+                    <div className="classified-stamp">CLASSIFIED</div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={generateRoomId}
+                    className="generate-btn"
+                  >
+                    RANDOMIZE<br/>CIPHER
+                  </button>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="form-divider">
+                <div className="divider-line"></div>
+                <span className="divider-text">⬣ CONFIRM ALLEGIANCE ⬣</span>
+                <div className="divider-line"></div>
+              </div>
+
+              {/* Submit Button */}
+              <button 
+                type="submit" 
+                className="submit-btn"
+                disabled={!connected}
+              >
+                <span className="submit-icon">👁️</span>
+                {connected ? 'INITIATE INDUCTION' : 'ESTABLISHING CONNECTION...'}
+                <span className="submit-icon">👁️</span>
+              </button>
+            </form>
+
+            {/* Instructions */}
+            <div className="lobby-instructions">
+              <div className="instruction-item">
+                <span className="instruction-icon">🔺</span>
+                <span>Establish or infiltrate existing cell</span>
+              </div>
+              <div className="instruction-item">
+                <span className="instruction-icon">🎴</span>
+                <span>Construct your deck of influence</span>
+              </div>
+              <div className="instruction-item">
+                <span className="instruction-icon">🤝</span>
+                <span>Share cipher to recruit co-conspirators</span>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      {/* Bottom Ticker */}
+      <div className="bottom-ticker">
+        <div className="ticker-label">
+          ⚠ GLOBAL NETWORK STATUS ⚠
+        </div>
+        <div className="ticker-content">
+          <div className="ticker-scroll">
+            {tickerMessages.concat(tickerMessages).map((msg, i) => (
+              <span key={i} className="ticker-message">
+                {msg} <span className="ticker-separator">●</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Floating Background Symbols */}
+      <div className="floating-symbols">
+        {['△', '◬', '☥', '⚡', '◉', '▽'].map((symbol, i) => (
+          <div 
+            key={i} 
+            className="floating-symbol"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${i * -2}s`,
+              animationDuration: `${15 + i * 3}s`
+            }}
+          >
+            {symbol}
+          </div>
+        ))}
       </div>
     </div>
   );
