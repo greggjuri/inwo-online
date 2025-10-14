@@ -1,7 +1,9 @@
 /* Lobby - Secret Society Induction Chamber */
 .lobby {
-  width: 1920px;
-  height: 1080px;
+  min-width: 1920px;
+  width: 100vw;
+  min-height: 1080px;
+  height: 100vh;
   background: radial-gradient(ellipse at top, rgba(139, 0, 0, 0.2) 0%, transparent 50%),
               radial-gradient(ellipse at bottom, rgba(80, 0, 0, 0.15) 0%, transparent 50%),
               #0a0a0a;
@@ -16,7 +18,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 60px;
+  height: 55px;
   background: linear-gradient(180deg, rgba(20, 20, 20, 0.95) 0%, rgba(15, 15, 15, 0.98) 100%);
   border-bottom: 2px solid rgba(139, 0, 0, 0.6);
   display: flex;
@@ -71,8 +73,8 @@
 /* Main Container */
 .main-container {
   position: absolute;
-  top: 60px;
-  bottom: 80px;
+  top: 55px;
+  bottom: 70px;
   left: 0;
   right: 0;
   display: flex;
@@ -93,16 +95,16 @@
 
 .eye-container {
   position: relative;
-  width: 400px;
-  height: 400px;
+  width: 380px;
+  height: 380px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .pyramid-svg {
-  width: 300px;
-  height: 300px;
+  width: 280px;
+  height: 280px;
   filter: drop-shadow(0 0 30px rgba(255, 136, 0, 0.6));
 }
 
@@ -139,16 +141,16 @@
 }
 
 .mystic-text {
-  margin-top: 40px;
+  margin-top: 30px;
   text-align: center;
 }
 
 .latin-text {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: bold;
   color: #ffcc00;
   letter-spacing: 4px;
-  margin: 0 0 10px 0;
+  margin: 0 0 8px 0;
   text-shadow: 0 0 20px rgba(255, 204, 0, 0.6), 2px 2px 4px rgba(0, 0, 0, 0.8);
   font-family: 'Trajan Pro', 'Times New Roman', serif;
 }
@@ -165,7 +167,7 @@
 /* Right Panel - 60% */
 .right-panel {
   width: 60%;
-  padding: 60px 80px;
+  padding: 50px 80px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -213,7 +215,7 @@
   width: 100%;
   max-width: 700px;
   background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
-  padding: 50px 60px;
+  padding: 40px 60px;
   border-radius: 15px;
   border: 3px solid rgba(139, 0, 0, 0.6);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 
@@ -222,16 +224,16 @@
 }
 
 .induction-header {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   position: relative;
 }
 
 .induction-title {
-  font-size: 72px;
+  font-size: 68px;
   font-weight: 900;
   font-style: italic;
   text-align: center;
-  margin: 0 0 10px 0;
+  margin: 0 0 8px 0;
   background: linear-gradient(180deg, #ff0000 0%, #ff4444 25%, #ff8800 50%, #ff4444 75%, #ff0000 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -250,11 +252,11 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .induction-subtitle {
-  font-size: 24px;
+  font-size: 22px;
   color: #ffcc00;
   letter-spacing: 4px;
   font-weight: bold;
@@ -262,8 +264,8 @@
 }
 
 .stamp {
-  width: 80px;
-  height: 80px;
+  width: 75px;
+  height: 75px;
   border: 4px solid #aa0000;
   border-radius: 50%;
   display: flex;
@@ -275,10 +277,10 @@
 
 .stamp-inner {
   color: #aa0000;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
   text-align: center;
-  line-height: 16px;
+  line-height: 15px;
   letter-spacing: 1px;
 }
 
@@ -286,13 +288,13 @@
 .lobby-form {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 25px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .form-label {
@@ -328,7 +330,7 @@
 
 .form-input {
   width: 100%;
-  padding: 18px 20px;
+  padding: 16px 20px;
   background: rgba(232, 232, 232, 0.95);
   border: 3px solid rgba(139, 0, 0, 0.4);
   border-radius: 8px;
@@ -386,7 +388,7 @@
 }
 
 .generate-btn {
-  padding: 18px 30px;
+  padding: 16px 28px;
   background: linear-gradient(180deg, #cc8800 0%, #aa6600 100%);
   border: 3px solid #884400;
   border-radius: 8px;
@@ -436,12 +438,12 @@
 }
 
 .submit-btn {
-  padding: 25px 40px;
+  padding: 22px 40px;
   background: linear-gradient(180deg, #aa0000 0%, #770000 100%);
   border: 4px solid #550000;
   border-radius: 12px;
   color: #fff;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 900;
   letter-spacing: 3px;
   cursor: pointer;
@@ -480,11 +482,11 @@
 
 /* Instructions */
 .lobby-instructions {
-  margin-top: 35px;
+  margin-top: 25px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding-top: 25px;
+  gap: 10px;
+  padding-top: 20px;
   border-top: 1px solid rgba(139, 0, 0, 0.3);
 }
 
@@ -508,7 +510,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 80px;
+  height: 70px;
   background: linear-gradient(180deg, rgba(15, 15, 15, 0.98) 0%, rgba(20, 20, 20, 0.95) 100%);
   border-top: 2px solid rgba(139, 0, 0, 0.6);
   display: flex;
