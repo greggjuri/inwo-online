@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSocket } from '../contexts/SocketContext';
 import './Lobby.css';
 
@@ -6,6 +6,9 @@ const Lobby = ({ onJoinRoom }) => {
   const [roomId, setRoomId] = useState('');
   const [playerName, setPlayerName] = useState('');
   const { connected } = useSocket();
+  const audioRef = useRef(null);
+  const fadeIntervalRef = useRef(null);
+  const audioStartedRef = useRef(false);
   
   const tickerMessages = [
     "AGENT PHOENIX HAS ENTERED THE NETWORK...",
@@ -18,9 +21,78 @@ const Lobby = ({ onJoinRoom }) => {
     "SHADOW GOVERNMENT PROTOCOLS ACTIVATED..."
   ];
 
-  const handleJoin = (e) => {
+  // Initialize and play audio on mount
+  useEffect(() => {
+    audioRef.current = new Audio('/inwo/audio/Oculus_Omnia_Videns.mp3');
+    audioRef.current.loop = true;
+    audioRef.current.volume = 0.6; // Set initial volume (0.0 to 1.0)
+    
+    // Try to play audio
+    const playAudio = async () => {
+      try {
+        await audioRef.current.play();
+        audioStartedRef.current = true;
+      } catch (error) {
+        console.log('Audio autoplay prevented - will play on first interaction');
+        // Audio will play on first user interaction via startAudioOnInteraction
+      }
+    };
+    
+    playAudio();
+
+    // Cleanup on unmount
+    return () => {
+      if (fadeIntervalRef.current) {
+        clearInterval(fadeIntervalRef.current);
+      }
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
+  // Start audio on any user interaction
+  const startAudioOnInteraction = async () => {
+    if (!audioStartedRef.current && audioRef.current) {
+      try {
+        await audioRef.current.play();
+        audioStartedRef.current = true;
+      } catch (error) {
+        console.log('Could not start audio:', error);
+      }
+    }
+  };
+
+  // Fade out audio
+  const fadeOutAudio = (duration = 1500) => {
+    return new Promise((resolve) => {
+      if (!audioRef.current) {
+        resolve();
+        return;
+      }
+
+      const startVolume = audioRef.current.volume;
+      const fadeStep = startVolume / (duration / 50); // 50ms intervals
+
+      fadeIntervalRef.current = setInterval(() => {
+        if (audioRef.current.volume > fadeStep) {
+          audioRef.current.volume -= fadeStep;
+        } else {
+          audioRef.current.volume = 0;
+          audioRef.current.pause();
+          clearInterval(fadeIntervalRef.current);
+          resolve();
+        }
+      }, 50);
+    });
+  };
+
+  const handleJoin = async (e) => {
     e.preventDefault();
     if (roomId && playerName) {
+      // Fade out music before transitioning
+      await fadeOutAudio(1500); // 1.5 second fade
       onJoinRoom(roomId, playerName);
     }
   };
@@ -28,10 +100,11 @@ const Lobby = ({ onJoinRoom }) => {
   const generateRoomId = () => {
     const newRoomId = Math.random().toString(36).substring(2, 8).toUpperCase();
     setRoomId(newRoomId);
+    startAudioOnInteraction();
   };
 
   return (
-    <div className="lobby">
+    <div className="lobby" onClick={startAudioOnInteraction}>
       {/* Security Clearance Banner */}
       <div className="top-banner">
         <div className="clearance-level">
@@ -177,7 +250,10 @@ const Lobby = ({ onJoinRoom }) => {
                     type="text"
                     placeholder="Enter your alias..."
                     value={playerName}
-                    onChange={(e) => setPlayerName(e.target.value)}
+                    onChange={(e) => {
+                      setPlayerName(e.target.value);
+                      startAudioOnInteraction();
+                    }}
                     required
                     maxLength={20}
                     className="form-input"
@@ -200,7 +276,10 @@ const Lobby = ({ onJoinRoom }) => {
                       type="text"
                       placeholder="Enter cipher..."
                       value={roomId}
-                      onChange={(e) => setRoomId(e.target.value.toUpperCase())}
+                      onChange={(e) => {
+                        setRoomId(e.target.value.toUpperCase());
+                        startAudioOnInteraction();
+                      }}
                       required
                       maxLength={6}
                       className="form-input"
