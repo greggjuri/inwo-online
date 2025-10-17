@@ -1,30 +1,141 @@
 # Dependencies
 node_modules/
+
+# Logs
+logs/
+*.log
 npm-debug.log*
+yarn-debug.log*
 yarn-error.log*
-package-lock.json
-yarn.lock
+lerna-debug.log*
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Diagnostic reports
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+lib-runtime/
+
+# Coverage directory used by testing tools
+coverage/
+*.lcov
+.nyc_output/
+
+# Dependency lock files (uncomment if you want version control for reproducible builds)
+# Recommended: KEEP these files for production applications
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
 
 # Environment variables
 .env
-.env.local
-.env.production.local
+.env*.local
+.env.test
+.env.production
+.env.development
 
 # Build outputs
 dist/
 build/
+out/
+.next/
 
-# IDE
-.vscode/
+# Vite
+.vite/
+vite.config.js.timestamp-*
+
+# Cache directories
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# IDE - JetBrains
 .idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# IDE - Other
 *.swp
 *.swo
+*.swn
+*~
 *.sublime-*
+.project
+.classpath
+.settings/
 
-# OS
+# OS Files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 desktop.ini
 
-# Optional: Uncomment if card images are too large for GitHub
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional REPL history
+.node_repl_history
+
+# Temporary folders
+tmp/
+temp/
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Card Images (uncomment if card images are too large for GitHub)
 # frontend/public/cards/**/*.webp
+
+# Production source maps (uncomment if you don't want to commit them)
+# *.map
+
+# Debug
+.debug/

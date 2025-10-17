@@ -33,7 +33,7 @@ INWO (Illuminati: New World Order) is a collectible card game where players take
 - **Shared Play Area**: Large, interactive board where both players can see all played cards
 - **Drag & Drop Interface**: Easily play cards from your hand to the board
 - **Card Manipulation**: 
-  - Rotate cards 90° (tap/tapped mechanic)
+  - Rotate cards 90°
   - Add/remove tokens for tracking card states
   - Move cards freely around the play area
   - Return cards to hand or discard
@@ -47,7 +47,7 @@ INWO (Illuminati: New World Order) is a collectible card game where players take
   - Clear turn indicators showing whose turn it is
   - Turn counter to track game progress
   - "Knock" system for ending turns
-- **Dice Rolling**: Built-in 2D6 dice roller with 3D visual effects
+- **Dice Rolling**: Built-in 2D6 dice roller
 - **Fullscreen Board View**: Maximize play area by pressing **F** or clicking "View Board"
 
 ### User Experience
@@ -271,7 +271,6 @@ Potential features for future development:
 - [ ] Game replay/history
 - [ ] Advanced deck statistics
 - [ ] Tournament mode
-- [ ] Mobile/tablet optimization
 - [ ] Custom card sets
 - [ ] Automated victory condition checking
 
