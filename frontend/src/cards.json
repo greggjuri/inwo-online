@@ -179,7 +179,7 @@
       "id": "bigfoot",
       "name": "Bigfoot",
       "type": "resources",
-      "filename": "groups/bigfoot.webp"
+      "filename": "resources/bigfoot.webp"
     },
     {
       "id": "bigger-business",
@@ -911,7 +911,7 @@
       "id": "gun-lobby",
       "name": "Gun Lobby",
       "type": "groups",
-      "filename": "plots/gun-lobby.webp"
+      "filename": "groups/gun-lobby.webp"
     },
     {
       "id": "hackers",
@@ -1241,7 +1241,7 @@
       "id": "loch-ness-monster",
       "name": "Loch Ness Monster",
       "type": "resources",
-      "filename": "plots/loch-ness-monster.webp"
+      "filename": "resources/loch-ness-monster.webp"
     },
     {
       "id": "logic-bomb",
