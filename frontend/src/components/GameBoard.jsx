@@ -7,6 +7,41 @@ import './Dice.css';
 import './GameBoard.css';
 
 const GameBoard = ({ roomId, playerName, playerDeck }) => {
+// Board configuration constants
+  const BOARD_CONFIG = {
+    width: 2400,  // Increased from 1500
+    height: 1200, // Increased from 850
+    nwoZone: {
+      width: 120,
+      height: 167,
+      gap: 20,
+      colors: ['red', 'yellow', 'blue']
+    }
+  };
+
+  // Calculate player zones for 2 players
+  const getPlayerZones = (playerCount, myPlayerId, allPlayers) => {
+    if (playerCount === 2) {
+      const myIndex = allPlayers.findIndex(p => p.id === myPlayerId);
+      return {
+        myZone: {
+          x: 0,
+          y: myIndex === 0 ? 0 : BOARD_CONFIG.height / 2,
+          width: BOARD_CONFIG.width,
+          height: BOARD_CONFIG.height / 2,
+          color: myIndex === 0 ? 'rgba(59, 130, 246, 0.08)' : 'rgba(239, 68, 68, 0.08)' // blue or red tint
+        },
+        opponentZone: {
+          x: 0,
+          y: myIndex === 0 ? BOARD_CONFIG.height / 2 : 0,
+          width: BOARD_CONFIG.width,
+          height: BOARD_CONFIG.height / 2,
+          color: myIndex === 0 ? 'rgba(239, 68, 68, 0.08)' : 'rgba(59, 130, 246, 0.08)'
+        }
+      };
+    }
+    // TODO: Add 3 and 4 player zones later
+  };
   const { socket } = useSocket();
   const [players, setPlayers] = useState([]);
   const [gamePhase, setGamePhase] = useState('setup');
@@ -27,6 +62,12 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
     resources: 0,
     plots: 0
   });
+  const [nwoCards, setNwoCards] = useState({
+  red: null,
+  yellow: null,
+  blue: null
+  });
+  const [playerZones, setPlayerZones] = useState(null);
   const [isFullscreenView, setIsFullscreenView] = useState(false);
   const [groupResourceDiscard, setGroupResourceDiscard] = useState([]);
   const [plotDiscard, setPlotDiscard] = useState([]);
@@ -53,6 +94,9 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
 
     socket.on('room-joined', ({ players: roomPlayers }) => {
       setPlayers(roomPlayers);
+      if (roomPlayers.length >= 2) {
+        setPlayerZones(getPlayerZones(2, socket.id, roomPlayers));
+      }
     });
 
     socket.on('player-joined', ({ playerId, playerName: newPlayerName }) => {
@@ -60,6 +104,12 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
         const exists = prev.find(p => p.id === playerId);
         if (exists) return prev;
         return [...prev, { id: playerId, name: newPlayerName }];
+      });
+      setPlayers(prev => {
+        if (prev.length >= 2) {
+          setPlayerZones(getPlayerZones(2, socket.id, prev));
+        }
+        return prev;
       });
     });
 
@@ -134,6 +184,14 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       setTurnNumber(newTurnNumber);
     });
 
+    socket.on('nwo-played', ({ color, card }) => {
+      setNwoCards(prev => ({ ...prev, [color]: card }));
+    });
+
+    socket.on('nwo-removed', ({ color }) => {
+      setNwoCards(prev => ({ ...prev, [color]: null }));
+    });
+
     return () => {
       socket.off('room-joined');
       socket.off('player-joined');
@@ -149,6 +207,8 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       socket.off('game-started');
       socket.off('turn-changed');
       socket.off('turn-number-updated');
+      socket.off('nwo-played');
+      socket.off('nwo-removed');
     };
   }, [socket, roomId, playerName, playerDeck]);
 
@@ -615,6 +675,31 @@ const handleRightClick = (e, card, index = null, source = 'hand') => {
     setPreviewCard(null);
   };
 
+  const handleNWODrop = (e, color) => {
+  e.preventDefault();
+  e.stopPropagation();
+  
+  if (!draggedCard || draggedCard.source !== 'hand') return;
+  
+  const card = draggedCard.card;
+  
+  setNwoCards(prev => ({ ...prev, [color]: card }));
+  setHand(prev => prev.filter((_, i) => i !== draggedCard.index));
+  
+  socket.emit('play-nwo', { roomId, color, card });
+  setDraggedCard(null);
+};
+
+const removeNWO = (color) => {
+  if (!nwoCards[color]) return;
+  
+  const card = nwoCards[color];
+  setNwoCards(prev => ({ ...prev, [color]: null }));
+  setHand(prev => [...prev, card]);
+  
+  socket.emit('remove-nwo', { roomId, color });
+};
+
   return (
     <div className={`game-board-container ${isFullscreenView ? 'fullscreen-mode' : ''}`}>
       {!isFullscreenView && (
@@ -741,16 +826,77 @@ const handleRightClick = (e, card, index = null, source = 'hand') => {
 
       <div className="play-area">
         <div className={`shared-play-area ${isDragOver ? 'drag-over' : ''}`} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}>
-          <div className="cards-container" ref={cardsContainerRef}>
-            {sharedPlayArea.map((card, index) => {
-              const isDragging = draggedCard && draggedCard.index === index && draggedCard.source === 'play-area';
-              return (
-                <div key={`play-${index}`} className={`played-card ${isDragging ? 'dragging-card' : ''}`} style={{ left: card.position.x + 'px', top: card.position.y + 'px' }} onContextMenu={(e) => handleRightClick(e, card, index, 'play-area')}>
-                  <Card card={card} size="small" rotation={card.rotation || 0} tokens={card.tokens || 0} onRotate={() => handleCardRotate(index)} onTokenChange={(tokens) => handleTokenChange(index, tokens)} onDoubleClick={() => returnToHand(card, index)} draggable={true} onDragStart={(e) => handleDragStart(e, card, index, 'play-area')} onDragEnd={handleDragEnd} />
+      {/* Find and REPLACE: <div className="cards-container" ref={cardsContainerRef}> */}
+      <div className="cards-container" ref={cardsContainerRef}>
+        {/* Player Zones */}
+        {playerZones && (
+          <>
+            <div 
+              className="player-zone my-zone"
+              style={{
+                left: playerZones.myZone.x + 'px',
+                top: playerZones.myZone.y + 'px',
+                width: playerZones.myZone.width + 'px',
+                height: playerZones.myZone.height + 'px',
+                backgroundColor: playerZones.myZone.color
+              }}
+            />
+            <div 
+              className="player-zone opponent-zone"
+              style={{
+                left: playerZones.opponentZone.x + 'px',
+                top: playerZones.opponentZone.y + 'px',
+                width: playerZones.opponentZone.width + 'px',
+                height: playerZones.opponentZone.height + 'px',
+                backgroundColor: playerZones.opponentZone.color
+              }}
+            />
+          </>
+        )}
+
+        {/* NWO Zone */}
+        <div className="nwo-zone">
+          {BOARD_CONFIG.nwoZone.colors.map(color => (
+            <div 
+              key={color}
+              className={`nwo-slot ${color} ${nwoCards[color] ? 'filled' : ''}`}
+              onDragOver={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}
+              onDrop={(e) => handleNWODrop(e, color)}
+            >
+              {nwoCards[color] ? (
+                <div className="nwo-card-wrapper">
+                  <Card 
+                    card={nwoCards[color]} 
+                    size="small" 
+                    draggable={false}
+                    onDoubleClick={() => removeNWO(color)}
+                  />
                 </div>
-              );
-            })}
-          </div>
+              ) : (
+                <>
+                  <span>NWO</span>
+                  <span className="nwo-slot-label">{color}</span>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Existing played cards - KEEP AS IS */}
+        {sharedPlayArea.map((card, index) => {
+          const isDragging = draggedCard && draggedCard.index === index && draggedCard.source === 'play-area';
+          return (
+            <div key={`play-${index}`} className={`played-card ${isDragging ? 'dragging-card' : ''}`} style={{ left: card.position.x + 'px', top: card.position.y + 'px' }} onContextMenu={(e) => handleRightClick(e, card, index, 'play-area')}>
+              <Card card={card} size="small" rotation={card.rotation || 0} tokens={card.tokens || 0} onRotate={() => handleCardRotate(index)} onTokenChange={(tokens) => handleTokenChange(index, tokens)} onDoubleClick={() => returnToHand(card, index)} draggable={true} onDragStart={(e) => handleDragStart(e, card, index, 'play-area')} onDragEnd={handleDragEnd} />
+            </div>
+          );
+        })}
+        
+        {/* Keep existing empty-area div */}
+      </div>
           {sharedPlayArea.length === 0 && (
             <div className="empty-area">
               <div className="empty-area-icon">🎯</div>

@@ -168,6 +168,21 @@ socket.on('join-room', ({ roomId, playerName }) => {
     socket.to(roomId).emit('dice-closed');
   });
 
+  // Handle closing dice popup
+  socket.on('close-dice', ({ roomId }) => {
+    socket.to(roomId).emit('dice-closed');
+  });
+
+  // Handle NWO card placement
+  socket.on('play-nwo', ({ roomId, color, card }) => {
+    socket.to(roomId).emit('nwo-played', { color, card });
+  });
+
+  // Handle NWO card removal
+  socket.on('remove-nwo', ({ roomId, color }) => {
+    socket.to(roomId).emit('nwo-removed', { color });
+  });
+
   // Handle showing card to all players
   socket.on('show-card-to-all', ({ roomId, card }) => {
     socket.to(roomId).emit('show-card-to-all', {
