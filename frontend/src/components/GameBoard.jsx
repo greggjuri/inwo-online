@@ -21,13 +21,13 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       'rgba(59, 130, 246, 0.08)',   // blue
       'rgba(239, 68, 68, 0.08)',    // red
       'rgba(34, 197, 94, 0.08)',    // green
-      'rgba(168, 85, 247, 0.08)'    // purple
+      'rgba(156, 163, 175, 0.08)'   // gray
     ],
     playerColorsBright: [
       'rgba(59, 130, 246, 0.3)',    // blue
       'rgba(239, 68, 68, 0.3)',     // red
       'rgba(34, 197, 94, 0.3)',     // green
-      'rgba(168, 85, 247, 0.3)'     // purple
+      'rgba(156, 163, 175, 0.3)'    // gray
     ]
   };
 
@@ -831,7 +831,7 @@ const removeNWO = (color) => {
       {players.map((player, index) => {
         const isCurrentTurn = currentTurn === player.id;
         const isMe = player.id === socket?.id;
-        const colorNames = ['blue', 'red', 'green', 'purple'];
+        const colorNames = ['blue', 'red', 'green', 'gray'];
         const playerColor = colorNames[index] || 'blue';
         return (
           <span 

@@ -1,5 +1,5 @@
 {
-  "totalCards": 399,
+  "totalCards": 524,
   "cards": [
     {
       "id": "18-and-half-minute-gap",
@@ -2394,6 +2394,1052 @@
       "name": "Xanadu",
       "type": "resources",
       "filename": "resources/xanadu.webp"
+    },
+    {
+      "id": "a-brief-attack-of-conscience",
+      "name": "A Brief Attack Of Conscience",
+      "type": "plots",
+      "filename": "plots/a-brief-attack-of-conscience.webp"
+    },
+    {
+      "id": "al-amarja",
+      "name": "Al Amarja",
+      "type": "groups",
+      "filename": "groups/al-amarja.webp",
+      "power": 2,
+      "resistance": 8,
+      "subtype": "Place",
+      "alignment": [
+        "Weird"
+      ],
+      "attribute": [
+        "Coastal",
+        "Nation"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
+      "id": "alien-abduction",
+      "name": "Alien Abduction",
+      "type": "plots",
+      "filename": "plots/alien-abduction.webp"
+    },
+    {
+      "id": "anarchists-unite",
+      "name": "Anarchists Unite",
+      "type": "plots",
+      "filename": "plots/anarchists-unite.webp"
+    },
+    {
+      "id": "antitrust-legislation",
+      "name": "Antitrust Legislation",
+      "type": "plots",
+      "filename": "plots/antitrust-legislation.webp"
+    },
+    {
+      "id": "anything-worth-doing-is-worth-overdoing",
+      "name": "Anything Worth Doing Is Worth Overdoing",
+      "type": "plots",
+      "filename": "plots/anything-worth-doing-is-worth-overdoing.webp"
+    },
+    {
+      "id": "apathy",
+      "name": "Apathy",
+      "type": "plots",
+      "filename": "plots/apathy.webp"
+    },
+    {
+      "id": "arms-dealers",
+      "name": "Arms Dealers",
+      "type": "groups",
+      "filename": "groups/arms-dealers.webp",
+      "power": 2,
+      "resistance": 4,
+      "alignment": [
+        "Violent",
+        "Criminal"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "australia",
+      "name": "Australia",
+      "type": "groups",
+      "filename": "groups/australia.webp",
+      "power": 3,
+      "resistance": 6,
+      "subtype": "Place",
+      "alignment": [
+        "Conservative",
+        "Government"
+      ],
+      "attribute": [
+        "Huge",
+        "Coastal",
+        "Nation"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom"
+      ]
+    },
+    {
+      "id": "australian-rules",
+      "name": "Australian Rules",
+      "type": "plots",
+      "filename": "plots/australian-rules.webp"
+    },
+    {
+      "id": "back-to-the-drawing-board",
+      "name": "Back To The Drawing Board",
+      "type": "plots",
+      "filename": "plots/back-to-the-drawing-board.webp"
+    },
+    {
+      "id": "back-to-the-salt-mines",
+      "name": "Back To The Salt Mines",
+      "type": "plots",
+      "filename": "plots/back-to-the-salt-mines.webp"
+    },
+    {
+      "id": "backfire",
+      "name": "Backfire",
+      "type": "plots",
+      "filename": "plots/backfire.webp"
+    },
+    {
+      "id": "backmasquerade",
+      "name": "Backmasquerade",
+      "type": "plots",
+      "filename": "plots/backmasquerade.webp"
+    },
+    {
+      "id": "bait-and-switch",
+      "name": "Bait And Switch",
+      "type": "plots",
+      "filename": "plots/bait-and-switch.webp"
+    },
+    {
+      "id": "bar-codes",
+      "name": "Bar Codes",
+      "type": "plots",
+      "filename": "plots/bar-codes.webp"
+    },
+    {
+      "id": "beach-party",
+      "name": "Beach Party",
+      "type": "plots",
+      "filename": "plots/beach-party.webp"
+    },
+    {
+      "id": "bite-the-wax-tadpole",
+      "name": "Bite The Wax Tadpole",
+      "type": "plots",
+      "filename": "plots/bite-the-wax-tadpole.webp"
+    },
+    {
+      "id": "black-helicopters",
+      "name": "Black Helicopters",
+      "type": "resources",
+      "filename": "resources/black-helicopters.webp"
+    },
+    {
+      "id": "blinded-by-science",
+      "name": "Blinded By Science",
+      "type": "plots",
+      "filename": "plots/blinded-by-science.webp"
+    },
+    {
+      "id": "blivit",
+      "name": "Blivit",
+      "type": "resources",
+      "filename": "resources/blivit.webp"
+    },
+    {
+      "id": "brushfire-war",
+      "name": "Brushfire War",
+      "type": "plots",
+      "filename": "plots/brushfire-war.webp"
+    },
+    {
+      "id": "cat-juggling",
+      "name": "Cat Juggling",
+      "type": "plots",
+      "filename": "plots/cat-juggling.webp"
+    },
+    {
+      "id": "cease-fire",
+      "name": "Cease Fire",
+      "type": "plots",
+      "filename": "plots/cease-fire.webp"
+    },
+    {
+      "id": "chain-letter",
+      "name": "Chain Letter",
+      "type": "plots",
+      "filename": "plots/chain-letter.webp"
+    },
+    {
+      "id": "church-of-violentology",
+      "name": "Church Of Violentology",
+      "type": "groups",
+      "filename": "groups/church-of-violentology.webp",
+      "power": 2,
+      "resistance": 6,
+      "alignment": [
+        "Violent",
+        "Corporate",
+        "Fanatic"
+      ],
+      "attribute": [
+        "Church"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "left"
+      ]
+    },
+    {
+      "id": "contract-on-america",
+      "name": "Contract On America",
+      "type": "plots",
+      "filename": "plots/contract-on-america.webp"
+    },
+    {
+      "id": "convenience-stores",
+      "name": "Convenience Stores",
+      "type": "groups",
+      "filename": "groups/convenience-stores.webp",
+      "power": 1,
+      "resistance": 2,
+      "alignment": [
+        "Corporate"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "copy-shops",
+      "name": "Copy Shops",
+      "type": "groups",
+      "filename": "groups/copy-shops.webp",
+      "power": 1,
+      "resistance": 4,
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "crackdown-on-crime",
+      "name": "Crackdown On Crime",
+      "type": "plots",
+      "filename": "plots/crackdown-on-crime.webp"
+    },
+    {
+      "id": "crusade",
+      "name": "Crusade",
+      "type": "plots",
+      "filename": "plots/crusade.webp"
+    },
+    {
+      "id": "day-care-centers",
+      "name": "Day Care Centers",
+      "type": "groups",
+      "filename": "groups/day-care-centers.webp",
+      "power": 1,
+      "resistance": 2,
+      "incomingArrow": "top"
+    },
+    {
+      "id": "death-to-all-fanatics",
+      "name": "Death To All Fanatics",
+      "type": "plots",
+      "filename": "plots/death-to-all-fanatics.webp"
+    },
+    {
+      "id": "defection",
+      "name": "Defection",
+      "type": "plots",
+      "filename": "plots/defection.webp"
+    },
+    {
+      "id": "dittoheads",
+      "name": "Dittoheads",
+      "type": "groups",
+      "filename": "groups/dittoheads.webp",
+      "power": 1,
+      "resistance": 4,
+      "alignment": [
+        "Fanatic"
+      ],
+      "incomingArrow": "bottom"
+    },
+    {
+      "id": "dolphins",
+      "name": "Dolphins",
+      "type": "plots",
+      "filename": "plots/dolphins.webp"
+    },
+    {
+      "id": "dont-rock-the-boat",
+      "name": "Dont Rock The Boat",
+      "type": "plots",
+      "filename": "plots/dont-rock-the-boat.webp"
+    },
+    {
+      "id": "dont-touch-that-dial",
+      "name": "Dont Touch That Dial",
+      "type": "plots",
+      "filename": "plots/dont-touch-that-dial.webp"
+    },
+    {
+      "id": "drought",
+      "name": "Drought",
+      "type": "plots",
+      "filename": "plots/drought.webp"
+    },
+    {
+      "id": "drug-companies",
+      "name": "Drug Companies",
+      "type": "groups",
+      "filename": "groups/drug-companies.webp",
+      "power": 3,
+      "globalPower": 3,
+      "resistance": 3,
+      "alignment": [
+        "Corporate"
+      ],
+      "attribute": [
+        "Science"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "earth-first",
+      "name": "Earth First",
+      "type": "plots",
+      "filename": "plots/earth-first.webp"
+    },
+    {
+      "id": "end-of-the-world",
+      "name": "End Of The World",
+      "type": "plots",
+      "filename": "plots/end-of-the-world.webp"
+    },
+    {
+      "id": "enough-is-enough",
+      "name": "Enough Is Enough",
+      "type": "plots",
+      "filename": "plots/enough-is-enough.webp"
+    },
+    {
+      "id": "epa",
+      "name": "Epa",
+      "type": "groups",
+      "filename": "groups/epa.webp",
+      "power": 3,
+      "resistance": 3,
+      "alignment": [
+        "Government"
+      ],
+      "attribute": [
+        "Green",
+        "Science"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "every-year-is-worse",
+      "name": "Every Year Is Worse",
+      "type": "plots",
+      "filename": "plots/every-year-is-worse.webp"
+    },
+    {
+      "id": "exorcism",
+      "name": "Exorcism",
+      "type": "plots",
+      "filename": "plots/exorcism.webp"
+    },
+    {
+      "id": "family-values",
+      "name": "Family Values",
+      "type": "plots",
+      "filename": "plots/family-values.webp"
+    },
+    {
+      "id": "fickle-finger-of-fate",
+      "name": "Fickle Finger Of Fate",
+      "type": "plots",
+      "filename": "plots/fickle-finger-of-fate.webp"
+    },
+    {
+      "id": "five-year-plan",
+      "name": "Five Year Plan",
+      "type": "plots",
+      "filename": "plots/five-year-plan.webp"
+    },
+    {
+      "id": "flesh-eating-bacteria",
+      "name": "Flesh Eating Bacteria",
+      "type": "plots",
+      "filename": "plots/flesh-eating-bacteria.webp"
+    },
+    {
+      "id": "floating-point-error",
+      "name": "Floating Point Error",
+      "type": "plots",
+      "filename": "plots/floating-point-error.webp"
+    },
+    {
+      "id": "frankenfood",
+      "name": "Frankenfood",
+      "type": "plots",
+      "filename": "plots/frankenfood.webp"
+    },
+    {
+      "id": "general-disorder",
+      "name": "General Disorder",
+      "type": "groups",
+      "filename": "groups/general-disorder.webp",
+      "power": 1,
+      "resistance": 6,
+      "subtype": "Personality",
+      "alignment": [
+        "Weird",
+        "Violent"
+      ],
+      "attribute": [
+        "Science"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom"
+      ]
+    },
+    {
+      "id": "global-warning",
+      "name": "Global Warning",
+      "type": "plots",
+      "filename": "plots/global-warning.webp"
+    },
+    {
+      "id": "go-fish",
+      "name": "Go Fish",
+      "type": "plots",
+      "filename": "plots/go-fish.webp"
+    },
+    {
+      "id": "go-lemmings-go",
+      "name": "Go Lemmings Go",
+      "type": "plots",
+      "filename": "plots/go-lemmings-go.webp"
+    },
+    {
+      "id": "grave-robbers",
+      "name": "Grave Robbers",
+      "type": "plots",
+      "filename": "plots/grave-robbers.webp"
+    },
+    {
+      "id": "hubble-trouble",
+      "name": "Hubble Trouble",
+      "type": "plots",
+      "filename": "plots/hubble-trouble.webp"
+    },
+    {
+      "id": "illuminati-university",
+      "name": "Illuminati University",
+      "type": "groups",
+      "filename": "groups/illuminati-university.webp",
+      "power": 2,
+      "resistance": 6,
+      "subtype": "Place",
+      "alignment": [
+        "Weird"
+      ],
+      "attribute": [
+        "Science",
+        "Magic"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
+      "id": "interesting-times",
+      "name": "Interesting Times",
+      "type": "plots",
+      "filename": "plots/interesting-times.webp"
+    },
+    {
+      "id": "junk-bonds",
+      "name": "Junk Bonds",
+      "type": "plots",
+      "filename": "plots/junk-bonds.webp"
+    },
+    {
+      "id": "killer-satellite",
+      "name": "Killer Satellite",
+      "type": "resources",
+      "filename": "resources/killer-satellite.webp"
+    },
+    {
+      "id": "lab-explosion",
+      "name": "Lab Explosion",
+      "type": "plots",
+      "filename": "plots/lab-explosion.webp"
+    },
+    {
+      "id": "lama-ramadingdong",
+      "name": "Lama Ramadingdong",
+      "type": "groups",
+      "filename": "groups/lama-ramadingdong.webp",
+      "power": 1,
+      "resistance": 1,
+      "subtype": "Personality",
+      "alignment": [
+        "Peaceful",
+        "Weird",
+        "Corporate"
+      ],
+      "attribute": [
+        "Green"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "lenins-body",
+      "name": "Lenins Body",
+      "type": "resources",
+      "filename": "resources/lenins-body.webp"
+    },
+    {
+      "id": "let-the-sunshine-in",
+      "name": "Let The Sunshine In",
+      "type": "plots",
+      "filename": "plots/let-the-sunshine-in.webp"
+    },
+    {
+      "id": "lyndon-larouche",
+      "name": "Lyndon Larouche",
+      "type": "groups",
+      "filename": "groups/lyndon-larouche.webp",
+      "power": 1,
+      "resistance": 8,
+      "subtype": "Personality",
+      "alignment": [
+        "Weird",
+        "Conservative",
+        "Criminal",
+        "Fanatic"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
+      "id": "may-day",
+      "name": "May Day",
+      "type": "plots",
+      "filename": "plots/may-day.webp"
+    },
+    {
+      "id": "metric-system",
+      "name": "Metric System",
+      "type": "plots",
+      "filename": "plots/metric-system.webp"
+    },
+    {
+      "id": "militia",
+      "name": "Militia",
+      "type": "groups",
+      "filename": "groups/militia.webp",
+      "power": 1,
+      "resistance": 6,
+      "alignment": [
+        "Violent",
+        "Conservative",
+        "Fanatic"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "my-karma-ran-over-your-dogma",
+      "name": "My Karma Ran Over Your Dogma",
+      "type": "plots",
+      "filename": "plots/my-karma-ran-over-your-dogma.webp"
+    },
+    {
+      "id": "near-miss",
+      "name": "Near Miss",
+      "type": "plots",
+      "filename": "plots/near-miss.webp"
+    },
+    {
+      "id": "nevermore",
+      "name": "Nevermore",
+      "type": "plots",
+      "filename": "plots/nevermore.webp"
+    },
+    {
+      "id": "newt-gingrich",
+      "name": "Newt Gingrich",
+      "type": "groups",
+      "filename": "groups/newt-gingrich.webp",
+      "power": 3,
+      "resistance": 6,
+      "subtype": "Personality",
+      "alignment": [
+        "Conservative",
+        "Government"
+      ],
+      "attribute": [
+        "Space",
+        "Science"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "no-beer",
+      "name": "No Beer",
+      "type": "plots",
+      "filename": "plots/no-beer.webp"
+    },
+    {
+      "id": "nutrition-nazis",
+      "name": "Nutrition Nazis",
+      "type": "groups",
+      "filename": "groups/nutrition-nazis.webp",
+      "power": 1,
+      "resistance": 4,
+      "alignment": [
+        "Straight"
+      ],
+      "attribute": [
+        "Science"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
+      "id": "oil-spill",
+      "name": "Oil Spill",
+      "type": "plots",
+      "filename": "plots/oil-spill.webp"
+    },
+    {
+      "id": "orgone-grinder",
+      "name": "Orgone Grinder",
+      "type": "resources",
+      "filename": "resources/orgone-grinder.webp"
+    },
+    {
+      "id": "pale-people-in-black",
+      "name": "Pale People In Black",
+      "type": "groups",
+      "filename": "groups/pale-people-in-black.webp",
+      "power": 1,
+      "globalPower": 1,
+      "resistance": 2,
+      "alignment": [
+        "Weird"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "partition",
+      "name": "Partition",
+      "type": "plots",
+      "filename": "plots/partition.webp"
+    },
+    {
+      "id": "pave-the-earth",
+      "name": "Pave The Earth",
+      "type": "plots",
+      "filename": "plots/pave-the-earth.webp"
+    },
+    {
+      "id": "pizza-for-the-secret-meeting",
+      "name": "Pizza For The Secret Meeting",
+      "type": "plots",
+      "filename": "plots/pizza-for-the-secret-meeting.webp"
+    },
+    {
+      "id": "population-reduction",
+      "name": "Population Reduction",
+      "type": "plots",
+      "filename": "plots/population-reduction.webp"
+    },
+    {
+      "id": "power-satellite",
+      "name": "Power Satellite",
+      "type": "resources",
+      "filename": "resources/power-satellite.webp"
+    },
+    {
+      "id": "recycling-centers",
+      "name": "Recycling Centers",
+      "type": "groups",
+      "filename": "groups/recycling-centers.webp",
+      "power": 1,
+      "resistance": 3,
+      "attribute": [
+        "Green"
+      ],
+      "incomingArrow": "bottom"
+    },
+    {
+      "id": "registered-trademark",
+      "name": "Registered Trademark",
+      "type": "plots",
+      "filename": "plots/registered-trademark.webp"
+    },
+    {
+      "id": "reverse-whammy",
+      "name": "Reverse Whammy",
+      "type": "plots",
+      "filename": "plots/reverse-whammy.webp"
+    },
+    {
+      "id": "school-prayer",
+      "name": "School Prayer",
+      "type": "plots",
+      "filename": "plots/school-prayer.webp"
+    },
+    {
+      "id": "science-alarmists",
+      "name": "Science Alarmists",
+      "type": "groups",
+      "filename": "groups/science-alarmists.webp",
+      "power": 1,
+      "resistance": 4,
+      "attribute": [
+        "Green",
+        "Science"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "screaming-meme",
+      "name": "Screaming Meme",
+      "type": "resources",
+      "filename": "resources/screaming-meme.webp"
+    },
+    {
+      "id": "secret-master",
+      "name": "Secret Master",
+      "type": "plots",
+      "filename": "plots/secret-master.webp"
+    },
+    {
+      "id": "security-leak",
+      "name": "Security Leak",
+      "type": "plots",
+      "filename": "plots/security-leak.webp"
+    },
+    {
+      "id": "shock-jocks",
+      "name": "Shock Jocks",
+      "type": "groups",
+      "filename": "groups/shock-jocks.webp",
+      "power": 1,
+      "resistance": 5,
+      "alignment": [
+        "Weird"
+      ],
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "society-of-assassins",
+      "name": "Society Of Assassins",
+      "type": "illuminati",
+      "filename": "illuminati/society-of-assassins.webp"
+    },
+    {
+      "id": "sorry-wrong-number",
+      "name": "Sorry Wrong Number",
+      "type": "plots",
+      "filename": "plots/sorry-wrong-number.webp"
+    },
+    {
+      "id": "spontaneous-combustion",
+      "name": "Spontaneous Combustion",
+      "type": "plots",
+      "filename": "plots/spontaneous-combustion.webp"
+    },
+    {
+      "id": "spy-satellite",
+      "name": "Spy Satellite",
+      "type": "resources",
+      "filename": "resources/spy-satellite.webp"
+    },
+    {
+      "id": "state-lotteries",
+      "name": "State Lotteries",
+      "type": "groups",
+      "filename": "groups/state-lotteries.webp",
+      "power": 2,
+      "resistance": 0,
+      "alignment": [
+        "Government"
+      ],
+      "incomingArrow": "bottom"
+    },
+    {
+      "id": "strange-bedfellows",
+      "name": "Strange Bedfellows",
+      "type": "plots",
+      "filename": "plots/strange-bedfellows.webp"
+    },
+    {
+      "id": "sudden-european-vacation",
+      "name": "Sudden European Vacation",
+      "type": "plots",
+      "filename": "plots/sudden-european-vacation.webp"
+    },
+    {
+      "id": "sufficiently-advanced-technology",
+      "name": "Sufficiently Advanced Technology",
+      "type": "plots",
+      "filename": "plots/sufficiently-advanced-technology.webp"
+    },
+    {
+      "id": "supernova",
+      "name": "Supernova",
+      "type": "plots",
+      "filename": "plots/supernova.webp"
+    },
+    {
+      "id": "supreme-court-nomination",
+      "name": "Supreme Court Nomination",
+      "type": "plots",
+      "filename": "plots/supreme-court-nomination.webp"
+    },
+    {
+      "id": "swingers",
+      "name": "Swingers",
+      "type": "groups",
+      "filename": "groups/swingers.webp",
+      "power": 1,
+      "resistance": 1,
+      "alignment": [
+        "Weird",
+        "Liberal"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
+      "id": "take-the-money-and-run",
+      "name": "Take The Money And Run",
+      "type": "plots",
+      "filename": "plots/take-the-money-and-run.webp"
+    },
+    {
+      "id": "tanstaafl",
+      "name": "Tanstaafl",
+      "type": "plots",
+      "filename": "plots/tanstaafl.webp"
+    },
+    {
+      "id": "teddy-kennedy",
+      "name": "Teddy Kennedy",
+      "type": "groups",
+      "filename": "groups/teddy-kennedy.webp",
+      "power": 4,
+      "resistance": 4,
+      "subtype": "Personality",
+      "alignment": [
+        "Liberal",
+        "Government"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "bottom"
+      ]
+    },
+    {
+      "id": "teflon-coating",
+      "name": "Teflon Coating",
+      "type": "plots",
+      "filename": "plots/teflon-coating.webp"
+    },
+    {
+      "id": "the-big-prawn",
+      "name": "The Big Prawn",
+      "type": "resources",
+      "filename": "resources/the-big-prawn.webp"
+    },
+    {
+      "id": "the-green-party",
+      "name": "The Green Party",
+      "type": "groups",
+      "filename": "groups/the-green-party.webp",
+      "power": 4,
+      "globalPower": 2,
+      "resistance": 5,
+      "alignment": [
+        "Liberal"
+      ],
+      "attribute": [
+        "Green"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "the-irish-flu",
+      "name": "The Irish Flu",
+      "type": "plots",
+      "filename": "plots/the-irish-flu.webp"
+    },
+    {
+      "id": "the-magic-goes-away",
+      "name": "The Magic Goes Away",
+      "type": "plots",
+      "filename": "plots/the-magic-goes-away.webp"
+    },
+    {
+      "id": "the-meek-shall-inherit",
+      "name": "The Meek Shall Inherit",
+      "type": "plots",
+      "filename": "plots/the-meek-shall-inherit.webp"
+    },
+    {
+      "id": "the-thule-group",
+      "name": "The Thule Group",
+      "type": "groups",
+      "filename": "groups/the-thule-group.webp",
+      "power": 1,
+      "resistance": 6,
+      "attribute": [
+        "Secret",
+        "Magic"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "this-was-only-a-test",
+      "name": "This Was Only A Test",
+      "type": "plots",
+      "filename": "plots/this-was-only-a-test.webp"
+    },
+    {
+      "id": "truck-bomb",
+      "name": "Truck Bomb",
+      "type": "plots",
+      "filename": "plots/truck-bomb.webp"
+    },
+    {
+      "id": "vile-secretions",
+      "name": "Vile Secretions",
+      "type": "plots",
+      "filename": "plots/vile-secretions.webp"
+    },
+    {
+      "id": "visualize-whirled-peas",
+      "name": "Visualize Whirled Peas",
+      "type": "plots",
+      "filename": "plots/visualize-whirled-peas.webp"
+    },
+    {
+      "id": "vladimir-zhirinovsky",
+      "name": "Vladimir Zhirinovsky",
+      "type": "groups",
+      "filename": "groups/vladimir-zhirinovsky.webp",
+      "power": 2,
+      "resistance": 6,
+      "subtype": "Personality",
+      "alignment": [
+        "Violent",
+        "Conservative"
+      ],
+      "attribute": [
+        "Communist"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "waiting-period",
+      "name": "Waiting Period",
+      "type": "plots",
+      "filename": "plots/waiting-period.webp"
+    },
+    {
+      "id": "watermelons",
+      "name": "Watermelons",
+      "type": "plots",
+      "filename": "plots/watermelons.webp"
+    },
+    {
+      "id": "whistle-blowers",
+      "name": "Whistle Blowers",
+      "type": "plots",
+      "filename": "plots/whistle-blowers.webp"
+    },
+    {
+      "id": "witch-hunt",
+      "name": "Witch Hunt",
+      "type": "plots",
+      "filename": "plots/witch-hunt.webp"
+    },
+    {
+      "id": "x-ray-specs",
+      "name": "X Ray Specs",
+      "type": "resources",
+      "filename": "resources/x-ray-specs.webp"
+    },
+    {
+      "id": "you-are-what-you-eat",
+      "name": "You Are What You Eat",
+      "type": "plots",
+      "filename": "plots/you-are-what-you-eat.webp"
     }
   ]
 }
