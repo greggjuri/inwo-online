@@ -522,13 +522,15 @@
 /* NWO Zone */
 .nwo-zone {
   position: absolute;
-  top: 50%;
+  top: 20px;  /* Changed from 50% */
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);  /* Changed from translate(-50%, -50%) */
   display: flex;
   gap: 20px;
   z-index: 10;
   pointer-events: none;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .nwo-slot {
@@ -976,6 +978,28 @@
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   transform: scale(1.15);
   position: relative;
+}
+
+.player-badge.player-blue {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(37, 99, 235, 0.3));
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.player-badge.player-blue.current-turn {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.6), rgba(37, 99, 235, 0.6));
+  border-color: rgba(59, 130, 246, 0.8);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+.player-badge.player-red {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(220, 38, 38, 0.3));
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.player-badge.player-red.current-turn {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.6), rgba(220, 38, 38, 0.6));
+  border-color: rgba(239, 68, 68, 0.8);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
 }
 
 .player-badge.current-turn::before {

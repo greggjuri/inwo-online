@@ -706,20 +706,21 @@ const removeNWO = (color) => {
         <div className="game-header">
         <div className="room-info">
           <h2>{roomId}</h2>
-          <div className="players">
-            {players.map(player => {
-              const isCurrentTurn = currentTurn === player.id;
-              const isMe = player.id === socket?.id;
-              return (
-                <span 
-                  key={player.id} 
-                  className={`player-badge ${isCurrentTurn ? 'current-turn' : ''}`}
-                >
-                  {player.name}{isMe ? ' (You)' : ''}
-                </span>
-              );
-            })}
-          </div>
+        <div className="players">
+          {players.map((player, index) => {
+            const isCurrentTurn = currentTurn === player.id;
+            const isMe = player.id === socket?.id;
+            const playerColor = index === 0 ? 'blue' : 'red';
+            return (
+              <span 
+                key={player.id} 
+                className={`player-badge ${isCurrentTurn ? 'current-turn' : ''} player-${playerColor}`}
+              >
+                {player.name}{isMe ? ' (You)' : ''}
+              </span>
+            );
+          })}
+        </div>
           {gamePhase === 'playing' && (
             <>
               <button className="dice-button" onClick={roll2D6}>🎲 2D6</button>
