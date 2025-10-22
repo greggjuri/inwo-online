@@ -1,11 +1,17 @@
 {
-  "totalCards": 524,
+  "totalCards": 399,
   "cards": [
     {
       "id": "18-and-half-minute-gap",
       "name": "18 And Half Minute Gap",
       "type": "plots",
       "filename": "plots/18-and-half-minute-gap.webp"
+    },
+    {
+      "id": "a-brief-attack-of-conscience",
+      "name": "A Brief Attack Of Conscience",
+      "type": "plots",
+      "filename": "plots/a-brief-attack-of-conscience.webp"
     },
     {
       "id": "a-thousand-points-of-light",
@@ -32,16 +38,59 @@
       "filename": "plots/air-magic.webp"
     },
     {
+      "id": "al-amarja",
+      "name": "Al Amarja",
+      "type": "groups",
+      "filename": "groups/al-amarja.webp",
+      "power": 2,
+      "resistance": 8,
+      "subtype": "Place",
+      "alignment": [
+        "Weird"
+      ],
+      "attribute": [
+        "Coastal",
+        "Nation"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
       "id": "al-gore",
       "name": "Al Gore",
       "type": "groups",
-      "filename": "groups/al-gore.webp"
+      "filename": "groups/al-gore.webp",
+      "power": 1,
+      "globalPower": 1,
+      "resistance": 4,
+      "subtype": "Personality",
+      "alignment": [
+        "Liberal",
+        "Government"
+      ],
+      "attribute": [
+        "Computer",
+        "Green"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "bottom"
+      ]
     },
     {
       "id": "albino-alligators",
       "name": "Albino Alligators",
       "type": "plots",
       "filename": "plots/albino-alligators.webp"
+    },
+    {
+      "id": "alien-abduction",
+      "name": "Alien Abduction",
+      "type": "plots",
+      "filename": "plots/alien-abduction.webp"
     },
     {
       "id": "alternate-goal",
@@ -53,19 +102,49 @@
       "id": "ama",
       "name": "Ama",
       "type": "groups",
-      "filename": "groups/ama.webp"
+      "filename": "groups/ama.webp",
+      "power": 3,
+      "resistance": 4,
+      "alignment": [
+        "Peaceful",
+        "Conservative"
+      ],
+      "attribute": [
+        "Science"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
     },
     {
       "id": "american-autodual-association",
       "name": "American Autodual Association",
       "type": "groups",
-      "filename": "groups/american-autodual-association.webp"
+      "filename": "groups/american-autodual-association.webp",
+      "power": 1,
+      "resistance": 5,
+      "alignment": [
+        "Violent",
+        "Weird"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom"
+      ]
     },
     {
       "id": "an-offer-you-cant-refuse",
       "name": "An Offer You Cant Refuse",
       "type": "plots",
       "filename": "plots/an-offer-you-cant-refuse.webp"
+    },
+    {
+      "id": "anarchists-unite",
+      "name": "Anarchists Unite",
+      "type": "plots",
+      "filename": "plots/anarchists-unite.webp"
     },
     {
       "id": "and-stay-dead",
@@ -95,2349 +174,39 @@
       "id": "anti-nuclear-activists",
       "name": "Anti Nuclear Activists",
       "type": "groups",
-      "filename": "groups/anti-nuclear-activists.webp"
-    },
-    {
-      "id": "antiwar-activists",
-      "name": "Antiwar Activists",
-      "type": "groups",
-      "filename": "groups/antiwar-activists.webp"
-    },
-    {
-      "id": "are-we-having-fun-yet",
-      "name": "Are We Having Fun Yet",
-      "type": "plots",
-      "filename": "plots/are-we-having-fun-yet.webp"
-    },
-    {
-      "id": "ark-of-the-covenant",
-      "name": "Ark Of The Covenant",
-      "type": "resources",
-      "filename": "resources/ark-of-the-covenant.webp"
-    },
-    {
-      "id": "assertiveness-training",
-      "name": "Assertiveness Training",
-      "type": "plots",
-      "filename": "plots/assertiveness-training.webp"
-    },
-    {
-      "id": "atomic-monster",
-      "name": "Atomic Monster",
-      "type": "plots",
-      "filename": "plots/atomic-monster.webp"
-    },
-    {
-      "id": "backlash",
-      "name": "Backlash",
-      "type": "plots",
-      "filename": "plots/backlash.webp"
-    },
-    {
-      "id": "bank-merger",
-      "name": "Bank Merger",
-      "type": "plots",
-      "filename": "plots/bank-merger.webp"
-    },
-    {
-      "id": "bank-of-england",
-      "name": "Bank Of England",
-      "type": "groups",
-      "filename": "groups/bank-of-england.webp"
-    },
-    {
-      "id": "batf",
-      "name": "Batf",
-      "type": "groups",
-      "filename": "groups/batf.webp"
-    },
-    {
-      "id": "bavarian-illuminati",
-      "name": "Bavarian Illuminati",
-      "type": "illuminati",
-      "filename": "illuminati/bavarian-illuminati.webp"
-    },
-    {
-      "id": "benefit-concert",
-      "name": "Benefit Concert",
-      "type": "plots",
-      "filename": "plots/benefit-concert.webp"
-    },
-    {
-      "id": "bermuda-triangle",
-      "name": "Bermuda Triangle",
-      "type": "illuminati",
-      "filename": "illuminati/bermuda-triangle.webp"
-    },
-    {
-      "id": "big-media",
-      "name": "Big Media",
-      "type": "groups",
-      "filename": "groups/big-media.webp"
-    },
-    {
-      "id": "bigfoot",
-      "name": "Bigfoot",
-      "type": "resources",
-      "filename": "resources/bigfoot.webp"
-    },
-    {
-      "id": "bigger-business",
-      "name": "Bigger Business",
-      "type": "plots",
-      "filename": "plots/bigger-business.webp"
-    },
-    {
-      "id": "bill-clinton",
-      "name": "Bill Clinton",
-      "type": "groups",
-      "filename": "groups/bill-clinton.webp"
-    },
-    {
-      "id": "bimbo-at-eleven",
-      "name": "Bimbo At Eleven",
-      "type": "plots",
-      "filename": "plots/bimbo-at-eleven.webp"
-    },
-    {
-      "id": "bj-rn",
-      "name": "BjøRnë",
-      "type": "groups",
-      "filename": "groups/bjørnë.webp"
-    },
-    {
-      "id": "black-activists",
-      "name": "Black Activists",
-      "type": "groups",
-      "filename": "groups/black-activists.webp"
-    },
-    {
-      "id": "blitzkrieg",
-      "name": "Blitzkrieg",
-      "type": "plots",
-      "filename": "plots/blitzkrieg.webp"
-    },
-    {
-      "id": "blood-toil-tears-and-sweat",
-      "name": "Blood Toil Tears And Sweat",
-      "type": "plots",
-      "filename": "plots/blood-toil-tears-and-sweat.webp"
-    },
-    {
-      "id": "bodyguard",
-      "name": "Bodyguard",
-      "type": "plots",
-      "filename": "plots/bodyguard.webp"
-    },
-    {
-      "id": "book-of-kells",
-      "name": "Book Of Kells",
-      "type": "resources",
-      "filename": "resources/book-of-kells.webp"
-    },
-    {
-      "id": "botched-contact",
-      "name": "Botched Contact",
-      "type": "plots",
-      "filename": "plots/botched-contact.webp"
-    },
-    {
-      "id": "boy-sprouts",
-      "name": "Boy Sprouts",
-      "type": "groups",
-      "filename": "groups/boy-sprouts.webp"
-    },
-    {
-      "id": "brazil",
-      "name": "Brazil",
-      "type": "groups",
-      "filename": "groups/brazil.webp"
-    },
-    {
-      "id": "bribery",
-      "name": "Bribery",
-      "type": "plots",
-      "filename": "plots/bribery.webp"
-    },
-    {
-      "id": "cable-tv",
-      "name": "Cable Tv",
-      "type": "groups",
-      "filename": "groups/cable-tv.webp"
-    },
-    {
-      "id": "california",
-      "name": "California",
-      "type": "groups",
-      "filename": "groups/california.webp"
-    },
-    {
-      "id": "canada",
-      "name": "Canada",
-      "type": "groups",
-      "filename": "groups/canada.webp"
-    },
-    {
-      "id": "car-bomb",
-      "name": "Car Bomb",
-      "type": "plots",
-      "filename": "plots/car-bomb.webp"
-    },
-    {
-      "id": "cattle-mutilators",
-      "name": "Cattle Mutilators",
-      "type": "groups",
-      "filename": "groups/cattle-mutilators.webp"
-    },
-    {
-      "id": "celebrity-spokesman",
-      "name": "Celebrity Spokesman",
-      "type": "plots",
-      "filename": "plots/celebrity-spokesman.webp"
-    },
-    {
-      "id": "censorship",
-      "name": "Censorship",
-      "type": "plots",
-      "filename": "plots/censorship.webp"
-    },
-    {
-      "id": "center-for-disease-control",
-      "name": "Center For Disease Control",
-      "type": "groups",
-      "filename": "groups/center-for-disease-control.webp"
-    },
-    {
-      "id": "center-for-weird-studies",
-      "name": "Center For Weird Studies",
-      "type": "resources",
-      "filename": "resources/center-for-weird-studies.webp"
-    },
-    {
-      "id": "cfl-aio",
-      "name": "Cfl Aio",
-      "type": "groups",
-      "filename": "groups/cfl-aio.webp"
-    },
-    {
-      "id": "charismatic-leader",
-      "name": "Charismatic Leader",
-      "type": "plots",
-      "filename": "plots/charismatic-leader.webp"
-    },
-    {
-      "id": "chicken-in-every-pot",
-      "name": "Chicken In Every Pot",
-      "type": "plots",
-      "filename": "plots/chicken-in-every-pot.webp"
-    },
-    {
-      "id": "china",
-      "name": "China",
-      "type": "groups",
-      "filename": "groups/china.webp"
-    },
-    {
-      "id": "church-of-elvis",
-      "name": "Church Of Elvis",
-      "type": "groups",
-      "filename": "groups/church-of-elvis.webp"
-    },
-    {
-      "id": "cia",
-      "name": "Cia",
-      "type": "groups",
-      "filename": "groups/cia.webp"
-    },
-    {
-      "id": "citizenship-award",
-      "name": "Citizenship Award",
-      "type": "plots",
-      "filename": "plots/citizenship-award.webp"
-    },
-    {
-      "id": "clipper-chip",
-      "name": "Clipper Chip",
-      "type": "resources",
-      "filename": "resources/clipper-chip.webp"
-    },
-    {
-      "id": "clone",
-      "name": "Clone",
-      "type": "plots",
-      "filename": "plots/clone.webp"
-    },
-    {
-      "id": "clone-arrangers",
-      "name": "Clone Arrangers",
-      "type": "groups",
-      "filename": "groups/clone-arrangers.webp"
-    },
-    {
-      "id": "combined-disasters",
-      "name": "Combined Disasters",
-      "type": "plots",
-      "filename": "plots/combined-disasters.webp"
-    },
-    {
-      "id": "comic-books",
-      "name": "Comic Books",
-      "type": "groups",
-      "filename": "groups/comic-books.webp"
-    },
-    {
-      "id": "commitment",
-      "name": "Commitment",
-      "type": "plots",
-      "filename": "plots/commitment.webp"
-    },
-    {
-      "id": "computer-security",
-      "name": "Computer Security",
-      "type": "plots",
-      "filename": "plots/computer-security.webp"
-    },
-    {
-      "id": "computer-virus",
-      "name": "Computer Virus",
-      "type": "plots",
-      "filename": "plots/computer-virus.webp"
-    },
-    {
-      "id": "congressional-wives",
-      "name": "Congressional Wives",
-      "type": "groups",
-      "filename": "groups/congressional-wives.webp"
-    },
-    {
-      "id": "conspiracy-theorists",
-      "name": "Conspiracy Theorists",
-      "type": "groups",
-      "filename": "groups/conspiracy-theorists.webp"
-    },
-    {
-      "id": "corruption",
-      "name": "Corruption",
-      "type": "plots",
-      "filename": "plots/corruption.webp"
-    },
-    {
-      "id": "count-dracula",
-      "name": "Count Dracula",
-      "type": "groups",
-      "filename": "groups/count-dracula.webp"
-    },
-    {
-      "id": "counter-revolution",
-      "name": "Counter Revolution",
-      "type": "plots",
-      "filename": "plots/counter-revolution.webp"
-    },
-    {
-      "id": "counterspell",
-      "name": "Counterspell",
-      "type": "plots",
-      "filename": "plots/counterspell.webp"
-    },
-    {
-      "id": "cover-of-darkness",
-      "name": "Cover Of Darkness",
-      "type": "plots",
-      "filename": "plots/cover-of-darkness.webp"
-    },
-    {
-      "id": "coverup",
-      "name": "Coverup",
-      "type": "plots",
-      "filename": "plots/coverup.webp"
-    },
-    {
-      "id": "criminal-overlords",
-      "name": "Criminal Overlords",
-      "type": "plots",
-      "filename": "plots/criminal-overlords.webp"
-    },
-    {
-      "id": "crop-circles",
-      "name": "Crop Circles",
-      "type": "plots",
-      "filename": "plots/crop-circles.webp"
-    },
-    {
-      "id": "crystal-skull",
-      "name": "Crystal Skull",
-      "type": "resources",
-      "filename": "resources/crystal-skull.webp"
-    },
-    {
-      "id": "currency-speculation",
-      "name": "Currency Speculation",
-      "type": "plots",
-      "filename": "plots/currency-speculation.webp"
-    },
-    {
-      "id": "cyborg-soldiers",
-      "name": "Cyborg Soldiers",
-      "type": "resources",
-      "filename": "resources/cyborg-soldiers.webp"
-    },
-    {
-      "id": "cycle-gangs",
-      "name": "Cycle Gangs",
-      "type": "groups",
-      "filename": "groups/cycle-gangs.webp"
-    },
-    {
-      "id": "dan-quayle",
-      "name": "Dan Quayle",
-      "type": "groups",
-      "filename": "groups/dan-quayle.webp"
-    },
-    {
-      "id": "deasil-engine",
-      "name": "Deasil Engine",
-      "type": "resources",
-      "filename": "resources/deasil-engine.webp"
-    },
-    {
-      "id": "death-mask",
-      "name": "Death Mask",
-      "type": "resources",
-      "filename": "resources/death-mask.webp"
-    },
-    {
-      "id": "deep-agent",
-      "name": "Deep Agent",
-      "type": "plots",
-      "filename": "plots/deep-agent.webp"
-    },
-    {
-      "id": "democrats",
-      "name": "Democrats",
-      "type": "groups",
-      "filename": "groups/democrats.webp"
-    },
-    {
-      "id": "dentists",
-      "name": "Dentists",
-      "type": "groups",
-      "filename": "groups/dentists.webp"
-    },
-    {
-      "id": "deprogrammers",
-      "name": "Deprogrammers",
-      "type": "groups",
-      "filename": "groups/deprogrammers.webp"
-    },
-    {
-      "id": "dictatorship",
-      "name": "Dictatorship",
-      "type": "plots",
-      "filename": "plots/dictatorship.webp"
-    },
-    {
-      "id": "dinosaur-park",
-      "name": "Dinosaur Park",
-      "type": "groups",
-      "filename": "groups/dinosaur-park.webp"
-    },
-    {
-      "id": "discordian-society",
-      "name": "Discordian Society",
-      "type": "illuminati",
-      "filename": "illuminati/discordian-society.webp"
-    },
-    {
-      "id": "dollars-for-decency",
-      "name": "Dollars For Decency",
-      "type": "plots",
-      "filename": "plots/dollars-for-decency.webp"
-    },
-    {
-      "id": "dont-forget-to-smash-the-state",
-      "name": "Dont Forget To Smash The State",
-      "type": "plots",
-      "filename": "plots/dont-forget-to-smash-the-state.webp"
-    },
-    {
-      "id": "double-cross",
-      "name": "Double Cross",
-      "type": "plots",
-      "filename": "plots/double-cross.webp"
-    },
-    {
-      "id": "druids",
-      "name": "Druids",
-      "type": "groups",
-      "filename": "groups/druids.webp"
-    },
-    {
-      "id": "early-warning",
-      "name": "Early Warning",
-      "type": "plots",
-      "filename": "plots/early-warning.webp"
-    },
-    {
-      "id": "earth-magic",
-      "name": "Earth Magic",
-      "type": "plots",
-      "filename": "plots/earth-magic.webp"
-    },
-    {
-      "id": "earthquake",
-      "name": "Earthquake",
-      "type": "plots",
-      "filename": "plots/earthquake.webp"
-    },
-    {
-      "id": "earthquake-projector",
-      "name": "Earthquake Projector",
-      "type": "resources",
-      "filename": "resources/earthquake-projector.webp"
-    },
-    {
-      "id": "eat-the-rich",
-      "name": "Eat The Rich",
-      "type": "plots",
-      "filename": "plots/eat-the-rich.webp"
-    },
-    {
-      "id": "eco-guerillas",
-      "name": "Eco Guerillas",
-      "type": "groups",
-      "filename": "groups/eco-guerillas.webp"
-    },
-    {
-      "id": "eff",
-      "name": "Eff",
-      "type": "groups",
-      "filename": "groups/eff.webp"
-    },
-    {
-      "id": "elders-of-zion",
-      "name": "Elders Of Zion",
-      "type": "groups",
-      "filename": "groups/elders-of-zion.webp"
-    },
-    {
-      "id": "eliza",
-      "name": "Eliza",
-      "type": "resources",
-      "filename": "resources/eliza.webp"
-    },
-    {
-      "id": "elvis",
-      "name": "Elvis",
-      "type": "groups",
-      "filename": "groups/elvis.webp"
-    },
-    {
-      "id": "embezzlement",
-      "name": "Embezzlement",
-      "type": "plots",
-      "filename": "plots/embezzlement.webp"
-    },
-    {
-      "id": "emergency-powers",
-      "name": "Emergency Powers",
-      "type": "plots",
-      "filename": "plots/emergency-powers.webp"
-    },
-    {
-      "id": "empty-vee",
-      "name": "Empty Vee",
-      "type": "groups",
-      "filename": "groups/empty-vee.webp"
-    },
-    {
-      "id": "energy-crisis",
-      "name": "Energy Crisis",
-      "type": "plots",
-      "filename": "plots/energy-crisis.webp"
-    },
-    {
-      "id": "england",
-      "name": "England",
-      "type": "groups",
-      "filename": "groups/england.webp"
-    },
-    {
-      "id": "epidemic",
-      "name": "Epidemic",
-      "type": "plots",
-      "filename": "plots/epidemic.webp"
-    },
-    {
-      "id": "evil-geniuses-for-a-better-tomorrow",
-      "name": "Evil Geniuses For A Better Tomorrow",
-      "type": "groups",
-      "filename": "groups/evil-geniuses-for-a-better-tomorrow.webp"
-    },
-    {
-      "id": "exposed",
-      "name": "Exposed",
-      "type": "plots",
-      "filename": "plots/exposed.webp"
-    },
-    {
-      "id": "faction-fight",
-      "name": "Faction Fight",
-      "type": "plots",
-      "filename": "plots/faction-fight.webp"
-    },
-    {
-      "id": "fast-food-chains",
-      "name": "Fast Food Chains",
-      "type": "groups",
-      "filename": "groups/fast-food-chains.webp"
-    },
-    {
-      "id": "fbi",
-      "name": "Fbi",
-      "type": "groups",
-      "filename": "groups/fbi.webp"
-    },
-    {
-      "id": "fear-and-loathing",
-      "name": "Fear And Loathing",
-      "type": "plots",
-      "filename": "plots/fear-and-loathing.webp"
-    },
-    {
-      "id": "federal-reserve",
-      "name": "Federal Reserve",
-      "type": "groups",
-      "filename": "groups/federal-reserve.webp"
-    },
-    {
-      "id": "feminists",
-      "name": "Feminists",
-      "type": "groups",
-      "filename": "groups/feminists.webp"
-    },
-    {
-      "id": "fidel-castro",
-      "name": "Fidel Castro",
-      "type": "groups",
-      "filename": "groups/fidel-castro.webp"
-    },
-    {
-      "id": "fiendish-fluoridators",
-      "name": "Fiendish Fluoridators",
-      "type": "groups",
-      "filename": "groups/fiendish-fluoridators.webp"
-    },
-    {
-      "id": "finland",
-      "name": "Finland",
-      "type": "groups",
-      "filename": "groups/finland.webp"
-    },
-    {
-      "id": "flat-earthers",
-      "name": "Flat Earthers",
-      "type": "groups",
-      "filename": "groups/flat-earthers.webp"
-    },
-    {
-      "id": "flower-power",
-      "name": "Flower Power",
-      "type": "plots",
-      "filename": "plots/flower-power.webp"
-    },
-    {
-      "id": "flying-saucer",
-      "name": "Flying Saucer",
-      "type": "resources",
-      "filename": "resources/flying-saucer.webp"
-    },
-    {
-      "id": "fnord",
-      "name": "Fnord",
-      "type": "plots",
-      "filename": "plots/fnord.webp"
-    },
-    {
-      "id": "fnord-motor-company",
-      "name": "Fnord Motor Company",
-      "type": "groups",
-      "filename": "groups/fnord-motor-company.webp"
-    },
-    {
-      "id": "foiled",
-      "name": "Foiled",
-      "type": "plots",
-      "filename": "plots/foiled.webp"
-    },
-    {
-      "id": "forgery",
-      "name": "Forgery",
-      "type": "plots",
-      "filename": "plots/forgery.webp"
-    },
-    {
-      "id": "france",
-      "name": "France",
-      "type": "groups",
-      "filename": "groups/france.webp"
-    },
-    {
-      "id": "fraternal-orders",
-      "name": "Fraternal Orders",
-      "type": "groups",
-      "filename": "groups/fraternal-orders.webp"
-    },
-    {
-      "id": "fratricide",
-      "name": "Fratricide",
-      "type": "plots",
-      "filename": "plots/fratricide.webp"
-    },
-    {
-      "id": "freaking-the-mundanes",
-      "name": "Freaking The Mundanes",
-      "type": "plots",
-      "filename": "plots/freaking-the-mundanes.webp"
-    },
-    {
-      "id": "fred-birch-society",
-      "name": "Fred Birch Society",
-      "type": "groups",
-      "filename": "groups/fred-birch-society.webp"
-    },
-    {
-      "id": "full-moon",
-      "name": "Full Moon",
-      "type": "plots",
-      "filename": "plots/full-moon.webp"
-    },
-    {
-      "id": "fundie-money",
-      "name": "Fundie Money",
-      "type": "plots",
-      "filename": "plots/fundie-money.webp"
-    },
-    {
-      "id": "gang-war",
-      "name": "Gang War",
-      "type": "plots",
-      "filename": "plots/gang-war.webp"
-    },
-    {
-      "id": "gay-activists",
-      "name": "Gay Activists",
-      "type": "groups",
-      "filename": "groups/gay-activists.webp"
-    },
-    {
-      "id": "george-bush",
-      "name": "George Bush",
-      "type": "groups",
-      "filename": "groups/george-bush.webp"
-    },
-    {
-      "id": "george-the-janitor",
-      "name": "George The Janitor",
-      "type": "plots",
-      "filename": "plots/george-the-janitor.webp"
-    },
-    {
-      "id": "germany",
-      "name": "Germany",
-      "type": "groups",
-      "filename": "groups/germany.webp"
-    },
-    {
-      "id": "giant-kudzu",
-      "name": "Giant Kudzu",
-      "type": "plots",
-      "filename": "plots/giant-kudzu.webp"
-    },
-    {
-      "id": "girlie-magazines",
-      "name": "Girlie Magazines",
-      "type": "groups",
-      "filename": "groups/girlie-magazines.webp"
-    },
-    {
-      "id": "gnomes-of-zurich",
-      "name": "Gnomes Of Zurich",
-      "type": "illuminati",
-      "filename": "illuminati/gnomes-of-zurich.webp"
-    },
-    {
-      "id": "gold-fushion",
-      "name": "Gold Fushion",
-      "type": "plots",
-      "filename": "plots/gold-fushion.webp"
-    },
-    {
-      "id": "goldfish-fanciers",
-      "name": "Goldfish Fanciers",
-      "type": "groups",
-      "filename": "groups/goldfish-fanciers.webp"
-    },
-    {
-      "id": "good-polls",
-      "name": "Good Polls",
-      "type": "plots",
-      "filename": "plots/good-polls.webp"
-    },
-    {
-      "id": "gordo-remora",
-      "name": "Gordo Remora",
-      "type": "groups",
-      "filename": "groups/gordo-remora.webp"
-    },
-    {
-      "id": "grassroots-support",
-      "name": "Grassroots Support",
-      "type": "plots",
-      "filename": "plots/grassroots-support.webp"
-    },
-    {
-      "id": "gremlins",
-      "name": "Gremlins",
-      "type": "plots",
-      "filename": "plots/gremlins.webp"
-    },
-    {
-      "id": "gun-control",
-      "name": "Gun Control",
-      "type": "plots",
-      "filename": "plots/gun-control.webp"
-    },
-    {
-      "id": "gun-lobby",
-      "name": "Gun Lobby",
-      "type": "groups",
-      "filename": "groups/gun-lobby.webp"
-    },
-    {
-      "id": "hackers",
-      "name": "Hackers",
-      "type": "groups",
-      "filename": "groups/hackers.webp"
-    },
-    {
-      "id": "hail-eris",
-      "name": "Hail Eris",
-      "type": "plots",
-      "filename": "plots/hail-eris.webp"
-    },
-    {
-      "id": "hallucinations",
-      "name": "Hallucinations",
-      "type": "plots",
-      "filename": "plots/hallucinations.webp"
-    },
-    {
-      "id": "hammer-of-thor",
-      "name": "Hammer Of Thor",
-      "type": "resources",
-      "filename": "resources/hammer-of-thor.webp"
-    },
-    {
-      "id": "harmonica-virgins",
-      "name": "Harmonica Virgins",
-      "type": "plots",
-      "filename": "plots/harmonica-virgins.webp"
-    },
-    {
-      "id": "hat-trick",
-      "name": "Hat Trick",
-      "type": "plots",
-      "filename": "plots/hat-trick.webp"
-    },
-    {
-      "id": "hawaii",
-      "name": "Hawaii",
-      "type": "groups",
-      "filename": "groups/hawaii.webp"
-    },
-    {
-      "id": "head-in-a-jar",
-      "name": "Head In A Jar",
-      "type": "plots",
-      "filename": "plots/head-in-a-jar.webp"
-    },
-    {
-      "id": "hex",
-      "name": "Hex",
-      "type": "plots",
-      "filename": "plots/hex.webp"
-    },
-    {
-      "id": "hidden-city",
-      "name": "Hidden City",
-      "type": "resources",
-      "filename": "resources/hidden-city.webp"
-    },
-    {
-      "id": "hidden-influence",
-      "name": "Hidden Influence",
-      "type": "plots",
-      "filename": "plots/hidden-influence.webp"
-    },
-    {
-      "id": "hillary-clinton",
-      "name": "Hillary Clinton",
-      "type": "groups",
-      "filename": "groups/hillary-clinton.webp"
-    },
-    {
-      "id": "hit-and-run",
-      "name": "Hit And Run",
-      "type": "plots",
-      "filename": "plots/hit-and-run.webp"
-    },
-    {
-      "id": "hitler-s-brain",
-      "name": "Hitler'S Brain",
-      "type": "resources",
-      "filename": "resources/hitler's-brain.webp"
-    },
-    {
-      "id": "hoax",
-      "name": "Hoax",
-      "type": "plots",
-      "filename": "plots/hoax.webp"
-    },
-    {
-      "id": "hollywood",
-      "name": "Hollywood",
-      "type": "groups",
-      "filename": "groups/hollywood.webp"
-    },
-    {
-      "id": "hurricane",
-      "name": "Hurricane",
-      "type": "plots",
-      "filename": "plots/hurricane.webp"
-    },
-    {
-      "id": "i-lied",
-      "name": "I Lied",
-      "type": "plots",
-      "filename": "plots/i-lied.webp"
-    },
-    {
-      "id": "imelda-marcos",
-      "name": "Imelda Marcos",
-      "type": "groups",
-      "filename": "groups/imelda-marcos.webp"
-    },
-    {
-      "id": "immortality-serum",
-      "name": "Immortality Serum",
-      "type": "resources",
-      "filename": "resources/immortality-serum.webp"
-    },
-    {
-      "id": "imposter",
-      "name": "Imposter",
-      "type": "plots",
-      "filename": "plots/imposter.webp"
-    },
-    {
-      "id": "infobahn",
-      "name": "Infobahn",
-      "type": "plots",
-      "filename": "plots/infobahn.webp"
-    },
-    {
-      "id": "intellectuals",
-      "name": "Intellectuals",
-      "type": "groups",
-      "filename": "groups/intellectuals.webp"
-    },
-    {
-      "id": "interference",
-      "name": "Interference",
-      "type": "plots",
-      "filename": "plots/interference.webp"
-    },
-    {
-      "id": "international-cocaine-smugglers",
-      "name": "International Cocaine Smugglers",
-      "type": "groups",
-      "filename": "groups/international-cocaine-smugglers.webp"
-    },
-    {
-      "id": "international-communist-conspiracy",
-      "name": "International Communist Conspiracy",
-      "type": "groups",
-      "filename": "groups/international-communist-conspiracy.webp"
-    },
-    {
-      "id": "international-weather-organisation",
-      "name": "International Weather Organisation",
-      "type": "groups",
-      "filename": "groups/international-weather-organisation.webp"
-    },
-    {
-      "id": "irs",
-      "name": "Irs",
-      "type": "groups",
-      "filename": "groups/irs.webp"
-    },
-    {
-      "id": "israel",
-      "name": "Israel",
-      "type": "groups",
-      "filename": "groups/israel.webp"
-    },
-    {
-      "id": "italy",
-      "name": "Italy",
-      "type": "groups",
-      "filename": "groups/italy.webp"
-    },
-    {
-      "id": "jake-day",
-      "name": "Jake Day",
-      "type": "plots",
-      "filename": "plots/jake-day.webp"
-    },
-    {
-      "id": "japan",
-      "name": "Japan",
-      "type": "groups",
-      "filename": "groups/japan.webp"
-    },
-    {
-      "id": "jihad",
-      "name": "Jihad",
-      "type": "plots",
-      "filename": "plots/jihad.webp"
-    },
-    {
-      "id": "jimmy-hoffa",
-      "name": "Jimmy Hoffa",
-      "type": "groups",
-      "filename": "groups/jimmy-hoffa.webp"
-    },
-    {
-      "id": "joggers",
-      "name": "Joggers",
-      "type": "groups",
-      "filename": "groups/joggers.webp"
-    },
-    {
-      "id": "junk-mail",
-      "name": "Junk Mail",
-      "type": "groups",
-      "filename": "groups/junk-mail.webp"
-    },
-    {
-      "id": "just-say-no",
-      "name": "Just Say No",
-      "type": "plots",
-      "filename": "plots/just-say-no.webp"
-    },
-    {
-      "id": "ketchup-is-a-vegetable",
-      "name": "Ketchup Is A Vegetable",
-      "type": "plots",
-      "filename": "plots/ketchup-is-a-vegetable.webp"
-    },
-    {
-      "id": "kill-for-peace",
-      "name": "Kill For Peace",
-      "type": "plots",
-      "filename": "plots/kill-for-peace.webp"
-    },
-    {
-      "id": "kinder-and-gentler",
-      "name": "Kinder And Gentler",
-      "type": "plots",
-      "filename": "plots/kinder-and-gentler.webp"
-    },
-    {
-      "id": "kkk",
-      "name": "Kkk",
-      "type": "groups",
-      "filename": "groups/kkk.webp"
-    },
-    {
-      "id": "l-4-society",
-      "name": "L 4 Society",
-      "type": "groups",
-      "filename": "groups/l-4-society.webp"
-    },
-    {
-      "id": "las-vegas",
-      "name": "Las Vegas",
-      "type": "groups",
-      "filename": "groups/las-vegas.webp"
-    },
-    {
-      "id": "law-and-order",
-      "name": "Law And Order",
-      "type": "plots",
-      "filename": "plots/law-and-order.webp"
-    },
-    {
-      "id": "lawyers",
-      "name": "Lawyers",
-      "type": "groups",
-      "filename": "groups/lawyers.webp"
-    },
-    {
-      "id": "let-them-eat-cake",
-      "name": "Let Them Eat Cake",
-      "type": "plots",
-      "filename": "plots/let-them-eat-cake.webp"
-    },
-    {
-      "id": "lets-get-organized",
-      "name": "Lets Get Organized",
-      "type": "plots",
-      "filename": "plots/lets-get-organized.webp"
-    },
-    {
-      "id": "lets-get-really-organized",
-      "name": "Lets Get Really Organized",
-      "type": "plots",
-      "filename": "plots/lets-get-really-organized.webp"
-    },
-    {
-      "id": "lets-you-and-him-fight",
-      "name": "Lets You And Him Fight",
-      "type": "plots",
-      "filename": "plots/lets-you-and-him-fight.webp"
-    },
-    {
-      "id": "liberal-agenda",
-      "name": "Liberal Agenda",
-      "type": "plots",
-      "filename": "plots/liberal-agenda.webp"
-    },
-    {
-      "id": "libertarians",
-      "name": "Libertarians",
-      "type": "groups",
-      "filename": "groups/libertarians.webp"
-    },
-    {
-      "id": "liquor-companies",
-      "name": "Liquor Companies",
-      "type": "groups",
-      "filename": "groups/liquor-companies.webp"
-    },
-    {
-      "id": "loan-sharks",
-      "name": "Loan Sharks",
-      "type": "groups",
-      "filename": "groups/loan-sharks.webp"
-    },
-    {
-      "id": "local-police-departments",
-      "name": "Local Police Departments",
-      "type": "groups",
-      "filename": "groups/local-police-departments.webp"
-    },
-    {
-      "id": "loch-ness-monster",
-      "name": "Loch Ness Monster",
-      "type": "resources",
-      "filename": "resources/loch-ness-monster.webp"
-    },
-    {
-      "id": "logic-bomb",
-      "name": "Logic Bomb",
-      "type": "plots",
-      "filename": "plots/logic-bomb.webp"
-    },
-    {
-      "id": "madison-avenue",
-      "name": "Madison Avenue",
-      "type": "groups",
-      "filename": "groups/madison-avenue.webp"
-    },
-    {
-      "id": "manuel-noreiga",
-      "name": "Manuel Noreiga",
-      "type": "groups",
-      "filename": "groups/manuel-noreiga.webp"
-    },
-    {
-      "id": "march-on-washington",
-      "name": "March On Washington",
-      "type": "plots",
-      "filename": "plots/march-on-washington.webp"
-    },
-    {
-      "id": "margerate-thatcher",
-      "name": "Margerate Thatcher",
-      "type": "groups",
-      "filename": "groups/margerate-thatcher.webp"
-    },
-    {
-      "id": "market-illumination",
-      "name": "Market Illumination",
-      "type": "plots",
-      "filename": "plots/market-illumination.webp"
-    },
-    {
-      "id": "martial-law",
-      "name": "Martial Law",
-      "type": "plots",
-      "filename": "plots/martial-law.webp"
-    },
-    {
-      "id": "martyrs",
-      "name": "Martyrs",
-      "type": "plots",
-      "filename": "plots/martyrs.webp"
-    },
-    {
-      "id": "mass-murder",
-      "name": "Mass Murder",
-      "type": "plots",
-      "filename": "plots/mass-murder.webp"
-    },
-    {
-      "id": "media-blitz",
-      "name": "Media Blitz",
-      "type": "plots",
-      "filename": "plots/media-blitz.webp"
-    },
-    {
-      "id": "media-connections",
-      "name": "Media Connections",
-      "type": "plots",
-      "filename": "plots/media-connections.webp"
-    },
-    {
-      "id": "media-sensation",
-      "name": "Media Sensation",
-      "type": "groups",
-      "filename": "groups/media-sensation.webp"
-    },
-    {
-      "id": "mercenaries",
-      "name": "Mercenaries",
-      "type": "resources",
-      "filename": "resources/mercenaries.webp"
-    },
-    {
-      "id": "messiah",
-      "name": "Messiah",
-      "type": "plots",
-      "filename": "plots/messiah.webp"
-    },
-    {
-      "id": "meteor-strike",
-      "name": "Meteor Strike",
-      "type": "plots",
-      "filename": "plots/meteor-strike.webp"
-    },
-    {
-      "id": "mi-5",
-      "name": "Mi 5",
-      "type": "groups",
-      "filename": "groups/mi-5.webp"
-    },
-    {
-      "id": "midas-mill",
-      "name": "Midas Mill",
-      "type": "resources",
-      "filename": "resources/midas-mill.webp"
-    },
-    {
-      "id": "military-industrial-complex",
-      "name": "Military Industrial Complex",
-      "type": "plots",
-      "filename": "plots/military-industrial-complex.webp"
-    },
-    {
-      "id": "miracle-diet-plan",
-      "name": "Miracle Diet Plan",
-      "type": "plots",
-      "filename": "plots/miracle-diet-plan.webp"
-    },
-    {
-      "id": "mistaken-identity",
-      "name": "Mistaken Identity",
-      "type": "plots",
-      "filename": "plots/mistaken-identity.webp"
-    },
-    {
-      "id": "mob-influence",
-      "name": "Mob Influence",
-      "type": "plots",
-      "filename": "plots/mob-influence.webp"
-    },
-    {
-      "id": "monopoly",
-      "name": "Monopoly",
-      "type": "plots",
-      "filename": "plots/monopoly.webp"
-    },
-    {
-      "id": "moonbase",
-      "name": "Moonbase",
-      "type": "groups",
-      "filename": "groups/moonbase.webp"
-    },
-    {
-      "id": "moonies",
-      "name": "Moonies",
-      "type": "groups",
-      "filename": "groups/moonies.webp"
-    },
-    {
-      "id": "moral-minority",
-      "name": "Moral Minority",
-      "type": "groups",
-      "filename": "groups/moral-minority.webp"
-    },
-    {
-      "id": "mossad",
-      "name": "Mossad",
-      "type": "groups",
-      "filename": "groups/mossad.webp"
-    },
-    {
-      "id": "mothers-march",
-      "name": "Mothers March",
-      "type": "plots",
-      "filename": "plots/mothers-march.webp"
-    },
-    {
-      "id": "multinational-oil-companies",
-      "name": "Multinational Oil Companies",
-      "type": "groups",
-      "filename": "groups/multinational-oil-companies.webp"
-    },
-    {
-      "id": "murphy-s-law",
-      "name": "Murphy'S Law",
-      "type": "plots",
-      "filename": "plots/murphy's-law.webp"
-    },
-    {
-      "id": "mutual-betrayal",
-      "name": "Mutual Betrayal",
-      "type": "plots",
-      "filename": "plots/mutual-betrayal.webp"
-    },
-    {
-      "id": "nancy-reagan",
-      "name": "Nancy Reagan",
-      "type": "groups",
-      "filename": "groups/nancy-reagan.webp"
-    },
-    {
-      "id": "nasa",
-      "name": "Nasa",
-      "type": "groups",
-      "filename": "groups/nasa.webp"
-    },
-    {
-      "id": "nationalization",
-      "name": "Nationalization",
-      "type": "plots",
-      "filename": "plots/nationalization.webp"
-    },
-    {
-      "id": "nato",
-      "name": "Nato",
-      "type": "groups",
-      "filename": "groups/nato.webp"
-    },
-    {
-      "id": "necronomicon",
-      "name": "Necronomicon",
-      "type": "resources",
-      "filename": "resources/necronomicon.webp"
-    },
-    {
-      "id": "nephews-of-god",
-      "name": "Nephews Of God",
-      "type": "groups",
-      "filename": "groups/nephews-of-god.webp"
-    },
-    {
-      "id": "never-surrender",
-      "name": "Never Surrender",
-      "type": "plots",
-      "filename": "plots/never-surrender.webp"
-    },
-    {
-      "id": "new-blood",
-      "name": "New Blood",
-      "type": "plots",
-      "filename": "plots/new-blood.webp"
-    },
-    {
-      "id": "new-federal-budgets",
-      "name": "New Federal Budgets",
-      "type": "plots",
-      "filename": "plots/new-federal-budgets.webp"
-    },
-    {
-      "id": "new-york",
-      "name": "New York",
-      "type": "groups",
-      "filename": "groups/new-york.webp"
-    },
-    {
-      "id": "nice-idea-its-mine-now",
-      "name": "Nice Idea Its Mine Now",
-      "type": "plots",
-      "filename": "plots/nice-idea-its-mine-now.webp"
-    },
-    {
-      "id": "ninjas",
-      "name": "Ninjas",
-      "type": "groups",
-      "filename": "groups/ninjas.webp"
-    },
-    {
-      "id": "nobel-peace-prize",
-      "name": "Nobel Peace Prize",
-      "type": "plots",
-      "filename": "plots/nobel-peace-prize.webp"
-    },
-    {
-      "id": "nsa",
-      "name": "Nsa",
-      "type": "groups",
-      "filename": "groups/nsa.webp"
-    },
-    {
-      "id": "nuclear-accident",
-      "name": "Nuclear Accident",
-      "type": "plots",
-      "filename": "plots/nuclear-accident.webp"
-    },
-    {
-      "id": "nuclear-power-companies",
-      "name": "Nuclear Power Companies",
-      "type": "groups",
-      "filename": "groups/nuclear-power-companies.webp"
-    },
-    {
-      "id": "offshore-banks",
-      "name": "Offshore Banks",
-      "type": "groups",
-      "filename": "groups/offshore-banks.webp"
-    },
-    {
-      "id": "ollie-north",
-      "name": "Ollie North",
-      "type": "groups",
-      "filename": "groups/ollie-north.webp"
-    },
-    {
-      "id": "opec",
-      "name": "Opec",
-      "type": "groups",
-      "filename": "groups/opec.webp"
-    },
-    {
-      "id": "opportunity-knocks",
-      "name": "Opportunity Knocks",
-      "type": "plots",
-      "filename": "plots/opportunity-knocks.webp"
-    },
-    {
-      "id": "orbit-one",
-      "name": "Orbit One",
-      "type": "groups",
-      "filename": "groups/orbit-one.webp"
-    },
-    {
-      "id": "orbital-mind-control-lasers",
-      "name": "Orbital Mind Control Lasers",
-      "type": "resources",
-      "filename": "resources/orbital-mind-control-lasers.webp"
-    },
-    {
-      "id": "paranoids",
-      "name": "Paranoids",
-      "type": "groups",
-      "filename": "groups/paranoids.webp"
-    },
-    {
-      "id": "payoff",
-      "name": "Payoff",
-      "type": "plots",
-      "filename": "plots/payoff.webp"
-    },
-    {
-      "id": "peace-in-our-time",
-      "name": "Peace In Our Time",
-      "type": "plots",
-      "filename": "plots/peace-in-our-time.webp"
-    },
-    {
-      "id": "pentagon",
-      "name": "Pentagon",
-      "type": "groups",
-      "filename": "groups/pentagon.webp"
-    },
-    {
-      "id": "perpetual-motion-machine",
-      "name": "Perpetual Motion Machine",
-      "type": "resources",
-      "filename": "resources/perpetual-motion-machine.webp"
-    },
-    {
-      "id": "phone-company",
-      "name": "Phone Company",
-      "type": "groups",
-      "filename": "groups/phone-company.webp"
-    },
-    {
-      "id": "phone-phreaks",
-      "name": "Phone Phreaks",
-      "type": "groups",
-      "filename": "groups/phone-phreaks.webp"
-    },
-    {
-      "id": "plague-of-demons",
-      "name": "Plague Of Demons",
-      "type": "plots",
-      "filename": "plots/plague-of-demons.webp"
-    },
-    {
-      "id": "pledge-drive",
-      "name": "Pledge Drive",
-      "type": "plots",
-      "filename": "plots/pledge-drive.webp"
-    },
-    {
-      "id": "poison",
-      "name": "Poison",
-      "type": "plots",
-      "filename": "plots/poison.webp"
-    },
-    {
-      "id": "political-correctness",
-      "name": "Political Correctness",
-      "type": "plots",
-      "filename": "plots/political-correctness.webp"
-    },
-    {
-      "id": "pollsters",
-      "name": "Pollsters",
-      "type": "groups",
-      "filename": "groups/pollsters.webp"
-    },
-    {
-      "id": "post-office",
-      "name": "Post Office",
-      "type": "groups",
-      "filename": "groups/post-office.webp"
-    },
-    {
-      "id": "power-corrupts",
-      "name": "Power Corrupts",
-      "type": "plots",
-      "filename": "plots/power-corrupts.webp"
-    },
-    {
-      "id": "power-for-its-own-sake",
-      "name": "Power For Its Own Sake",
-      "type": "plots",
-      "filename": "plots/power-for-its-own-sake.webp"
-    },
-    {
-      "id": "power-grab",
-      "name": "Power Grab",
-      "type": "plots",
-      "filename": "plots/power-grab.webp"
-    },
-    {
-      "id": "power-to-the-people",
-      "name": "Power To The People",
-      "type": "plots",
-      "filename": "plots/power-to-the-people.webp"
-    },
-    {
-      "id": "prince-charles",
-      "name": "Prince Charles",
-      "type": "groups",
-      "filename": "groups/prince-charles.webp"
-    },
-    {
-      "id": "princess-di",
-      "name": "Princess Di",
-      "type": "groups",
-      "filename": "groups/princess-di.webp"
-    },
-    {
-      "id": "principia-discordia",
-      "name": "Principia Discordia",
-      "type": "resources",
-      "filename": "resources/principia-discordia.webp"
-    },
-    {
-      "id": "privatization",
-      "name": "Privatization",
-      "type": "plots",
-      "filename": "plots/privatization.webp"
-    },
-    {
-      "id": "privileged-attack",
-      "name": "Privileged Attack",
-      "type": "plots",
-      "filename": "plots/privileged-attack.webp"
-    },
-    {
-      "id": "professional-sports",
-      "name": "Professional Sports",
-      "type": "groups",
-      "filename": "groups/professional-sports.webp"
-    },
-    {
-      "id": "psychiatrists",
-      "name": "Psychiatrists",
-      "type": "groups",
-      "filename": "groups/psychiatrists.webp"
-    },
-    {
-      "id": "pulitzer-price",
-      "name": "Pulitzer Price",
-      "type": "plots",
-      "filename": "plots/pulitzer-price.webp"
-    },
-    {
-      "id": "punk-rockers",
-      "name": "Punk Rockers",
-      "type": "groups",
-      "filename": "groups/punk-rockers.webp"
-    },
-    {
-      "id": "purge",
-      "name": "Purge",
-      "type": "plots",
-      "filename": "plots/purge.webp"
-    },
-    {
-      "id": "pyramid-marketing-schemes",
-      "name": "Pyramid Marketing Schemes",
-      "type": "groups",
-      "filename": "groups/pyramid-marketing-schemes.webp"
-    },
-    {
-      "id": "reach-out",
-      "name": "Reach Out",
-      "type": "plots",
-      "filename": "plots/reach-out.webp"
-    },
-    {
-      "id": "read-my-lips",
-      "name": "Read My Lips",
-      "type": "plots",
-      "filename": "plots/read-my-lips.webp"
-    },
-    {
-      "id": "recording-industry",
-      "name": "Recording Industry",
-      "type": "groups",
-      "filename": "groups/recording-industry.webp"
-    },
-    {
-      "id": "red-cross",
-      "name": "Red Cross",
-      "type": "groups",
-      "filename": "groups/red-cross.webp"
-    },
-    {
-      "id": "red-scare",
-      "name": "Red Scare",
-      "type": "plots",
-      "filename": "plots/red-scare.webp"
-    },
-    {
-      "id": "reformed-church-of-satan",
-      "name": "Reformed Church Of Satan",
-      "type": "groups",
-      "filename": "groups/reformed-church-of-satan.webp"
-    },
-    {
-      "id": "religious-reich",
-      "name": "Religious Reich",
-      "type": "groups",
-      "filename": "groups/religious-reich.webp"
-    },
-    {
-      "id": "reload",
-      "name": "Reload",
-      "type": "plots",
-      "filename": "plots/reload.webp"
-    },
-    {
-      "id": "reorganization",
-      "name": "Reorganization",
-      "type": "plots",
-      "filename": "plots/reorganization.webp"
-    },
-    {
-      "id": "republicans",
-      "name": "Republicans",
-      "type": "groups",
-      "filename": "groups/republicans.webp"
-    },
-    {
-      "id": "resistance-is-useless",
-      "name": "Resistance Is Useless",
-      "type": "plots",
-      "filename": "plots/resistance-is-useless.webp"
-    },
-    {
-      "id": "revolution",
-      "name": "Revolution",
-      "type": "plots",
-      "filename": "plots/revolution.webp"
-    },
-    {
-      "id": "rewriting-history",
-      "name": "Rewriting History",
-      "type": "plots",
-      "filename": "plots/rewriting-history.webp"
-    },
-    {
-      "id": "rifkinites",
-      "name": "Rifkinites",
-      "type": "groups",
-      "filename": "groups/rifkinites.webp"
-    },
-    {
-      "id": "robot-sea-monsters",
-      "name": "Robot Sea Monsters",
-      "type": "groups",
-      "filename": "groups/robot-sea-monsters.webp"
-    },
-    {
-      "id": "rogue-boomer",
-      "name": "Rogue Boomer",
-      "type": "resources",
-      "filename": "resources/rogue-boomer.webp"
-    },
-    {
-      "id": "ronald-reagan",
-      "name": "Ronald Reagan",
-      "type": "groups",
-      "filename": "groups/ronald-reagan.webp"
-    },
-    {
-      "id": "rosicrucians",
-      "name": "Rosicrucians",
-      "type": "groups",
-      "filename": "groups/rosicrucians.webp"
-    },
-    {
-      "id": "ross-perot",
-      "name": "Ross Perot",
-      "type": "groups",
-      "filename": "groups/ross-perot.webp"
-    },
-    {
-      "id": "russia",
-      "name": "Russia",
-      "type": "groups",
-      "filename": "groups/russia.webp"
-    },
-    {
-      "id": "sabotage",
-      "name": "Sabotage",
-      "type": "plots",
-      "filename": "plots/sabotage.webp"
-    },
-    {
-      "id": "saddam-hussein",
-      "name": "Saddam Hussein",
-      "type": "groups",
-      "filename": "groups/saddam-hussein.webp"
-    },
-    {
-      "id": "save-the-whales",
-      "name": "Save The Whales",
-      "type": "plots",
-      "filename": "plots/save-the-whales.webp"
-    },
-    {
-      "id": "savings-loan-scam",
-      "name": "Savings & Loan Scam",
-      "type": "plots",
-      "filename": "plots/savings-&-loan-scam.webp"
-    },
-    {
-      "id": "savings-and-loans",
-      "name": "Savings And Loans",
-      "type": "groups",
-      "filename": "groups/savings-and-loans.webp"
-    },
-    {
-      "id": "scandal",
-      "name": "Scandal",
-      "type": "plots",
-      "filename": "plots/scandal.webp"
-    },
-    {
-      "id": "science-fiction-fans",
-      "name": "Science Fiction Fans",
-      "type": "groups",
-      "filename": "groups/science-fiction-fans.webp"
-    },
-    {
-      "id": "secret-service",
-      "name": "Secret Service",
-      "type": "groups",
-      "filename": "groups/secret-service.webp"
-    },
-    {
-      "id": "secrets-man-was-not-meant-to-know",
-      "name": "Secrets Man Was Not Meant To Know",
-      "type": "plots",
-      "filename": "plots/secrets-man-was-not-meant-to-know.webp"
-    },
-    {
-      "id": "secular-humanists",
-      "name": "Secular Humanists",
-      "type": "groups",
-      "filename": "groups/secular-humanists.webp"
-    },
-    {
-      "id": "seize-the-time",
-      "name": "Seize The Time",
-      "type": "plots",
-      "filename": "plots/seize-the-time.webp"
-    },
-    {
-      "id": "self-esteem",
-      "name": "Self Esteem",
-      "type": "plots",
-      "filename": "plots/self-esteem.webp"
-    },
-    {
-      "id": "semiconscious-liberation-army",
-      "name": "Semiconscious Liberation Army",
-      "type": "groups",
-      "filename": "groups/semiconscious-liberation-army.webp"
-    },
-    {
-      "id": "senate-investigating-committee",
-      "name": "Senate Investigating Committee",
-      "type": "plots",
-      "filename": "plots/senate-investigating-committee.webp"
-    },
-    {
-      "id": "servants-of-cthulhu",
-      "name": "Servants Of Cthulhu",
-      "type": "illuminati",
-      "filename": "illuminati/servants-of-cthulhu.webp"
-    },
-    {
-      "id": "shangri-la",
-      "name": "Shangri La",
-      "type": "illuminati",
-      "filename": "illuminati/shangri-la.webp"
-    },
-    {
-      "id": "shroud-of-turin",
-      "name": "Shroud Of Turin",
-      "type": "resources",
-      "filename": "resources/shroud-of-turin.webp"
-    },
-    {
-      "id": "slush-fund",
-      "name": "Slush Fund",
-      "type": "plots",
-      "filename": "plots/slush-fund.webp"
-    },
-    {
-      "id": "smof",
-      "name": "Smof",
-      "type": "groups",
-      "filename": "groups/smof.webp"
-    },
-    {
-      "id": "sniper",
-      "name": "Sniper",
-      "type": "plots",
-      "filename": "plots/sniper.webp"
-    },
-    {
-      "id": "society-for-creative-anarchism",
-      "name": "Society For Creative Anarchism",
-      "type": "groups",
-      "filename": "groups/society-for-creative-anarchism.webp"
-    },
-    {
-      "id": "solidarity",
-      "name": "Solidarity",
-      "type": "plots",
-      "filename": "plots/solidarity.webp"
-    },
-    {
-      "id": "soulburner",
-      "name": "Soulburner",
-      "type": "resources",
-      "filename": "resources/soulburner.webp"
-    },
-    {
-      "id": "south-americans-nazis",
-      "name": "South Americans Nazis",
-      "type": "groups",
-      "filename": "groups/south-americans-nazis.webp"
-    },
-    {
-      "id": "spasm-of-violence",
-      "name": "Spasm Of Violence",
-      "type": "plots",
-      "filename": "plots/spasm-of-violence.webp"
-    },
-    {
-      "id": "spear-of-longinus",
-      "name": "Spear Of Longinus",
-      "type": "resources",
-      "filename": "resources/spear-of-longinus.webp"
-    },
-    {
-      "id": "stealing-the-plans",
-      "name": "Stealing The Plans",
-      "type": "plots",
-      "filename": "plots/stealing-the-plans.webp"
-    },
-    {
-      "id": "stock-split",
-      "name": "Stock Split",
-      "type": "plots",
-      "filename": "plots/stock-split.webp"
-    },
-    {
-      "id": "straighten-up",
-      "name": "Straighten Up",
-      "type": "plots",
-      "filename": "plots/straighten-up.webp"
-    },
-    {
-      "id": "subliminals",
-      "name": "Subliminals",
-      "type": "groups",
-      "filename": "groups/subliminals.webp"
-    },
-    {
-      "id": "sucked-dry-and-cast-aside",
-      "name": "Sucked Dry And Cast Aside",
-      "type": "plots",
-      "filename": "plots/sucked-dry-and-cast-aside.webp"
-    },
-    {
-      "id": "supreme-court",
-      "name": "Supreme Court",
-      "type": "groups",
-      "filename": "groups/supreme-court.webp"
-    },
-    {
-      "id": "survivalists",
-      "name": "Survivalists",
-      "type": "groups",
-      "filename": "groups/survivalists.webp"
-    },
-    {
-      "id": "sweeping-reforms",
-      "name": "Sweeping Reforms",
-      "type": "plots",
-      "filename": "plots/sweeping-reforms.webp"
-    },
-    {
-      "id": "sweepstakes-prize",
-      "name": "Sweepstakes Prize",
-      "type": "plots",
-      "filename": "plots/sweepstakes-prize.webp"
-    },
-    {
-      "id": "switzerland",
-      "name": "Switzerland",
-      "type": "groups",
-      "filename": "groups/switzerland.webp"
-    },
-    {
-      "id": "tabloids",
-      "name": "Tabloids",
-      "type": "groups",
-      "filename": "groups/tabloids.webp"
-    },
-    {
-      "id": "talisman-of-ahrimanes",
-      "name": "Talisman Of Ahrimanes",
-      "type": "resources",
-      "filename": "resources/talisman-of-ahrimanes.webp"
-    },
-    {
-      "id": "tax-breaks",
-      "name": "Tax Breaks",
-      "type": "plots",
-      "filename": "plots/tax-breaks.webp"
-    },
-    {
-      "id": "tax-reform",
-      "name": "Tax Reform",
-      "type": "plots",
-      "filename": "plots/tax-reform.webp"
-    },
-    {
-      "id": "telephone-psychics",
-      "name": "Telephone Psychics",
-      "type": "groups",
-      "filename": "groups/telephone-psychics.webp"
-    },
-    {
-      "id": "terrorist-nuke",
-      "name": "Terrorist Nuke",
-      "type": "plots",
-      "filename": "plots/terrorist-nuke.webp"
-    },
-    {
-      "id": "texas",
-      "name": "Texas",
-      "type": "groups",
-      "filename": "groups/texas.webp"
-    },
-    {
-      "id": "the-auditor-from-hell",
-      "name": "The Auditor From Hell",
-      "type": "plots",
-      "filename": "plots/the-auditor-from-hell.webp"
-    },
-    {
-      "id": "the-big-score",
-      "name": "The Big Score",
-      "type": "plots",
-      "filename": "plots/the-big-score.webp"
-    },
-    {
-      "id": "the-bronze-head",
-      "name": "The Bronze Head",
-      "type": "resources",
-      "filename": "resources/the-bronze-head.webp"
-    },
-    {
-      "id": "the-corporate-masters",
-      "name": "The Corporate Masters",
-      "type": "plots",
-      "filename": "plots/the-corporate-masters.webp"
-    },
-    {
-      "id": "the-first-thing-we-do-lets-kill-all-the-lawyers",
-      "name": "The First Thing We Do Lets Kill All The Lawyers",
-      "type": "plots",
-      "filename": "plots/the-first-thing-we-do-lets-kill-all-the-lawyers.webp"
-    },
-    {
-      "id": "the-great-pyramid",
-      "name": "The Great Pyramid",
-      "type": "groups",
-      "filename": "groups/the-great-pyramid.webp"
-    },
-    {
-      "id": "the-hand-of-madness",
-      "name": "The Hand Of Madness",
-      "type": "plots",
-      "filename": "plots/the-hand-of-madness.webp"
-    },
-    {
-      "id": "the-holy-grail",
-      "name": "The Holy Grail",
-      "type": "resources",
-      "filename": "resources/the-holy-grail.webp"
-    },
-    {
-      "id": "the-internet-worm",
-      "name": "The Internet Worm",
-      "type": "plots",
-      "filename": "plots/the-internet-worm.webp"
-    },
-    {
-      "id": "the-library-at-alexandria",
-      "name": "The Library At Alexandria",
-      "type": "resources",
-      "filename": "resources/the-library-at-alexandria.webp"
-    },
-    {
-      "id": "the-men-in-black",
-      "name": "The Men In Black",
-      "type": "groups",
-      "filename": "groups/the-men-in-black.webp"
-    },
-    {
-      "id": "the-network",
-      "name": "The Network",
-      "type": "illuminati",
-      "filename": "illuminati/the-network.webp"
-    },
-    {
-      "id": "the-oregon-crud",
-      "name": "The Oregon Crud",
-      "type": "plots",
-      "filename": "plots/the-oregon-crud.webp"
-    },
-    {
-      "id": "the-second-bullet",
-      "name": "The Second Bullet",
-      "type": "plots",
-      "filename": "plots/the-second-bullet.webp"
-    },
-    {
-      "id": "the-stars-are-right",
-      "name": "The Stars Are Right",
-      "type": "plots",
-      "filename": "plots/the-stars-are-right.webp"
-    },
-    {
-      "id": "the-weak-link",
-      "name": "The Weak Link",
-      "type": "plots",
-      "filename": "plots/the-weak-link.webp"
-    },
-    {
-      "id": "the-weird-turn-pro",
-      "name": "The Weird Turn Pro",
-      "type": "plots",
-      "filename": "plots/the-weird-turn-pro.webp"
-    },
-    {
-      "id": "tidal-wave",
-      "name": "Tidal Wave",
-      "type": "plots",
-      "filename": "plots/tidal-wave.webp"
-    },
-    {
-      "id": "tobacco-companies",
-      "name": "Tobacco Companies",
-      "type": "groups",
-      "filename": "groups/tobacco-companies.webp"
-    },
-    {
-      "id": "tornado",
-      "name": "Tornado",
-      "type": "plots",
-      "filename": "plots/tornado.webp"
-    },
-    {
-      "id": "trading-card-games",
-      "name": "Trading Card Games",
-      "type": "groups",
-      "filename": "groups/trading-card-games.webp"
-    },
-    {
-      "id": "trekkies",
-      "name": "Trekkies",
-      "type": "groups",
-      "filename": "groups/trekkies.webp"
-    },
-    {
-      "id": "triliberal-commission",
-      "name": "Triliberal Commission",
-      "type": "groups",
-      "filename": "groups/triliberal-commission.webp"
-    },
-    {
-      "id": "tv-preachers",
-      "name": "Tv Preachers",
-      "type": "groups",
-      "filename": "groups/tv-preachers.webp"
-    },
-    {
-      "id": "ufos",
-      "name": "Ufos",
-      "type": "illuminati",
-      "filename": "illuminati/ufos.webp"
-    },
-    {
-      "id": "underground-newspapers",
-      "name": "Underground Newspapers",
-      "type": "groups",
-      "filename": "groups/underground-newspapers.webp"
-    },
-    {
-      "id": "united-nations",
-      "name": "United Nations",
-      "type": "groups",
-      "filename": "groups/united-nations.webp"
-    },
-    {
-      "id": "unlucky-13",
-      "name": "Unlucky 13",
-      "type": "plots",
-      "filename": "plots/unlucky-13.webp"
-    },
-    {
-      "id": "unmasked",
-      "name": "Unmasked",
-      "type": "plots",
-      "filename": "plots/unmasked.webp"
-    },
-    {
-      "id": "up-against-the-wall",
-      "name": "Up Against The Wall",
-      "type": "plots",
-      "filename": "plots/up-against-the-wall.webp"
-    },
-    {
-      "id": "upheavel",
-      "name": "Upheavel",
-      "type": "plots",
-      "filename": "plots/upheavel.webp"
-    },
-    {
-      "id": "urban-gangs",
-      "name": "Urban Gangs",
-      "type": "groups",
-      "filename": "groups/urban-gangs.webp"
-    },
-    {
-      "id": "vampires",
-      "name": "Vampires",
-      "type": "groups",
-      "filename": "groups/vampires.webp"
-    },
-    {
-      "id": "vatican-city",
-      "name": "Vatican City",
-      "type": "groups",
-      "filename": "groups/vatican-city.webp"
-    },
-    {
-      "id": "video-games",
-      "name": "Video Games",
-      "type": "groups",
-      "filename": "groups/video-games.webp"
-    },
-    {
-      "id": "volcano",
-      "name": "Volcano",
-      "type": "plots",
-      "filename": "plots/volcano.webp"
-    },
-    {
-      "id": "volunteer-aid",
-      "name": "Volunteer Aid",
-      "type": "plots",
-      "filename": "plots/volunteer-aid.webp"
-    },
-    {
-      "id": "voodoo-economics",
-      "name": "Voodoo Economics",
-      "type": "plots",
-      "filename": "plots/voodoo-economics.webp"
-    },
-    {
-      "id": "voudonistas",
-      "name": "Voudonistas",
-      "type": "groups",
-      "filename": "groups/voudonistas.webp"
-    },
-    {
-      "id": "vultures",
-      "name": "Vultures",
-      "type": "plots",
-      "filename": "plots/vultures.webp"
-    },
-    {
-      "id": "warehouse-23",
-      "name": "Warehouse 23",
-      "type": "resources",
-      "filename": "resources/warehouse-23.webp"
-    },
-    {
-      "id": "weather-satellite",
-      "name": "Weather Satellite",
-      "type": "resources",
-      "filename": "resources/weather-satellite.webp"
-    },
-    {
-      "id": "whispering-campaign",
-      "name": "Whispering Campaign",
-      "type": "plots",
-      "filename": "plots/whispering-campaign.webp"
-    },
-    {
-      "id": "witch",
-      "name": "Witch",
-      "type": "groups",
-      "filename": "groups/witch.webp"
-    },
-    {
-      "id": "withering-curse",
-      "name": "Withering Curse",
-      "type": "plots",
-      "filename": "plots/withering-curse.webp"
-    },
-    {
-      "id": "world-cup-victory",
-      "name": "World Cup Victory",
-      "type": "plots",
-      "filename": "plots/world-cup-victory.webp"
-    },
-    {
-      "id": "world-hunger",
-      "name": "World Hunger",
-      "type": "plots",
-      "filename": "plots/world-hunger.webp"
-    },
-    {
-      "id": "world-war-three",
-      "name": "World War Three",
-      "type": "plots",
-      "filename": "plots/world-war-three.webp"
-    },
-    {
-      "id": "xanadu",
-      "name": "Xanadu",
-      "type": "resources",
-      "filename": "resources/xanadu.webp"
-    },
-    {
-      "id": "a-brief-attack-of-conscience",
-      "name": "A Brief Attack Of Conscience",
-      "type": "plots",
-      "filename": "plots/a-brief-attack-of-conscience.webp"
-    },
-    {
-      "id": "al-amarja",
-      "name": "Al Amarja",
-      "type": "groups",
-      "filename": "groups/al-amarja.webp",
+      "filename": "groups/anti-nuclear-activists.webp",
       "power": 2,
-      "resistance": 8,
-      "subtype": "Place",
+      "resistance": 5,
       "alignment": [
-        "Weird"
+        "Liberal"
       ],
       "attribute": [
-        "Coastal",
-        "Nation"
+        "Green"
       ],
-      "incomingArrow": "bottom",
+      "incomingArrow": "top",
       "outgoingArrows": [
-        "left"
+        "right"
       ]
-    },
-    {
-      "id": "alien-abduction",
-      "name": "Alien Abduction",
-      "type": "plots",
-      "filename": "plots/alien-abduction.webp"
-    },
-    {
-      "id": "anarchists-unite",
-      "name": "Anarchists Unite",
-      "type": "plots",
-      "filename": "plots/anarchists-unite.webp"
     },
     {
       "id": "antitrust-legislation",
       "name": "Antitrust Legislation",
       "type": "plots",
       "filename": "plots/antitrust-legislation.webp"
+    },
+    {
+      "id": "antiwar-activists",
+      "name": "Antiwar Activists",
+      "type": "groups",
+      "filename": "groups/antiwar-activists.webp",
+      "power": 1,
+      "globalPower": 1,
+      "resistance": 3,
+      "alignment": [
+        "Peaceful",
+        "Liberal"
+      ],
+      "incomingArrow": "top"
     },
     {
       "id": "anything-worth-doing-is-worth-overdoing",
@@ -2450,6 +219,18 @@
       "name": "Apathy",
       "type": "plots",
       "filename": "plots/apathy.webp"
+    },
+    {
+      "id": "are-we-having-fun-yet",
+      "name": "Are We Having Fun Yet",
+      "type": "plots",
+      "filename": "plots/are-we-having-fun-yet.webp"
+    },
+    {
+      "id": "ark-of-the-covenant",
+      "name": "Ark Of The Covenant",
+      "type": "resources",
+      "filename": "resources/ark-of-the-covenant.webp"
     },
     {
       "id": "arms-dealers",
@@ -2466,6 +247,18 @@
       "outgoingArrows": [
         "right"
       ]
+    },
+    {
+      "id": "assertiveness-training",
+      "name": "Assertiveness Training",
+      "type": "plots",
+      "filename": "plots/assertiveness-training.webp"
+    },
+    {
+      "id": "atomic-monster",
+      "name": "Atomic Monster",
+      "type": "plots",
+      "filename": "plots/atomic-monster.webp"
     },
     {
       "id": "australia",
@@ -2514,6 +307,12 @@
       "filename": "plots/backfire.webp"
     },
     {
+      "id": "backlash",
+      "name": "Backlash",
+      "type": "plots",
+      "filename": "plots/backlash.webp"
+    },
+    {
       "id": "backmasquerade",
       "name": "Backmasquerade",
       "type": "plots",
@@ -2526,10 +325,57 @@
       "filename": "plots/bait-and-switch.webp"
     },
     {
+      "id": "bank-merger",
+      "name": "Bank Merger",
+      "type": "plots",
+      "filename": "plots/bank-merger.webp"
+    },
+    {
+      "id": "bank-of-england",
+      "name": "Bank Of England",
+      "type": "groups",
+      "filename": "groups/bank-of-england.webp",
+      "power": 3,
+      "resistance": 6,
+      "alignment": [
+        "Straight",
+        "Government"
+      ],
+      "attribute": [
+        "Bank"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
       "id": "bar-codes",
       "name": "Bar Codes",
       "type": "plots",
       "filename": "plots/bar-codes.webp"
+    },
+    {
+      "id": "batf",
+      "name": "Batf",
+      "type": "groups",
+      "filename": "groups/batf.webp",
+      "power": 3,
+      "resistance": 2,
+      "alignment": [
+        "Violent",
+        "Government"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
+    },
+    {
+      "id": "bavarian-illuminati",
+      "name": "Bavarian Illuminati",
+      "type": "illuminati",
+      "filename": "illuminati/bavarian-illuminati.webp"
     },
     {
       "id": "beach-party",
@@ -2538,10 +384,115 @@
       "filename": "plots/beach-party.webp"
     },
     {
+      "id": "benefit-concert",
+      "name": "Benefit Concert",
+      "type": "plots",
+      "filename": "plots/benefit-concert.webp"
+    },
+    {
+      "id": "bermuda-triangle",
+      "name": "Bermuda Triangle",
+      "type": "illuminati",
+      "filename": "illuminati/bermuda-triangle.webp"
+    },
+    {
+      "id": "big-media",
+      "name": "Big Media",
+      "type": "groups",
+      "filename": "groups/big-media.webp",
+      "power": 4,
+      "globalPower": 4,
+      "resistance": 6,
+      "alignment": [
+        "Straight",
+        "Liberal"
+      ],
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "bottom",
+        "left"
+      ]
+    },
+    {
+      "id": "bigfoot",
+      "name": "Bigfoot",
+      "type": "resources",
+      "filename": "resources/bigfoot.webp"
+    },
+    {
+      "id": "bigger-business",
+      "name": "Bigger Business",
+      "type": "plots",
+      "filename": "plots/bigger-business.webp"
+    },
+    {
+      "id": "bill-clinton",
+      "name": "Bill Clinton",
+      "type": "groups",
+      "filename": "groups/bill-clinton.webp",
+      "power": 4,
+      "resistance": 2,
+      "subtype": "Personality",
+      "alignment": [
+        "Straight",
+        "Liberal",
+        "Government"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "bimbo-at-eleven",
+      "name": "Bimbo At Eleven",
+      "type": "plots",
+      "filename": "plots/bimbo-at-eleven.webp"
+    },
+    {
       "id": "bite-the-wax-tadpole",
       "name": "Bite The Wax Tadpole",
       "type": "plots",
       "filename": "plots/bite-the-wax-tadpole.webp"
+    },
+    {
+      "id": "bj-rn",
+      "name": "Bj\u00f8Rn\u00eb",
+      "type": "groups",
+      "filename": "groups/bj\u00f8rn\u00eb.webp",
+      "power": 1,
+      "resistance": 4,
+      "subtype": "Personality",
+      "alignment": [
+        "Peaceful"
+      ],
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
+    },
+    {
+      "id": "black-activists",
+      "name": "Black Activists",
+      "type": "groups",
+      "filename": "groups/black-activists.webp",
+      "power": 3,
+      "resistance": 4,
+      "alignment": [
+        "Liberal"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
     },
     {
       "id": "black-helicopters",
@@ -2556,10 +507,81 @@
       "filename": "plots/blinded-by-science.webp"
     },
     {
+      "id": "blitzkrieg",
+      "name": "Blitzkrieg",
+      "type": "plots",
+      "filename": "plots/blitzkrieg.webp"
+    },
+    {
       "id": "blivit",
       "name": "Blivit",
       "type": "resources",
       "filename": "resources/blivit.webp"
+    },
+    {
+      "id": "blood-toil-tears-and-sweat",
+      "name": "Blood Toil Tears And Sweat",
+      "type": "plots",
+      "filename": "plots/blood-toil-tears-and-sweat.webp"
+    },
+    {
+      "id": "bodyguard",
+      "name": "Bodyguard",
+      "type": "plots",
+      "filename": "plots/bodyguard.webp"
+    },
+    {
+      "id": "book-of-kells",
+      "name": "Book Of Kells",
+      "type": "resources",
+      "filename": "resources/book-of-kells.webp"
+    },
+    {
+      "id": "botched-contact",
+      "name": "Botched Contact",
+      "type": "plots",
+      "filename": "plots/botched-contact.webp"
+    },
+    {
+      "id": "boy-sprouts",
+      "name": "Boy Sprouts",
+      "type": "groups",
+      "filename": "groups/boy-sprouts.webp",
+      "power": 1,
+      "resistance": 3,
+      "alignment": [
+        "Straight",
+        "Peaceful"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "brazil",
+      "name": "Brazil",
+      "type": "groups",
+      "filename": "groups/brazil.webp",
+      "power": 3,
+      "resistance": 3,
+      "subtype": "Place",
+      "alignment": [
+        "Government"
+      ],
+      "attribute": [
+        "Huge",
+        "Coastal",
+        "Nation"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "right"
+      ]
+    },
+    {
+      "id": "bribery",
+      "name": "Bribery",
+      "type": "plots",
+      "filename": "plots/bribery.webp"
     },
     {
       "id": "brushfire-war",
@@ -2568,10 +590,105 @@
       "filename": "plots/brushfire-war.webp"
     },
     {
+      "id": "cable-tv",
+      "name": "Cable Tv",
+      "type": "groups",
+      "filename": "groups/cable-tv.webp",
+      "power": 3,
+      "globalPower": 2,
+      "resistance": 2,
+      "alignment": [
+        "Corporate"
+      ],
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "bottom"
+      ]
+    },
+    {
+      "id": "california",
+      "name": "California",
+      "type": "groups",
+      "filename": "groups/california.webp",
+      "power": 5,
+      "resistance": 4,
+      "subtype": "Place",
+      "alignment": [
+        "Weird",
+        "Liberal",
+        "Government"
+      ],
+      "attribute": [
+        "Coastal",
+        "Huge",
+        "Green"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "canada",
+      "name": "Canada",
+      "type": "groups",
+      "filename": "groups/canada.webp",
+      "power": 3,
+      "resistance": 4,
+      "subtype": "Place",
+      "alignment": [
+        "Peaceful",
+        "Liberal",
+        "Government"
+      ],
+      "attribute": [
+        "Huge",
+        "Green",
+        "Coastal",
+        "Nation"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "bottom"
+      ]
+    },
+    {
+      "id": "car-bomb",
+      "name": "Car Bomb",
+      "type": "plots",
+      "filename": "plots/car-bomb.webp"
+    },
+    {
       "id": "cat-juggling",
       "name": "Cat Juggling",
       "type": "plots",
       "filename": "plots/cat-juggling.webp"
+    },
+    {
+      "id": "cattle-mutilators",
+      "name": "Cattle Mutilators",
+      "type": "groups",
+      "filename": "groups/cattle-mutilators.webp",
+      "power": 2,
+      "resistance": 6,
+      "alignment": [
+        "Criminal",
+        "Weird"
+      ],
+      "attribute": [
+        "Magic",
+        "Secret"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
     },
     {
       "id": "cease-fire",
@@ -2580,10 +697,114 @@
       "filename": "plots/cease-fire.webp"
     },
     {
+      "id": "celebrity-spokesman",
+      "name": "Celebrity Spokesman",
+      "type": "plots",
+      "filename": "plots/celebrity-spokesman.webp"
+    },
+    {
+      "id": "censorship",
+      "name": "Censorship",
+      "type": "plots",
+      "filename": "plots/censorship.webp"
+    },
+    {
+      "id": "center-for-disease-control",
+      "name": "Center For Disease Control",
+      "type": "groups",
+      "filename": "groups/center-for-disease-control.webp",
+      "power": 1,
+      "resistance": 2,
+      "subtype": "Place",
+      "alignment": [
+        "Peaceful",
+        "Government"
+      ],
+      "attribute": [
+        "Science"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "center-for-weird-studies",
+      "name": "Center For Weird Studies",
+      "type": "resources",
+      "filename": "resources/center-for-weird-studies.webp"
+    },
+    {
+      "id": "cfl-aio",
+      "name": "Cfl Aio",
+      "type": "groups",
+      "filename": "groups/cfl-aio.webp",
+      "power": 6,
+      "resistance": 5,
+      "alignment": [
+        "Liberal",
+        "Corporate"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "right",
+        "left"
+      ]
+    },
+    {
       "id": "chain-letter",
       "name": "Chain Letter",
       "type": "plots",
       "filename": "plots/chain-letter.webp"
+    },
+    {
+      "id": "charismatic-leader",
+      "name": "Charismatic Leader",
+      "type": "plots",
+      "filename": "plots/charismatic-leader.webp"
+    },
+    {
+      "id": "chicken-in-every-pot",
+      "name": "Chicken In Every Pot",
+      "type": "plots",
+      "filename": "plots/chicken-in-every-pot.webp"
+    },
+    {
+      "id": "china",
+      "name": "China",
+      "type": "groups",
+      "filename": "groups/china.webp",
+      "power": 4,
+      "resistance": 4,
+      "subtype": "Place",
+      "alignment": [
+        "Government"
+      ],
+      "attribute": [
+        "Huge",
+        "Communist",
+        "Coastal",
+        "Nation"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "left"
+      ]
+    },
+    {
+      "id": "church-of-elvis",
+      "name": "Church Of Elvis",
+      "type": "groups",
+      "filename": "groups/church-of-elvis.webp",
+      "power": 1,
+      "resistance": 3,
+      "alignment": [
+        "Peaceful",
+        "Weird"
+      ],
+      "attribute": [
+        "Church"
+      ],
+      "incomingArrow": "top"
     },
     {
       "id": "church-of-violentology",
@@ -2605,6 +826,138 @@
         "top",
         "left"
       ]
+    },
+    {
+      "id": "cia",
+      "name": "Cia",
+      "type": "groups",
+      "filename": "groups/cia.webp",
+      "power": 6,
+      "globalPower": 4,
+      "resistance": 5,
+      "alignment": [
+        "Violent",
+        "Government"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "bottom",
+        "left"
+      ]
+    },
+    {
+      "id": "citizenship-award",
+      "name": "Citizenship Award",
+      "type": "plots",
+      "filename": "plots/citizenship-award.webp"
+    },
+    {
+      "id": "clipper-chip",
+      "name": "Clipper Chip",
+      "type": "resources",
+      "filename": "resources/clipper-chip.webp"
+    },
+    {
+      "id": "clone",
+      "name": "Clone",
+      "type": "plots",
+      "filename": "plots/clone.webp"
+    },
+    {
+      "id": "clone-arrangers",
+      "name": "Clone Arrangers",
+      "type": "groups",
+      "filename": "groups/clone-arrangers.webp",
+      "power": 6,
+      "globalPower": 2,
+      "resistance": 6,
+      "alignment": [
+        "Violent",
+        "Criminal"
+      ],
+      "attribute": [
+        "Communist",
+        "Science",
+        "Secret"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom",
+        "left"
+      ]
+    },
+    {
+      "id": "combined-disasters",
+      "name": "Combined Disasters",
+      "type": "plots",
+      "filename": "plots/combined-disasters.webp"
+    },
+    {
+      "id": "comic-books",
+      "name": "Comic Books",
+      "type": "groups",
+      "filename": "groups/comic-books.webp",
+      "power": 1,
+      "globalPower": 1,
+      "resistance": 1,
+      "alignment": [
+        "Weird",
+        "Violent"
+      ],
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom"
+      ]
+    },
+    {
+      "id": "commitment",
+      "name": "Commitment",
+      "type": "plots",
+      "filename": "plots/commitment.webp"
+    },
+    {
+      "id": "computer-security",
+      "name": "Computer Security",
+      "type": "plots",
+      "filename": "plots/computer-security.webp"
+    },
+    {
+      "id": "computer-virus",
+      "name": "Computer Virus",
+      "type": "plots",
+      "filename": "plots/computer-virus.webp"
+    },
+    {
+      "id": "congressional-wives",
+      "name": "Congressional Wives",
+      "type": "groups",
+      "filename": "groups/congressional-wives.webp",
+      "power": 1,
+      "resistance": 4,
+      "alignment": [
+        "Straight",
+        "Conservative"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "conspiracy-theorists",
+      "name": "Conspiracy Theorists",
+      "type": "groups",
+      "filename": "groups/conspiracy-theorists.webp",
+      "power": 0,
+      "resistance": 6,
+      "alignment": [
+        "Weird"
+      ],
+      "incomingArrow": "top"
     },
     {
       "id": "contract-on-america",
@@ -2640,16 +993,125 @@
       ]
     },
     {
+      "id": "corruption",
+      "name": "Corruption",
+      "type": "plots",
+      "filename": "plots/corruption.webp"
+    },
+    {
+      "id": "count-dracula",
+      "name": "Count Dracula",
+      "type": "groups",
+      "filename": "groups/count-dracula.webp",
+      "power": 2,
+      "resistance": 7,
+      "subtype": "Personality",
+      "alignment": [
+        "Violent"
+      ],
+      "attribute": [
+        "Magic"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "counter-revolution",
+      "name": "Counter Revolution",
+      "type": "plots",
+      "filename": "plots/counter-revolution.webp"
+    },
+    {
+      "id": "counterspell",
+      "name": "Counterspell",
+      "type": "plots",
+      "filename": "plots/counterspell.webp"
+    },
+    {
+      "id": "cover-of-darkness",
+      "name": "Cover Of Darkness",
+      "type": "plots",
+      "filename": "plots/cover-of-darkness.webp"
+    },
+    {
+      "id": "coverup",
+      "name": "Coverup",
+      "type": "plots",
+      "filename": "plots/coverup.webp"
+    },
+    {
       "id": "crackdown-on-crime",
       "name": "Crackdown On Crime",
       "type": "plots",
       "filename": "plots/crackdown-on-crime.webp"
     },
     {
+      "id": "criminal-overlords",
+      "name": "Criminal Overlords",
+      "type": "plots",
+      "filename": "plots/criminal-overlords.webp"
+    },
+    {
+      "id": "crop-circles",
+      "name": "Crop Circles",
+      "type": "plots",
+      "filename": "plots/crop-circles.webp"
+    },
+    {
       "id": "crusade",
       "name": "Crusade",
       "type": "plots",
       "filename": "plots/crusade.webp"
+    },
+    {
+      "id": "crystal-skull",
+      "name": "Crystal Skull",
+      "type": "resources",
+      "filename": "resources/crystal-skull.webp"
+    },
+    {
+      "id": "currency-speculation",
+      "name": "Currency Speculation",
+      "type": "plots",
+      "filename": "plots/currency-speculation.webp"
+    },
+    {
+      "id": "cyborg-soldiers",
+      "name": "Cyborg Soldiers",
+      "type": "resources",
+      "filename": "resources/cyborg-soldiers.webp"
+    },
+    {
+      "id": "cycle-gangs",
+      "name": "Cycle Gangs",
+      "type": "groups",
+      "filename": "groups/cycle-gangs.webp",
+      "power": 1,
+      "resistance": 4,
+      "alignment": [
+        "Violent",
+        "Weird"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "dan-quayle",
+      "name": "Dan Quayle",
+      "type": "groups",
+      "filename": "groups/dan-quayle.webp",
+      "power": 1,
+      "resistance": 1,
+      "subtype": "Personality",
+      "alignment": [
+        "Straight",
+        "Conservative"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
     },
     {
       "id": "day-care-centers",
@@ -2661,16 +1123,106 @@
       "incomingArrow": "top"
     },
     {
+      "id": "deasil-engine",
+      "name": "Deasil Engine",
+      "type": "resources",
+      "filename": "resources/deasil-engine.webp"
+    },
+    {
+      "id": "death-mask",
+      "name": "Death Mask",
+      "type": "resources",
+      "filename": "resources/death-mask.webp"
+    },
+    {
       "id": "death-to-all-fanatics",
       "name": "Death To All Fanatics",
       "type": "plots",
       "filename": "plots/death-to-all-fanatics.webp"
     },
     {
+      "id": "deep-agent",
+      "name": "Deep Agent",
+      "type": "plots",
+      "filename": "plots/deep-agent.webp"
+    },
+    {
       "id": "defection",
       "name": "Defection",
       "type": "plots",
       "filename": "plots/defection.webp"
+    },
+    {
+      "id": "democrats",
+      "name": "Democrats",
+      "type": "groups",
+      "filename": "groups/democrats.webp",
+      "power": 6,
+      "globalPower": 5,
+      "resistance": 4,
+      "alignment": [
+        "Liberal"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "dentists",
+      "name": "Dentists",
+      "type": "groups",
+      "filename": "groups/dentists.webp",
+      "power": 1,
+      "resistance": 2,
+      "alignment": [
+        "Straight"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "deprogrammers",
+      "name": "Deprogrammers",
+      "type": "groups",
+      "filename": "groups/deprogrammers.webp",
+      "power": 1,
+      "resistance": 4,
+      "alignment": [
+        "Straight"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "dictatorship",
+      "name": "Dictatorship",
+      "type": "plots",
+      "filename": "plots/dictatorship.webp"
+    },
+    {
+      "id": "dinosaur-park",
+      "name": "Dinosaur Park",
+      "type": "groups",
+      "filename": "groups/dinosaur-park.webp",
+      "power": 1,
+      "resistance": 3,
+      "subtype": "Place",
+      "alignment": [
+        "Corporate"
+      ],
+      "attribute": [
+        "Science"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
+      "id": "discordian-society",
+      "name": "Discordian Society",
+      "type": "illuminati",
+      "filename": "illuminati/discordian-society.webp"
     },
     {
       "id": "dittoheads",
@@ -2685,10 +1237,22 @@
       "incomingArrow": "bottom"
     },
     {
+      "id": "dollars-for-decency",
+      "name": "Dollars For Decency",
+      "type": "plots",
+      "filename": "plots/dollars-for-decency.webp"
+    },
+    {
       "id": "dolphins",
       "name": "Dolphins",
       "type": "plots",
       "filename": "plots/dolphins.webp"
+    },
+    {
+      "id": "dont-forget-to-smash-the-state",
+      "name": "Dont Forget To Smash The State",
+      "type": "plots",
+      "filename": "plots/dont-forget-to-smash-the-state.webp"
     },
     {
       "id": "dont-rock-the-boat",
@@ -2701,6 +1265,12 @@
       "name": "Dont Touch That Dial",
       "type": "plots",
       "filename": "plots/dont-touch-that-dial.webp"
+    },
+    {
+      "id": "double-cross",
+      "name": "Double Cross",
+      "type": "plots",
+      "filename": "plots/double-cross.webp"
     },
     {
       "id": "drought",
@@ -2729,16 +1299,196 @@
       ]
     },
     {
+      "id": "druids",
+      "name": "Druids",
+      "type": "groups",
+      "filename": "groups/druids.webp",
+      "power": 2,
+      "globalPower": 1,
+      "resistance": 4,
+      "attribute": [
+        "Magic",
+        "Green"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
+    },
+    {
+      "id": "early-warning",
+      "name": "Early Warning",
+      "type": "plots",
+      "filename": "plots/early-warning.webp"
+    },
+    {
       "id": "earth-first",
       "name": "Earth First",
       "type": "plots",
       "filename": "plots/earth-first.webp"
     },
     {
+      "id": "earth-magic",
+      "name": "Earth Magic",
+      "type": "plots",
+      "filename": "plots/earth-magic.webp"
+    },
+    {
+      "id": "earthquake",
+      "name": "Earthquake",
+      "type": "plots",
+      "filename": "plots/earthquake.webp"
+    },
+    {
+      "id": "earthquake-projector",
+      "name": "Earthquake Projector",
+      "type": "resources",
+      "filename": "resources/earthquake-projector.webp"
+    },
+    {
+      "id": "eat-the-rich",
+      "name": "Eat The Rich",
+      "type": "plots",
+      "filename": "plots/eat-the-rich.webp"
+    },
+    {
+      "id": "eco-guerillas",
+      "name": "Eco Guerillas",
+      "type": "groups",
+      "filename": "groups/eco-guerillas.webp",
+      "power": 1,
+      "globalPower": 1,
+      "resistance": 6,
+      "alignment": [
+        "Violent",
+        "Liberal"
+      ],
+      "attribute": [
+        "Green"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "eff",
+      "name": "Eff",
+      "type": "groups",
+      "filename": "groups/eff.webp",
+      "power": 2,
+      "globalPower": 1,
+      "resistance": 3,
+      "alignment": [
+        "Liberal"
+      ],
+      "attribute": [
+        "Computer"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
+    },
+    {
+      "id": "elders-of-zion",
+      "name": "Elders Of Zion",
+      "type": "groups",
+      "filename": "groups/elders-of-zion.webp",
+      "power": 2,
+      "resistance": 7,
+      "alignment": [
+        "Fanatic"
+      ],
+      "attribute": [
+        "Secret"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "left"
+      ]
+    },
+    {
+      "id": "eliza",
+      "name": "Eliza",
+      "type": "resources",
+      "filename": "resources/eliza.webp"
+    },
+    {
+      "id": "elvis",
+      "name": "Elvis",
+      "type": "groups",
+      "filename": "groups/elvis.webp",
+      "power": 1,
+      "globalPower": 1,
+      "resistance": 4,
+      "subtype": "Personality",
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "embezzlement",
+      "name": "Embezzlement",
+      "type": "plots",
+      "filename": "plots/embezzlement.webp"
+    },
+    {
+      "id": "emergency-powers",
+      "name": "Emergency Powers",
+      "type": "plots",
+      "filename": "plots/emergency-powers.webp"
+    },
+    {
+      "id": "empty-vee",
+      "name": "Empty Vee",
+      "type": "groups",
+      "filename": "groups/empty-vee.webp",
+      "power": 3,
+      "globalPower": 2,
+      "resistance": 3,
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "right"
+      ]
+    },
+    {
       "id": "end-of-the-world",
       "name": "End Of The World",
       "type": "plots",
       "filename": "plots/end-of-the-world.webp"
+    },
+    {
+      "id": "energy-crisis",
+      "name": "Energy Crisis",
+      "type": "plots",
+      "filename": "plots/energy-crisis.webp"
+    },
+    {
+      "id": "england",
+      "name": "England",
+      "type": "groups",
+      "filename": "groups/england.webp",
+      "power": 2,
+      "globalPower": 2,
+      "resistance": 6,
+      "subtype": "Place",
+      "alignment": [
+        "Government"
+      ],
+      "attribute": [
+        "Huge",
+        "Coastal",
+        "Nation"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
     },
     {
       "id": "enough-is-enough",
@@ -2766,10 +1516,33 @@
       ]
     },
     {
+      "id": "epidemic",
+      "name": "Epidemic",
+      "type": "plots",
+      "filename": "plots/epidemic.webp"
+    },
+    {
       "id": "every-year-is-worse",
       "name": "Every Year Is Worse",
       "type": "plots",
       "filename": "plots/every-year-is-worse.webp"
+    },
+    {
+      "id": "evil-geniuses-for-a-better-tomorrow",
+      "name": "Evil Geniuses For A Better Tomorrow",
+      "type": "groups",
+      "filename": "groups/evil-geniuses-for-a-better-tomorrow.webp",
+      "power": 2,
+      "globalPower": 2,
+      "resistance": 6,
+      "alignment": [
+        "Violent",
+        "Weird"
+      ],
+      "attribute": [
+        "Science"
+      ],
+      "incomingArrow": "top"
     },
     {
       "id": "exorcism",
@@ -2778,10 +1551,100 @@
       "filename": "plots/exorcism.webp"
     },
     {
+      "id": "exposed",
+      "name": "Exposed",
+      "type": "plots",
+      "filename": "plots/exposed.webp"
+    },
+    {
+      "id": "faction-fight",
+      "name": "Faction Fight",
+      "type": "plots",
+      "filename": "plots/faction-fight.webp"
+    },
+    {
       "id": "family-values",
       "name": "Family Values",
       "type": "plots",
       "filename": "plots/family-values.webp"
+    },
+    {
+      "id": "fast-food-chains",
+      "name": "Fast Food Chains",
+      "type": "groups",
+      "filename": "groups/fast-food-chains.webp",
+      "power": 2,
+      "resistance": 4,
+      "alignment": [
+        "Straight",
+        "Corporate"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "fbi",
+      "name": "Fbi",
+      "type": "groups",
+      "filename": "groups/fbi.webp",
+      "power": 4,
+      "globalPower": 2,
+      "resistance": 6,
+      "alignment": [
+        "Straight",
+        "Government"
+      ],
+      "attribute": [
+        "Science"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "fear-and-loathing",
+      "name": "Fear And Loathing",
+      "type": "plots",
+      "filename": "plots/fear-and-loathing.webp"
+    },
+    {
+      "id": "federal-reserve",
+      "name": "Federal Reserve",
+      "type": "groups",
+      "filename": "groups/federal-reserve.webp",
+      "power": 5,
+      "globalPower": 3,
+      "resistance": 7,
+      "alignment": [
+        "Government"
+      ],
+      "attribute": [
+        "Bank"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom",
+        "left"
+      ]
+    },
+    {
+      "id": "feminists",
+      "name": "Feminists",
+      "type": "groups",
+      "filename": "groups/feminists.webp",
+      "power": 2,
+      "resistance": 2,
+      "alignment": [
+        "Liberal"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom"
+      ]
     },
     {
       "id": "fickle-finger-of-fate",
@@ -2790,10 +1653,89 @@
       "filename": "plots/fickle-finger-of-fate.webp"
     },
     {
+      "id": "fidel-castro",
+      "name": "Fidel Castro",
+      "type": "groups",
+      "filename": "groups/fidel-castro.webp",
+      "power": 1,
+      "resistance": 6,
+      "subtype": "Personality",
+      "alignment": [
+        "Liberal",
+        "Government"
+      ],
+      "attribute": [
+        "Communist"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom"
+      ]
+    },
+    {
+      "id": "fiendish-fluoridators",
+      "name": "Fiendish Fluoridators",
+      "type": "groups",
+      "filename": "groups/fiendish-fluoridators.webp",
+      "power": 3,
+      "resistance": 5,
+      "alignment": [
+        "Fanatic"
+      ],
+      "attribute": [
+        "Secret",
+        "Science",
+        "Communist"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "finland",
+      "name": "Finland",
+      "type": "groups",
+      "filename": "groups/finland.webp",
+      "power": 2,
+      "resistance": 5,
+      "subtype": "Place",
+      "alignment": [
+        "Liberal",
+        "Government"
+      ],
+      "attribute": [
+        "Computer",
+        "Coastal",
+        "Nation"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
       "id": "five-year-plan",
       "name": "Five Year Plan",
       "type": "plots",
       "filename": "plots/five-year-plan.webp"
+    },
+    {
+      "id": "flat-earthers",
+      "name": "Flat Earthers",
+      "type": "groups",
+      "filename": "groups/flat-earthers.webp",
+      "power": 1,
+      "resistance": 2,
+      "alignment": [
+        "Weird",
+        "Conservative"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
     },
     {
       "id": "flesh-eating-bacteria",
@@ -2808,10 +1750,154 @@
       "filename": "plots/floating-point-error.webp"
     },
     {
+      "id": "flower-power",
+      "name": "Flower Power",
+      "type": "plots",
+      "filename": "plots/flower-power.webp"
+    },
+    {
+      "id": "flying-saucer",
+      "name": "Flying Saucer",
+      "type": "resources",
+      "filename": "resources/flying-saucer.webp"
+    },
+    {
+      "id": "fnord",
+      "name": "Fnord",
+      "type": "plots",
+      "filename": "plots/fnord.webp"
+    },
+    {
+      "id": "fnord-motor-company",
+      "name": "Fnord Motor Company",
+      "type": "groups",
+      "filename": "groups/fnord-motor-company.webp",
+      "power": 2,
+      "resistance": 4,
+      "alignment": [
+        "Peaceful",
+        "Corporate"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
+      "id": "foiled",
+      "name": "Foiled",
+      "type": "plots",
+      "filename": "plots/foiled.webp"
+    },
+    {
+      "id": "forgery",
+      "name": "Forgery",
+      "type": "plots",
+      "filename": "plots/forgery.webp"
+    },
+    {
+      "id": "france",
+      "name": "France",
+      "type": "groups",
+      "filename": "groups/france.webp",
+      "power": 3,
+      "resistance": 5,
+      "subtype": "Place",
+      "alignment": [
+        "Liberal",
+        "Government"
+      ],
+      "attribute": [
+        "Huge",
+        "Coastal",
+        "Nation"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
+    },
+    {
       "id": "frankenfood",
       "name": "Frankenfood",
       "type": "plots",
       "filename": "plots/frankenfood.webp"
+    },
+    {
+      "id": "fraternal-orders",
+      "name": "Fraternal Orders",
+      "type": "groups",
+      "filename": "groups/fraternal-orders.webp",
+      "power": 3,
+      "resistance": 5,
+      "alignment": [
+        "Conservative"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
+    },
+    {
+      "id": "fratricide",
+      "name": "Fratricide",
+      "type": "plots",
+      "filename": "plots/fratricide.webp"
+    },
+    {
+      "id": "freaking-the-mundanes",
+      "name": "Freaking The Mundanes",
+      "type": "plots",
+      "filename": "plots/freaking-the-mundanes.webp"
+    },
+    {
+      "id": "fred-birch-society",
+      "name": "Fred Birch Society",
+      "type": "groups",
+      "filename": "groups/fred-birch-society.webp",
+      "power": 1,
+      "resistance": 4,
+      "alignment": [
+        "Conservative",
+        "Straight"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
+    },
+    {
+      "id": "full-moon",
+      "name": "Full Moon",
+      "type": "plots",
+      "filename": "plots/full-moon.webp"
+    },
+    {
+      "id": "fundie-money",
+      "name": "Fundie Money",
+      "type": "plots",
+      "filename": "plots/fundie-money.webp"
+    },
+    {
+      "id": "gang-war",
+      "name": "Gang War",
+      "type": "plots",
+      "filename": "plots/gang-war.webp"
+    },
+    {
+      "id": "gay-activists",
+      "name": "Gay Activists",
+      "type": "groups",
+      "filename": "groups/gay-activists.webp",
+      "power": 2,
+      "resistance": 3,
+      "alignment": [
+        "Weird"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
     },
     {
       "id": "general-disorder",
@@ -2834,10 +1920,88 @@
       ]
     },
     {
+      "id": "george-bush",
+      "name": "George Bush",
+      "type": "groups",
+      "filename": "groups/george-bush.webp",
+      "power": 2,
+      "resistance": 3,
+      "subtype": "Personality",
+      "alignment": [
+        "Straight",
+        "Conservative"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "george-the-janitor",
+      "name": "George The Janitor",
+      "type": "plots",
+      "filename": "plots/george-the-janitor.webp"
+    },
+    {
+      "id": "germany",
+      "name": "Germany",
+      "type": "groups",
+      "filename": "groups/germany.webp",
+      "power": 4,
+      "resistance": 3,
+      "subtype": "Place",
+      "alignment": [
+        "Conservative",
+        "Government"
+      ],
+      "attribute": [
+        "Huge",
+        "Coastal",
+        "Nation"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "giant-kudzu",
+      "name": "Giant Kudzu",
+      "type": "plots",
+      "filename": "plots/giant-kudzu.webp"
+    },
+    {
+      "id": "girlie-magazines",
+      "name": "Girlie Magazines",
+      "type": "groups",
+      "filename": "groups/girlie-magazines.webp",
+      "power": 2,
+      "globalPower": 1,
+      "resistance": 2,
+      "alignment": [
+        "Liberal"
+      ],
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom"
+      ]
+    },
+    {
       "id": "global-warning",
       "name": "Global Warning",
       "type": "plots",
       "filename": "plots/global-warning.webp"
+    },
+    {
+      "id": "gnomes-of-zurich",
+      "name": "Gnomes Of Zurich",
+      "type": "illuminati",
+      "filename": "illuminati/gnomes-of-zurich.webp"
     },
     {
       "id": "go-fish",
@@ -2852,16 +2016,254 @@
       "filename": "plots/go-lemmings-go.webp"
     },
     {
+      "id": "gold-fushion",
+      "name": "Gold Fushion",
+      "type": "plots",
+      "filename": "plots/gold-fushion.webp"
+    },
+    {
+      "id": "goldfish-fanciers",
+      "name": "Goldfish Fanciers",
+      "type": "groups",
+      "filename": "groups/goldfish-fanciers.webp",
+      "power": 1,
+      "resistance": 4,
+      "alignment": [
+        "Peaceful",
+        "Fanatic"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "good-polls",
+      "name": "Good Polls",
+      "type": "plots",
+      "filename": "plots/good-polls.webp"
+    },
+    {
+      "id": "gordo-remora",
+      "name": "Gordo Remora",
+      "type": "groups",
+      "filename": "groups/gordo-remora.webp",
+      "power": 1,
+      "resistance": 0,
+      "subtype": "Personality",
+      "alignment": [
+        "Liberal"
+      ],
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "grassroots-support",
+      "name": "Grassroots Support",
+      "type": "plots",
+      "filename": "plots/grassroots-support.webp"
+    },
+    {
       "id": "grave-robbers",
       "name": "Grave Robbers",
       "type": "plots",
       "filename": "plots/grave-robbers.webp"
     },
     {
+      "id": "gremlins",
+      "name": "Gremlins",
+      "type": "plots",
+      "filename": "plots/gremlins.webp"
+    },
+    {
+      "id": "gun-control",
+      "name": "Gun Control",
+      "type": "plots",
+      "filename": "plots/gun-control.webp"
+    },
+    {
+      "id": "gun-lobby",
+      "name": "Gun Lobby",
+      "type": "groups",
+      "filename": "groups/gun-lobby.webp",
+      "power": 1,
+      "resistance": 3,
+      "alignment": [
+        "Violent",
+        "Conservative"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
+    },
+    {
+      "id": "hackers",
+      "name": "Hackers",
+      "type": "groups",
+      "filename": "groups/hackers.webp",
+      "power": 3,
+      "globalPower": 2,
+      "resistance": 4,
+      "alignment": [
+        "Weird",
+        "Fanatic"
+      ],
+      "attribute": [
+        "Computer"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
+      "id": "hail-eris",
+      "name": "Hail Eris",
+      "type": "plots",
+      "filename": "plots/hail-eris.webp"
+    },
+    {
+      "id": "hallucinations",
+      "name": "Hallucinations",
+      "type": "plots",
+      "filename": "plots/hallucinations.webp"
+    },
+    {
+      "id": "hammer-of-thor",
+      "name": "Hammer Of Thor",
+      "type": "resources",
+      "filename": "resources/hammer-of-thor.webp"
+    },
+    {
+      "id": "harmonica-virgins",
+      "name": "Harmonica Virgins",
+      "type": "plots",
+      "filename": "plots/harmonica-virgins.webp"
+    },
+    {
+      "id": "hat-trick",
+      "name": "Hat Trick",
+      "type": "plots",
+      "filename": "plots/hat-trick.webp"
+    },
+    {
+      "id": "hawaii",
+      "name": "Hawaii",
+      "type": "groups",
+      "filename": "groups/hawaii.webp",
+      "power": 1,
+      "resistance": 2,
+      "subtype": "Place",
+      "alignment": [
+        "Corporate"
+      ],
+      "attribute": [
+        "Coastal"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom"
+      ]
+    },
+    {
+      "id": "head-in-a-jar",
+      "name": "Head In A Jar",
+      "type": "plots",
+      "filename": "plots/head-in-a-jar.webp"
+    },
+    {
+      "id": "hex",
+      "name": "Hex",
+      "type": "plots",
+      "filename": "plots/hex.webp"
+    },
+    {
+      "id": "hidden-city",
+      "name": "Hidden City",
+      "type": "resources",
+      "filename": "resources/hidden-city.webp"
+    },
+    {
+      "id": "hidden-influence",
+      "name": "Hidden Influence",
+      "type": "plots",
+      "filename": "plots/hidden-influence.webp"
+    },
+    {
+      "id": "hillary-clinton",
+      "name": "Hillary Clinton",
+      "type": "groups",
+      "filename": "groups/hillary-clinton.webp",
+      "power": 2,
+      "resistance": 4,
+      "subtype": "Personality",
+      "alignment": [
+        "Liberal"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "hit-and-run",
+      "name": "Hit And Run",
+      "type": "plots",
+      "filename": "plots/hit-and-run.webp"
+    },
+    {
+      "id": "hitler-s-brain",
+      "name": "Hitler'S Brain",
+      "type": "resources",
+      "filename": "resources/hitler's-brain.webp"
+    },
+    {
+      "id": "hoax",
+      "name": "Hoax",
+      "type": "plots",
+      "filename": "plots/hoax.webp"
+    },
+    {
+      "id": "hollywood",
+      "name": "Hollywood",
+      "type": "groups",
+      "filename": "groups/hollywood.webp",
+      "power": 3,
+      "globalPower": 3,
+      "resistance": 0,
+      "subtype": "Place",
+      "alignment": [
+        "Liberal"
+      ],
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "left"
+      ]
+    },
+    {
       "id": "hubble-trouble",
       "name": "Hubble Trouble",
       "type": "plots",
       "filename": "plots/hubble-trouble.webp"
+    },
+    {
+      "id": "hurricane",
+      "name": "Hurricane",
+      "type": "plots",
+      "filename": "plots/hurricane.webp"
+    },
+    {
+      "id": "i-lied",
+      "name": "I Lied",
+      "type": "plots",
+      "filename": "plots/i-lied.webp"
     },
     {
       "id": "illuminati-university",
@@ -2884,10 +2286,253 @@
       ]
     },
     {
+      "id": "imelda-marcos",
+      "name": "Imelda Marcos",
+      "type": "groups",
+      "filename": "groups/imelda-marcos.webp",
+      "power": 1,
+      "resistance": 1,
+      "subtype": "Personality",
+      "alignment": [
+        "Criminal"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
+      "id": "immortality-serum",
+      "name": "Immortality Serum",
+      "type": "resources",
+      "filename": "resources/immortality-serum.webp"
+    },
+    {
+      "id": "imposter",
+      "name": "Imposter",
+      "type": "plots",
+      "filename": "plots/imposter.webp"
+    },
+    {
+      "id": "infobahn",
+      "name": "Infobahn",
+      "type": "plots",
+      "filename": "plots/infobahn.webp"
+    },
+    {
+      "id": "intellectuals",
+      "name": "Intellectuals",
+      "type": "groups",
+      "filename": "groups/intellectuals.webp",
+      "power": 1,
+      "resistance": 3,
+      "alignment": [
+        "Weird",
+        "Fanatic"
+      ],
+      "incomingArrow": "top"
+    },
+    {
       "id": "interesting-times",
       "name": "Interesting Times",
       "type": "plots",
       "filename": "plots/interesting-times.webp"
+    },
+    {
+      "id": "interference",
+      "name": "Interference",
+      "type": "plots",
+      "filename": "plots/interference.webp"
+    },
+    {
+      "id": "international-cocaine-smugglers",
+      "name": "International Cocaine Smugglers",
+      "type": "groups",
+      "filename": "groups/international-cocaine-smugglers.webp",
+      "power": 3,
+      "resistance": 5,
+      "alignment": [
+        "Violent",
+        "Criminal"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "international-communist-conspiracy",
+      "name": "International Communist Conspiracy",
+      "type": "groups",
+      "filename": "groups/international-communist-conspiracy.webp",
+      "power": 3,
+      "resistance": 3,
+      "alignment": [
+        "Fanatic"
+      ],
+      "attribute": [
+        "Communist"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "bottom",
+        "left"
+      ]
+    },
+    {
+      "id": "international-weather-organisation",
+      "name": "International Weather Organisation",
+      "type": "groups",
+      "filename": "groups/international-weather-organisation.webp",
+      "power": 1,
+      "resistance": 2,
+      "alignment": [
+        "Straight",
+        "Liberal"
+      ],
+      "attribute": [
+        "Computer",
+        "Science"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "bottom",
+        "left"
+      ]
+    },
+    {
+      "id": "irs",
+      "name": "Irs",
+      "type": "groups",
+      "filename": "groups/irs.webp",
+      "power": 5,
+      "globalPower": 3,
+      "resistance": 5,
+      "alignment": [
+        "Criminal",
+        "Government"
+      ],
+      "attribute": [
+        "Bank"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "israel",
+      "name": "Israel",
+      "type": "groups",
+      "filename": "groups/israel.webp",
+      "power": 3,
+      "globalPower": 3,
+      "resistance": 8,
+      "subtype": "Place",
+      "alignment": [
+        "Violent",
+        "Government"
+      ],
+      "attribute": [
+        "Coastal",
+        "Nation"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "italy",
+      "name": "Italy",
+      "type": "groups",
+      "filename": "groups/italy.webp",
+      "power": 3,
+      "resistance": 6,
+      "subtype": "Place",
+      "alignment": [
+        "Liberal",
+        "Government"
+      ],
+      "attribute": [
+        "Coastal",
+        "Nation"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "jake-day",
+      "name": "Jake Day",
+      "type": "plots",
+      "filename": "plots/jake-day.webp"
+    },
+    {
+      "id": "japan",
+      "name": "Japan",
+      "type": "groups",
+      "filename": "groups/japan.webp",
+      "power": 6,
+      "globalPower": 4,
+      "resistance": 8,
+      "subtype": "Place",
+      "alignment": [
+        "Peaceful",
+        "Government"
+      ],
+      "attribute": [
+        "Computer",
+        "Coastal",
+        "Nation"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "bottom",
+        "left"
+      ]
+    },
+    {
+      "id": "jihad",
+      "name": "Jihad",
+      "type": "plots",
+      "filename": "plots/jihad.webp"
+    },
+    {
+      "id": "jimmy-hoffa",
+      "name": "Jimmy Hoffa",
+      "type": "groups",
+      "filename": "groups/jimmy-hoffa.webp",
+      "power": 2,
+      "resistance": 3,
+      "subtype": "Personality",
+      "alignment": [
+        "Criminal"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
+      "id": "joggers",
+      "name": "Joggers",
+      "type": "groups",
+      "filename": "groups/joggers.webp",
+      "power": 1,
+      "resistance": 2,
+      "attribute": [
+        "Green"
+      ],
+      "incomingArrow": "top"
     },
     {
       "id": "junk-bonds",
@@ -2896,10 +2541,89 @@
       "filename": "plots/junk-bonds.webp"
     },
     {
+      "id": "junk-mail",
+      "name": "Junk Mail",
+      "type": "groups",
+      "filename": "groups/junk-mail.webp",
+      "power": 1,
+      "globalPower": 1,
+      "resistance": 3,
+      "alignment": [
+        "Corporate",
+        "Criminal"
+      ],
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "just-say-no",
+      "name": "Just Say No",
+      "type": "plots",
+      "filename": "plots/just-say-no.webp"
+    },
+    {
+      "id": "ketchup-is-a-vegetable",
+      "name": "Ketchup Is A Vegetable",
+      "type": "plots",
+      "filename": "plots/ketchup-is-a-vegetable.webp"
+    },
+    {
+      "id": "kill-for-peace",
+      "name": "Kill For Peace",
+      "type": "plots",
+      "filename": "plots/kill-for-peace.webp"
+    },
+    {
       "id": "killer-satellite",
       "name": "Killer Satellite",
       "type": "resources",
       "filename": "resources/killer-satellite.webp"
+    },
+    {
+      "id": "kinder-and-gentler",
+      "name": "Kinder And Gentler",
+      "type": "plots",
+      "filename": "plots/kinder-and-gentler.webp"
+    },
+    {
+      "id": "kkk",
+      "name": "Kkk",
+      "type": "groups",
+      "filename": "groups/kkk.webp",
+      "power": 2,
+      "resistance": 5,
+      "alignment": [
+        "Violent",
+        "Conservative"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom"
+      ]
+    },
+    {
+      "id": "l-4-society",
+      "name": "L 4 Society",
+      "type": "groups",
+      "filename": "groups/l-4-society.webp",
+      "power": 1,
+      "resistance": 2,
+      "alignment": [
+        "Weird"
+      ],
+      "attribute": [
+        "Space",
+        "Science"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
     },
     {
       "id": "lab-explosion",
@@ -2929,6 +2653,44 @@
       ]
     },
     {
+      "id": "las-vegas",
+      "name": "Las Vegas",
+      "type": "groups",
+      "filename": "groups/las-vegas.webp",
+      "power": 2,
+      "resistance": 1,
+      "alignment": [
+        "Corporate"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
+      "id": "law-and-order",
+      "name": "Law And Order",
+      "type": "plots",
+      "filename": "plots/law-and-order.webp"
+    },
+    {
+      "id": "lawyers",
+      "name": "Lawyers",
+      "type": "groups",
+      "filename": "groups/lawyers.webp",
+      "power": 4,
+      "globalPower": 3,
+      "resistance": 1,
+      "alignment": [
+        "Criminal"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "bottom"
+      ]
+    },
+    {
       "id": "lenins-body",
       "name": "Lenins Body",
       "type": "resources",
@@ -2939,6 +2701,111 @@
       "name": "Let The Sunshine In",
       "type": "plots",
       "filename": "plots/let-the-sunshine-in.webp"
+    },
+    {
+      "id": "let-them-eat-cake",
+      "name": "Let Them Eat Cake",
+      "type": "plots",
+      "filename": "plots/let-them-eat-cake.webp"
+    },
+    {
+      "id": "lets-get-organized",
+      "name": "Lets Get Organized",
+      "type": "plots",
+      "filename": "plots/lets-get-organized.webp"
+    },
+    {
+      "id": "lets-get-really-organized",
+      "name": "Lets Get Really Organized",
+      "type": "plots",
+      "filename": "plots/lets-get-really-organized.webp"
+    },
+    {
+      "id": "lets-you-and-him-fight",
+      "name": "Lets You And Him Fight",
+      "type": "plots",
+      "filename": "plots/lets-you-and-him-fight.webp"
+    },
+    {
+      "id": "liberal-agenda",
+      "name": "Liberal Agenda",
+      "type": "plots",
+      "filename": "plots/liberal-agenda.webp"
+    },
+    {
+      "id": "libertarians",
+      "name": "Libertarians",
+      "type": "groups",
+      "filename": "groups/libertarians.webp",
+      "power": 1,
+      "globalPower": 1,
+      "resistance": 4,
+      "alignment": [
+        "Fanatic"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
+      "id": "liquor-companies",
+      "name": "Liquor Companies",
+      "type": "groups",
+      "filename": "groups/liquor-companies.webp",
+      "power": 3,
+      "resistance": 1,
+      "alignment": [
+        "Corporate"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom",
+        "left"
+      ]
+    },
+    {
+      "id": "loan-sharks",
+      "name": "Loan Sharks",
+      "type": "groups",
+      "filename": "groups/loan-sharks.webp",
+      "power": 3,
+      "resistance": 5,
+      "alignment": [
+        "Violent",
+        "Criminal"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "local-police-departments",
+      "name": "Local Police Departments",
+      "type": "groups",
+      "filename": "groups/local-police-departments.webp",
+      "power": 1,
+      "resistance": 4,
+      "alignment": [
+        "Straight",
+        "Violent",
+        "Conservative"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "loch-ness-monster",
+      "name": "Loch Ness Monster",
+      "type": "resources",
+      "filename": "resources/loch-ness-monster.webp"
+    },
+    {
+      "id": "logic-bomb",
+      "name": "Logic Bomb",
+      "type": "plots",
+      "filename": "plots/logic-bomb.webp"
     },
     {
       "id": "lyndon-larouche",
@@ -2960,16 +2827,171 @@
       ]
     },
     {
+      "id": "madison-avenue",
+      "name": "Madison Avenue",
+      "type": "groups",
+      "filename": "groups/madison-avenue.webp",
+      "power": 3,
+      "globalPower": 3,
+      "resistance": 3,
+      "alignment": [
+        "Corporate"
+      ],
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "left"
+      ]
+    },
+    {
+      "id": "manuel-noreiga",
+      "name": "Manuel Noreiga",
+      "type": "groups",
+      "filename": "groups/manuel-noreiga.webp",
+      "power": 1,
+      "resistance": 2,
+      "subtype": "Personality",
+      "alignment": [
+        "Violent",
+        "Criminal",
+        "Government"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "march-on-washington",
+      "name": "March On Washington",
+      "type": "plots",
+      "filename": "plots/march-on-washington.webp"
+    },
+    {
+      "id": "margerate-thatcher",
+      "name": "Margerate Thatcher",
+      "type": "groups",
+      "filename": "groups/margerate-thatcher.webp",
+      "power": 1,
+      "resistance": 6,
+      "subtype": "Personality",
+      "alignment": [
+        "Straight",
+        "Conservative",
+        "Government"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "market-illumination",
+      "name": "Market Illumination",
+      "type": "plots",
+      "filename": "plots/market-illumination.webp"
+    },
+    {
+      "id": "martial-law",
+      "name": "Martial Law",
+      "type": "plots",
+      "filename": "plots/martial-law.webp"
+    },
+    {
+      "id": "martyrs",
+      "name": "Martyrs",
+      "type": "plots",
+      "filename": "plots/martyrs.webp"
+    },
+    {
+      "id": "mass-murder",
+      "name": "Mass Murder",
+      "type": "plots",
+      "filename": "plots/mass-murder.webp"
+    },
+    {
       "id": "may-day",
       "name": "May Day",
       "type": "plots",
       "filename": "plots/may-day.webp"
     },
     {
+      "id": "media-blitz",
+      "name": "Media Blitz",
+      "type": "plots",
+      "filename": "plots/media-blitz.webp"
+    },
+    {
+      "id": "media-connections",
+      "name": "Media Connections",
+      "type": "plots",
+      "filename": "plots/media-connections.webp"
+    },
+    {
+      "id": "media-sensation",
+      "name": "Media Sensation",
+      "type": "groups",
+      "filename": "groups/media-sensation.webp",
+      "power": 1,
+      "resistance": 1,
+      "subtype": "Personality",
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "mercenaries",
+      "name": "Mercenaries",
+      "type": "resources",
+      "filename": "resources/mercenaries.webp"
+    },
+    {
+      "id": "messiah",
+      "name": "Messiah",
+      "type": "plots",
+      "filename": "plots/messiah.webp"
+    },
+    {
+      "id": "meteor-strike",
+      "name": "Meteor Strike",
+      "type": "plots",
+      "filename": "plots/meteor-strike.webp"
+    },
+    {
       "id": "metric-system",
       "name": "Metric System",
       "type": "plots",
       "filename": "plots/metric-system.webp"
+    },
+    {
+      "id": "mi-5",
+      "name": "Mi 5",
+      "type": "groups",
+      "filename": "groups/mi-5.webp",
+      "power": 2,
+      "globalPower": 1,
+      "resistance": 5,
+      "alignment": [
+        "Straight",
+        "Government"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
+    },
+    {
+      "id": "midas-mill",
+      "name": "Midas Mill",
+      "type": "resources",
+      "filename": "resources/midas-mill.webp"
+    },
+    {
+      "id": "military-industrial-complex",
+      "name": "Military Industrial Complex",
+      "type": "plots",
+      "filename": "plots/military-industrial-complex.webp"
     },
     {
       "id": "militia",
@@ -2989,10 +3011,198 @@
       ]
     },
     {
+      "id": "miracle-diet-plan",
+      "name": "Miracle Diet Plan",
+      "type": "plots",
+      "filename": "plots/miracle-diet-plan.webp"
+    },
+    {
+      "id": "mistaken-identity",
+      "name": "Mistaken Identity",
+      "type": "plots",
+      "filename": "plots/mistaken-identity.webp"
+    },
+    {
+      "id": "mob-influence",
+      "name": "Mob Influence",
+      "type": "plots",
+      "filename": "plots/mob-influence.webp"
+    },
+    {
+      "id": "monopoly",
+      "name": "Monopoly",
+      "type": "plots",
+      "filename": "plots/monopoly.webp"
+    },
+    {
+      "id": "moonbase",
+      "name": "Moonbase",
+      "type": "groups",
+      "filename": "groups/moonbase.webp",
+      "power": 3,
+      "resistance": 6,
+      "subtype": "Place",
+      "attribute": [
+        "Space",
+        "Science",
+        "Computer"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
+      "id": "moonies",
+      "name": "Moonies",
+      "type": "groups",
+      "filename": "groups/moonies.webp",
+      "power": 2,
+      "globalPower": 2,
+      "resistance": 4,
+      "alignment": [
+        "Peaceful",
+        "Fanatic"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
+    },
+    {
+      "id": "moral-minority",
+      "name": "Moral Minority",
+      "type": "groups",
+      "filename": "groups/moral-minority.webp",
+      "power": 2,
+      "resistance": 1,
+      "alignment": [
+        "Conservative",
+        "Straight",
+        "Fanatic"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "mossad",
+      "name": "Mossad",
+      "type": "groups",
+      "filename": "groups/mossad.webp",
+      "power": 2,
+      "globalPower": 1,
+      "resistance": 7,
+      "alignment": [
+        "Violent",
+        "Government"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom"
+      ]
+    },
+    {
+      "id": "mothers-march",
+      "name": "Mothers March",
+      "type": "plots",
+      "filename": "plots/mothers-march.webp"
+    },
+    {
+      "id": "multinational-oil-companies",
+      "name": "Multinational Oil Companies",
+      "type": "groups",
+      "filename": "groups/multinational-oil-companies.webp",
+      "power": 6,
+      "globalPower": 4,
+      "resistance": 4,
+      "alignment": [
+        "Corporate"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "murphy-s-law",
+      "name": "Murphy'S Law",
+      "type": "plots",
+      "filename": "plots/murphy's-law.webp"
+    },
+    {
+      "id": "mutual-betrayal",
+      "name": "Mutual Betrayal",
+      "type": "plots",
+      "filename": "plots/mutual-betrayal.webp"
+    },
+    {
       "id": "my-karma-ran-over-your-dogma",
       "name": "My Karma Ran Over Your Dogma",
       "type": "plots",
       "filename": "plots/my-karma-ran-over-your-dogma.webp"
+    },
+    {
+      "id": "nancy-reagan",
+      "name": "Nancy Reagan",
+      "type": "groups",
+      "filename": "groups/nancy-reagan.webp",
+      "power": 2,
+      "resistance": 6,
+      "alignment": [
+        "Straight",
+        "Conservative"
+      ],
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "nasa",
+      "name": "Nasa",
+      "type": "groups",
+      "filename": "groups/nasa.webp",
+      "power": 2,
+      "resistance": 4,
+      "alignment": [
+        "Government"
+      ],
+      "attribute": [
+        "Space"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "nationalization",
+      "name": "Nationalization",
+      "type": "plots",
+      "filename": "plots/nationalization.webp"
+    },
+    {
+      "id": "nato",
+      "name": "Nato",
+      "type": "groups",
+      "filename": "groups/nato.webp",
+      "power": 3,
+      "globalPower": 2,
+      "resistance": 3,
+      "alignment": [
+        "Violent"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
     },
     {
       "id": "near-miss",
@@ -3001,10 +3211,70 @@
       "filename": "plots/near-miss.webp"
     },
     {
+      "id": "necronomicon",
+      "name": "Necronomicon",
+      "type": "resources",
+      "filename": "resources/necronomicon.webp"
+    },
+    {
+      "id": "nephews-of-god",
+      "name": "Nephews Of God",
+      "type": "groups",
+      "filename": "groups/nephews-of-god.webp",
+      "power": 1,
+      "resistance": 4,
+      "alignment": [
+        "Conservative",
+        "Fanatic"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "never-surrender",
+      "name": "Never Surrender",
+      "type": "plots",
+      "filename": "plots/never-surrender.webp"
+    },
+    {
       "id": "nevermore",
       "name": "Nevermore",
       "type": "plots",
       "filename": "plots/nevermore.webp"
+    },
+    {
+      "id": "new-blood",
+      "name": "New Blood",
+      "type": "plots",
+      "filename": "plots/new-blood.webp"
+    },
+    {
+      "id": "new-federal-budgets",
+      "name": "New Federal Budgets",
+      "type": "plots",
+      "filename": "plots/new-federal-budgets.webp"
+    },
+    {
+      "id": "new-york",
+      "name": "New York",
+      "type": "groups",
+      "filename": "groups/new-york.webp",
+      "power": 7,
+      "resistance": 8,
+      "subtype": "Place",
+      "alignment": [
+        "Violent",
+        "Criminal",
+        "Government"
+      ],
+      "attribute": [
+        "Coastal"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "right",
+        "left"
+      ]
     },
     {
       "id": "newt-gingrich",
@@ -3029,10 +3299,88 @@
       ]
     },
     {
+      "id": "nice-idea-its-mine-now",
+      "name": "Nice Idea Its Mine Now",
+      "type": "plots",
+      "filename": "plots/nice-idea-its-mine-now.webp"
+    },
+    {
+      "id": "ninjas",
+      "name": "Ninjas",
+      "type": "groups",
+      "filename": "groups/ninjas.webp",
+      "power": 1,
+      "resistance": 7,
+      "alignment": [
+        "Violent"
+      ],
+      "attribute": [
+        "Magic"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
+    },
+    {
       "id": "no-beer",
       "name": "No Beer",
       "type": "plots",
       "filename": "plots/no-beer.webp"
+    },
+    {
+      "id": "nobel-peace-prize",
+      "name": "Nobel Peace Prize",
+      "type": "plots",
+      "filename": "plots/nobel-peace-prize.webp"
+    },
+    {
+      "id": "nsa",
+      "name": "Nsa",
+      "type": "groups",
+      "filename": "groups/nsa.webp",
+      "power": 5,
+      "globalPower": 2,
+      "resistance": 4,
+      "alignment": [
+        "Government"
+      ],
+      "attribute": [
+        "Secret",
+        "Computer"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "nuclear-accident",
+      "name": "Nuclear Accident",
+      "type": "plots",
+      "filename": "plots/nuclear-accident.webp"
+    },
+    {
+      "id": "nuclear-power-companies",
+      "name": "Nuclear Power Companies",
+      "type": "groups",
+      "filename": "groups/nuclear-power-companies.webp",
+      "power": 4,
+      "resistance": 4,
+      "alignment": [
+        "Conservative",
+        "Corporate"
+      ],
+      "attribute": [
+        "Science"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
     },
     {
       "id": "nutrition-nazis",
@@ -3053,10 +3401,94 @@
       ]
     },
     {
+      "id": "offshore-banks",
+      "name": "Offshore Banks",
+      "type": "groups",
+      "filename": "groups/offshore-banks.webp",
+      "power": 2,
+      "globalPower": 2,
+      "resistance": 2,
+      "alignment": [
+        "Criminal"
+      ],
+      "attribute": [
+        "Bank"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
+    },
+    {
       "id": "oil-spill",
       "name": "Oil Spill",
       "type": "plots",
       "filename": "plots/oil-spill.webp"
+    },
+    {
+      "id": "ollie-north",
+      "name": "Ollie North",
+      "type": "groups",
+      "filename": "groups/ollie-north.webp",
+      "power": 1,
+      "resistance": 2,
+      "subtype": "Personality",
+      "alignment": [
+        "Conservative",
+        "Criminal"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
+      "id": "opec",
+      "name": "Opec",
+      "type": "groups",
+      "filename": "groups/opec.webp",
+      "power": "*",
+      "resistance": 4,
+      "alignment": [
+        "Conservative"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "bottom"
+      ]
+    },
+    {
+      "id": "opportunity-knocks",
+      "name": "Opportunity Knocks",
+      "type": "plots",
+      "filename": "plots/opportunity-knocks.webp"
+    },
+    {
+      "id": "orbit-one",
+      "name": "Orbit One",
+      "type": "groups",
+      "filename": "groups/orbit-one.webp",
+      "power": 2,
+      "resistance": 5,
+      "subtype": "Place",
+      "attribute": [
+        "Space",
+        "Science",
+        "Computer"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "orbital-mind-control-lasers",
+      "name": "Orbital Mind Control Lasers",
+      "type": "resources",
+      "filename": "resources/orbital-mind-control-lasers.webp"
     },
     {
       "id": "orgone-grinder",
@@ -3078,6 +3510,15 @@
       "incomingArrow": "top"
     },
     {
+      "id": "paranoids",
+      "name": "Paranoids",
+      "type": "groups",
+      "filename": "groups/paranoids.webp",
+      "power": 0,
+      "resistance": 6,
+      "incomingArrow": "top"
+    },
+    {
       "id": "partition",
       "name": "Partition",
       "type": "plots",
@@ -3090,10 +3531,127 @@
       "filename": "plots/pave-the-earth.webp"
     },
     {
+      "id": "payoff",
+      "name": "Payoff",
+      "type": "plots",
+      "filename": "plots/payoff.webp"
+    },
+    {
+      "id": "peace-in-our-time",
+      "name": "Peace In Our Time",
+      "type": "plots",
+      "filename": "plots/peace-in-our-time.webp"
+    },
+    {
+      "id": "pentagon",
+      "name": "Pentagon",
+      "type": "groups",
+      "filename": "groups/pentagon.webp",
+      "power": 6,
+      "resistance": 6,
+      "subtype": "Place",
+      "alignment": [
+        "Straight",
+        "Violent",
+        "Government"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "bottom",
+        "left"
+      ]
+    },
+    {
+      "id": "perpetual-motion-machine",
+      "name": "Perpetual Motion Machine",
+      "type": "resources",
+      "filename": "resources/perpetual-motion-machine.webp"
+    },
+    {
+      "id": "phone-company",
+      "name": "Phone Company",
+      "type": "groups",
+      "filename": "groups/phone-company.webp",
+      "power": 5,
+      "globalPower": 3,
+      "resistance": 6,
+      "alignment": [
+        "Corporate"
+      ],
+      "attribute": [
+        "Science",
+        "Computer"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom",
+        "left"
+      ]
+    },
+    {
+      "id": "phone-phreaks",
+      "name": "Phone Phreaks",
+      "type": "groups",
+      "filename": "groups/phone-phreaks.webp",
+      "power": 1,
+      "globalPower": 1,
+      "resistance": 1,
+      "alignment": [
+        "Liberal",
+        "Criminal"
+      ],
+      "attribute": [
+        "Science",
+        "Computer"
+      ],
+      "incomingArrow": "top"
+    },
+    {
       "id": "pizza-for-the-secret-meeting",
       "name": "Pizza For The Secret Meeting",
       "type": "plots",
       "filename": "plots/pizza-for-the-secret-meeting.webp"
+    },
+    {
+      "id": "plague-of-demons",
+      "name": "Plague Of Demons",
+      "type": "plots",
+      "filename": "plots/plague-of-demons.webp"
+    },
+    {
+      "id": "pledge-drive",
+      "name": "Pledge Drive",
+      "type": "plots",
+      "filename": "plots/pledge-drive.webp"
+    },
+    {
+      "id": "poison",
+      "name": "Poison",
+      "type": "plots",
+      "filename": "plots/poison.webp"
+    },
+    {
+      "id": "political-correctness",
+      "name": "Political Correctness",
+      "type": "plots",
+      "filename": "plots/political-correctness.webp"
+    },
+    {
+      "id": "pollsters",
+      "name": "Pollsters",
+      "type": "groups",
+      "filename": "groups/pollsters.webp",
+      "power": 2,
+      "globalPower": 2,
+      "resistance": 4,
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
     },
     {
       "id": "population-reduction",
@@ -3102,10 +3660,211 @@
       "filename": "plots/population-reduction.webp"
     },
     {
+      "id": "post-office",
+      "name": "Post Office",
+      "type": "groups",
+      "filename": "groups/post-office.webp",
+      "power": 4,
+      "globalPower": 3,
+      "resistance": 3,
+      "alignment": [
+        "Government"
+      ],
+      "attribute": [
+        "Computer"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom"
+      ]
+    },
+    {
+      "id": "power-corrupts",
+      "name": "Power Corrupts",
+      "type": "plots",
+      "filename": "plots/power-corrupts.webp"
+    },
+    {
+      "id": "power-for-its-own-sake",
+      "name": "Power For Its Own Sake",
+      "type": "plots",
+      "filename": "plots/power-for-its-own-sake.webp"
+    },
+    {
+      "id": "power-grab",
+      "name": "Power Grab",
+      "type": "plots",
+      "filename": "plots/power-grab.webp"
+    },
+    {
       "id": "power-satellite",
       "name": "Power Satellite",
       "type": "resources",
       "filename": "resources/power-satellite.webp"
+    },
+    {
+      "id": "power-to-the-people",
+      "name": "Power To The People",
+      "type": "plots",
+      "filename": "plots/power-to-the-people.webp"
+    },
+    {
+      "id": "prince-charles",
+      "name": "Prince Charles",
+      "type": "groups",
+      "filename": "groups/prince-charles.webp",
+      "power": 2,
+      "resistance": 5,
+      "subtype": "Personality",
+      "alignment": [
+        "Conservative"
+      ],
+      "attribute": [
+        "Green"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom"
+      ]
+    },
+    {
+      "id": "princess-di",
+      "name": "Princess Di",
+      "type": "groups",
+      "filename": "groups/princess-di.webp",
+      "power": 2,
+      "resistance": 5,
+      "subtype": "Personality",
+      "alignment": [
+        "Straight",
+        "Peaceful",
+        "Liberal"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
+      "id": "principia-discordia",
+      "name": "Principia Discordia",
+      "type": "resources",
+      "filename": "resources/principia-discordia.webp"
+    },
+    {
+      "id": "privatization",
+      "name": "Privatization",
+      "type": "plots",
+      "filename": "plots/privatization.webp"
+    },
+    {
+      "id": "privileged-attack",
+      "name": "Privileged Attack",
+      "type": "plots",
+      "filename": "plots/privileged-attack.webp"
+    },
+    {
+      "id": "professional-sports",
+      "name": "Professional Sports",
+      "type": "groups",
+      "filename": "groups/professional-sports.webp",
+      "power": 2,
+      "resistance": 4,
+      "alignment": [
+        "Violent",
+        "Fanatic"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "psychiatrists",
+      "name": "Psychiatrists",
+      "type": "groups",
+      "filename": "groups/psychiatrists.webp",
+      "power": 2,
+      "globalPower": 2,
+      "resistance": 6,
+      "alignment": [
+        "Weird"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "pulitzer-price",
+      "name": "Pulitzer Price",
+      "type": "plots",
+      "filename": "plots/pulitzer-price.webp"
+    },
+    {
+      "id": "punk-rockers",
+      "name": "Punk Rockers",
+      "type": "groups",
+      "filename": "groups/punk-rockers.webp",
+      "power": 1,
+      "resistance": 4,
+      "alignment": [
+        "Weird"
+      ],
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "purge",
+      "name": "Purge",
+      "type": "plots",
+      "filename": "plots/purge.webp"
+    },
+    {
+      "id": "pyramid-marketing-schemes",
+      "name": "Pyramid Marketing Schemes",
+      "type": "groups",
+      "filename": "groups/pyramid-marketing-schemes.webp",
+      "power": 1,
+      "resistance": 2,
+      "alignment": [
+        "Straight"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "reach-out",
+      "name": "Reach Out",
+      "type": "plots",
+      "filename": "plots/reach-out.webp"
+    },
+    {
+      "id": "read-my-lips",
+      "name": "Read My Lips",
+      "type": "plots",
+      "filename": "plots/read-my-lips.webp"
+    },
+    {
+      "id": "recording-industry",
+      "name": "Recording Industry",
+      "type": "groups",
+      "filename": "groups/recording-industry.webp",
+      "power": 2,
+      "resistance": 1,
+      "alignment": [
+        "Corporate"
+      ],
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "left"
+      ]
     },
     {
       "id": "recycling-centers",
@@ -3120,16 +3879,310 @@
       "incomingArrow": "bottom"
     },
     {
+      "id": "red-cross",
+      "name": "Red Cross",
+      "type": "groups",
+      "filename": "groups/red-cross.webp",
+      "power": 2,
+      "resistance": 4,
+      "alignment": [
+        "Peaceful"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "right"
+      ]
+    },
+    {
+      "id": "red-scare",
+      "name": "Red Scare",
+      "type": "plots",
+      "filename": "plots/red-scare.webp"
+    },
+    {
+      "id": "reformed-church-of-satan",
+      "name": "Reformed Church Of Satan",
+      "type": "groups",
+      "filename": "groups/reformed-church-of-satan.webp",
+      "power": 2,
+      "resistance": 4,
+      "alignment": [
+        "Weird",
+        "Fanatic"
+      ],
+      "attribute": [
+        "Magic",
+        "Church"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
       "id": "registered-trademark",
       "name": "Registered Trademark",
       "type": "plots",
       "filename": "plots/registered-trademark.webp"
     },
     {
+      "id": "religious-reich",
+      "name": "Religious Reich",
+      "type": "groups",
+      "filename": "groups/religious-reich.webp",
+      "power": 3,
+      "globalPower": 1,
+      "resistance": 5,
+      "alignment": [
+        "Straight",
+        "Conservative"
+      ],
+      "attribute": [
+        "Church"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "bottom"
+      ]
+    },
+    {
+      "id": "reload",
+      "name": "Reload",
+      "type": "plots",
+      "filename": "plots/reload.webp"
+    },
+    {
+      "id": "reorganization",
+      "name": "Reorganization",
+      "type": "plots",
+      "filename": "plots/reorganization.webp"
+    },
+    {
+      "id": "republicans",
+      "name": "Republicans",
+      "type": "groups",
+      "filename": "groups/republicans.webp",
+      "power": 5,
+      "globalPower": 4,
+      "resistance": 4,
+      "alignment": [
+        "Conservative"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom",
+        "left"
+      ]
+    },
+    {
+      "id": "resistance-is-useless",
+      "name": "Resistance Is Useless",
+      "type": "plots",
+      "filename": "plots/resistance-is-useless.webp"
+    },
+    {
       "id": "reverse-whammy",
       "name": "Reverse Whammy",
       "type": "plots",
       "filename": "plots/reverse-whammy.webp"
+    },
+    {
+      "id": "revolution",
+      "name": "Revolution",
+      "type": "plots",
+      "filename": "plots/revolution.webp"
+    },
+    {
+      "id": "rewriting-history",
+      "name": "Rewriting History",
+      "type": "plots",
+      "filename": "plots/rewriting-history.webp"
+    },
+    {
+      "id": "rifkinites",
+      "name": "Rifkinites",
+      "type": "groups",
+      "filename": "groups/rifkinites.webp",
+      "power": 2,
+      "resistance": 4,
+      "alignment": [
+        "Fanatic"
+      ],
+      "attribute": [
+        "Green"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "robot-sea-monsters",
+      "name": "Robot Sea Monsters",
+      "type": "groups",
+      "filename": "groups/robot-sea-monsters.webp",
+      "power": 1,
+      "globalPower": 1,
+      "resistance": 6,
+      "alignment": [
+        "Violent"
+      ],
+      "attribute": [
+        "Secret",
+        "Science",
+        "Computer"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "rogue-boomer",
+      "name": "Rogue Boomer",
+      "type": "resources",
+      "filename": "resources/rogue-boomer.webp"
+    },
+    {
+      "id": "ronald-reagan",
+      "name": "Ronald Reagan",
+      "type": "groups",
+      "filename": "groups/ronald-reagan.webp",
+      "power": 2,
+      "resistance": 1,
+      "subtype": "Personality",
+      "alignment": [
+        "Straight",
+        "Conservative"
+      ],
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
+    },
+    {
+      "id": "rosicrucians",
+      "name": "Rosicrucians",
+      "type": "groups",
+      "filename": "groups/rosicrucians.webp",
+      "power": 1,
+      "globalPower": 1,
+      "resistance": 4,
+      "attribute": [
+        "Magic",
+        "Secret"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
+      "id": "ross-perot",
+      "name": "Ross Perot",
+      "type": "groups",
+      "filename": "groups/ross-perot.webp",
+      "power": 2,
+      "resistance": 6,
+      "subtype": "Personality",
+      "alignment": [
+        "Straight",
+        "Conservative"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "russia",
+      "name": "Russia",
+      "type": "groups",
+      "filename": "groups/russia.webp",
+      "power": 4,
+      "resistance": 5,
+      "subtype": "Place",
+      "alignment": [
+        "Violent",
+        "Government"
+      ],
+      "attribute": [
+        "Huge",
+        "Coastal",
+        "Nation"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "sabotage",
+      "name": "Sabotage",
+      "type": "plots",
+      "filename": "plots/sabotage.webp"
+    },
+    {
+      "id": "saddam-hussein",
+      "name": "Saddam Hussein",
+      "type": "groups",
+      "filename": "groups/saddam-hussein.webp",
+      "power": 2,
+      "resistance": 4,
+      "subtype": "Personality",
+      "alignment": [
+        "Violent",
+        "Government"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom"
+      ]
+    },
+    {
+      "id": "save-the-whales",
+      "name": "Save The Whales",
+      "type": "plots",
+      "filename": "plots/save-the-whales.webp"
+    },
+    {
+      "id": "savings-and-loans",
+      "name": "Savings And Loans",
+      "type": "groups",
+      "filename": "groups/savings-and-loans.webp",
+      "power": 2,
+      "resistance": 3,
+      "alignment": [
+        "Straight",
+        "Criminal"
+      ],
+      "attribute": [
+        "Bank"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "left"
+      ]
+    },
+    {
+      "id": "savings-loan-scam",
+      "name": "Savings & Loan Scam",
+      "type": "plots",
+      "filename": "plots/savings-&-loan-scam.webp"
+    },
+    {
+      "id": "scandal",
+      "name": "Scandal",
+      "type": "plots",
+      "filename": "plots/scandal.webp"
     },
     {
       "id": "school-prayer",
@@ -3154,6 +4207,18 @@
       ]
     },
     {
+      "id": "science-fiction-fans",
+      "name": "Science Fiction Fans",
+      "type": "groups",
+      "filename": "groups/science-fiction-fans.webp",
+      "power": 1,
+      "resistance": 5,
+      "alignment": [
+        "Weird"
+      ],
+      "incomingArrow": "top"
+    },
+    {
       "id": "screaming-meme",
       "name": "Screaming Meme",
       "type": "resources",
@@ -3166,10 +4231,95 @@
       "filename": "plots/secret-master.webp"
     },
     {
+      "id": "secret-service",
+      "name": "Secret Service",
+      "type": "groups",
+      "filename": "groups/secret-service.webp",
+      "power": 2,
+      "resistance": 3,
+      "alignment": [
+        "Violent",
+        "Government"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "secrets-man-was-not-meant-to-know",
+      "name": "Secrets Man Was Not Meant To Know",
+      "type": "plots",
+      "filename": "plots/secrets-man-was-not-meant-to-know.webp"
+    },
+    {
+      "id": "secular-humanists",
+      "name": "Secular Humanists",
+      "type": "groups",
+      "filename": "groups/secular-humanists.webp",
+      "power": 2,
+      "resistance": 5,
+      "alignment": [
+        "Liberal"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
+    },
+    {
       "id": "security-leak",
       "name": "Security Leak",
       "type": "plots",
       "filename": "plots/security-leak.webp"
+    },
+    {
+      "id": "seize-the-time",
+      "name": "Seize The Time",
+      "type": "plots",
+      "filename": "plots/seize-the-time.webp"
+    },
+    {
+      "id": "self-esteem",
+      "name": "Self Esteem",
+      "type": "plots",
+      "filename": "plots/self-esteem.webp"
+    },
+    {
+      "id": "semiconscious-liberation-army",
+      "name": "Semiconscious Liberation Army",
+      "type": "groups",
+      "filename": "groups/semiconscious-liberation-army.webp",
+      "power": 1,
+      "resistance": 8,
+      "alignment": [
+        "Weird",
+        "Liberal",
+        "Violent",
+        "Criminal"
+      ],
+      "attribute": [
+        "Communist"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
+    },
+    {
+      "id": "senate-investigating-committee",
+      "name": "Senate Investigating Committee",
+      "type": "plots",
+      "filename": "plots/senate-investigating-committee.webp"
+    },
+    {
+      "id": "servants-of-cthulhu",
+      "name": "Servants Of Cthulhu",
+      "type": "illuminati",
+      "filename": "illuminati/servants-of-cthulhu.webp"
+    },
+    {
+      "id": "shangri-la",
+      "name": "Shangri La",
+      "type": "illuminati",
+      "filename": "illuminati/shangri-la.webp"
     },
     {
       "id": "shock-jocks",
@@ -3187,16 +4337,109 @@
       "incomingArrow": "top"
     },
     {
+      "id": "shroud-of-turin",
+      "name": "Shroud Of Turin",
+      "type": "resources",
+      "filename": "resources/shroud-of-turin.webp"
+    },
+    {
+      "id": "slush-fund",
+      "name": "Slush Fund",
+      "type": "plots",
+      "filename": "plots/slush-fund.webp"
+    },
+    {
+      "id": "smof",
+      "name": "Smof",
+      "type": "groups",
+      "filename": "groups/smof.webp",
+      "power": 1,
+      "resistance": 1,
+      "alignment": [
+        "Weird"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "right"
+      ]
+    },
+    {
+      "id": "sniper",
+      "name": "Sniper",
+      "type": "plots",
+      "filename": "plots/sniper.webp"
+    },
+    {
+      "id": "society-for-creative-anarchism",
+      "name": "Society For Creative Anarchism",
+      "type": "groups",
+      "filename": "groups/society-for-creative-anarchism.webp",
+      "power": 1,
+      "resistance": 4,
+      "alignment": [
+        "Violent",
+        "Weird"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "left"
+      ]
+    },
+    {
       "id": "society-of-assassins",
       "name": "Society Of Assassins",
       "type": "illuminati",
       "filename": "illuminati/society-of-assassins.webp"
     },
     {
+      "id": "solidarity",
+      "name": "Solidarity",
+      "type": "plots",
+      "filename": "plots/solidarity.webp"
+    },
+    {
       "id": "sorry-wrong-number",
       "name": "Sorry Wrong Number",
       "type": "plots",
       "filename": "plots/sorry-wrong-number.webp"
+    },
+    {
+      "id": "soulburner",
+      "name": "Soulburner",
+      "type": "resources",
+      "filename": "resources/soulburner.webp"
+    },
+    {
+      "id": "south-americans-nazis",
+      "name": "South Americans Nazis",
+      "type": "groups",
+      "filename": "groups/south-americans-nazis.webp",
+      "power": 4,
+      "globalPower": 1,
+      "resistance": 6,
+      "alignment": [
+        "Conservative",
+        "Violent"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "spasm-of-violence",
+      "name": "Spasm Of Violence",
+      "type": "plots",
+      "filename": "plots/spasm-of-violence.webp"
+    },
+    {
+      "id": "spear-of-longinus",
+      "name": "Spear Of Longinus",
+      "type": "resources",
+      "filename": "resources/spear-of-longinus.webp"
     },
     {
       "id": "spontaneous-combustion",
@@ -3223,10 +4466,47 @@
       "incomingArrow": "bottom"
     },
     {
+      "id": "stealing-the-plans",
+      "name": "Stealing The Plans",
+      "type": "plots",
+      "filename": "plots/stealing-the-plans.webp"
+    },
+    {
+      "id": "stock-split",
+      "name": "Stock Split",
+      "type": "plots",
+      "filename": "plots/stock-split.webp"
+    },
+    {
+      "id": "straighten-up",
+      "name": "Straighten Up",
+      "type": "plots",
+      "filename": "plots/straighten-up.webp"
+    },
+    {
       "id": "strange-bedfellows",
       "name": "Strange Bedfellows",
       "type": "plots",
       "filename": "plots/strange-bedfellows.webp"
+    },
+    {
+      "id": "subliminals",
+      "name": "Subliminals",
+      "type": "groups",
+      "filename": "groups/subliminals.webp",
+      "power": 2,
+      "globalPower": 2,
+      "resistance": 4,
+      "attribute": [
+        "Secret"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "sucked-dry-and-cast-aside",
+      "name": "Sucked Dry And Cast Aside",
+      "type": "plots",
+      "filename": "plots/sucked-dry-and-cast-aside.webp"
     },
     {
       "id": "sudden-european-vacation",
@@ -3247,10 +4527,54 @@
       "filename": "plots/supernova.webp"
     },
     {
+      "id": "supreme-court",
+      "name": "Supreme Court",
+      "type": "groups",
+      "filename": "groups/supreme-court.webp",
+      "power": 3,
+      "globalPower": 3,
+      "resistance": 6,
+      "alignment": [
+        "Peaceful",
+        "Government"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
       "id": "supreme-court-nomination",
       "name": "Supreme Court Nomination",
       "type": "plots",
       "filename": "plots/supreme-court-nomination.webp"
+    },
+    {
+      "id": "survivalists",
+      "name": "Survivalists",
+      "type": "groups",
+      "filename": "groups/survivalists.webp",
+      "power": 1,
+      "resistance": 3,
+      "alignment": [
+        "Conservative",
+        "Violent",
+        "Fanatic"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "sweeping-reforms",
+      "name": "Sweeping Reforms",
+      "type": "plots",
+      "filename": "plots/sweeping-reforms.webp"
+    },
+    {
+      "id": "sweepstakes-prize",
+      "name": "Sweepstakes Prize",
+      "type": "plots",
+      "filename": "plots/sweepstakes-prize.webp"
     },
     {
       "id": "swingers",
@@ -3269,16 +4593,73 @@
       ]
     },
     {
+      "id": "switzerland",
+      "name": "Switzerland",
+      "type": "groups",
+      "filename": "groups/switzerland.webp",
+      "power": 1,
+      "resistance": 6,
+      "subtype": "Place",
+      "alignment": [
+        "Conservative",
+        "Government"
+      ],
+      "attribute": [
+        "Nation"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
+    },
+    {
+      "id": "tabloids",
+      "name": "Tabloids",
+      "type": "groups",
+      "filename": "groups/tabloids.webp",
+      "power": 2,
+      "globalPower": 2,
+      "resistance": 3,
+      "alignment": [
+        "Weird"
+      ],
+      "attribute": [
+        "Media"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
       "id": "take-the-money-and-run",
       "name": "Take The Money And Run",
       "type": "plots",
       "filename": "plots/take-the-money-and-run.webp"
     },
     {
+      "id": "talisman-of-ahrimanes",
+      "name": "Talisman Of Ahrimanes",
+      "type": "resources",
+      "filename": "resources/talisman-of-ahrimanes.webp"
+    },
+    {
       "id": "tanstaafl",
       "name": "Tanstaafl",
       "type": "plots",
       "filename": "plots/tanstaafl.webp"
+    },
+    {
+      "id": "tax-breaks",
+      "name": "Tax Breaks",
+      "type": "plots",
+      "filename": "plots/tax-breaks.webp"
+    },
+    {
+      "id": "tax-reform",
+      "name": "Tax Reform",
+      "type": "plots",
+      "filename": "plots/tax-reform.webp"
     },
     {
       "id": "teddy-kennedy",
@@ -3305,10 +4686,105 @@
       "filename": "plots/teflon-coating.webp"
     },
     {
+      "id": "telephone-psychics",
+      "name": "Telephone Psychics",
+      "type": "groups",
+      "filename": "groups/telephone-psychics.webp",
+      "power": 2,
+      "resistance": 4,
+      "alignment": [
+        "Peaceful"
+      ],
+      "attribute": [
+        "Criminal"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
+    },
+    {
+      "id": "terrorist-nuke",
+      "name": "Terrorist Nuke",
+      "type": "plots",
+      "filename": "plots/terrorist-nuke.webp"
+    },
+    {
+      "id": "texas",
+      "name": "Texas",
+      "type": "groups",
+      "filename": "groups/texas.webp",
+      "power": 6,
+      "resistance": 6,
+      "subtype": "Place",
+      "alignment": [
+        "Violent",
+        "Conservative",
+        "Government"
+      ],
+      "attribute": [
+        "Huge",
+        "Coastal"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "bottom",
+        "left"
+      ]
+    },
+    {
+      "id": "the-auditor-from-hell",
+      "name": "The Auditor From Hell",
+      "type": "plots",
+      "filename": "plots/the-auditor-from-hell.webp"
+    },
+    {
       "id": "the-big-prawn",
       "name": "The Big Prawn",
       "type": "resources",
       "filename": "resources/the-big-prawn.webp"
+    },
+    {
+      "id": "the-big-score",
+      "name": "The Big Score",
+      "type": "plots",
+      "filename": "plots/the-big-score.webp"
+    },
+    {
+      "id": "the-bronze-head",
+      "name": "The Bronze Head",
+      "type": "resources",
+      "filename": "resources/the-bronze-head.webp"
+    },
+    {
+      "id": "the-corporate-masters",
+      "name": "The Corporate Masters",
+      "type": "plots",
+      "filename": "plots/the-corporate-masters.webp"
+    },
+    {
+      "id": "the-first-thing-we-do-lets-kill-all-the-lawyers",
+      "name": "The First Thing We Do Lets Kill All The Lawyers",
+      "type": "plots",
+      "filename": "plots/the-first-thing-we-do-lets-kill-all-the-lawyers.webp"
+    },
+    {
+      "id": "the-great-pyramid",
+      "name": "The Great Pyramid",
+      "type": "groups",
+      "filename": "groups/the-great-pyramid.webp",
+      "power": 2,
+      "globalPower": 2,
+      "resistance": 4,
+      "subtype": "Place",
+      "attribute": [
+        "Magic"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom"
+      ]
     },
     {
       "id": "the-green-party",
@@ -3331,10 +4807,34 @@
       ]
     },
     {
+      "id": "the-hand-of-madness",
+      "name": "The Hand Of Madness",
+      "type": "plots",
+      "filename": "plots/the-hand-of-madness.webp"
+    },
+    {
+      "id": "the-holy-grail",
+      "name": "The Holy Grail",
+      "type": "resources",
+      "filename": "resources/the-holy-grail.webp"
+    },
+    {
+      "id": "the-internet-worm",
+      "name": "The Internet Worm",
+      "type": "plots",
+      "filename": "plots/the-internet-worm.webp"
+    },
+    {
       "id": "the-irish-flu",
       "name": "The Irish Flu",
       "type": "plots",
       "filename": "plots/the-irish-flu.webp"
+    },
+    {
+      "id": "the-library-at-alexandria",
+      "name": "The Library At Alexandria",
+      "type": "resources",
+      "filename": "resources/the-library-at-alexandria.webp"
     },
     {
       "id": "the-magic-goes-away",
@@ -3347,6 +4847,47 @@
       "name": "The Meek Shall Inherit",
       "type": "plots",
       "filename": "plots/the-meek-shall-inherit.webp"
+    },
+    {
+      "id": "the-men-in-black",
+      "name": "The Men In Black",
+      "type": "groups",
+      "filename": "groups/the-men-in-black.webp",
+      "power": 2,
+      "globalPower": 2,
+      "resistance": 6,
+      "alignment": [
+        "Criminal",
+        "Weird"
+      ],
+      "attribute": [
+        "Secret"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "the-network",
+      "name": "The Network",
+      "type": "illuminati",
+      "filename": "illuminati/the-network.webp"
+    },
+    {
+      "id": "the-oregon-crud",
+      "name": "The Oregon Crud",
+      "type": "plots",
+      "filename": "plots/the-oregon-crud.webp"
+    },
+    {
+      "id": "the-second-bullet",
+      "name": "The Second Bullet",
+      "type": "plots",
+      "filename": "plots/the-second-bullet.webp"
+    },
+    {
+      "id": "the-stars-are-right",
+      "name": "The Stars Are Right",
+      "type": "plots",
+      "filename": "plots/the-stars-are-right.webp"
     },
     {
       "id": "the-thule-group",
@@ -3362,16 +4903,260 @@
       "incomingArrow": "top"
     },
     {
+      "id": "the-weak-link",
+      "name": "The Weak Link",
+      "type": "plots",
+      "filename": "plots/the-weak-link.webp"
+    },
+    {
+      "id": "the-weird-turn-pro",
+      "name": "The Weird Turn Pro",
+      "type": "plots",
+      "filename": "plots/the-weird-turn-pro.webp"
+    },
+    {
       "id": "this-was-only-a-test",
       "name": "This Was Only A Test",
       "type": "plots",
       "filename": "plots/this-was-only-a-test.webp"
     },
     {
+      "id": "tidal-wave",
+      "name": "Tidal Wave",
+      "type": "plots",
+      "filename": "plots/tidal-wave.webp"
+    },
+    {
+      "id": "tobacco-companies",
+      "name": "Tobacco Companies",
+      "type": "groups",
+      "filename": "groups/tobacco-companies.webp",
+      "power": 4,
+      "resistance": 3,
+      "alignment": [
+        "Straight",
+        "Corporate"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "bottom"
+      ]
+    },
+    {
+      "id": "tornado",
+      "name": "Tornado",
+      "type": "plots",
+      "filename": "plots/tornado.webp"
+    },
+    {
+      "id": "trading-card-games",
+      "name": "Trading Card Games",
+      "type": "groups",
+      "filename": "groups/trading-card-games.webp",
+      "power": 1,
+      "resistance": 2,
+      "alignment": [
+        "Weird"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "trekkies",
+      "name": "Trekkies",
+      "type": "groups",
+      "filename": "groups/trekkies.webp",
+      "power": 1,
+      "resistance": 4,
+      "alignment": [
+        "Peaceful",
+        "Weird",
+        "Fanatic"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom"
+      ]
+    },
+    {
+      "id": "triliberal-commission",
+      "name": "Triliberal Commission",
+      "type": "groups",
+      "filename": "groups/triliberal-commission.webp",
+      "power": 5,
+      "resistance": 6,
+      "alignment": [
+        "Straight",
+        "Liberal"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom",
+        "left"
+      ]
+    },
+    {
       "id": "truck-bomb",
       "name": "Truck Bomb",
       "type": "plots",
       "filename": "plots/truck-bomb.webp"
+    },
+    {
+      "id": "tv-preachers",
+      "name": "Tv Preachers",
+      "type": "groups",
+      "filename": "groups/tv-preachers.webp",
+      "power": 3,
+      "globalPower": 3,
+      "resistance": 6,
+      "alignment": [
+        "Straight",
+        "Fanatic"
+      ],
+      "attribute": [
+        "Media",
+        "Church"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "ufos",
+      "name": "Ufos",
+      "type": "illuminati",
+      "filename": "illuminati/ufos.webp"
+    },
+    {
+      "id": "underground-newspapers",
+      "name": "Underground Newspapers",
+      "type": "groups",
+      "filename": "groups/underground-newspapers.webp",
+      "power": 1,
+      "globalPower": 1,
+      "resistance": 5,
+      "alignment": [
+        "Liberal"
+      ],
+      "attribute": [
+        "Media",
+        "Green"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom"
+      ]
+    },
+    {
+      "id": "united-nations",
+      "name": "United Nations",
+      "type": "groups",
+      "filename": "groups/united-nations.webp",
+      "power": 1,
+      "resistance": 3,
+      "alignment": [
+        "Liberal"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "unlucky-13",
+      "name": "Unlucky 13",
+      "type": "plots",
+      "filename": "plots/unlucky-13.webp"
+    },
+    {
+      "id": "unmasked",
+      "name": "Unmasked",
+      "type": "plots",
+      "filename": "plots/unmasked.webp"
+    },
+    {
+      "id": "up-against-the-wall",
+      "name": "Up Against The Wall",
+      "type": "plots",
+      "filename": "plots/up-against-the-wall.webp"
+    },
+    {
+      "id": "upheavel",
+      "name": "Upheavel",
+      "type": "plots",
+      "filename": "plots/upheavel.webp"
+    },
+    {
+      "id": "urban-gangs",
+      "name": "Urban Gangs",
+      "type": "groups",
+      "filename": "groups/urban-gangs.webp",
+      "power": 1,
+      "resistance": 2,
+      "alignment": [
+        "Violent"
+      ],
+      "incomingArrow": "top"
+    },
+    {
+      "id": "vampires",
+      "name": "Vampires",
+      "type": "groups",
+      "filename": "groups/vampires.webp",
+      "power": 2,
+      "resistance": 5,
+      "alignment": [
+        "Weird"
+      ],
+      "attribute": [
+        "Secret",
+        "Magic"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "left"
+      ]
+    },
+    {
+      "id": "vatican-city",
+      "name": "Vatican City",
+      "type": "groups",
+      "filename": "groups/vatican-city.webp",
+      "power": 4,
+      "globalPower": 4,
+      "resistance": 6,
+      "subtype": "Place",
+      "alignment": [
+        "Peaceful",
+        "Conservative"
+      ],
+      "attribute": [
+        "Church",
+        "Nation"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top",
+        "right",
+        "left"
+      ]
+    },
+    {
+      "id": "video-games",
+      "name": "Video Games",
+      "type": "groups",
+      "filename": "groups/video-games.webp",
+      "power": 2,
+      "resistance": 3,
+      "attribute": [
+        "Computer"
+      ],
+      "incomingArrow": "bottom",
+      "outgoingArrows": [
+        "top"
+      ]
     },
     {
       "id": "vile-secretions",
@@ -3406,10 +5191,59 @@
       ]
     },
     {
+      "id": "volcano",
+      "name": "Volcano",
+      "type": "plots",
+      "filename": "plots/volcano.webp"
+    },
+    {
+      "id": "volunteer-aid",
+      "name": "Volunteer Aid",
+      "type": "plots",
+      "filename": "plots/volunteer-aid.webp"
+    },
+    {
+      "id": "voodoo-economics",
+      "name": "Voodoo Economics",
+      "type": "plots",
+      "filename": "plots/voodoo-economics.webp"
+    },
+    {
+      "id": "voudonistas",
+      "name": "Voudonistas",
+      "type": "groups",
+      "filename": "groups/voudonistas.webp",
+      "power": 1,
+      "globalPower": 1,
+      "resistance": 6,
+      "alignment": [
+        "Violent"
+      ],
+      "attribute": [
+        "Magic"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "right"
+      ]
+    },
+    {
+      "id": "vultures",
+      "name": "Vultures",
+      "type": "plots",
+      "filename": "plots/vultures.webp"
+    },
+    {
       "id": "waiting-period",
       "name": "Waiting Period",
       "type": "plots",
       "filename": "plots/waiting-period.webp"
+    },
+    {
+      "id": "warehouse-23",
+      "name": "Warehouse 23",
+      "type": "resources",
+      "filename": "resources/warehouse-23.webp"
     },
     {
       "id": "watermelons",
@@ -3418,10 +5252,43 @@
       "filename": "plots/watermelons.webp"
     },
     {
+      "id": "weather-satellite",
+      "name": "Weather Satellite",
+      "type": "resources",
+      "filename": "resources/weather-satellite.webp"
+    },
+    {
+      "id": "whispering-campaign",
+      "name": "Whispering Campaign",
+      "type": "plots",
+      "filename": "plots/whispering-campaign.webp"
+    },
+    {
       "id": "whistle-blowers",
       "name": "Whistle Blowers",
       "type": "plots",
       "filename": "plots/whistle-blowers.webp"
+    },
+    {
+      "id": "witch",
+      "name": "Witch",
+      "type": "groups",
+      "filename": "groups/witch.webp",
+      "power": 3,
+      "globalPower": 2,
+      "resistance": 6,
+      "alignment": [
+        "Fanatic",
+        "Weird",
+        "Violent"
+      ],
+      "attribute": [
+        "Magic"
+      ],
+      "incomingArrow": "top",
+      "outgoingArrows": [
+        "bottom"
+      ]
     },
     {
       "id": "witch-hunt",
@@ -3430,10 +5297,40 @@
       "filename": "plots/witch-hunt.webp"
     },
     {
+      "id": "withering-curse",
+      "name": "Withering Curse",
+      "type": "plots",
+      "filename": "plots/withering-curse.webp"
+    },
+    {
+      "id": "world-cup-victory",
+      "name": "World Cup Victory",
+      "type": "plots",
+      "filename": "plots/world-cup-victory.webp"
+    },
+    {
+      "id": "world-hunger",
+      "name": "World Hunger",
+      "type": "plots",
+      "filename": "plots/world-hunger.webp"
+    },
+    {
+      "id": "world-war-three",
+      "name": "World War Three",
+      "type": "plots",
+      "filename": "plots/world-war-three.webp"
+    },
+    {
       "id": "x-ray-specs",
       "name": "X Ray Specs",
       "type": "resources",
       "filename": "resources/x-ray-specs.webp"
+    },
+    {
+      "id": "xanadu",
+      "name": "Xanadu",
+      "type": "resources",
+      "filename": "resources/xanadu.webp"
     },
     {
       "id": "you-are-what-you-eat",
