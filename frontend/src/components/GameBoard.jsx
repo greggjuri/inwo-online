@@ -9,38 +9,110 @@ import './GameBoard.css';
 const GameBoard = ({ roomId, playerName, playerDeck }) => {
 // Board configuration constants
   const BOARD_CONFIG = {
-    width: 2400,  // Increased from 1500
-    height: 1200, // Increased from 850
+    width: 2400,
+    height: 1200,
     nwoZone: {
       width: 120,
       height: 167,
       gap: 20,
       colors: ['red', 'yellow', 'blue']
-    }
+    },
+    playerColors: [
+      'rgba(59, 130, 246, 0.08)',   // blue
+      'rgba(239, 68, 68, 0.08)',    // red
+      'rgba(34, 197, 94, 0.08)',    // green
+      'rgba(168, 85, 247, 0.08)'    // purple
+    ],
+    playerColorsBright: [
+      'rgba(59, 130, 246, 0.3)',    // blue
+      'rgba(239, 68, 68, 0.3)',     // red
+      'rgba(34, 197, 94, 0.3)',     // green
+      'rgba(168, 85, 247, 0.3)'     // purple
+    ]
   };
 
-  // Calculate player zones for 2 players
+// Calculate player zones for 2-4 players
   const getPlayerZones = (playerCount, myPlayerId, allPlayers) => {
+    const myIndex = allPlayers.findIndex(p => p.id === myPlayerId);
+    const zones = {};
+    
     if (playerCount === 2) {
-      const myIndex = allPlayers.findIndex(p => p.id === myPlayerId);
-      return {
-        myZone: {
-          x: myIndex === 0 ? 0 : BOARD_CONFIG.width / 2,
+      // Side by side layout
+      for (let i = 0; i < 2; i++) {
+        const isMyZone = i === myIndex;
+        zones[isMyZone ? 'myZone' : `player${i}`] = {
+          x: i === 0 ? 0 : BOARD_CONFIG.width / 2,
           y: 0,
           width: BOARD_CONFIG.width / 2,
           height: BOARD_CONFIG.height,
-          color: myIndex === 0 ? 'rgba(59, 130, 246, 0.08)' : 'rgba(239, 68, 68, 0.08)' // blue or red tint
-        },
-        opponentZone: {
-          x: myIndex === 0 ? BOARD_CONFIG.width / 2 : 0,
-          y: 0,
-          width: BOARD_CONFIG.width / 2,
-          height: BOARD_CONFIG.height,
-          color: myIndex === 0 ? 'rgba(239, 68, 68, 0.08)' : 'rgba(59, 130, 246, 0.08)'
+          color: BOARD_CONFIG.playerColors[i],
+          playerId: allPlayers[i].id,
+          playerName: allPlayers[i].name,
+          colorIndex: i
+        };
+      }
+    } else if (playerCount === 3) {
+      // Two on top, one on bottom (wider)
+      const topWidth = BOARD_CONFIG.width / 2;
+      const topHeight = BOARD_CONFIG.height / 2;
+      const bottomHeight = BOARD_CONFIG.height / 2;
+      
+      for (let i = 0; i < 3; i++) {
+        const isMyZone = i === myIndex;
+        let zoneConfig;
+        
+        if (i < 2) {
+          // Top two zones
+          zoneConfig = {
+            x: i === 0 ? 0 : topWidth,
+            y: 0,
+            width: topWidth,
+            height: topHeight,
+            color: BOARD_CONFIG.playerColors[i],
+            playerId: allPlayers[i].id,
+            playerName: allPlayers[i].name,
+            colorIndex: i
+          };
+        } else {
+          // Bottom zone (full width)
+          zoneConfig = {
+            x: 0,
+            y: topHeight,
+            width: BOARD_CONFIG.width,
+            height: bottomHeight,
+            color: BOARD_CONFIG.playerColors[i],
+            playerId: allPlayers[i].id,
+            playerName: allPlayers[i].name,
+            colorIndex: i
+          };
         }
-      };
+        
+        zones[isMyZone ? 'myZone' : `player${i}`] = zoneConfig;
+      }
+    } else if (playerCount === 4) {
+      // Quadrant layout (2x2 grid)
+      const quadWidth = BOARD_CONFIG.width / 2;
+      const quadHeight = BOARD_CONFIG.height / 2;
+      
+      for (let i = 0; i < 4; i++) {
+        const isMyZone = i === myIndex;
+        const row = Math.floor(i / 2);
+        const col = i % 2;
+        
+        zones[isMyZone ? 'myZone' : `player${i}`] = {
+          x: col * quadWidth,
+          y: row * quadHeight,
+          width: quadWidth,
+          height: quadHeight,
+          color: BOARD_CONFIG.playerColors[i],
+          playerId: allPlayers[i].id,
+          playerName: allPlayers[i].name,
+          colorIndex: i
+        };
+      }
     }
-    // TODO: Add 3 and 4 player zones later
+    
+    return zones;
   };
   const { socket } = useSocket();
   const [players, setPlayers] = useState([]);
@@ -68,6 +140,8 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
   blue: null
   });
   const [playerZones, setPlayerZones] = useState(null);
+  const [zoom, setZoom] = useState(1);
+  const [maxPlayers, setMaxPlayers] = useState(2); // Default to 2 players
   const [isFullscreenView, setIsFullscreenView] = useState(false);
   const [groupResourceDiscard, setGroupResourceDiscard] = useState([]);
   const [plotDiscard, setPlotDiscard] = useState([]);
@@ -75,6 +149,52 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
   const [turnNumber, setTurnNumber] = useState(1);
   const cardsContainerRef = useRef(null);
 
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      // Fullscreen toggle
+      if (e.key === 'f' || e.key === 'F') {
+        setIsFullscreenView(prev => !prev);
+      }
+      if (e.key === 'Escape' && isFullscreenView) {
+        setIsFullscreenView(false);
+      }
+      // Zoom controls
+      if (e.key === '+' || e.key === '=') {
+        e.preventDefault();
+        setZoom(prev => Math.min(prev + 0.1, 2));
+      }
+      if (e.key === '-' || e.key === '_') {
+        e.preventDefault();
+        setZoom(prev => Math.max(prev - 0.1, 0.5));
+      }
+      if (e.key === '0') {
+        e.preventDefault();
+        setZoom(1);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [isFullscreenView]);
+
+  useEffect(() => {
+    const handleWheel = (e) => {
+      if (e.ctrlKey) {
+        e.preventDefault();
+        const delta = e.deltaY * -0.001;
+        setZoom(prev => Math.min(Math.max(0.5, prev + delta), 2));
+      }
+    };
+
+    const playArea = document.querySelector('.shared-play-area');
+    if (playArea) {
+      playArea.addEventListener('wheel', handleWheel, { passive: false });
+      return () => {
+        playArea.removeEventListener('wheel', handleWheel);
+      };
+    }
+  }, []); // Empty dependency array - only run once on mount
+  
   useEffect(() => {
     if (!socket || !playerDeck || playerDeck.length === 0) return;
 
@@ -95,7 +215,7 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
     socket.on('room-joined', ({ players: roomPlayers }) => {
       setPlayers(roomPlayers);
       if (roomPlayers.length >= 2) {
-        setPlayerZones(getPlayerZones(2, socket.id, roomPlayers));
+        setPlayerZones(getPlayerZones(roomPlayers.length, socket.id, roomPlayers));
       }
     });
 
@@ -105,9 +225,10 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
         if (exists) return prev;
         return [...prev, { id: playerId, name: newPlayerName }];
       });
+      
       setPlayers(prev => {
         if (prev.length >= 2) {
-          setPlayerZones(getPlayerZones(2, socket.id, prev));
+          setPlayerZones(getPlayerZones(prev.length, socket.id, prev));
         }
         return prev;
       });
@@ -706,27 +827,41 @@ const removeNWO = (color) => {
         <div className="game-header">
         <div className="room-info">
           <h2>{roomId}</h2>
-        <div className="players">
-          {players.map((player, index) => {
-            const isCurrentTurn = currentTurn === player.id;
-            const isMe = player.id === socket?.id;
-            const playerColor = index === 0 ? 'blue' : 'red';
-            return (
-              <span 
-                key={player.id} 
-                className={`player-badge ${isCurrentTurn ? 'current-turn' : ''} player-${playerColor}`}
-              >
-                {player.name}{isMe ? ' (You)' : ''}
-              </span>
-            );
-          })}
-        </div>
+    <div className="players">
+      {players.map((player, index) => {
+        const isCurrentTurn = currentTurn === player.id;
+        const isMe = player.id === socket?.id;
+        const colorNames = ['blue', 'red', 'green', 'purple'];
+        const playerColor = colorNames[index] || 'blue';
+        return (
+          <span 
+            key={player.id} 
+            className={`player-badge ${isCurrentTurn ? 'current-turn' : ''} player-${playerColor}`}
+          >
+            {player.name}{isMe ? ' (You)' : ''}
+          </span>
+        );
+      })}
+    </div>
           {gamePhase === 'playing' && (
             <>
               <button className="dice-button" onClick={roll2D6}>🎲 2D6</button>
               <button className="view-board-button" onClick={() => setIsFullscreenView(true)}>
                 👁️ View Board
               </button>
+              {/* ADD THESE ZOOM CONTROLS: */}
+              <div className="zoom-controls">
+                <button className="zoom-button" onClick={() => setZoom(prev => Math.max(prev - 0.1, 0.5))}>
+                  🔍−
+                </button>
+                <span className="zoom-level">{Math.round(zoom * 100)}%</span>
+                <button className="zoom-button" onClick={() => setZoom(prev => Math.min(prev + 0.1, 2))}>
+                  🔍+
+                </button>
+                <button className="zoom-button" onClick={() => setZoom(1)}>
+                  ⊙
+                </button>
+              </div>
               {currentTurn === socket?.id && (
                 <button className="knock-button" onClick={endTurn}>
                   👊 KNOCK
@@ -828,30 +963,34 @@ const removeNWO = (color) => {
       <div className="play-area">
         <div className={`shared-play-area ${isDragOver ? 'drag-over' : ''}`} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}>
       {/* Find and REPLACE: <div className="cards-container" ref={cardsContainerRef}> */}
-      <div className="cards-container" ref={cardsContainerRef}>
+      <div 
+        className="cards-container" 
+        ref={cardsContainerRef}
+        style={{
+          transform: `scale(${zoom})`,
+          transformOrigin: 'center center',
+          transition: 'transform 0.2s ease'
+        }}
+      >
         {/* Player Zones */}
         {playerZones && (
           <>
-            <div 
-              className="player-zone my-zone"
-              style={{
-                left: playerZones.myZone.x + 'px',
-                top: playerZones.myZone.y + 'px',
-                width: playerZones.myZone.width + 'px',
-                height: playerZones.myZone.height + 'px',
-                backgroundColor: playerZones.myZone.color
-              }}
-            />
-            <div 
-              className="player-zone opponent-zone"
-              style={{
-                left: playerZones.opponentZone.x + 'px',
-                top: playerZones.opponentZone.y + 'px',
-                width: playerZones.opponentZone.width + 'px',
-                height: playerZones.opponentZone.height + 'px',
-                backgroundColor: playerZones.opponentZone.color
-              }}
-            />
+            {Object.entries(playerZones).map(([key, zone]) => (
+              <div 
+                key={key}
+                className={`player-zone ${key === 'myZone' ? 'my-zone' : ''}`}
+                style={{
+                  left: zone.x + 'px',
+                  top: zone.y + 'px',
+                  width: zone.width + 'px',
+                  height: zone.height + 'px',
+                  backgroundColor: zone.color,
+                  borderColor: BOARD_CONFIG.playerColorsBright[zone.colorIndex]
+                }}
+              >
+                <div className="zone-label">{zone.playerName}</div>
+              </div>
+            ))}
           </>
         )}
 

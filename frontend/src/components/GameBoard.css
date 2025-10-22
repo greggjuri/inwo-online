@@ -327,6 +327,49 @@
   transform: translateY(0);
 }
 
+.dice-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.6);
+}
+
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.zoom-button {
+  padding: 0.3rem 0.6rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+  color: white;
+  border: 1px solid rgba(102, 126, 234, 0.4);
+}
+
+.zoom-button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.5), rgba(118, 75, 162, 0.5));
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.zoom-level {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  min-width: 45px;
+  text-align: center;
+}
+
 .view-board-button {
   padding: 0.3rem 0.75rem;
   border: none;
@@ -509,6 +552,22 @@
   pointer-events: none;
   border: 2px solid rgba(255, 255, 255, 0.1);
   transition: background-color 0.3s ease;
+}
+
+.zone-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.25rem 0.75rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  backdrop-filter: blur(5px);
+  pointer-events: none;
 }
 
 .player-zone.my-zone {
@@ -1000,6 +1059,28 @@
   background: linear-gradient(135deg, rgba(239, 68, 68, 0.6), rgba(220, 38, 38, 0.6));
   border-color: rgba(239, 68, 68, 0.8);
   box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+}
+
+.player-badge.player-green {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(22, 163, 74, 0.3));
+  border-color: rgba(34, 197, 94, 0.5);
+}
+
+.player-badge.player-green.current-turn {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.6), rgba(22, 163, 74, 0.6));
+  border-color: rgba(34, 197, 94, 0.8);
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+}
+
+.player-badge.player-purple {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(147, 51, 234, 0.3));
+  border-color: rgba(168, 85, 247, 0.5);
+}
+
+.player-badge.player-purple.current-turn {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.6), rgba(147, 51, 234, 0.6));
+  border-color: rgba(168, 85, 247, 0.8);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
 }
 
 .player-badge.current-turn::before {
