@@ -25,17 +25,17 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       const myIndex = allPlayers.findIndex(p => p.id === myPlayerId);
       return {
         myZone: {
-          x: 0,
-          y: myIndex === 0 ? 0 : BOARD_CONFIG.height / 2,
-          width: BOARD_CONFIG.width,
-          height: BOARD_CONFIG.height / 2,
+          x: myIndex === 0 ? 0 : BOARD_CONFIG.width / 2,
+          y: 0,
+          width: BOARD_CONFIG.width / 2,
+          height: BOARD_CONFIG.height,
           color: myIndex === 0 ? 'rgba(59, 130, 246, 0.08)' : 'rgba(239, 68, 68, 0.08)' // blue or red tint
         },
         opponentZone: {
-          x: 0,
-          y: myIndex === 0 ? BOARD_CONFIG.height / 2 : 0,
-          width: BOARD_CONFIG.width,
-          height: BOARD_CONFIG.height / 2,
+          x: myIndex === 0 ? BOARD_CONFIG.width / 2 : 0,
+          y: 0,
+          width: BOARD_CONFIG.width / 2,
+          height: BOARD_CONFIG.height,
           color: myIndex === 0 ? 'rgba(239, 68, 68, 0.08)' : 'rgba(59, 130, 246, 0.08)'
         }
       };
