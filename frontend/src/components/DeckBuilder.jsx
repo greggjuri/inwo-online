@@ -8,6 +8,7 @@ import { deckStorage } from '../services/deckStorage';
 const DeckBuilder = ({ onStartGame }) => {
   const [selectedCards, setSelectedCards] = useState([]);
   const [filter, setFilter] = useState('all');
+  const [alignmentFilter, setAlignmentFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCard, setSelectedCard] = useState(null);
   const [showSaveModal, setShowSaveModal] = useState(false);
@@ -18,13 +19,31 @@ const DeckBuilder = ({ onStartGame }) => {
 
   // Load decks when component mounts
   useEffect(() => {
-      loadDecks();
-    }, []);
+    loadDecks();
+  }, []);
+
+  // Reset alignment filter when card type filter changes
+  useEffect(() => {
+    if (filter !== 'groups') {
+      setAlignmentFilter('all');
+    }
+  }, [filter]);
 
   const loadDecks = async () => {
     const decks = await deckStorage.getDecks();
     setSavedDecks(decks);
   };
+
+  // Get all unique alignments from group cards
+  const availableAlignments = useMemo(() => {
+    const alignments = new Set();
+    cardsData.cards
+      .filter(card => card.type === 'groups' && card.alignment)
+      .forEach(card => {
+        card.alignment.forEach(align => alignments.add(align));
+      });
+    return Array.from(alignments).sort();
+  }, []);
 
   // Organize cards by type in the order: illuminati, groups, resources, plots
   const organizedCards = useMemo(() => {
@@ -40,6 +59,14 @@ const DeckBuilder = ({ onStartGame }) => {
     // If filter is active, only show that type
     if (filter !== 'all') {
       cards = cards.filter(card => card.type === filter);
+      
+      // Apply alignment filter if on groups
+      if (filter === 'groups' && alignmentFilter !== 'all') {
+        cards = cards.filter(card => 
+          card.alignment && card.alignment.includes(alignmentFilter)
+        );
+      }
+      
       return { [filter]: cards };
     }
     
@@ -51,10 +78,17 @@ const DeckBuilder = ({ onStartGame }) => {
       plots: cards.filter(c => c.type === 'plots')
     };
     
+    // Apply alignment filter to groups if needed
+    if (alignmentFilter !== 'all') {
+      organized.groups = organized.groups.filter(card =>
+        card.alignment && card.alignment.includes(alignmentFilter)
+      );
+    }
+    
     return organized;
-  }, [filter, searchTerm]);
+  }, [filter, alignmentFilter, searchTerm]);
 
-  // Get card counts by type
+  // Get card counts by type and alignment
   const cardCounts = useMemo(() => {
     const counts = {
       all: cardsData.cards.length,
@@ -70,6 +104,35 @@ const DeckBuilder = ({ onStartGame }) => {
     
     return counts;
   }, []);
+
+  // Get alignment counts
+  const alignmentCounts = useMemo(() => {
+    const counts = { all: 0 };
+    cardsData.cards
+      .filter(card => card.type === 'groups')
+      .forEach(card => {
+        counts.all++;
+        if (card.alignment) {
+          card.alignment.forEach(align => {
+            counts[align] = (counts[align] || 0) + 1;
+          });
+        }
+      });
+    return counts;
+  }, []);
+
+  const handleCardClick = (card) => {
+    setSelectedCards([...selectedCards, card]);
+  };
+
+  const removeFromDeck = (index) => {
+    setSelectedCards(selectedCards.filter((_, i) => i !== index));
+  };
+
+  const handleCardRightClick = (e, card) => {
+    e.preventDefault();
+    setSelectedCard(card);
+  };
 
   // Save deck using storage service
   const saveDeck = async () => {
@@ -103,44 +166,29 @@ const DeckBuilder = ({ onStartGame }) => {
     }
   };
 
-  // Load a saved deck
+  // Load deck from saved list
   const loadDeck = (deck) => {
     setSelectedCards(deck.cards);
     setShowLoadModal(false);
-    alert(`Loaded deck: ${deck.name}`);
+    alert(`Deck "${deck.name}" loaded successfully!`);
   };
 
   // Delete a saved deck
   const deleteDeck = async (deckId) => {
-    if (!confirm('Are you sure you want to delete this deck?')) return;
-
-    try {
-      await deckStorage.deleteDeck(deckId);
-      await loadDecks(); // Refresh the deck list
-    } catch (error) {
-      console.error('Error deleting deck:', error);
-      alert('Error deleting deck. Please try again.');
+    if (window.confirm('Are you sure you want to delete this deck?')) {
+      try {
+        await deckStorage.deleteDeck(deckId);
+        await loadDecks(); // Refresh the deck list
+      } catch (error) {
+        console.error('Error deleting deck:', error);
+        alert('Error deleting deck. Please try again.');
+      }
     }
-  };
-
-  const handleCardClick = (card) => {
-    // Add card to deck (allow duplicates)
-    setSelectedCards(prev => [...prev, card]);
-  };
-
-  const handleCardRightClick = (e, card) => {
-    e.preventDefault();
-    // Show preview on right-click
-    setSelectedCard(card);
-  };
-
-  const removeFromDeck = (index) => {
-    setSelectedCards(prev => prev.filter((_, i) => i !== index));
   };
 
   const handleStartGame = () => {
     if (selectedCards.length === 0) {
-      alert('Please select at least one card for your deck!');
+      alert('Please add some cards to your deck before starting!');
       return;
     }
     
@@ -245,6 +293,30 @@ const DeckBuilder = ({ onStartGame }) => {
                 Plots ({cardCounts.plots})
               </button>
             </div>
+
+            {/* Alignment Filter - Only show when Groups filter is active */}
+            {filter === 'groups' && (
+              <div className="alignment-filters">
+                <div className="filter-label">Filter by Alignment:</div>
+                <div className="filter-buttons">
+                  <button 
+                    className={alignmentFilter === 'all' ? 'active' : ''}
+                    onClick={() => setAlignmentFilter('all')}
+                  >
+                    All ({alignmentCounts.all})
+                  </button>
+                  {availableAlignments.map(alignment => (
+                    <button 
+                      key={alignment}
+                      className={alignmentFilter === alignment ? 'active' : ''}
+                      onClick={() => setAlignmentFilter(alignment)}
+                    >
+                      {alignment} ({alignmentCounts[alignment] || 0})
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="cards-organized">
@@ -281,7 +353,7 @@ const DeckBuilder = ({ onStartGame }) => {
 
           {Object.values(organizedCards).every(arr => arr.length === 0) && (
             <div className="no-cards">
-              <p>No cards found matching "{searchTerm}"</p>
+              <p>No cards found matching your filters</p>
             </div>
           )}
         </div>

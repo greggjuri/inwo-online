@@ -977,3 +977,51 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
 }
+/* Additional styles for alignment filters */
+
+.alignment-filters {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.alignment-filters .filter-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.alignment-filters .filter-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.alignment-filters .filter-buttons button {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+}
+
+/* Improve the filter button hover states */
+.filter-buttons button:active {
+  transform: scale(0.95);
+}
+
+/* Add subtle animation when alignment filters appear */
+.alignment-filters {
+  animation: slideInDown 0.3s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
