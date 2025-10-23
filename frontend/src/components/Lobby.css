@@ -469,6 +469,130 @@
   transform: translateY(0);
 }
 
+/* Player Count Selection */
+.player-count-group {
+  margin: 25px 0;
+  animation: slideIn 0.5s ease-out 0.4s both;
+}
+
+.player-count-selector {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.player-count-btn {
+  flex: 1;
+  padding: 20px 15px;
+  background: linear-gradient(180deg, rgba(51, 51, 51, 0.95) 0%, rgba(34, 34, 34, 0.95) 100%);
+  border: 3px solid rgba(139, 0, 0, 0.5);
+  border-radius: 10px;
+  color: #cc7700;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5),
+              inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.player-count-btn:hover {
+  transform: translateY(-3px);
+  border-color: rgba(204, 119, 0, 0.8);
+  background: linear-gradient(180deg, rgba(60, 60, 60, 0.95) 0%, rgba(40, 40, 40, 0.95) 100%);
+  box-shadow: 0 6px 20px rgba(204, 119, 0, 0.3),
+              0 0 30px rgba(204, 119, 0, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.player-count-btn.active {
+  background: linear-gradient(180deg, rgba(139, 0, 0, 0.9) 0%, rgba(85, 0, 0, 0.9) 100%);
+  border-color: #cc0000;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(139, 0, 0, 0.6),
+              0 0 40px rgba(204, 0, 0, 0.4),
+              inset 0 1px 0 rgba(255, 80, 80, 0.3);
+}
+
+.player-count-btn.active:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(139, 0, 0, 0.7),
+              0 0 50px rgba(204, 0, 0, 0.5),
+              inset 0 1px 0 rgba(255, 80, 80, 0.4);
+}
+
+.count-number {
+  font-size: 32px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 0 15px currentColor,
+               2px 2px 4px rgba(0, 0, 0, 0.9);
+  line-height: 1;
+}
+
+.player-count-btn.active .count-number {
+  color: #ffaa00;
+  text-shadow: 0 0 20px #ff6600,
+               0 0 40px #ff3300,
+               2px 2px 6px rgba(0, 0, 0, 0.9);
+}
+
+.count-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #888;
+  font-weight: 600;
+}
+
+.player-count-btn.active .count-label {
+  color: #ffcc00;
+  text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+}
+
+.player-count-hint {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 13px;
+  color: #888;
+  font-style: italic;
+  letter-spacing: 0.5px;
+}
+
+/* Animation for player count group */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments for player count */
+@media (max-width: 768px) {
+  .player-count-selector {
+    flex-direction: column;
+  }
+  
+  .player-count-btn {
+    flex-direction: row;
+    justify-content: center;
+    padding: 15px 20px;
+    gap: 15px;
+  }
+  
+  .count-number {
+    font-size: 28px;
+  }
+}
+
 .form-divider {
   display: flex;
   align-items: center;

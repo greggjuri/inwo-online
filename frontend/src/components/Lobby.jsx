@@ -5,6 +5,8 @@ import './Lobby.css';
 const Lobby = ({ onJoinRoom }) => {
   const [roomId, setRoomId] = useState('');
   const [playerName, setPlayerName] = useState('');
+  const [playerCount, setPlayerCount] = useState(2);
+  const [isCreatingRoom, setIsCreatingRoom] = useState(false);
   const { connected } = useSocket();
   const audioRef = useRef(null);
   const fadeIntervalRef = useRef(null);
@@ -25,22 +27,19 @@ const Lobby = ({ onJoinRoom }) => {
   useEffect(() => {
     audioRef.current = new Audio('/inwo/audio/Oculus_Omnia_Videns.mp3');
     audioRef.current.loop = true;
-    audioRef.current.volume = 0.6; // Set initial volume (0.0 to 1.0)
+    audioRef.current.volume = 0.6;
     
-    // Try to play audio
     const playAudio = async () => {
       try {
         await audioRef.current.play();
         audioStartedRef.current = true;
       } catch (error) {
         console.log('Audio autoplay prevented - will play on first interaction');
-        // Audio will play on first user interaction via startAudioOnInteraction
       }
     };
     
     playAudio();
 
-    // Cleanup on unmount
     return () => {
       if (fadeIntervalRef.current) {
         clearInterval(fadeIntervalRef.current);
@@ -52,7 +51,6 @@ const Lobby = ({ onJoinRoom }) => {
     };
   }, []);
 
-  // Start audio on any user interaction
   const startAudioOnInteraction = async () => {
     if (!audioStartedRef.current && audioRef.current) {
       try {
@@ -64,7 +62,6 @@ const Lobby = ({ onJoinRoom }) => {
     }
   };
 
-  // Fade out audio
   const fadeOutAudio = (duration = 1500) => {
     return new Promise((resolve) => {
       if (!audioRef.current) {
@@ -73,7 +70,7 @@ const Lobby = ({ onJoinRoom }) => {
       }
 
       const startVolume = audioRef.current.volume;
-      const fadeStep = startVolume / (duration / 50); // 50ms intervals
+      const fadeStep = startVolume / (duration / 50);
 
       fadeIntervalRef.current = setInterval(() => {
         if (audioRef.current.volume > fadeStep) {
@@ -91,16 +88,21 @@ const Lobby = ({ onJoinRoom }) => {
   const handleJoin = async (e) => {
     e.preventDefault();
     if (roomId && playerName) {
-      // Fade out music before transitioning
-      await fadeOutAudio(1500); // 1.5 second fade
-      onJoinRoom(roomId, playerName);
+      await fadeOutAudio(1500);
+      onJoinRoom(roomId, playerName, isCreatingRoom ? playerCount : undefined);
     }
   };
 
   const generateRoomId = () => {
     const newRoomId = Math.random().toString(36).substring(2, 8).toUpperCase();
     setRoomId(newRoomId);
+    setIsCreatingRoom(true);
     startAudioOnInteraction();
+  };
+
+  const handleRoomIdChange = (e) => {
+    setRoomId(e.target.value.toUpperCase());
+    setIsCreatingRoom(e.target.value.length === 0);
   };
 
   return (
@@ -203,7 +205,6 @@ const Lobby = ({ onJoinRoom }) => {
 
         {/* Center Panel - Induction Form */}
         <div className="center-panel">
-
           <div className="form-container">
             <div className="induction-header">
               <div className="title-eye">👁️</div>
@@ -258,10 +259,7 @@ const Lobby = ({ onJoinRoom }) => {
                       type="text"
                       placeholder="Enter cipher..."
                       value={roomId}
-                      onChange={(e) => {
-                        setRoomId(e.target.value.toUpperCase());
-                        startAudioOnInteraction();
-                      }}
+                      onChange={handleRoomIdChange}
                       required
                       maxLength={6}
                       className="form-input"
@@ -278,6 +276,36 @@ const Lobby = ({ onJoinRoom }) => {
                   </button>
                 </div>
               </div>
+
+              {/* Player Count Selection - Only show when creating a room */}
+              {isCreatingRoom && roomId && (
+                <div className="form-group player-count-group">
+                  <label htmlFor="playerCount" className="form-label">
+                    <span className="label-icon">👥</span>
+                    OPERATIVE COUNT
+                    <span className="required">*STRATEGIC</span>
+                  </label>
+                  <div className="player-count-selector">
+                    {[2, 3, 4].map((count) => (
+                      <button
+                        key={count}
+                        type="button"
+                        className={`player-count-btn ${playerCount === count ? 'active' : ''}`}
+                        onClick={() => {
+                          setPlayerCount(count);
+                          startAudioOnInteraction();
+                        }}
+                      >
+                        <span className="count-number">{count}</span>
+                        <span className="count-label">PLAYERS</span>
+                      </button>
+                    ))}
+                  </div>
+                  <div className="player-count-hint">
+                    Select the number of conspirators for this operation
+                  </div>
+                </div>
+              )}
 
               {/* Divider */}
               <div className="form-divider">

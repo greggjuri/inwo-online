@@ -6,7 +6,7 @@ import Dice3D from './Dice';
 import './Dice.css';
 import './GameBoard.css';
 
-const GameBoard = ({ roomId, playerName, playerDeck }) => {
+const GameBoard = ({ roomId, playerName, playerDeck, playerCount }) => {
 // Board configuration constants
   const BOARD_CONFIG = {
     width: 2400,
@@ -198,7 +198,19 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
   useEffect(() => {
     if (!socket || !playerDeck || playerDeck.length === 0) return;
 
-    socket.emit('join-room', { roomId, playerName });
+    socket.emit('join-room', { roomId, playerName, playerCount });
+
+        // Handle room full event
+    socket.on('room-full', ({ maxPlayers }) => {
+      alert(`This room is full! Maximum ${maxPlayers} players allowed.`);
+      // Optionally: redirect back to lobby here
+    });
+
+    // Handle setup progress (waiting for other players)
+    socket.on('setup-progress', ({ readyCount, maxPlayers }) => {
+      console.log(`Waiting for players: ${readyCount}/${maxPlayers} ready`);
+      // You can show this in UI later if desired
+    });
 
     const illuminati = playerDeck.filter(c => c.type === 'illuminati');
     const groups = playerDeck.filter(c => c.type === 'groups');
@@ -219,14 +231,17 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       }
     });
 
-    socket.on('player-joined', ({ playerId, playerName: newPlayerName }) => {
+    socket.on('player-joined', ({ playerId, playerName: newPlayerName, currentPlayerCount, maxPlayers }) => {
       setPlayers(prev => {
         const exists = prev.find(p => p.id === playerId);
         if (exists) return prev;
         return [...prev, { id: playerId, name: newPlayerName }];
       });
       
+      console.log(`${newPlayerName} joined! (${currentPlayerCount}/${maxPlayers} players)`);
+      
       setPlayers(prev => {
+        // Update player zones when player count changes
         if (prev.length >= 2) {
           setPlayerZones(getPlayerZones(prev.length, socket.id, prev));
         }
@@ -330,8 +345,10 @@ const GameBoard = ({ roomId, playerName, playerDeck }) => {
       socket.off('turn-number-updated');
       socket.off('nwo-played');
       socket.off('nwo-removed');
+      socket.off('room-full');
+      socket.off('setup-progress'); 
     };
-  }, [socket, roomId, playerName, playerDeck]);
+  }, [socket, roomId, playerName, playerDeck, playerCount]);
 
   const groupedHand = useMemo(() => {
     const groups = { illuminati: [], groups: [], resources: [], plots: [] };
@@ -376,6 +393,7 @@ const handleSetupDone = () => {
   
   // Notify server that this player is ready
   socket.emit('setup-done', { roomId });
+  alert(`Setup complete! Waiting for other players... (${players.length}/${playerCount || 2})`);
 };
 
 const endTurn = () => {

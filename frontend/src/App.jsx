@@ -10,15 +10,19 @@ function App() {
   const [roomId, setRoomId] = useState(null);
   const [playerName, setPlayerName] = useState('');
   const [playerDeck, setPlayerDeck] = useState([]);
+  const [playerCount, setPlayerCount] = useState(2); // New state for player count
 
   return (
     <SocketProvider>
       <div className="App">
         {gameState === 'lobby' && (
           <Lobby
-            onJoinRoom={(room, name) => {
+            onJoinRoom={(room, name, count) => {
               setRoomId(room);
               setPlayerName(name);
+              if (count !== undefined) {
+                setPlayerCount(count); // Set player count if provided (room creator)
+              }
               setGameState('deck-builder');
             }}
           />
@@ -36,6 +40,7 @@ function App() {
             roomId={roomId} 
             playerName={playerName}
             playerDeck={playerDeck}
+            playerCount={playerCount} // Pass player count to GameBoard
           />
         )}
       </div>

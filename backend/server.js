@@ -45,13 +45,15 @@ const gameRooms = new Map();
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
 
-// Create or join a room
-socket.on('join-room', ({ roomId, playerName }) => {
-  socket.join(roomId);
-  
+  // Create or join a room
+  socket.on('join-room', ({ roomId, playerName, playerCount }) => {
+    socket.join(roomId);
+    
     if (!gameRooms.has(roomId)) {
+      // Create new room with player count (default to 2 if not provided)
       gameRooms.set(roomId, {
         players: [],
+        maxPlayers: playerCount || 2, // NEW: Store max players for the room
         gameState: {
           board: [],
           currentTurn: null,
@@ -60,33 +62,47 @@ socket.on('join-room', ({ roomId, playerName }) => {
         setupReady: [],
         knockedThisRound: []
       });
+      console.log(`Created room ${roomId} for ${playerCount || 2} players`);
     }
+    
     const room = gameRooms.get(roomId);
     
-    // Add player if not already in room (max 2 players)
-    if (room.players.length < 2 && !room.players.find(p => p.id === socket.id)) {
+    // Check if room is full
+    if (room.players.length >= room.maxPlayers) {
+      socket.emit('room-full', { 
+        roomId, 
+        maxPlayers: room.maxPlayers 
+      });
+      console.log(`Room ${roomId} is full (${room.maxPlayers} players)`);
+      return;
+    }
+    
+    // Add player if not already in room
+    if (!room.players.find(p => p.id === socket.id)) {
       room.players.push({
         id: socket.id,
         name: playerName,
         hand: [],
         deck: []
       });
+      console.log(`${playerName} joined room ${roomId} (${room.players.length}/${room.maxPlayers})`);
     }
 
     // Send current room state to the joining player
     socket.emit('room-joined', {
       roomId,
       players: room.players,
+      maxPlayers: room.maxPlayers, // NEW: Send max players to client
       gameState: room.gameState
     });
 
     // Notify other players in room
     socket.to(roomId).emit('player-joined', {
       playerId: socket.id,
-      playerName
+      playerName,
+      currentPlayerCount: room.players.length,
+      maxPlayers: room.maxPlayers
     });
-
-    console.log(`${playerName} joined room ${roomId}`);
   });
 
   // Handle card movements
@@ -151,6 +167,44 @@ socket.on('join-room', ({ roomId, playerName }) => {
     });
   });
 
+  // Handle turn changes (knock)
+  socket.on('knock', ({ roomId }) => {
+    const room = gameRooms.get(roomId);
+    if (!room) return;
+
+    // Add current player to knocked list
+    if (!room.knockedThisRound.includes(socket.id)) {
+      room.knockedThisRound.push(socket.id);
+    }
+
+    // Check if all players have knocked (UPDATED for multiple players)
+    if (room.knockedThisRound.length === room.maxPlayers) {
+      // All players knocked - new round
+      room.knockedThisRound = [];
+      room.gameState.turnNumber += 1;
+      
+      io.to(roomId).emit('turn-number-updated', {
+        turnNumber: room.gameState.turnNumber
+      });
+    }
+
+    // Find next player who hasn't knocked yet
+    const currentPlayerIndex = room.players.findIndex(p => p.id === socket.id);
+    let nextPlayerIndex = (currentPlayerIndex + 1) % room.players.length;
+    
+    // Skip players who already knocked this round
+    while (room.knockedThisRound.includes(room.players[nextPlayerIndex].id) && 
+           room.knockedThisRound.length < room.maxPlayers) {
+      nextPlayerIndex = (nextPlayerIndex + 1) % room.players.length;
+    }
+
+    room.gameState.currentTurn = room.players[nextPlayerIndex].id;
+    
+    io.to(roomId).emit('turn-changed', {
+      currentTurn: room.gameState.currentTurn
+    });
+  });
+
   // Handle dice roll - FIXED to roll TWO dice
   socket.on('roll-dice', ({ roomId, sides }) => {
     const dice1 = Math.floor(Math.random() * sides) + 1;
@@ -161,11 +215,6 @@ socket.on('join-room', ({ roomId, playerName }) => {
       dice1,
       dice2
     });
-  });
-
-  // Handle closing dice popup
-  socket.on('close-dice', ({ roomId }) => {
-    socket.to(roomId).emit('dice-closed');
   });
 
   // Handle closing dice popup
@@ -191,67 +240,43 @@ socket.on('join-room', ({ roomId, playerName }) => {
     });
   });
 
-// Handle setup completion
-socket.on('setup-done', ({ roomId }) => {
-  const room = gameRooms.get(roomId);
-  if (!room) return;
-  
-  // Add player to ready list
-  if (!room.setupReady.includes(socket.id)) {
-    room.setupReady.push(socket.id);
-  }
-  
-  // Check if both players are ready
-  if (room.setupReady.length === 2) {
-    // Randomize starting player
-    const randomIndex = Math.floor(Math.random() * 2);
-    const startingPlayerId = room.players[randomIndex].id;
-    room.gameState.currentTurn = startingPlayerId;
-    room.gameState.turnNumber = 1;
-    room.knockedThisRound = [];
+  // Handle setup completion - UPDATED for multiple players
+  socket.on('setup-done', ({ roomId }) => {
+    const room = gameRooms.get(roomId);
+    if (!room) return;
     
-    // Notify all players
-    io.to(roomId).emit('game-started', {
-      currentTurn: startingPlayerId,
-      startingPlayerName: room.players[randomIndex].name,
-      turnNumber: 1
-    });
-  }
-});
-
-// Handle turn change
-socket.on('end-turn', ({ roomId }) => {
-  const room = gameRooms.get(roomId);
-  if (!room) return;
-  
-  // Track who knocked this round
-  if (!room.knockedThisRound.includes(socket.id)) {
-    room.knockedThisRound.push(socket.id);
-  }
-  
-  // Find current player index
-  const currentIndex = room.players.findIndex(p => p.id === room.gameState.currentTurn);
-  // Switch to next player
-  const nextIndex = (currentIndex + 1) % room.players.length;
-  room.gameState.currentTurn = room.players[nextIndex].id;
-  
-  // Check if both players have knocked (round complete)
-  if (room.knockedThisRound.length === 2) {
-    room.gameState.turnNumber++;
-    room.knockedThisRound = [];
+    // Add player to ready list
+    if (!room.setupReady.includes(socket.id)) {
+      room.setupReady.push(socket.id);
+    }
     
-    // Notify all players of new turn number
-    io.to(roomId).emit('turn-number-updated', {
-      turnNumber: room.gameState.turnNumber
-    });
-  }
-  
-  io.to(roomId).emit('turn-changed', {
-    currentTurn: room.gameState.currentTurn
+    // Check if all players are ready (UPDATED)
+    if (room.setupReady.length === room.maxPlayers) {
+      // Randomize starting player
+      const randomIndex = Math.floor(Math.random() * room.maxPlayers);
+      const startingPlayerId = room.players[randomIndex].id;
+      room.gameState.currentTurn = startingPlayerId;
+      room.gameState.turnNumber = 1;
+      room.knockedThisRound = [];
+      
+      // Notify all players
+      io.to(roomId).emit('game-started', {
+        currentTurn: startingPlayerId,
+        startingPlayerName: room.players[randomIndex].name,
+        turnNumber: 1
+      });
+      
+      console.log(`Game started in room ${roomId} with ${room.maxPlayers} players. ${room.players[randomIndex].name} goes first!`);
+    } else {
+      // Notify players waiting
+      io.to(roomId).emit('setup-progress', {
+        readyCount: room.setupReady.length,
+        maxPlayers: room.maxPlayers
+      });
+    }
   });
-});
 
-  // Handle disconnect
+  // Handle player disconnection
   socket.on('disconnect', () => {
     console.log('User disconnected:', socket.id);
     
@@ -259,18 +284,21 @@ socket.on('end-turn', ({ roomId }) => {
     gameRooms.forEach((room, roomId) => {
       const playerIndex = room.players.findIndex(p => p.id === socket.id);
       if (playerIndex !== -1) {
-        const player = room.players[playerIndex];
+        const playerName = room.players[playerIndex].name;
         room.players.splice(playerIndex, 1);
+        room.setupReady = room.setupReady.filter(id => id !== socket.id);
         
-        // Notify other players
+        // Notify remaining players
         socket.to(roomId).emit('player-left', {
           playerId: socket.id,
-          playerName: player.name
+          playerName,
+          remainingPlayers: room.players.length
         });
-
-        // Clean up empty rooms
+        
+        // Delete room if empty
         if (room.players.length === 0) {
           gameRooms.delete(roomId);
+          console.log(`Room ${roomId} deleted (empty)`);
         }
       }
     });
