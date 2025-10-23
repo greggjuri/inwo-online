@@ -93,10 +93,10 @@
       "filename": "plots/alien-abduction.webp"
     },
     {
-      "id": "alternate-goal",
-      "name": "Alternate Goal",
+      "id": "alternate-goals",
+      "name": "Alternate Goals",
       "type": "plots",
-      "filename": "plots/alternate-goal.webp"
+      "filename": "plots/alternate-goals.webp"
     },
     {
       "id": "ama",
@@ -153,10 +153,10 @@
       "filename": "plots/and-stay-dead.webp"
     },
     {
-      "id": "angel-s-feather",
+      "id": "angels-feather",
       "name": "Angel'S Feather",
       "type": "resources",
-      "filename": "resources/angel's-feather.webp"
+      "filename": "resources/angels-feather.webp"
     },
     {
       "id": "angst",
@@ -888,6 +888,12 @@
       ]
     },
     {
+      "id": "cold-fusion",
+      "name": "Cold Fusion",
+      "type": "plots",
+      "filename": "plots/cold-fusion.webp"
+    },
+    {
       "id": "combined-disasters",
       "name": "Combined Disasters",
       "type": "plots",
@@ -1036,10 +1042,10 @@
       "filename": "plots/cover-of-darkness.webp"
     },
     {
-      "id": "coverup",
-      "name": "Coverup",
+      "id": "cover-up",
+      "name": "Cover Up",
       "type": "plots",
-      "filename": "plots/coverup.webp"
+      "filename": "plots/cover-up.webp"
     },
     {
       "id": "crackdown-on-crime",
@@ -1352,10 +1358,10 @@
       "filename": "plots/eat-the-rich.webp"
     },
     {
-      "id": "eco-guerillas",
-      "name": "Eco Guerillas",
+      "id": "eco-guerrillas",
+      "name": "Eco Guerrillas",
       "type": "groups",
-      "filename": "groups/eco-guerillas.webp",
+      "filename": "groups/eco-guerrillas.webp",
       "power": 1,
       "globalPower": 1,
       "resistance": 6,
@@ -2016,12 +2022,6 @@
       "filename": "plots/go-lemmings-go.webp"
     },
     {
-      "id": "gold-fushion",
-      "name": "Gold Fushion",
-      "type": "plots",
-      "filename": "plots/gold-fushion.webp"
-    },
-    {
       "id": "goldfish-fanciers",
       "name": "Goldfish Fanciers",
       "type": "groups",
@@ -2128,8 +2128,8 @@
     {
       "id": "hallucinations",
       "name": "Hallucinations",
-      "type": "plots",
-      "filename": "plots/hallucinations.webp"
+      "type": "resources",
+      "filename": "resources/hallucinations.webp"
     },
     {
       "id": "hammer-of-thor",
@@ -2215,10 +2215,10 @@
       "filename": "plots/hit-and-run.webp"
     },
     {
-      "id": "hitler-s-brain",
+      "id": "hitlers-brain",
       "name": "Hitler'S Brain",
       "type": "resources",
-      "filename": "resources/hitler's-brain.webp"
+      "filename": "resources/hitlers-brain.webp"
     },
     {
       "id": "hoax",
@@ -2308,10 +2308,10 @@
       "filename": "resources/immortality-serum.webp"
     },
     {
-      "id": "imposter",
-      "name": "Imposter",
+      "id": "impostor",
+      "name": "Impostor",
       "type": "plots",
-      "filename": "plots/imposter.webp"
+      "filename": "plots/impostor.webp"
     },
     {
       "id": "infobahn",
@@ -2383,10 +2383,10 @@
       ]
     },
     {
-      "id": "international-weather-organisation",
-      "name": "International Weather Organisation",
+      "id": "international-weather-organization",
+      "name": "International Weather Organization",
       "type": "groups",
-      "filename": "groups/international-weather-organisation.webp",
+      "filename": "groups/international-weather-organization.webp",
       "power": 1,
       "resistance": 2,
       "alignment": [
@@ -2886,10 +2886,10 @@
       ]
     },
     {
-      "id": "market-illumination",
-      "name": "Market Illumination",
+      "id": "market-manipulation",
+      "name": "Market Manipulation",
       "type": "plots",
-      "filename": "plots/market-illumination.webp"
+      "filename": "plots/market-manipulation.webp"
     },
     {
       "id": "martial-law",
@@ -3128,10 +3128,10 @@
       ]
     },
     {
-      "id": "murphy-s-law",
+      "id": "murphys-law",
       "name": "Murphy'S Law",
       "type": "plots",
-      "filename": "plots/murphy's-law.webp"
+      "filename": "plots/murphys-law.webp"
     },
     {
       "id": "mutual-betrayal",
@@ -3248,10 +3248,10 @@
       "filename": "plots/new-blood.webp"
     },
     {
-      "id": "new-federal-budgets",
-      "name": "New Federal Budgets",
+      "id": "new-federal-budget",
+      "name": "New Federal Budget",
       "type": "plots",
-      "filename": "plots/new-federal-budgets.webp"
+      "filename": "plots/new-federal-budget.webp"
     },
     {
       "id": "new-york",
@@ -3794,10 +3794,10 @@
       "incomingArrow": "top"
     },
     {
-      "id": "pulitzer-price",
-      "name": "Pulitzer Price",
+      "id": "pulitzer-prize",
+      "name": "Pulitzer Prize",
       "type": "plots",
-      "filename": "plots/pulitzer-price.webp"
+      "filename": "plots/pulitzer-prize.webp"
     },
     {
       "id": "punk-rockers",
@@ -4176,7 +4176,7 @@
       "id": "savings-loan-scam",
       "name": "Savings & Loan Scam",
       "type": "plots",
-      "filename": "plots/savings-&-loan-scam.webp"
+      "filename": "plots/savings-loan-scam.webp"
     },
     {
       "id": "scandal",
@@ -4412,10 +4412,10 @@
       "filename": "resources/soulburner.webp"
     },
     {
-      "id": "south-americans-nazis",
-      "name": "South Americans Nazis",
+      "id": "south-american-nazis",
+      "name": "South American Nazis",
       "type": "groups",
-      "filename": "groups/south-americans-nazis.webp",
+      "filename": "groups/south-american-nazis.webp",
       "power": 4,
       "globalPower": 1,
       "resistance": 6,
@@ -4640,8 +4640,8 @@
     {
       "id": "talisman-of-ahrimanes",
       "name": "Talisman Of Ahrimanes",
-      "type": "resources",
-      "filename": "resources/talisman-of-ahrimanes.webp"
+      "type": "plots",
+      "filename": "plots/talisman-of-ahrimanes.webp"
     },
     {
       "id": "tanstaafl",
@@ -5083,10 +5083,10 @@
       "filename": "plots/up-against-the-wall.webp"
     },
     {
-      "id": "upheavel",
-      "name": "Upheavel",
+      "id": "upheaval",
+      "name": "Upheaval",
       "type": "plots",
-      "filename": "plots/upheavel.webp"
+      "filename": "plots/upheaval.webp"
     },
     {
       "id": "urban-gangs",
