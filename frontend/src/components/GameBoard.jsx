@@ -397,7 +397,7 @@ const handleSetupDone = () => {
 };
 
 const endTurn = () => {
-  socket.emit('end-turn', { roomId });
+  socket.emit('knock', { roomId });
 };
 
   const drawFromGroupResource = () => {

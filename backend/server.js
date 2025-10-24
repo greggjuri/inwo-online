@@ -167,7 +167,7 @@ io.on('connection', (socket) => {
     });
   });
 
-  // Handle turn changes (knock)
+  // Handle turn changes (knock) - FIXED FOR MULTIPLAYER
   socket.on('knock', ({ roomId }) => {
     const room = gameRooms.get(roomId);
     if (!room) return;
@@ -177,28 +177,30 @@ io.on('connection', (socket) => {
       room.knockedThisRound.push(socket.id);
     }
 
-    // Check if all players have knocked (UPDATED for multiple players)
-    if (room.knockedThisRound.length === room.maxPlayers) {
-      // All players knocked - new round
+    console.log(`Player ${socket.id} knocked in room ${roomId}. Knocked: ${room.knockedThisRound.length}/${room.maxPlayers}`);
+
+    // Find next player (cycle through all players)
+    const currentPlayerIndex = room.players.findIndex(p => p.id === socket.id);
+    let nextPlayerIndex = (currentPlayerIndex + 1) % room.players.length;
+    
+    // If we've cycled back to a player who already knocked this round,
+    // it means everyone has knocked - start new round
+    if (room.knockedThisRound.includes(room.players[nextPlayerIndex].id)) {
+      // All players have knocked - new round starts
       room.knockedThisRound = [];
       room.gameState.turnNumber += 1;
+      
+      console.log(`Round complete in room ${roomId}. Starting turn ${room.gameState.turnNumber}`);
       
       io.to(roomId).emit('turn-number-updated', {
         turnNumber: room.gameState.turnNumber
       });
     }
 
-    // Find next player who hasn't knocked yet
-    const currentPlayerIndex = room.players.findIndex(p => p.id === socket.id);
-    let nextPlayerIndex = (currentPlayerIndex + 1) % room.players.length;
-    
-    // Skip players who already knocked this round
-    while (room.knockedThisRound.includes(room.players[nextPlayerIndex].id) && 
-           room.knockedThisRound.length < room.maxPlayers) {
-      nextPlayerIndex = (nextPlayerIndex + 1) % room.players.length;
-    }
-
+    // Set next player's turn
     room.gameState.currentTurn = room.players[nextPlayerIndex].id;
+    
+    console.log(`Turn changed to player ${nextPlayerIndex} (${room.players[nextPlayerIndex].name})`);
     
     io.to(roomId).emit('turn-changed', {
       currentTurn: room.gameState.currentTurn
