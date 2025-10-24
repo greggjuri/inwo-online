@@ -370,6 +370,12 @@ const GameBoard = ({ roomId, playerName, playerDeck, playerCount }) => {
   }, [hand, socket, roomId, groupedHand]);
 
 const handleSetupDone = () => {
+  // CRITICAL: Prevent multiple clicks
+  if (setupReady) {
+    console.log('Setup already completed - ignoring duplicate click');
+    return;
+  }
+
   const myPlayedCards = sharedPlayArea.filter(c => c.playerId === socket.id);
   const hasIlluminati = myPlayedCards.some(c => c.type === 'illuminati');
   const hasGroup = myPlayedCards.some(c => c.type === 'groups');
@@ -379,6 +385,9 @@ const handleSetupDone = () => {
     return;
   }
 
+  // Set ready state FIRST before doing anything else
+  setSetupReady(true);
+
   const playedCardIds = myPlayedCards.map(c => c.id);
   const remainingHand = hand.filter(c => !playedCardIds.includes(c.id));
   const remainingGroups = remainingHand.filter(c => c.type === 'groups');
@@ -387,9 +396,8 @@ const handleSetupDone = () => {
   const drawn = groupResourceDeck.slice(0, 6);
   const remainingGroupResource = groupResourceDeck.slice(6);
   const plots = remainingHand.filter(c => c.type === 'plots');
-    setHand([...plots, ...drawn]);
-    setGroupResourcePile(remainingGroupResource);
-    setSetupReady(true);
+  setHand([...plots, ...drawn]);
+  setGroupResourcePile(remainingGroupResource);
   
   // Notify server that this player is ready
   socket.emit('setup-done', { roomId });
@@ -888,7 +896,17 @@ const removeNWO = (color) => {
             </>
           )}
           {gamePhase === 'setup' && (
-            <button className="setup-done-button" onClick={handleSetupDone}>✓ Done</button>
+            <button 
+              className="setup-done-button" 
+              onClick={handleSetupDone}
+              disabled={setupReady}
+              style={{
+                opacity: setupReady ? 0.5 : 1,
+                cursor: setupReady ? 'not-allowed' : 'pointer'
+              }}
+            >
+              {setupReady ? '⏳ Waiting...' : '✓ Done'}
+            </button>
           )}
         </div>
 

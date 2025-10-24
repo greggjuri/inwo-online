@@ -247,10 +247,15 @@ io.on('connection', (socket) => {
     const room = gameRooms.get(roomId);
     if (!room) return;
     
-    // Add player to ready list
-    if (!room.setupReady.includes(socket.id)) {
-      room.setupReady.push(socket.id);
+    // CRITICAL: Prevent same player from clicking Done multiple times
+    if (room.setupReady.includes(socket.id)) {
+      console.log(`Player ${socket.id} already marked as ready - ignoring duplicate click`);
+      return; // Exit early if player already clicked Done
     }
+    
+    // Add player to ready list
+    room.setupReady.push(socket.id);
+    console.log(`Player ${socket.id} marked ready in room ${roomId} (${room.setupReady.length}/${room.maxPlayers})`);
     
     // Check if all players are ready (UPDATED)
     if (room.setupReady.length === room.maxPlayers) {
