@@ -46,24 +46,25 @@ io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
 
   // Create or join a room
-  socket.on('join-room', ({ roomId, playerName, playerCount }) => {
-    socket.join(roomId);
-    
-    if (!gameRooms.has(roomId)) {
-      // Create new room with player count (default to 2 if not provided)
-      gameRooms.set(roomId, {
-        players: [],
-        maxPlayers: playerCount || 2, // NEW: Store max players for the room
-        gameState: {
-          board: [],
-          currentTurn: null,
-          turnNumber: 1
-        },
-        setupReady: [],
-        knockedThisRound: []
-      });
-      console.log(`Created room ${roomId} for ${playerCount || 2} players`);
-    }
+socket.on('join-room', ({ roomId, playerName, playerCount }) => {
+  socket.join(roomId);
+  
+  // Check if room exists (it should have been created by create-room event)
+  if (!gameRooms.has(roomId)) {
+    // Fallback: Create room if it doesn't exist (for backwards compatibility)
+    console.log(`⚠️ Room ${roomId} doesn't exist yet, creating with ${playerCount || 2} players`);
+    gameRooms.set(roomId, {
+      players: [],
+      maxPlayers: playerCount || 2,
+      gameState: {
+        board: [],
+        currentTurn: null,
+        turnNumber: 1
+      },
+      setupReady: [],
+      knockedThisRound: []
+    });
+  }
     
     const room = gameRooms.get(roomId);
     
@@ -103,6 +104,29 @@ io.on('connection', (socket) => {
       currentPlayerCount: room.players.length,
       maxPlayers: room.maxPlayers
     });
+  });
+
+  // Create a room with specific player count (called from Lobby)
+  socket.on('create-room', ({ roomId, playerName, playerCount }) => {
+    console.log(`Creating room ${roomId} for ${playerCount} players by ${playerName}`);
+    
+    if (!gameRooms.has(roomId)) {
+      gameRooms.set(roomId, {
+        players: [],
+        maxPlayers: playerCount || 2,
+        creatorId: socket.id,
+        creatorName: playerName,
+        gameState: {
+          board: [],
+          currentTurn: null,
+          turnNumber: 1
+        },
+        setupReady: [],
+        knockedThisRound: []
+      });
+      
+      console.log(`✓ Room ${roomId} created with ${playerCount} max players`);
+    }
   });
 
   // Handle card movements

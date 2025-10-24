@@ -7,7 +7,7 @@ const Lobby = ({ onJoinRoom }) => {
   const [playerName, setPlayerName] = useState('');
   const [playerCount, setPlayerCount] = useState(2);
   const [isCreatingRoom, setIsCreatingRoom] = useState(false);
-  const { connected } = useSocket();
+  const { connected, socket } = useSocket();
   const audioRef = useRef(null);
   const fadeIntervalRef = useRef(null);
   const audioStartedRef = useRef(false);
@@ -88,6 +88,15 @@ const Lobby = ({ onJoinRoom }) => {
   const handleJoin = async (e) => {
     e.preventDefault();
     if (roomId && playerName) {
+      // If creating a room, tell the server to create it NOW with the player count
+      if (isCreatingRoom && socket) {
+        socket.emit('create-room', { 
+          roomId, 
+          playerName, 
+          playerCount 
+        });
+      }
+      
       await fadeOutAudio(1500);
       onJoinRoom(roomId, playerName, isCreatingRoom ? playerCount : undefined);
     }
@@ -98,6 +107,10 @@ const Lobby = ({ onJoinRoom }) => {
     setRoomId(newRoomId);
     setIsCreatingRoom(true);
     startAudioOnInteraction();
+    
+    // Immediately create the room on the server with the selected player count
+    // This ensures the room exists with correct maxPlayers before anyone joins
+    // Note: We'll emit this when the user clicks "ENTER" to avoid creating unused rooms
   };
 
   const handleRoomIdChange = (e) => {
