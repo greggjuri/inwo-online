@@ -4,8 +4,11 @@ import Card from './Card';
 import cardsData from '../cards.json';
 import './DeckBuilder.css';
 import { deckStorage } from '../services/deckStorage';
+import IlluminatiNotification from './IlluminatiNotification';
+import { useNotification } from '../hooks/useNotification';
 
 const DeckBuilder = ({ onStartGame }) => {
+  const { notification, hideNotification, notify } = useNotification();
   const [selectedCards, setSelectedCards] = useState([]);
   const [filter, setFilter] = useState('all');
   const [alignmentFilter, setAlignmentFilter] = useState('all');
@@ -137,12 +140,12 @@ const DeckBuilder = ({ onStartGame }) => {
   // Save deck using storage service
   const saveDeck = async () => {
     if (!deckName.trim()) {
-      alert('Please enter a deck name');
+      notify.warning('Please enter a deck name');
       return;
     }
 
     if (selectedCards.length === 0) {
-      alert('Cannot save an empty deck');
+      notify.warning('Cannot save an empty deck');
       return;
     }
 
@@ -156,13 +159,13 @@ const DeckBuilder = ({ onStartGame }) => {
     try {
       await deckStorage.saveDeck(deck);
       await loadDecks(); // Refresh the deck list
-      alert(`Deck "${deck.name}" saved successfully!`);
+      notify.success(`Deck "${deck.name}" saved successfully!`);
       setShowSaveModal(false);
       setDeckName('');
       setDeckDescription('');
     } catch (error) {
       console.error('Error saving deck:', error);
-      alert('Error saving deck. Please try again.');
+      notify.error('Error saving deck. Please try again.');
     }
   };
 
@@ -170,38 +173,38 @@ const DeckBuilder = ({ onStartGame }) => {
   const loadDeck = (deck) => {
     setSelectedCards(deck.cards);
     setShowLoadModal(false);
-    alert(`Deck "${deck.name}" loaded successfully!`);
+    notify.success(`Deck "${deck.name}" loaded successfully!`);
   };
 
   // Delete a saved deck
   const deleteDeck = async (deckId) => {
-    if (window.confirm('Are you sure you want to delete this deck?')) {
+    if (confirm('Are you sure you want to delete this deck?')) {
       try {
         await deckStorage.deleteDeck(deckId);
         await loadDecks(); // Refresh the deck list
       } catch (error) {
         console.error('Error deleting deck:', error);
-        alert('Error deleting deck. Please try again.');
+        notify.error('Error deleting deck. Please try again.');
       }
     }
   };
 
   const handleStartGame = () => {
     if (selectedCards.length === 0) {
-      alert('Please add some cards to your deck before starting!');
+      notify.warning('Please add some cards to your deck before starting!');
       return;
     }
     
     // Check if deck has at least one Illuminati card
     const hasIlluminati = selectedCards.some(card => card.type === 'illuminati');
     if (!hasIlluminati) {
-      const confirmed = window.confirm('Your deck has no Illuminati card. Are you sure you want to continue?');
+      const confirmed = confirm('Your deck has no Illuminati card. Are you sure you want to continue?');
       if (!confirmed) return;
     }
     
     // Recommend 45 cards but don't enforce it
     if (selectedCards.length < 30) {
-      const confirmed = window.confirm(`Your deck has ${selectedCards.length} cards. A typical deck has 45 cards. Continue anyway?`);
+      const confirmed = confirm(`Your deck has ${selectedCards.length} cards. A typical deck has 45 cards. Continue anyway?`);
       if (!confirmed) return;
     }
     
@@ -537,6 +540,14 @@ const DeckBuilder = ({ onStartGame }) => {
           </div>
         )}
       </div>
+
+      {notification && (
+        <IlluminatiNotification
+          message={notification.message}
+          type={notification.type}
+          onClose={hideNotification}
+        />
+      )}
     </div>
   );
 };

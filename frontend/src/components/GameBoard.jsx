@@ -5,6 +5,8 @@ import Card from './Card';
 import Dice3D from './Dice';
 import './Dice.css';
 import './GameBoard.css';
+import IlluminatiNotification from './IlluminatiNotification';
+import { useNotification } from '../hooks/useNotification';
 
 const GameBoard = ({ roomId, playerName, playerDeck, playerCount }) => {
 // Board configuration constants
@@ -115,6 +117,7 @@ const GameBoard = ({ roomId, playerName, playerDeck, playerCount }) => {
     return zones;
   };
   const { socket } = useSocket();
+  const { notification, hideNotification, notify } = useNotification();
   const [players, setPlayers] = useState([]);
   const [gamePhase, setGamePhase] = useState('setup');
   const [hand, setHand] = useState([]);
@@ -202,7 +205,7 @@ const GameBoard = ({ roomId, playerName, playerDeck, playerCount }) => {
 
         // Handle room full event
     socket.on('room-full', ({ maxPlayers }) => {
-      alert(`This room is full! Maximum ${maxPlayers} players allowed.`);
+      notify.error(`This room is full! Maximum ${maxPlayers} players allowed.`);
       // Optionally: redirect back to lobby here
     });
 
@@ -309,7 +312,7 @@ const GameBoard = ({ roomId, playerName, playerDeck, playerCount }) => {
       setCurrentTurn(newCurrentTurn);
       setTurnNumber(newTurnNumber);
       setGamePhase('playing');
-      alert(`Game started! ${startingPlayerName} goes first!`);
+      notify.success(`Game started! ${startingPlayerName} goes first!`);
     });
 
     socket.on('turn-changed', ({ currentTurn: newCurrentTurn }) => {
@@ -381,7 +384,7 @@ const handleSetupDone = () => {
   const hasGroup = myPlayedCards.some(c => c.type === 'groups');
   
   if (!hasIlluminati || !hasGroup) {
-    alert('Please place 1 Illuminati card and 1 Group card on the play area before clicking Done.');
+    notify.warning('Please place Your Illuminati and initial Group on the play area before clicking Done.');
     return;
   }
 
@@ -401,7 +404,7 @@ const handleSetupDone = () => {
   
   // Notify server that this player is ready
   socket.emit('setup-done', { roomId });
-  alert(`Setup complete! Waiting for other players... (${players.length}/${playerCount || 2})`);
+  notify.info(`Setup complete! Waiting for other players... (${players.length}/${playerCount || 2})`);
 };
 
 const endTurn = () => {
@@ -1193,6 +1196,14 @@ const removeNWO = (color) => {
           </div>
         )}
       </div>
+      )}
+      
+      {notification && (
+        <IlluminatiNotification
+          message={notification.message}
+          type={notification.type}
+          onClose={hideNotification}
+        />
       )}
     </div>
   );
