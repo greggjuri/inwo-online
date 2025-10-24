@@ -2847,10 +2847,10 @@
       ]
     },
     {
-      "id": "manuel-noreiga",
-      "name": "Manuel Noreiga",
+      "id": "manuel-noriega",
+      "name": "Manuel Noriega",
       "type": "groups",
-      "filename": "groups/manuel-noreiga.webp",
+      "filename": "groups/manuel-noriega.webp",
       "power": 1,
       "resistance": 2,
       "subtype": "Personality",
@@ -2868,10 +2868,10 @@
       "filename": "plots/march-on-washington.webp"
     },
     {
-      "id": "margerate-thatcher",
-      "name": "Margerate Thatcher",
+      "id": "margaret-thatcher",
+      "name": "Margaret Thatcher",
       "type": "groups",
-      "filename": "groups/margerate-thatcher.webp",
+      "filename": "groups/margaret-thatcher.webp",
       "power": 1,
       "resistance": 6,
       "subtype": "Personality",
