@@ -482,6 +482,12 @@ const discardTop2PlotsBlind = () => {
   };
 
   const returnToHand = (card, index) => {
+    // Check if this is the player's own card
+    if (card.playerId && card.playerId !== socket.id) {
+      notify.error("That's not your card!");
+      return;
+    }
+    
     setSharedPlayArea(prev => prev.filter((_, i) => i !== index));
     const { position, rotation, tokens, playerId, ...cleanCard } = card;
     setHand(prev => [...prev, cleanCard]);
@@ -758,6 +764,12 @@ const handleRightClick = (e, card, index = null, source = 'hand') => {
         const discardBtn = document.createElement('button');
         discardBtn.textContent = '🗑️ Discard';
         discardBtn.onclick = () => {
+          // Check if this is the player's own card
+          if (card.playerId && card.playerId !== socket.id) {
+            notify.error("That's not your card!");
+            document.body.removeChild(menu);
+            return;
+          }
           discardFromPlay(card, index);
           document.body.removeChild(menu);
         };
@@ -766,6 +778,12 @@ const handleRightClick = (e, card, index = null, source = 'hand') => {
         const returnBtn = document.createElement('button');
         returnBtn.textContent = '↩️ Return to Hand';
         returnBtn.onclick = () => {
+          // Check if this is the player's own card
+          if (card.playerId && card.playerId !== socket.id) {
+            notify.error("That's not your card!");
+            document.body.removeChild(menu);
+            return;
+          }
           returnToHand(card, index);
           document.body.removeChild(menu);
         };
